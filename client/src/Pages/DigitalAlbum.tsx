@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { postImages, getImage } from "../Axios";
+import { postImage, getImage } from "../Axios";
 import "../Styles/DigitalAlbum.css";
 import upload from "../Images/upload.png";
-
-// -> save the chosen images in DB
 
 function DigitalAlbum() {
   const [sendImage, setSendImage] = useState<File[]>([]);
@@ -29,9 +27,14 @@ function DigitalAlbum() {
   //   }
   //   void test();
   // }, [sendImage]);
-  useEffect(() => {
-    getImage("pexels-nati-17362172.jpg");
-  }, []);
+
+  // useEffect(() => {
+  //   async function test() {
+  //     const image = await getImage("pexels-nati-17362172.jpg");
+  //     setImageFromDB(image);
+  //   }
+  //   void test();
+  // }, []);
 
   function deleteImage(imageIndex: number) {
     const updateDisplayImages = [
@@ -47,10 +50,17 @@ function DigitalAlbum() {
   }
 
   async function saveImage() {
-    if (sendImage.length == 0) {
-      console.log("no image that can be sendt to DB");
-    } else {
-      await postImages(sendImage);
+    try {
+      if (sendImage.length == 0) {
+        console.log("no image that can be sendt to DB"); // it should be popup
+      }
+      const response = await postImage(sendImage);
+      if (response.status === 200) {
+        console.log("good");
+        // display images in new page
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -94,10 +104,6 @@ function DigitalAlbum() {
             Save
           </button>
         </div>
-        {/* <div>
-          image from local file :{" "}
-          {displayImage && <img src={displayImage}></img>}
-        </div> */}
         {/* <div>
           image from DB : <img src="http://localhost:8000/getImage?id=28"></img>
         </div> */}
