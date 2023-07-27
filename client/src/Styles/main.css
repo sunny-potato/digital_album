@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  text-decoration: none;
+}
+
+#root {
+  /* width: 100vw;
+  height: 100vh; */
+  /* display: flex;
+  flex-direction: column; */
+  background-color: red;
+}

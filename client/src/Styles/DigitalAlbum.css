@@ -1,0 +1,98 @@
+.pageContainer {
+  /* width: 100%; */
+  /* height: 100%; */
+  /* height: 100vh; */
+  background-color: lightgoldenrodyellow;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+.contentContainer {
+  width: 70%;
+  margin: auto;
+}
+.uploadImageBox {
+  height: 10em;
+  /* font-size: 12em; */
+  border: 0.1em lightgray dashed;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.uploadIcon {
+  width: 3em;
+  background-color: red;
+}
+.uploadInput {
+  background-color: lightgreen;
+}
+.uploadDragDrop {
+  margin-left: 9em;
+}
+.uploadImages {
+  background-color: lightblue;
+}
+input[type="file"]::file-selector-button {
+  margin-left: 0.3rem;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  /* overflow: hidden; */
+  /* text-align: center; */
+}
+input[type="file"] {
+  color: transparent;
+}
+input[type="file"]:after {
+  /* color: #000; */
+  content: "";
+}
+.displayImageBox {
+  width: 100%;
+  margin-top: 1em;
+  /* border: 1px black solid; */
+  /* background-color: aqua; */
+}
+
+.displayContent {
+  background-color: lightblue;
+  /* border: 5px white solid; */
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* auto-fill vs auto-fit*/
+}
+
+/* @media (min-width: 1000px) {
+  .displayContents {
+    grid-template-columns: repeat(4, 1fr);
+  }
+} */
+
+.chosenImage {
+  position: relative;
+  aspect-ratio: 1;
+}
+.chosenImage img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+}
+.deleteImageButton {
+  position: absolute;
+  right: 0%;
+}
+
+.saveImageButton {
+  margin-top: 1em;
+}
+
+img {
+  display: block;
+}
