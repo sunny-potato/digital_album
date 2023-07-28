@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { postImage, getImage } from "../Axios";
 import "../Styles/DigitalAlbum.css";
 import upload from "../Images/upload.png";
 
 function DigitalAlbum() {
+  const navigate = useNavigate();
   const [sendImage, setSendImage] = useState<File[]>([]);
   const [displayImage, setDisplayImage] = useState<string[]>([]);
   const [ImageFromDB, setImageFromDB] = useState<string>();
@@ -56,7 +58,7 @@ function DigitalAlbum() {
       }
       const response = await postImage(sendImage);
       if (response.status === 200) {
-        console.log("good");
+        navigate("/MyAlbum");
         // display images in new page
       }
     } catch (error) {
@@ -65,7 +67,7 @@ function DigitalAlbum() {
   }
 
   return (
-    <div className="pageContainer">
+    <div className="uploadPageContainer">
       <div className="contentContainer">
         <div className="uploadImageBox">
           <img className="uploadIcon" src={upload} alt="upload image"></img>

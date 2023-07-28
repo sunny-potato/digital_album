@@ -1,0 +1,10 @@
+.navContainer {
+  padding: 0.5em;
+  background-color: aquamarine;
+  display: flex;
+}
+
+.navHome {
+  /* background-color: black; */
+  padding: 0 1em;
+}
