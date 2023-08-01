@@ -31,3 +31,12 @@ export async function getImage(fileName: string) {
     return image;
   }
 }
+
+export async function createFolder(folderList: string[], userId: number = 1) {
+  console.log(folderList, userId);
+  const response = await axios.post(`/myAlbum?userId=${userId}`, folderList);
+}
+
+export async function getFolder(userId: number) {
+  const response = await axios.get(`/myAlbum?userId=${userId}`);
+}
