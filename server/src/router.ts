@@ -1,10 +1,22 @@
 import express from "express";
-import { postImage, getImage, getFolder } from "./query";
+import {
+  postImage,
+  getImage,
+  getFolder,
+  updateFolder,
+  createFolder,
+  deleteFolder,
+} from "./query";
 import multer from "multer";
 import { uploadFile, downloadFile } from "./imageStorage";
 import crypto from "crypto";
 import { Row } from "postgres";
-
+type folderList = {
+  id: number | undefined;
+  name: string;
+  userId: number;
+  order_value: number;
+}[];
 const router = express.Router();
 
 // memorystorage : stores files in memory as buffer objects.
@@ -14,6 +26,24 @@ const upload = multer({ storage: storage });
 function getUnikImageName() {
   return crypto.randomUUID();
 }
+
+router.get("/digitalAlbum/getImages", async (req, res) => {
+  // const id = Number(req.query.id);
+  // console.log(req.query.filename);
+  const fileBuffer = await downloadFile("pexels-nati-17362172.jpg");
+  res.contentType("image/jpg"); //filetype
+  res.send(fileBuffer);
+
+  // if (req.query.fileName && typeof req.query.filename == "string") {
+  //   //   // const result = await getImage(id);
+  //   //   // const file = result[0];
+  //   //   // console.log(result);
+  //   console.log("hei");
+  // }
+
+  // res.contentType(file.type);
+  // res.send(file.name);
+});
 
 router.post(
   "/digitalAlbum/postImages",
@@ -38,42 +68,69 @@ router.post(
   }
 );
 
-router.get("/digitalAlbum/getImages", async (req, res) => {
-  // const id = Number(req.query.id);
-  // console.log(req.query.filename);
-  const fileBuffer = await downloadFile("pexels-nati-17362172.jpg");
-  res.contentType("image/jpg"); //filetype
-  res.send(fileBuffer);
-
-  // if (req.query.fileName && typeof req.query.filename == "string") {
-  //   //   // const result = await getImage(id);
-  //   //   // const file = result[0];
-  //   //   // console.log(result);
-  //   console.log("hei");
-  // }
-
-  // res.contentType(file.type);
-  // res.send(file.name);
+router.get("/myAlbum", async (req, res) => {
+  const userId = Number(req.query.userId);
+  const result = await getFolder(userId);
+  // console.log(result);
+  res.status(200).send(result);
 });
+
+// function resetOrderValue(folderList: folderList) {
+//   for (let [index, folder] of folderList.entries()) {
+//     folder.order_value = index + 1;
+//   }
+//   return folderList;
+// }
 
 router.post(`/myAlbum`, async (req, res) => {
-  console.log(req.query, req.body);
   const userId = Number(req.query.userId);
-  const folderListFromClient = req.body;
-  // if (typeof userId == "number") {
+  const folderListFromClient = req.body as folderList;
+  // console.log(folderListFromClient);
   const folderListFromDB = await getFolder(userId);
-  for (let folder of folderListFromDB) {
-    console.log("folder", folder);
-    const filteredFolder = folderListFromClient.filter(
-      (each: Row) => each !== folder.name
-    );
-    console.log(filteredFolder);
+
+  // const orderedFolderListFromClient = resetOrderValue(folderListFromClient);
+  // console.log(orderedFolderListFromClient);
+
+  for (const [index, folder] of folderListFromClient.entries()) {
+    if (folder.id === undefined) {
+      const result = await createFolder({
+        name: folder.name,
+        order_value: index + 1,
+        user_id: userId,
+      });
+      // console.log("create folder id : ", result);
+    } else {
+      const result = await updateFolder({
+        id: folder.id,
+        name: folder.name,
+        order_value: index + 1,
+      });
+      // console.log("update folder : ", result);
+    }
   }
-  // console.log("-----------------", folderList);
-  // }
+
+  function findDifferentFolder() {
+    let difference = folderListFromDB.filter((oldFolder) => {
+      const isItDifferent = folderListFromClient.every((newFolder) => {
+        // console.log(oldFolder, newFolder);
+        return oldFolder.id !== newFolder.id;
+      });
+      // console.log(isItDifferent);
+      if (isItDifferent) {
+        return oldFolder;
+      }
+    });
+    return difference;
+  }
+
+  const deleteFolderList = findDifferentFolder();
+  if (deleteFolderList.length !== 0) {
+    deleteFolderList.map(async (folder) => {
+      return await deleteFolder(folder.id);
+    });
+  }
+
+  res.status(200).send("updated folder!");
 });
 
-// for(let folder of folderList) {
-// }
-// console.log(folder);
 export default router;

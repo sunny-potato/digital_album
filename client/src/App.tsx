@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/digitalAlbum" element={<DigitalAlbum />}></Route>
-          <Route path="/myAlbum" element={<MyAlbum />}></Route>
+          <Route path="/myAlbum/:id" element={<MyAlbum />}></Route>
         </Routes>
       </BrowserRouter>
     </>

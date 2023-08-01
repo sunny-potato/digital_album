@@ -1,15 +1,25 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { createFolder } from "../Axios";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { createFolder, getFolder } from "../Axios";
 import "../Styles/MyAlbum.css";
 
 function MyAlbum() {
+  const userId = Number(useParams().id);
   const [albumPhoto, setAlbumPhoto] = useState<File>();
   const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [editAlbumTitle, setEditAlbumTitle] = useState<string>();
-  const [editAlbumList, setEditAlbumList] = useState<string[]>([]);
-  console.log(editAlbumList);
+  const [editAlbumList, setEditAlbumList] = useState<[]>([]);
+  const [test, setTest] = useState<[]>([]);
+
+  useEffect(() => {
+    async function getAlbumInfo() {
+      // download album main image & title from db
+      const result = await getFolder(userId);
+      setTest(result);
+    }
+    void getAlbumInfo();
+  }, [userId]);
 
   function handleFile(file: FileList | null) {
     if (file !== null) {
@@ -20,11 +30,12 @@ function MyAlbum() {
   }
   async function saveAlbumList() {
     if (isEditMode) {
-      const HaveAllName = editAlbumList.every((list) => list !== "");
+      const HaveAllName = test.every((folder) => folder !== "");
       if (HaveAllName) {
-        console.log(editAlbumList);
         setIsEditMode(false);
-        const newFolder = await createFolder(editAlbumList);
+        const eachFolder = test.map((name) => name);
+        const newFolder = await createFolder(eachFolder, userId);
+        console.log(newFolder);
       } else {
         console.log("all albums should have its own name"); //popup
       }
@@ -75,31 +86,34 @@ function MyAlbum() {
             <div className="albumListBox">
               <div className="albumList">
                 <div className="albumListTitle">Album List</div>
-                {editAlbumList &&
-                  editAlbumList.map((list, index) => {
+                {test &&
+                  test.map((folder: Record<string, string>, index) => {
                     return (
                       <li key={index}>
                         <input
                           type="text"
                           placeholder="Album name"
-                          value={editAlbumList[index]}
+                          value={folder.name}
                           onChange={(event) => {
-                            const updateAlbumList = [
-                              ...editAlbumList.slice(0, index),
-                              event.target.value,
-                              ...editAlbumList.slice(index + 1),
+                            const updateFolder = [
+                              ...test.slice(0, index),
+                              {
+                                ...folder,
+                                ["name"]: event.target.value,
+                              },
+                              ...test.slice(index + 1),
                             ];
-                            setEditAlbumList(updateAlbumList);
+                            setTest(updateFolder);
                           }}
                         ></input>
                         <button
                           className="deleteAlbumList"
                           onClick={() => {
-                            const updateAlbumList = [
-                              ...editAlbumList.slice(0, index),
-                              ...editAlbumList.slice(index + 1),
+                            const delteFolder = [
+                              ...test.slice(0, index),
+                              ...test.slice(index + 1),
                             ];
-                            setEditAlbumList(updateAlbumList);
+                            setTest(delteFolder);
                           }}
                         >
                           X
@@ -111,8 +125,13 @@ function MyAlbum() {
                   <button
                     className="addAlbumList"
                     onClick={() => {
-                      const newTest = [""];
-                      setEditAlbumList([...editAlbumList, ...newTest]);
+                      const newFolder = {
+                        id: undefined,
+                        name: "",
+                        user_id: userId,
+                        order_value: 0,
+                      };
+                      setTest([...test, newFolder]);
                     }}
                   >
                     +
@@ -139,13 +158,13 @@ function MyAlbum() {
             <div className="albumListBox">
               <div className="albumList">
                 <div className="albumListTitle">Album List</div>
-                {editAlbumList.length !== 0 &&
-                  editAlbumList.map((list, index) => (
-                    <li key={index}>
-                      <Link to={list}>{list}</Link>
+                {test.length !== 0 &&
+                  test.map((folder: Record<string, string>, index) => (
+                    <li key={folder.id}>
+                      <Link to={folder.name}>{folder.name}</Link>
                     </li>
                   ))}
-                {editAlbumList.length === 0 && <li>No albums</li>}
+                {test.length === 0 && <li>No albums</li>}
               </div>
             </div>
           </div>

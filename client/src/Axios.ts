@@ -2,29 +2,12 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Buffer } from "buffer";
 
-export async function postImage(images: File[]) {
-  const form = new FormData();
-  // form.append("image", images);
-  images.map((img) => form.append("image", img));
-  for (const [key, value] of form) {
-    console.log(key, value);
-  }
-  // console.log(form);
-  const response = await axios.post(`/digitalAlbum/postImages`, form, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
-  return response;
-  // console.log(response);
-}
-
 export async function getImage(fileName: string) {
   const response = await axios.get(
     `/digitalAlbum/getImages?filename=${fileName}`,
     { responseType: "arraybuffer" }
   );
-
   if (response.data) {
-    // console.log(response.headers["content-type"]);
     const base64 = Buffer.from(response.data, "binary").toString("base64");
     const image = `data:${response.headers["content-type"]};base64,${base64}`;
 
@@ -32,11 +15,33 @@ export async function getImage(fileName: string) {
   }
 }
 
-export async function createFolder(folderList: string[], userId: number = 1) {
-  console.log(folderList, userId);
-  const response = await axios.post(`/myAlbum?userId=${userId}`, folderList);
+export async function postImage(images: File[]) {
+  const form = new FormData();
+  images.map((img) => form.append("image", img));
+  for (const [key, value] of form) {
+    console.log(key, value);
+  }
+  const response = await axios.post(`/digitalAlbum/postImages`, form, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return response;
 }
 
 export async function getFolder(userId: number) {
   const response = await axios.get(`/myAlbum?userId=${userId}`);
+  return response.data as [];
+}
+
+export async function createFolder(
+  folderList: {
+    id: number | undefined;
+    name: string;
+    userId: number;
+    order_value: number;
+  }[],
+  userId: number
+) {
+  console.log("axios");
+  const response = await axios.post(`/myAlbum?userId=${userId}`, folderList);
+  console.log(response);
 }
