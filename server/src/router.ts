@@ -1,8 +1,9 @@
 import express from "express";
-import { postImage, getImage } from "./query";
+import { postImage, getImage, getFolder } from "./query";
 import multer from "multer";
 import { uploadFile, downloadFile } from "./imageStorage";
 import crypto from "crypto";
+import { Row } from "postgres";
 
 const router = express.Router();
 
@@ -55,4 +56,24 @@ router.get("/digitalAlbum/getImages", async (req, res) => {
   // res.send(file.name);
 });
 
+router.post(`/myAlbum`, async (req, res) => {
+  console.log(req.query, req.body);
+  const userId = Number(req.query.userId);
+  const folderListFromClient = req.body;
+  // if (typeof userId == "number") {
+  const folderListFromDB = await getFolder(userId);
+  for (let folder of folderListFromDB) {
+    console.log("folder", folder);
+    const filteredFolder = folderListFromClient.filter(
+      (each: Row) => each !== folder.name
+    );
+    console.log(filteredFolder);
+  }
+  // console.log("-----------------", folderList);
+  // }
+});
+
+// for(let folder of folderList) {
+// }
+// console.log(folder);
 export default router;

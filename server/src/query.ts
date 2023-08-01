@@ -16,3 +16,10 @@ export async function getImage(id: number) {
   const image = await sql`select * from images where id=${id}`;
   return image;
 }
+
+// export async function createFolder(id: number);
+
+export async function getFolder(userId: number) {
+  const folder = await sql`select * from folder where userId=${userId}`;
+  return folder;
+}
