@@ -27,9 +27,26 @@ export async function postImage(images: File[]) {
   return response;
 }
 
-export async function getFolder(userId: number) {
+export async function getMyAlbumInfo(userId: number) {
   const response = await axios.get(`/myAlbum?userId=${userId}`);
   return response.data as [];
+}
+
+export async function createMyAlbum(
+  userId: number,
+  newAlbum: {
+    id: number | undefined;
+    image_uuid: string;
+    title: string;
+    user_id: number;
+  }
+) {
+  console.log(newAlbum);
+  const response = await axios.post(
+    `/myAlbum/newAlbum?userId=${userId}`,
+    newAlbum
+  );
+  console.log(response);
 }
 
 export async function createFolder(
@@ -41,7 +58,10 @@ export async function createFolder(
   }[],
   userId: number
 ) {
-  console.log("axios");
-  const response = await axios.post(`/myAlbum?userId=${userId}`, folderList);
+  // console.log("axios");
+  const response = await axios.post(
+    `/myAlbum/newFolder?userId=${userId}`,
+    folderList
+  );
   console.log(response);
 }

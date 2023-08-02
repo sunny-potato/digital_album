@@ -1,3 +1,4 @@
+import { title } from "process";
 import sql from "./db";
 
 export async function getImage(id: number) {
@@ -11,6 +12,20 @@ export async function postImage(file: Express.Multer.File, uuid: string) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getMyAlbum(userId: number) {
+  return await sql`select * from album where user_id=${userId}`;
+}
+
+export async function createMyAlbum(album: {
+  image_uuid: string;
+  title: string;
+  user_id: number;
+}) {
+  return await sql`insert into album(image_uuid, title, user_id) values(${
+    (album.image_uuid, album.title, album.user_id)
+  }) returning id`;
 }
 
 export async function getFolder(userId: number) {

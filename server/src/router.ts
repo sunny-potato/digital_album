@@ -2,6 +2,8 @@ import express from "express";
 import {
   postImage,
   getImage,
+  getMyAlbum,
+  createMyAlbum,
   getFolder,
   updateFolder,
   createFolder,
@@ -70,26 +72,28 @@ router.post(
 
 router.get("/myAlbum", async (req, res) => {
   const userId = Number(req.query.userId);
-  const result = await getFolder(userId);
+  const album = await getMyAlbum(userId);
+  const folder = await getFolder(userId);
+  const result = { album, folder };
   // console.log(result);
   res.status(200).send(result);
 });
 
-// function resetOrderValue(folderList: folderList) {
-//   for (let [index, folder] of folderList.entries()) {
-//     folder.order_value = index + 1;
-//   }
-//   return folderList;
-// }
+router.post(`/myAlbum/newAlbum`, async (req, res) => {
+  const userId = Number(req.query.userId);
+  const newAlbum = req.body;
+  // console.log(newAlbum);
+  if (newAlbum.id === undefined) {
+    console.log(newAlbum);
+    await createMyAlbum(newAlbum);
+  }
+  // createMyAlbum()
+});
 
-router.post(`/myAlbum`, async (req, res) => {
+router.post(`/myAlbum/newFolder`, async (req, res) => {
   const userId = Number(req.query.userId);
   const folderListFromClient = req.body as folderList;
-  // console.log(folderListFromClient);
   const folderListFromDB = await getFolder(userId);
-
-  // const orderedFolderListFromClient = resetOrderValue(folderListFromClient);
-  // console.log(orderedFolderListFromClient);
 
   for (const [index, folder] of folderListFromClient.entries()) {
     if (folder.id === undefined) {
@@ -112,10 +116,8 @@ router.post(`/myAlbum`, async (req, res) => {
   function findDifferentFolder() {
     let difference = folderListFromDB.filter((oldFolder) => {
       const isItDifferent = folderListFromClient.every((newFolder) => {
-        // console.log(oldFolder, newFolder);
         return oldFolder.id !== newFolder.id;
       });
-      // console.log(isItDifferent);
       if (isItDifferent) {
         return oldFolder;
       }
