@@ -4,15 +4,19 @@ import {
   getImage,
   getMyAlbum,
   createMyAlbum,
+  updateMyAlbumImage,
+  updateMyAlbumTitle,
   getFolder,
   updateFolder,
   createFolder,
   deleteFolder,
 } from "./query";
 import multer from "multer";
-import { uploadFile, downloadFile } from "./imageStorage";
+import { uploadFile, downloadFile, deleteFile } from "./imageStorage";
 import crypto from "crypto";
 import { Row } from "postgres";
+import { throws } from "assert";
+
 type folderList = {
   id: number | undefined;
   name: string;
@@ -30,21 +34,9 @@ function getUnikImageName() {
 }
 
 router.get("/digitalAlbum/getImages", async (req, res) => {
-  // const id = Number(req.query.id);
-  // console.log(req.query.filename);
   const fileBuffer = await downloadFile("pexels-nati-17362172.jpg");
   res.contentType("image/jpg"); //filetype
   res.send(fileBuffer);
-
-  // if (req.query.fileName && typeof req.query.filename == "string") {
-  //   //   // const result = await getImage(id);
-  //   //   // const file = result[0];
-  //   //   // console.log(result);
-  //   console.log("hei");
-  // }
-
-  // res.contentType(file.type);
-  // res.send(file.name);
 });
 
 router.post(
@@ -75,19 +67,62 @@ router.get("/myAlbum", async (req, res) => {
   const album = await getMyAlbum(userId);
   const folder = await getFolder(userId);
   const result = { album, folder };
-  // console.log(result);
   res.status(200).send(result);
 });
 
-router.post(`/myAlbum/newAlbum`, async (req, res) => {
-  const userId = Number(req.query.userId);
-  const newAlbum = req.body;
-  // console.log(newAlbum);
-  if (newAlbum.id === undefined) {
-    console.log(newAlbum);
-    await createMyAlbum(newAlbum);
+router.get("/myAlbum/getAlbumImage", async (req, res) => {
+  const imageName = req.query.filename as string;
+  const imageBuffer = await downloadFile(imageName);
+  res.contentType("image/jpg");
+  res.status(200).send(imageBuffer);
+});
+
+router.post(
+  `/myAlbum/newAlbumImage`,
+  upload.array("albumImage"),
+  async (req, res) => {
+    const userId = Number(req.query.userId);
+    if (Array.isArray(req.files)) {
+      for (const file of req.files) {
+        try {
+          const fileType = file.originalname.slice(
+            file.originalname.indexOf(".")
+          );
+          let newImageName = getUnikImageName();
+          newImageName += fileType;
+          const findUser = await getMyAlbum(userId);
+          if (findUser.length === 0) {
+            const album = {
+              image_uuid: newImageName,
+              title: "",
+              user_id: userId,
+            };
+            await createMyAlbum(album);
+            await uploadFile(newImageName, file.buffer);
+          } else {
+            await updateMyAlbumImage({
+              image_uuid: newImageName,
+              user_id: userId,
+            });
+            await uploadFile(newImageName, file.buffer);
+            const oldImageName = findUser[0].image_uuid;
+            await deleteFile(oldImageName);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+    res.status(200).send("posted albumimage!");
   }
-  // createMyAlbum()
+);
+
+router.post(`/myAlbum/albumTitle`, async (req, res) => {
+  const user_id = Number(req.query.userId);
+  const title = Object.keys(req.body)[0] as string;
+  await updateMyAlbumTitle({ title, user_id });
+
+  res.status(200).send("updated albumTitle");
 });
 
 router.post(`/myAlbum/newFolder`, async (req, res) => {
@@ -102,14 +137,12 @@ router.post(`/myAlbum/newFolder`, async (req, res) => {
         order_value: index + 1,
         user_id: userId,
       });
-      // console.log("create folder id : ", result);
     } else {
       const result = await updateFolder({
         id: folder.id,
         name: folder.name,
         order_value: index + 1,
       });
-      // console.log("update folder : ", result);
     }
   }
 

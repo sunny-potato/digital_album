@@ -1,47 +1,64 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { createFolder, getMyAlbumInfo, createMyAlbum } from "../Axios";
+import {
+  createFolder,
+  getMyAlbumInfo,
+  postImage,
+  postMyAlbumImage,
+  postMyAlbumTitle,
+  getMyAlbumImage,
+} from "../Axios";
 import "../Styles/MyAlbum.css";
 
 function MyAlbum() {
   const userId = Number(useParams().id);
-  const [album, setAlbum] = useState<[]>();
-  const [albumPhoto, setAlbumPhoto] = useState<File>();
-  const [albumTitle, setAlbumTitle] = useState<string>();
+  const [updatedAlbumPhoto, setUpdatedAlbumPhoto] = useState<File>();
+  const [currentAlbumTitle, setCurrentAlbumTitle] = useState<string>();
   const [folderList, setFolderList] = useState<[]>([]);
   const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  console.log(albumPhoto, albumTitle);
 
   useEffect(() => {
     async function getAlbumInfo() {
       const result = await getMyAlbumInfo(userId);
-      setFolderList(result.folder);
-      // if (result.album.length == 0) {
-      //   const newAlbum
-      // }
-      setAlbum(result.album);
+      if (result.folder.length !== 0) {
+        setFolderList(result.folder);
+      }
+      if (result.album.length !== 0) {
+        const albumImage = result.album[0].image_uuid;
+        const albumTitle = result.album[0].title;
+        if (albumImage) {
+          const imageBuffer = await getMyAlbumImage(albumImage);
+          setDisplayAlbumPhoto(imageBuffer);
+        }
+        if (albumTitle) setCurrentAlbumTitle(albumTitle);
+      }
     }
     void getAlbumInfo();
   }, [userId]);
 
   function handleFile(file: FileList | null) {
     if (file !== null) {
-      setAlbumPhoto(file[0]);
+      setUpdatedAlbumPhoto(file[0]);
       setDisplayAlbumPhoto(URL.createObjectURL(file[0]));
     }
   }
+
   async function saveAlbumInfo() {
-    // console.log(folderList.every((folder) => folder.name !== ""));
     if (isEditMode) {
+      setIsEditMode(false);
       const HaveAllName = folderList.every((folder) => folder !== "");
       if (HaveAllName) {
-        setIsEditMode(false);
         const eachFolder = folderList.map((name) => name);
         const newFolder = await createFolder(eachFolder, userId);
-        console.log(newFolder);
       } else {
-        console.log("all albums should have its own name"); //popup
+        console.log("all folder should have its own name"); //popup
+      }
+      if (updatedAlbumPhoto) {
+        await postMyAlbumImage(userId, updatedAlbumPhoto);
+      }
+      if (currentAlbumTitle) {
+        await postMyAlbumTitle(userId, currentAlbumTitle);
       }
     } else {
       setIsEditMode(true);
@@ -82,9 +99,9 @@ function MyAlbum() {
                 <input
                   type="text"
                   placeholder="album title"
-                  value={albumTitle}
+                  value={currentAlbumTitle}
                   onChange={(event) => {
-                    setAlbumTitle(event.target.value);
+                    setCurrentAlbumTitle(event.target.value);
                   }}
                 ></input>
               </div>
@@ -156,14 +173,16 @@ function MyAlbum() {
                   <div className="noImageDiv">No image</div>
                 )}
               </div>
-              {!albumTitle && <div className="albumTitle">No title</div>}
-              {albumTitle && <div className="albumTitle">{albumTitle}</div>}
+              {!currentAlbumTitle && <div className="albumTitle">No title</div>}
+              {currentAlbumTitle && (
+                <div className="albumTitle">{currentAlbumTitle}</div>
+              )}
             </div>
             <div className="albumListBox">
               <div className="albumList">
                 <div className="albumListTitle">Album List</div>
                 {folderList.length !== 0 &&
-                  folderList.map((folder: Record<string, string>, index) => (
+                  folderList.map((folder: Record<string, string>) => (
                     <li key={folder.id}>
                       <Link to={folder.name}>{folder.name}</Link>
                     </li>

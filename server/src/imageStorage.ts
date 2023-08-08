@@ -12,11 +12,19 @@ const storage = new Storage({ projectId, keyFilename });
 
 export async function uploadFile(destFileName: string, file: string | Buffer) {
   await storage.bucket(bucketName).file(destFileName).save(file);
-  // console.log(`${destFileName} uploaded to ${bucketName}`);
+  console.log(`${destFileName} uploaded to ${bucketName}`);
 }
 
 export async function downloadFile(fileName: string) {
   // Downloads the file into a buffer in memory.
   const contents = await storage.bucket(bucketName).file(fileName).download();
   return contents[0];
+}
+
+// const deleteOptions = {
+//   ifGenerationMatch: generationMatchPrecondition,
+// };
+export async function deleteFile(fileName: string) {
+  await storage.bucket(bucketName).file(fileName).delete();
+  console.log(`${fileName} in ${bucketName} is deleted`);
 }
