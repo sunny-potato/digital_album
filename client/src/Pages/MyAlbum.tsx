@@ -9,12 +9,13 @@ import {
   getMyAlbumImage,
 } from "../Axios";
 import "../Styles/MyAlbum.css";
+import { Folder } from "../types/Folder";
 
 function MyAlbum() {
-  const userId = Number(useParams().id);
+  const userId = Number(useParams().userId);
   const [updatedAlbumPhoto, setUpdatedAlbumPhoto] = useState<File>();
   const [currentAlbumTitle, setCurrentAlbumTitle] = useState<string>();
-  const [folderList, setFolderList] = useState<[]>([]);
+  const [folderList, setFolderList] = useState<Folder[]>([]);
   const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
@@ -47,10 +48,15 @@ function MyAlbum() {
   async function saveAlbumInfo() {
     if (isEditMode) {
       setIsEditMode(false);
-      const HaveAllName = folderList.every((folder) => folder !== "");
+      const HaveAllName = folderList.every((folder) => folder.name !== "");
       if (HaveAllName) {
         const eachFolder = folderList.map((name) => name);
         const newFolder = await createFolder(eachFolder, userId);
+
+        const result = await getMyAlbumInfo(userId);
+        if (result.folder.length !== 0) {
+          setFolderList(result.folder);
+        }
       } else {
         console.log("all folder should have its own name"); //popup
       }
@@ -110,7 +116,7 @@ function MyAlbum() {
               <div className="albumList">
                 <div className="albumListTitle">Album List</div>
                 {folderList &&
-                  folderList.map((folder: Record<string, string>, index) => {
+                  folderList.map((folder, index) => {
                     return (
                       <li key={index}>
                         <input
@@ -148,7 +154,7 @@ function MyAlbum() {
                   <button
                     className="addAlbumList"
                     onClick={() => {
-                      const newFolder = {
+                      const newFolder: Folder = {
                         id: undefined,
                         name: "",
                         user_id: userId,
@@ -182,11 +188,18 @@ function MyAlbum() {
               <div className="albumList">
                 <div className="albumListTitle">Album List</div>
                 {folderList.length !== 0 &&
-                  folderList.map((folder: Record<string, string>) => (
-                    <li key={folder.id}>
-                      <Link to={folder.name}>{folder.name}</Link>
-                    </li>
-                  ))}
+                  folderList.map(
+                    (folder) => (
+                      console.log(folder.id), //?????????????????
+                      (
+                        <li key={folder.id}>
+                          <Link to={`/albumFolder/${folder.id}`}>
+                            {folder.name}
+                          </Link>
+                        </li>
+                      )
+                    )
+                  )}
                 {folderList.length === 0 && <li>No albums</li>}
               </div>
             </div>

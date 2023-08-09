@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { postImage, getImage } from "../Axios";
-import "../Styles/DigitalAlbum.css";
+import "../Styles/AlbumFolder.css";
 import upload from "../Images/upload.png";
 
-function DigitalAlbum() {
+function AlbumFolder() {
+  console.log("hei");
+  const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
   const [sendImage, setSendImage] = useState<File[]>([]);
   const [displayImage, setDisplayImage] = useState<string[]>([]);
@@ -114,4 +117,4 @@ function DigitalAlbum() {
   );
 }
 
-export default DigitalAlbum;
+export default AlbumFolder;

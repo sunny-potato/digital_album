@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./Styles/App.css";
 import Navigation from "./Components/Navigation";
 import Home from "./Pages/Home";
-import DigitalAlbum from "./Pages/DigitalAlbum";
+import AlbumFolder from "./Pages/AlbumFolder";
 import MyAlbum from "./Pages/MyAlbum";
 
 function App() {
@@ -12,9 +12,14 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/digitalAlbum" element={<DigitalAlbum />}></Route>
-          <Route path="/myAlbum/:id" element={<MyAlbum />}></Route>
+          <Route path="/" element={<Home />} />
+          {/* <Route
+            path="/myAlbum/:userId/albumFolder/*"
+            element={<AlbumFolder />}
+          /> */}
+          <Route path="/myAlbum/:userId" element={<MyAlbum />} />
+          <Route path="/albumFolder/*" element={<AlbumFolder />} />
+          {/* <Route path="/*" element={<div>no found page</div>} /> */}
         </Routes>
       </BrowserRouter>
     </>
