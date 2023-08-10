@@ -16,6 +16,7 @@ export async function uploadFile(destFileName: string, file: string | Buffer) {
 }
 
 export async function downloadFile(fileName: string) {
+  console.log(fileName);
   // Downloads the file into a buffer in memory.
   const contents = await storage.bucket(bucketName).file(fileName).download();
   return contents[0];

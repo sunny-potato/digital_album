@@ -18,7 +18,7 @@ function App() {
             element={<AlbumFolder />}
           /> */}
           <Route path="/myAlbum/:userId" element={<MyAlbum />} />
-          <Route path="/albumFolder/*" element={<AlbumFolder />} />
+          <Route path="/albumFolder/:folderId" element={<AlbumFolder />} />
           {/* <Route path="/*" element={<div>no found page</div>} /> */}
         </Routes>
       </BrowserRouter>

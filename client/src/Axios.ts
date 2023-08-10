@@ -1,11 +1,11 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Buffer } from "buffer";
-import { Folder } from "./types/Folder";
+import { Folder } from "./Types/Folder";
 
 export async function getImage(fileName: string) {
   const response = await axios.get(
-    `/digitalAlbum/getImages?filename=${fileName}`,
+    `/albumFolder/getImage?filename=${fileName}`,
     { responseType: "arraybuffer" }
   );
   if (response.data) {
@@ -15,13 +15,27 @@ export async function getImage(fileName: string) {
   }
 }
 
-export async function postImage(images: File[]) {
+export async function getImageInfolder(folderId: number) {
+  const response = await axios.get(
+    `/albumFolder/getAllImages?folderId=${folderId}`
+    // ,
+    // { responseType: "arraybuffer" }
+  );
+  if (response.data) {
+    return response.data;
+    // const base64 = Buffer.from(response.data, "binary").toString("base64");
+    // const image = `data:${response.headers["content-type"]};base64,${base64}`;
+    // return image;
+  }
+}
+
+export async function postImageInfolder(images: File[], folderId: number) {
   const form = new FormData();
   Array.from(images).map((img) => form.append("image", img));
-  for (const [key, value] of form) {
-    console.log(key, value);
-  }
-  return await axios.post(`/digitalAlbum/postImages`, form, {
+  // for (const [key, value] of form) {
+  //   console.log(key, value);
+  // }
+  return await axios.post(`/albumFolder/postImage?folderId=${folderId}`, form, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
@@ -46,14 +60,9 @@ export async function getMyAlbumImage(fileName: string) {
 export async function postMyAlbumImage(userId: number, albumImage: File) {
   const form = new FormData();
   form.append("albumImage", albumImage);
-  return await axios.post(
-    `/myAlbum/newAlbumImage?userId=${userId}`,
-    form,
-    userId,
-    {
-      headers: { "Content-Type": "multipart/form-data" },
-    }
-  );
+  return await axios.post(`/myAlbum/newAlbumImage?userId=${userId}`, form, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 }
 
 export async function postMyAlbumTitle(userId: number, albumTitle: string) {

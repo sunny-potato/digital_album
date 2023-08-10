@@ -1,7 +1,7 @@
 import express from "express";
 import {
   postImage,
-  getImage,
+  getAllImagesInFolder,
   getMyAlbum,
   createMyAlbum,
   updateMyAlbumImage,
@@ -16,6 +16,7 @@ import { uploadFile, downloadFile, deleteFile } from "./imageStorage";
 import crypto from "crypto";
 import { Row } from "postgres";
 import { throws } from "assert";
+import { Console } from "console";
 
 type folderList = {
   id: number | undefined;
@@ -33,16 +34,24 @@ function getUnikImageName() {
   return crypto.randomUUID();
 }
 
-router.get("/digitalAlbum/getImages", async (req, res) => {
-  const fileBuffer = await downloadFile("pexels-nati-17362172.jpg");
-  res.contentType("image/jpg"); //filetype
-  res.send(fileBuffer);
+router.get("/albumFolder/image/:uuid", async (req, res) => {
+  const imageName = req.params.uuid;
+  const imageBuffer = await downloadFile(imageName);
+  res.contentType("image/jpg");
+  res.send(imageBuffer);
+});
+
+router.get("/albumFolder/getAllImages", async (req, res) => {
+  const folderId = Number(req.query.folderId);
+  const imageList = await getAllImagesInFolder(folderId);
+  res.send(imageList);
 });
 
 router.post(
-  "/digitalAlbum/postImages",
+  "/albumFolder/postImage",
   upload.array("image"),
   async (req, res) => {
+    const folderId = Number(req.query.folderId);
     if (Array.isArray(req.files)) {
       for (const file of req.files) {
         try {
@@ -51,14 +60,15 @@ router.post(
           );
           let newImageName = getUnikImageName();
           newImageName += fileType;
-          await postImage(file, newImageName);
+          const result = await postImage(file, newImageName, folderId); // error, how to stop??????????
+          console.log(`Image updated : ${result}`);
           await uploadFile(newImageName, file.buffer);
         } catch (error) {
           console.error(error);
         }
       }
     }
-    res.status(200).send("success!");
+    res.status(200).send(`success!`);
   }
 );
 

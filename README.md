@@ -9,7 +9,12 @@
 
 ##
 
-1. relative url vs absolute url
+1. relative url vs absolute url when <Link> is used in React
 
 - relative link : without "/"
 - absolute link : with "/"
+
+2. URL parameters vs Query strings
+
+- url parameters : be part of url, given by client, ":" -> ex) /example/:id
+- query strings : used for filtering, "?" -> ex) /example?id={userId}

@@ -3,13 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import {
   createFolder,
   getMyAlbumInfo,
-  postImage,
   postMyAlbumImage,
   postMyAlbumTitle,
   getMyAlbumImage,
 } from "../Axios";
 import "../Styles/MyAlbum.css";
-import { Folder } from "../types/Folder";
+import { Folder } from "../Types/Folder";
 
 function MyAlbum() {
   const userId = Number(useParams().userId);
@@ -18,6 +17,7 @@ function MyAlbum() {
   const [folderList, setFolderList] = useState<Folder[]>([]);
   const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  // console.log(folderList);
 
   useEffect(() => {
     async function getAlbumInfo() {
@@ -52,12 +52,13 @@ function MyAlbum() {
       if (HaveAllName) {
         const eachFolder = folderList.map((name) => name);
         const newFolder = await createFolder(eachFolder, userId);
-
         const result = await getMyAlbumInfo(userId);
+        console.log(result);
         if (result.folder.length !== 0) {
           setFolderList(result.folder);
         }
       } else {
+        setIsEditMode(true);
         console.log("all folder should have its own name"); //popup
       }
       if (updatedAlbumPhoto) {
@@ -188,18 +189,13 @@ function MyAlbum() {
               <div className="albumList">
                 <div className="albumListTitle">Album List</div>
                 {folderList.length !== 0 &&
-                  folderList.map(
-                    (folder) => (
-                      console.log(folder.id), //?????????????????
-                      (
-                        <li key={folder.id}>
-                          <Link to={`/albumFolder/${folder.id}`}>
-                            {folder.name}
-                          </Link>
-                        </li>
-                      )
-                    )
-                  )}
+                  folderList.map((folder) => (
+                    <li key={folder.id}>
+                      <Link to={`/albumFolder/${folder.id}`}>
+                        {folder.name}
+                      </Link>
+                    </li>
+                  ))}
                 {folderList.length === 0 && <li>No albums</li>}
               </div>
             </div>

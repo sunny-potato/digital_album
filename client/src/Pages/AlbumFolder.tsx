@@ -1,25 +1,27 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { postImage, getImage } from "../Axios";
+import { postImageInfolder, getImageInfolder } from "../Axios";
 import "../Styles/AlbumFolder.css";
 import upload from "../Images/upload.png";
+import { Image } from "../Types/Folder";
 
 function AlbumFolder() {
-  console.log("hei");
-  const { id } = useParams();
-  console.log(id);
+  const folderId = Number(useParams().folderId);
   const navigate = useNavigate();
-  const [sendImage, setSendImage] = useState<File[]>([]);
-  const [displayImage, setDisplayImage] = useState<string[]>([]);
-  const [ImageFromDB, setImageFromDB] = useState<string>();
-  // console.log(sendImage.length, displayImage.length);
+  const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
+  const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
+  const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
+  // console.log(selectedImageBlob, selectedImageList);
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
     Object.values(fileList).map((file: File) => {
       const fileBlob = URL.createObjectURL(file);
-      setDisplayImage((displayImage) => [...displayImage, fileBlob]);
-      setSendImage((sendImage) => [...sendImage, file]);
+      setSelectedImageBlob((selectedImageBlob) => [
+        ...selectedImageBlob,
+        fileBlob,
+      ]);
+      setSelectedImageList((selectedImageList) => [...selectedImageList, file]);
     });
   }
   // useEffect(() => {
@@ -33,40 +35,45 @@ function AlbumFolder() {
   //   void test();
   // }, [sendImage]);
 
-  // useEffect(() => {
-  //   async function test() {
-  //     const image = await getImage("pexels-nati-17362172.jpg");
-  //     setImageFromDB(image);
-  //   }
-  //   void test();
-  // }, []);
+  useEffect(() => {
+    async function getImages() {
+      const getImageList = await getImageInfolder(folderId);
+      setUploadedImageList(getImageList);
+    }
+    void getImages();
+  }, []);
 
   function deleteImage(imageIndex: number) {
-    const updateDisplayImages = [
-      ...displayImage.slice(0, imageIndex),
-      ...displayImage.slice(imageIndex + 1),
+    const updateSelectedImageBlob = [
+      ...selectedImageBlob.slice(0, imageIndex),
+      ...selectedImageBlob.slice(imageIndex + 1),
     ];
-    setDisplayImage(updateDisplayImages);
-    const updateSendImages = [
-      ...sendImage.slice(0, imageIndex),
-      ...sendImage.slice(imageIndex + 1),
+    setSelectedImageBlob(updateSelectedImageBlob);
+    const updateSelectedImage = [
+      ...selectedImageList.slice(0, imageIndex),
+      ...selectedImageList.slice(imageIndex + 1),
     ];
-    setSendImage(updateSendImages);
+    setSelectedImageList(updateSelectedImage);
   }
 
-  async function saveImage() {
+  async function saveSelectedImage() {
     try {
-      if (sendImage.length == 0) {
+      if (selectedImageList.length == 0) {
         console.log("no image that can be sendt to DB"); // it should be popup
       }
-      const response = await postImage(sendImage);
+      const response = await postImageInfolder(selectedImageList, folderId);
       if (response.status === 200) {
-        navigate("/MyAlbum");
-        // display images in new page
+        cancelSelectedImage();
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function cancelSelectedImage() {
+    setSelectedImageList([]);
+    setSelectedImageBlob([]);
   }
 
   return (
@@ -80,7 +87,6 @@ function AlbumFolder() {
               or
               <input
                 name="uploadImages"
-                // className="uploadImageButton"
                 type="file"
                 accept="image/*"
                 multiple
@@ -92,9 +98,37 @@ function AlbumFolder() {
         <div className="displayImageBox">
           <div className="displayTitle">Uploaded photos</div>
           <div className="displayContent">
-            {displayImage &&
-              displayImage.map((img, index) => (
-                <div key={index} className="chosenImage">
+            {uploadedImageList &&
+              uploadedImageList.map((image, index) => (
+                <div key={image.id} className="uploadedImage">
+                  {/* <button
+                    className="deleteImageButton"
+                    onClick={() => deleteImage(index)}
+                  >
+                    x
+                  </button> */}
+                  <img
+                    src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
+                    alt={image.origianl_name}
+                  ></img>
+                </div>
+              ))}
+          </div>
+          {/* <button className="saveImageButton" onClick={saveImage}>
+            Save
+          </button> */}
+        </div>
+        <div
+          className="displayImagePopupBox"
+          style={{
+            visibility: selectedImageBlob.length > 0 ? "visible" : "hidden",
+          }}
+        >
+          <div className="displayPopupTitle">Selected photos</div>
+          <div className="displayPopupContent">
+            {selectedImageBlob &&
+              selectedImageBlob.map((img, index) => (
+                <div key={index} className="selectedImage">
                   <button
                     className="deleteImageButton"
                     onClick={() => deleteImage(index)}
@@ -105,13 +139,19 @@ function AlbumFolder() {
                 </div>
               ))}
           </div>
-          <button className="saveImageButton" onClick={saveImage}>
+          <button
+            className="saveSelectedImageButton"
+            onClick={saveSelectedImage}
+          >
             Save
           </button>
+          <button
+            className="cancelSelectedImageButton"
+            onClick={cancelSelectedImage}
+          >
+            Cancel
+          </button>
         </div>
-        {/* <div>
-          image from DB : <img src="http://localhost:8000/getImage?id=28"></img>
-        </div> */}
       </div>
     </div>
   );
