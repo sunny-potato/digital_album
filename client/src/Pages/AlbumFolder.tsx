@@ -79,7 +79,12 @@ function AlbumFolder() {
 
   return (
     <div className="uploadPageContainer">
-      <div className="contentContainer">
+      <div
+        className="contentContainer"
+        style={{
+          backgroundColor: selectedImageBlob.length > 0 ? "lightgrey" : "white",
+        }}
+      >
         <div className="uploadImageBox">
           <img className="uploadIcon" src={upload} alt="upload image"></img>
           <div className="uploadInput">
@@ -119,7 +124,12 @@ function AlbumFolder() {
             Save
           </button> */}
         </div>
-        {/* <div className="popupBackgroundDiv"> </div> */}
+        {/* <div
+          className="popupBackgroundDiv"
+          style={{
+            display: selectedImageBlob.length > 0 ? "block" : "none",
+          }}
+        > */}
         <div
           className="displayImagePopupBox"
           style={{
@@ -145,7 +155,6 @@ function AlbumFolder() {
               </label>
             </div>
           </div>
-          <div className="displayPopupTitle">Selected photos</div>
           <div className="displayPopupContent">
             {selectedImageBlob &&
               selectedImageBlob.map((img, index) => (
@@ -160,20 +169,18 @@ function AlbumFolder() {
                 </div>
               ))}
           </div>
-          <div>
-            <button
-              className="saveSelectedImageButton"
-              onClick={saveSelectedImage}
-            >
-              Save
-            </button>
-            <button
-              className="cancelSelectedImageButton"
-              onClick={cancelSelectedImage}
-            >
-              Cancel
-            </button>
-          </div>
+          <button
+            className="saveSelectedImageButton"
+            onClick={saveSelectedImage}
+          >
+            Save
+          </button>
+          <button
+            className="cancelSelectedImageButton"
+            onClick={cancelSelectedImage}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
