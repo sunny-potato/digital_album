@@ -1,4 +1,7 @@
 .navContainer {
+  z-index: 100;
+  position: fixed;
+  width: 100%;
   padding: 0.5em;
   background-color: aquamarine;
   display: flex;

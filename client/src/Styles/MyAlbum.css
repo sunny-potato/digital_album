@@ -11,6 +11,7 @@
   width: 40em;
   height: 30em;
   border: 0.1em black solid;
+  /* display: flex; */
 }
 .albumBox:hover .editAlbumButton {
   visibility: visible;
@@ -19,23 +20,16 @@
 .editAlbumBox {
   width: 100%;
   height: 100%;
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(2, 1fr);
 }
 .albumPhotoBox {
   height: 100%;
   width: 100%;
-  /* display: flex;
-  flex-direction: column; */
-  /* justify-content: center;
-  align-items: center; */
 }
 .albumPhoto {
   margin: 1em;
   height: 17em;
-  /* border-radius: 0.5em black solid; */
-  /* background: lightcoral; */
-  /* position: relative; */
 }
 .albumPhoto img {
   width: 100%;
@@ -43,7 +37,6 @@
   object-fit: scale-down;
 }
 .albumTitle {
-  /* background-color: lightcyan; */
   text-align: center;
 }
 .albumPhotoBox,

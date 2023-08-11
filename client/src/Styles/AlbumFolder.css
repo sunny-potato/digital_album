@@ -1,26 +1,19 @@
 .uploadPageContainer {
-  /* width: 100%; */
-  /* height: 100%; */
-  /* height: 100vh; */
   background-color: lightgoldenrodyellow;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
 }
 .contentContainer {
   width: 70%;
   margin: auto;
+  padding-top: 4em;
 }
 .uploadImageBox {
   height: 10em;
-  /* font-size: 12em; */
   border: 0.1em lightgray dashed;
   border-radius: 0.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 1em;
 }
 
 .uploadIcon {
@@ -53,13 +46,12 @@ input[type="file"]:after {
 }
 .displayImageBox {
   width: 100%;
-  margin-top: 1em;
-  /* border: 1px black solid; */
-  /* background-color: aqua; */
+  padding-top: 1.5em;
 }
 
 .displayContent {
-  background-color: lightblue;
+  /* background-color: lightblue; */
+  padding: 0.5em 0 1.5em 0;
   /* border: 5px white solid; */
   /* display: flex; */
   /* flex-wrap: wrap; */
@@ -96,6 +88,16 @@ input[type="file"]:after {
 img {
   display: block;
 }
+/* .popupBackgroundDiv {
+  z-index: 99;
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #cccccc;
+} */
 .displayImagePopupBox {
   position: absolute;
   top: 50%;
@@ -103,14 +105,35 @@ img {
   transform: translate(-50%, -50%);
   width: 70%;
   max-height: 70%;
+
   background-color: pink;
-  margin-top: 1em;
+}
+.uploadImagePopupBox {
+  /* height: 10em; */
+  border: 0.1em lightgray dashed;
+  /* border-radius: 0.5em; */
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  background-color: white;
+  padding: 1em 0;
+}
+.uploadInputPopup {
+  display: inline-flex;
+}
+.addImageIcon {
+  width: 1.5em;
+  height: 1.5em;
+  margin: auto;
 }
 
 .displayPopupContent {
   background-color: lightblue;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+  /* margin: auto; */
+  padding: 0.5em 0;
 }
 .displayPopupContent img {
   width: 100%;

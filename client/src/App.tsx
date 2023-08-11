@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./Styles/App.css";
+// import "./Styles/App.css";
 import Navigation from "./Components/Navigation";
 import Home from "./Pages/Home";
 import AlbumFolder from "./Pages/AlbumFolder";

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { postImageInfolder, getImageInfolder } from "../Axios";
 import "../Styles/AlbumFolder.css";
 import upload from "../Images/upload.png";
+import addImage from "../Images/addImage.png";
 import { Image } from "../Types/Folder";
 
 function AlbumFolder() {
@@ -11,7 +12,7 @@ function AlbumFolder() {
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
-  // console.log(selectedImageBlob, selectedImageList);
+  console.log(selectedImageBlob);
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
@@ -118,12 +119,32 @@ function AlbumFolder() {
             Save
           </button> */}
         </div>
+        {/* <div className="popupBackgroundDiv"> </div> */}
         <div
           className="displayImagePopupBox"
           style={{
-            visibility: selectedImageBlob.length > 0 ? "visible" : "hidden",
+            display: selectedImageBlob.length > 0 ? "block" : "none",
           }}
         >
+          <div className="uploadImagePopupBox">
+            <div className="uploadInputPopup">
+              <img
+                className="addImageIcon"
+                src={addImage}
+                alt="add image"
+              ></img>
+              <label className="uploadImages" htmlFor="uploadImages">
+                more images? :)
+                <input
+                  name="uploadImages"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(event) => handleFiles(event.target.files)}
+                />
+              </label>
+            </div>
+          </div>
           <div className="displayPopupTitle">Selected photos</div>
           <div className="displayPopupContent">
             {selectedImageBlob &&
@@ -139,18 +160,20 @@ function AlbumFolder() {
                 </div>
               ))}
           </div>
-          <button
-            className="saveSelectedImageButton"
-            onClick={saveSelectedImage}
-          >
-            Save
-          </button>
-          <button
-            className="cancelSelectedImageButton"
-            onClick={cancelSelectedImage}
-          >
-            Cancel
-          </button>
+          <div>
+            <button
+              className="saveSelectedImageButton"
+              onClick={saveSelectedImage}
+            >
+              Save
+            </button>
+            <button
+              className="cancelSelectedImageButton"
+              onClick={cancelSelectedImage}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>
