@@ -79,12 +79,7 @@ function AlbumFolder() {
 
   return (
     <div className="uploadPageContainer">
-      <div
-        className="contentContainer"
-        style={{
-          backgroundColor: selectedImageBlob.length > 0 ? "lightgrey" : "white",
-        }}
-      >
+      <div className="contentContainer">
         <div className="uploadImageBox">
           <img className="uploadIcon" src={upload} alt="upload image"></img>
           <div className="uploadInput">
@@ -124,15 +119,6 @@ function AlbumFolder() {
             Save
           </button> */}
         </div>
-<<<<<<< HEAD
-        {/* <div
-          className="popupBackgroundDiv"
-          style={{
-            display: selectedImageBlob.length > 0 ? "block" : "none",
-          }}
-        > */}
-=======
->>>>>>> folder
         <div
           className="popupBackgroundDiv"
           style={{
@@ -189,35 +175,6 @@ function AlbumFolder() {
               </button>
             </div>
           </div>
-<<<<<<< HEAD
-          <div className="displayPopupContent">
-            {selectedImageBlob &&
-              selectedImageBlob.map((img, index) => (
-                <div key={index} className="selectedImage">
-                  <button
-                    className="deleteImageButton"
-                    onClick={() => deleteImage(index)}
-                  >
-                    x
-                  </button>
-                  <img src={img}></img>
-                </div>
-              ))}
-          </div>
-          <button
-            className="saveSelectedImageButton"
-            onClick={saveSelectedImage}
-          >
-            Save
-          </button>
-          <button
-            className="cancelSelectedImageButton"
-            onClick={cancelSelectedImage}
-          >
-            Cancel
-          </button>
-=======
->>>>>>> folder
         </div>
       </div>
     </div>
