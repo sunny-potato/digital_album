@@ -78,6 +78,7 @@ input[type="file"]:after {
   /* object-fit: cover; */
 }
 .deleteImageButton {
+  /* z-index: 99; */
   position: absolute;
   right: 0%;
 }
@@ -100,7 +101,7 @@ img {
   background-color: #cccccc;
   backdrop-filter: invert(50%);
 }
-.displayImagePopupBox {
+.displayInputPopupBox {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -111,6 +112,7 @@ img {
   background-color: pink;
 }
 .uploadImagePopupBox {
+  /* height: 10em; */
   border: 0.1em lightgray dashed;
   display: flex;
   flex-direction: column;

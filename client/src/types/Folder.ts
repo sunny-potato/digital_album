@@ -12,4 +12,5 @@ export type Image = {
   size: number;
   type: string;
   uuid: string;
+  folder_id?: number;
 };

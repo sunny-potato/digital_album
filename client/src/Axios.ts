@@ -1,21 +1,21 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Buffer } from "buffer";
-import { Folder } from "./Types/Folder";
+import { Folder, Image } from "./Types/Folder";
 
-export async function getImage(fileName: string) {
-  const response = await axios.get(
-    `/albumFolder/getImage?filename=${fileName}`,
-    { responseType: "arraybuffer" }
-  );
-  if (response.data) {
-    const base64 = Buffer.from(response.data, "binary").toString("base64");
-    const image = `data:${response.headers["content-type"]};base64,${base64}`;
-    return image;
-  }
-}
+// export async function getImage(fileName: string) {
+//   const response = await axios.get(
+//     `/albumFolder/getImage?filename=${fileName}`,
+//     { responseType: "arraybuffer" }
+//   );
+//   if (response.data) {
+//     const base64 = Buffer.from(response.data, "binary").toString("base64");
+//     const image = `data:${response.headers["content-type"]};base64,${base64}`;
+//     return image;
+//   }
+// }
 
-export async function getImageInfolder(folderId: number) {
+export async function getAllImagesInFolder(folderId: number) {
   const response = await axios.get(
     `/albumFolder/getAllImages?folderId=${folderId}`
     // ,
@@ -38,6 +38,13 @@ export async function postImageInfolder(images: File[], folderId: number) {
   return await axios.post(`/albumFolder/postImage?folderId=${folderId}`, form, {
     headers: { "Content-Type": "multipart/form-data" },
   });
+}
+
+export async function deleteImageInfolder(image: Image) {
+  // console.log(typeof image.id);
+  return await axios.delete(
+    `/albumFolder/deleteImage?imageId=${image.id}&imageUuid=${image.uuid}`
+  );
 }
 
 export async function getMyAlbumInfo(userId: number) {

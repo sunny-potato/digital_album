@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { postImageInfolder, getImageInfolder } from "../Axios";
+import {
+  postImageInfolder,
+  getAllImagesInFolder,
+  deleteImageInfolder,
+} from "../Axios";
 import "../Styles/AlbumFolder.css";
 import upload from "../Images/upload.png";
 import addImage from "../Images/addImage.png";
@@ -8,11 +12,11 @@ import { Image } from "../Types/Folder";
 
 function AlbumFolder() {
   const folderId = Number(useParams().folderId);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
-  // console.log(selectedImageBlob);
+  // console.log(uploadedImageList);
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
@@ -34,17 +38,17 @@ function AlbumFolder() {
   //     }
   //   }
   //   void test();
-  // }, [sendImage]);
+  // }, [sendImage]);{}
 
   useEffect(() => {
     async function getImages() {
-      const getImageList = await getImageInfolder(folderId);
+      const getImageList = await getAllImagesInFolder(folderId);
       setUploadedImageList(getImageList);
     }
     void getImages();
   }, []);
 
-  function deleteImage(imageIndex: number) {
+  function deleteSelectedImage(imageIndex: number) {
     const updateSelectedImageBlob = [
       ...selectedImageBlob.slice(0, imageIndex),
       ...selectedImageBlob.slice(imageIndex + 1),
@@ -77,6 +81,16 @@ function AlbumFolder() {
     setSelectedImageBlob([]);
   }
 
+  async function deleteSavedImage(imageIndex: number) {
+    const deletedImage = uploadedImageList[imageIndex];
+    // console.log(deletedImage);
+    const result = await deleteImageInfolder(deletedImage);
+    if (result.status == 200) {
+      const getImageList = await getAllImagesInFolder(folderId);
+      setUploadedImageList(getImageList);
+    }
+  }
+
   return (
     <div className="uploadPageContainer">
       <div className="contentContainer">
@@ -101,13 +115,17 @@ function AlbumFolder() {
           <div className="displayContent">
             {uploadedImageList &&
               uploadedImageList.map((image, index) => (
-                <div key={image.id} className="uploadedImage">
-                  {/* <button
+                <div
+                  key={image.id}
+                  className="uploadedImage"
+                  onClick={() => console.log(image)}
+                >
+                  <button
                     className="deleteImageButton"
-                    onClick={() => deleteImage(index)}
+                    onClick={() => deleteSavedImage(index)}
                   >
                     x
-                  </button> */}
+                  </button>
                   <img
                     src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
                     alt={image.origianl_name}
@@ -125,8 +143,8 @@ function AlbumFolder() {
             display: selectedImageBlob.length > 0 ? "block" : "none",
           }}
         >
-          <div className="displayImagePopupBox">
-            <div className="uploadImagePopupBox">
+          <div className="displayInputPopupBox">
+            <div className="uploadInputPopupBox">
               <div className="uploadInputPopup">
                 <img
                   className="addImageIcon"
@@ -152,7 +170,7 @@ function AlbumFolder() {
                   <div key={index} className="selectedImage">
                     <button
                       className="deleteImageButton"
-                      onClick={() => deleteImage(index)}
+                      onClick={() => deleteSelectedImage(index)}
                     >
                       x
                     </button>

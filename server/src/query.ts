@@ -16,6 +16,9 @@ export async function postImage(
     console.log(error);
   }
 }
+export async function deleteImage(imageId: number) {
+  return await sql`delete from image where id=${imageId}`;
+}
 
 export async function getMyAlbum(userId: number) {
   return await sql`select * from album where user_id=${userId}`;
