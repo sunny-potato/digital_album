@@ -89,24 +89,25 @@ input[type="file"]:after {
 img {
   display: block;
 }
-/* .popupBackgroundDiv {
-  z-index: 99;
-  display: none;
+.popupBackgroundDiv {
+  /* z-index: 99; */
+  /* display: none; */
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
   background-color: #cccccc;
-} */
+  backdrop-filter: invert(50%);
+}
 .displayImagePopupBox {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
-  /* max-height: 70%; */
-  margin-top: 4em;
+  max-height: 70%;
+
   background-color: pink;
 }
 .uploadImagePopupBox {
@@ -114,7 +115,8 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
+  background-color: white;
   padding: 1em 0;
 }
 .uploadInputPopup {

@@ -12,7 +12,7 @@ function AlbumFolder() {
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
-  console.log(selectedImageBlob);
+  // console.log(selectedImageBlob);
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
@@ -124,37 +124,72 @@ function AlbumFolder() {
             Save
           </button> */}
         </div>
+<<<<<<< HEAD
         {/* <div
           className="popupBackgroundDiv"
           style={{
             display: selectedImageBlob.length > 0 ? "block" : "none",
           }}
         > */}
+=======
+>>>>>>> folder
         <div
-          className="displayImagePopupBox"
+          className="popupBackgroundDiv"
           style={{
             display: selectedImageBlob.length > 0 ? "block" : "none",
           }}
         >
-          <div className="uploadImagePopupBox">
-            <div className="uploadInputPopup">
-              <img
-                className="addImageIcon"
-                src={addImage}
-                alt="add image"
-              ></img>
-              <label className="uploadImages" htmlFor="uploadImages">
-                more images? :)
-                <input
-                  name="uploadImages"
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={(event) => handleFiles(event.target.files)}
-                />
-              </label>
+          <div className="displayImagePopupBox">
+            <div className="uploadImagePopupBox">
+              <div className="uploadInputPopup">
+                <img
+                  className="addImageIcon"
+                  src={addImage}
+                  alt="add image"
+                ></img>
+                <label className="uploadImages" htmlFor="uploadImages">
+                  more images? :)
+                  <input
+                    name="uploadImages"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(event) => handleFiles(event.target.files)}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="displayPopupTitle">Selected photos</div>
+            <div className="displayPopupContent">
+              {selectedImageBlob &&
+                selectedImageBlob.map((img, index) => (
+                  <div key={index} className="selectedImage">
+                    <button
+                      className="deleteImageButton"
+                      onClick={() => deleteImage(index)}
+                    >
+                      x
+                    </button>
+                    <img src={img}></img>
+                  </div>
+                ))}
+            </div>
+            <div>
+              <button
+                className="saveSelectedImageButton"
+                onClick={saveSelectedImage}
+              >
+                Save
+              </button>
+              <button
+                className="cancelSelectedImageButton"
+                onClick={cancelSelectedImage}
+              >
+                Cancel
+              </button>
             </div>
           </div>
+<<<<<<< HEAD
           <div className="displayPopupContent">
             {selectedImageBlob &&
               selectedImageBlob.map((img, index) => (
@@ -181,6 +216,8 @@ function AlbumFolder() {
           >
             Cancel
           </button>
+=======
+>>>>>>> folder
         </div>
       </div>
     </div>
