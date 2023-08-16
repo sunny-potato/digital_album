@@ -10,15 +10,15 @@ const projectId = "core-ridge-394012";
 const keyFilename = "key.json";
 const storage = new Storage({ projectId, keyFilename });
 
-export async function uploadFile(destFileName: string, file: string | Buffer) {
-  await storage.bucket(bucketName).file(destFileName).save(file);
-  console.log(`${destFileName} uploaded to ${bucketName}`);
+export async function uploadFile(fileName: string, file: string | Buffer) {
+  await storage.bucket(bucketName).file(fileName).save(file);
+  console.log(`${fileName} uploaded to imageStorage`);
 }
 
 export async function downloadFile(fileName: string) {
-  console.log(fileName);
   // Downloads the file into a buffer in memory.
   const contents = await storage.bucket(bucketName).file(fileName).download();
+  console.log(`${fileName} downloaded from imageStorage`);
   return contents[0];
 }
 
@@ -27,5 +27,5 @@ export async function downloadFile(fileName: string) {
 // };
 export async function deleteFile(fileName: string) {
   await storage.bucket(bucketName).file(fileName).delete();
-  console.log(`${fileName} in ${bucketName} is deleted`);
+  console.log(`${fileName} in ${bucketName} is deleted from imageStorage`);
 }

@@ -1,7 +1,8 @@
 import express from "express";
 import {
-  postImage,
   getAllImagesInFolder,
+  postImage,
+  deleteImage,
   getMyAlbum,
   createMyAlbum,
   updateMyAlbumImage,
@@ -71,6 +72,13 @@ router.post(
     res.status(200).send(`success!`);
   }
 );
+router.delete("/albumFolder/deleteImage", async (req, res) => {
+  const imageId = Number(req.query.imageId);
+  const imageUuid = req.query.imageUuid as string;
+  await deleteFile(imageUuid);
+  await deleteImage(imageId);
+  res.status(200).send(`imageId=${imageId} deleted!`);
+});
 
 router.get("/myAlbum", async (req, res) => {
   const userId = Number(req.query.userId);
