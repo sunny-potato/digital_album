@@ -48,10 +48,12 @@ input[type="file"]:after {
 .displayImageBox {
   width: 100%;
   padding-top: 1.5em;
+  background-color: black;
+  /* position: relative; */
 }
 
 .displayContent {
-  /* background-color: lightblue; */
+  background-color: lightblue;
   padding: 0.5em 0 1.5em 0;
   /* border: 5px white solid; */
   /* display: flex; */
