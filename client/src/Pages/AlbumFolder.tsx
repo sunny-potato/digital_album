@@ -5,10 +5,11 @@ import {
   getAllImagesInFolder,
   deleteImageInfolder,
 } from "../Axios";
+import { Image } from "../Types/Folder";
 import "../Styles/AlbumFolder.css";
 import upload from "../Images/upload.png";
 import addImage from "../Images/addImage.png";
-import { Image } from "../Types/Folder";
+import PopupEachImage from "../Components/PopupEachImage";
 
 function AlbumFolder() {
   const folderId = Number(useParams().folderId);
@@ -16,7 +17,9 @@ function AlbumFolder() {
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
-  // console.log(uploadedImageList);
+  const [isImageClicked, setIsImageClicked] = useState<boolean>(false);
+  const [clickedImageIndex, setClickedImageIndex] = useState<number>();
+  console.log(isImageClicked, clickedImageIndex);
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
@@ -112,27 +115,40 @@ function AlbumFolder() {
         </div>
         <div className="displayImageBox">
           <div className="displayTitle">Uploaded photos</div>
-          <div className="displayContent">
-            {uploadedImageList &&
-              uploadedImageList.map((image, index) => (
-                <div
-                  key={image.id}
-                  className="uploadedImage"
-                  onClick={() => console.log(image)}
-                >
-                  <button
-                    className="deleteImageButton"
-                    onClick={() => deleteSavedImage(index)}
+          {isImageClicked ? (
+            <PopupEachImage
+              clickedImage={uploadedImageList[clickedImageIndex]}
+            />
+          ) : (
+            <div className="displayContent">
+              {uploadedImageList &&
+                uploadedImageList.map((image, index) => (
+                  <div
+                    key={image.id}
+                    className="uploadedImage"
+                    onClick={() => {
+                      if (isImageClicked) {
+                        setIsImageClicked(false);
+                      } else {
+                        setIsImageClicked(true), setClickedImageIndex(index);
+                      }
+                    }}
                   >
-                    x
-                  </button>
-                  <img
-                    src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
-                    alt={image.origianl_name}
-                  ></img>
-                </div>
-              ))}
-          </div>
+                    <button
+                      className="deleteImageButton"
+                      onClick={() => deleteSavedImage(index)}
+                    >
+                      x
+                    </button>
+                    <img
+                      src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
+                      alt={image.origianl_name}
+                    ></img>
+                  </div>
+                ))}
+            </div>
+          )}
+
           {/* <button className="saveImageButton" onClick={saveImage}>
             Save
           </button> */}
