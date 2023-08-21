@@ -19,7 +19,7 @@ function AlbumFolder() {
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
   const [isImageClicked, setIsImageClicked] = useState<boolean>(false);
   const [clickedImageIndex, setClickedImageIndex] = useState<number>();
-  console.log(isImageClicked, clickedImageIndex);
+  // console.log(isImageClicked, clickedImageIndex);
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
