@@ -5,6 +5,7 @@ import Navigation from "./Components/Navigation";
 import Home from "./Pages/Home";
 import AlbumFolder from "./Pages/AlbumFolder";
 import MyAlbum from "./Pages/MyAlbum";
+import Login from "./Pages/Login";
 import NotFoundPage from "./Pages/NotFound";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           /> */}
           <Route path="/myAlbum/:userId" element={<MyAlbum />} />
           <Route path="/albumFolder/:folderId" element={<AlbumFolder />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

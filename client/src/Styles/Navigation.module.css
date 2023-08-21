@@ -5,9 +5,13 @@
   padding: 0.5em;
   background-color: aquamarine;
   display: flex;
+  justify-content: space-between;
 }
 
 .navHome {
-  /* background-color: black; */
   padding: 0 1em;
+}
+.navRight {
+  padding: 0 1em;
+  /* margin: auto; */
 }

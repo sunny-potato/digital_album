@@ -10,9 +10,11 @@ function Navigation() {
       </div>
       {/* <Link to={"/about"}>About</Link> */}
       {/* <Link to={"/albumFolder"}>Folder</Link> */}
-      <Link to={"/myAlbum"}>My album</Link>
-      {/* <Link to={"/login"}>Login</Link> */}
-      {/* <Link to={"signup"}>Sign up</Link> */}
+      <div className={styles.navRight}>
+        <Link to={"/myAlbum"}>My album</Link>
+        <Link to={"/login"}>Login</Link>
+        {/* <Link to={"signup"}>Sign up</Link> */}
+      </div>
     </div>
   );
 }
