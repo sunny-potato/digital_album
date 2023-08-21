@@ -5,6 +5,7 @@ import Navigation from "./Components/Navigation";
 import Home from "./Pages/Home";
 import AlbumFolder from "./Pages/AlbumFolder";
 import MyAlbum from "./Pages/MyAlbum";
+import NotFoundPage from "./Pages/NotFound";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           /> */}
           <Route path="/myAlbum/:userId" element={<MyAlbum />} />
           <Route path="/albumFolder/:folderId" element={<AlbumFolder />} />
-          {/* <Route path="/*" element={<div>no found page</div>} /> */}
+          <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </>
