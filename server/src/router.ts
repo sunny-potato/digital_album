@@ -11,6 +11,7 @@ import {
   updateFolder,
   createFolder,
   deleteFolder,
+  getAllLoginInfo,
 } from "./query";
 import multer from "multer";
 import { uploadFile, downloadFile, deleteFile } from "./imageStorage";
@@ -18,13 +19,8 @@ import crypto from "crypto";
 import { Row } from "postgres";
 import { throws } from "assert";
 import { Console } from "console";
+import { FolderList, UserAccount, AccountFromUser } from "../src/types";
 
-type folderList = {
-  id: number | undefined;
-  name: string;
-  userId: number;
-  order_value: number;
-}[];
 const router = express.Router();
 
 // memorystorage : stores files in memory as buffer objects.
@@ -145,7 +141,7 @@ router.post(`/myAlbum/albumTitle`, async (req, res) => {
 
 router.post(`/myAlbum/newFolder`, async (req, res) => {
   const userId = Number(req.query.userId);
-  const folderListFromClient = req.body as folderList;
+  const folderListFromClient = req.body as FolderList;
   const folderListFromDB = await getFolder(userId);
 
   for (const [index, folder] of folderListFromClient.entries()) {
@@ -187,3 +183,36 @@ router.post(`/myAlbum/newFolder`, async (req, res) => {
 });
 
 export default router;
+
+// login
+
+router.get(`/login`, async (req, res) => {
+  const accountFromUser = req.query as AccountFromUser;
+  console.log(accountFromUser);
+  const accountListFromDB = await getAllLoginInfo();
+  const accountValidationResult = isUserAccountValidated(
+    accountFromUser,
+    accountListFromDB
+  );
+  res.status(200).send(accountValidationResult); //////////////
+});
+
+function isUserAccountValidated(
+  accountFromUser: { username: string; password: string },
+  accountListFromDB: any
+) {
+  const matchedUserName = accountListFromDB.find((account: UserAccount) => {
+    return account.user_name === accountFromUser.username;
+  });
+  if (matchedUserName === undefined) {
+    return false;
+  } else {
+    if (matchedUserName.user_password === accountFromUser.password) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+// find if user exist -> check password is right

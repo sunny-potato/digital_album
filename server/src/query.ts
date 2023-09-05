@@ -75,3 +75,9 @@ export async function updateFolder(folder: {
 export async function deleteFolder(id: number) {
   return await sql`delete from folder where id=${id} `;
 }
+
+// login
+
+export async function getAllLoginInfo() {
+  return await sql`select * from user_account`;
+}

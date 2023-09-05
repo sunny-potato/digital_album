@@ -2,6 +2,7 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Buffer } from "buffer";
 import { Folder, Image } from "./Types/Folder";
+import { Login as login } from "Types/Login";
 
 // export async function getImage(fileName: string) {
 //   const response = await axios.get(
@@ -78,4 +79,11 @@ export async function postMyAlbumTitle(userId: number, albumTitle: string) {
 
 export async function createFolder(folderList: Folder[], userId: number) {
   return await axios.post(`/myAlbum/newFolder?userId=${userId}`, folderList);
+}
+
+// login
+export async function validateLoginInfo(loginInfo: login) {
+  return await axios.get(
+    `/login?username=${loginInfo.username}&&password=${loginInfo.password}`
+  );
 }
