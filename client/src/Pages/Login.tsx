@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Login as login } from "../Types/Login";
 import { validateLoginInfo } from "../Axios";
 import hideEyeIcon from "../Images/hide.png";
@@ -7,6 +8,7 @@ import viewEyeIcon from "../Images/view.png";
 import "../Styles/Login.css";
 
 function Login() {
+  const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<login>({
     username: "",
     password: "",
@@ -32,7 +34,8 @@ function Login() {
   function displayValidationResult(validationResult: boolean) {
     if (validationResult) {
       setIsLoginValidated(true);
-      console.log("go to login page"); //how to be logined page? let's research!
+      const userData = { username: loginInfo.username };
+      navigate("/", { state: userData });
     } else {
       setIsLoginValidated(false);
     }
@@ -41,7 +44,6 @@ function Login() {
   function submitLoginInfo(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     checkValidation(loginInfo);
-    console.log("submit");
   }
 
   return (
