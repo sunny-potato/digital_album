@@ -1,0 +1,24 @@
+.signupContainer {
+  height: 100vh;
+  background-color: lightslategray;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.formContainer {
+  width: 80%;
+  margin: auto;
+  padding-top: 4em;
+  background-color: lightgray;
+}
+
+.signupInput {
+  display: flex;
+  padding: 0.3em 0;
+}
+
+.inputLabel {
+  /* background-color: red; */
+  width: 8em;
+}
