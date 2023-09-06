@@ -194,7 +194,7 @@ router.get(`/login`, async (req, res) => {
     accountFromUser,
     accountListFromDB
   );
-  res.status(200).send(accountValidationResult); //////////////
+  res.status(200).send(accountValidationResult);
 });
 
 function isUserAccountValidated(

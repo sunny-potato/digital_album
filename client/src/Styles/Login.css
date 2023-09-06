@@ -2,6 +2,15 @@
   /* background-color: lightgoldenrodyellow; */
 }
 
-.login {
-  /* background-color: blue; */
+.loginList {
+  /* background-color: red; */
+}
+.passWord {
+  display: flex;
+}
+.hideEyeIcon,
+.viewEyeIcon {
+  width: 1em;
+  /* height: 100%; */
+  margin: 0.2em;
 }
