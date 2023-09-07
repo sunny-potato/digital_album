@@ -7,7 +7,11 @@ import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
 import "../Styles/Login.css";
 
-function Login() {
+function Login({
+  setUserData,
+}: {
+  setUserData: (userData: { username: string }) => void;
+}) {
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<login>({
     username: "",
@@ -16,7 +20,7 @@ function Login() {
   const [isLoginInfoValid, setIsLoginInfoValid] = useState<boolean>(true);
   const [isLoginValidated, setIsLoginValidated] = useState<boolean>(true);
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
-  console.log(loginInfo);
+  // console.log(loginInfo);
 
   function loginInputHandler(key: string, value: string) {
     setLoginInfo({ ...loginInfo, [key]: value });
@@ -35,7 +39,8 @@ function Login() {
     if (validationResult) {
       setIsLoginValidated(true);
       const userData = { username: loginInfo.username };
-      navigate("/", { state: userData });
+      setUserData(userData);
+      navigate("/");
     } else {
       setIsLoginValidated(false);
     }

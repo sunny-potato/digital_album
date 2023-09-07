@@ -1,9 +1,10 @@
 import { useLocation } from "react-router-dom";
+import s from "../Styles/Home.module.css";
 function Home() {
   const location = useLocation();
   // location.state =null -> no logined user
   const userData = location.state;
-  console.log(userData);
+  // console.log(userData);
   if (userData === null) {
     return;
   }
@@ -12,7 +13,7 @@ function Home() {
       {userData === null ? (
         <div>shasfasfasfasfow?</div>
       ) : (
-        <div>logined user</div>
+        <div className={s.test}>logined user</div>
       )}
     </>
   );

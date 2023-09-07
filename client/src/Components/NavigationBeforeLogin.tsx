@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "../Styles/Navigation.module.css";
 // import "../Styles/Navigation.module.css";
 
-function Navigation() {
+function NavigationBeforeLogin() {
   return (
     <div className={styles.navContainer}>
       <div className={styles.navHome}>
@@ -11,7 +11,7 @@ function Navigation() {
       {/* <Link to={"/about"}>About</Link> */}
       {/* <Link to={"/albumFolder"}>Folder</Link> */}
       <div className={styles.navRight}>
-        <Link to={"/myAlbum"}>My album</Link>
+        {/* <Link to={"/myAlbum"}>My album</Link> */}
         <Link to={"/login"}>Login</Link>
         <Link to={"/signup"}>Sign up</Link>
       </div>
@@ -19,4 +19,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default NavigationBeforeLogin;

@@ -188,7 +188,7 @@ export default router;
 
 router.get(`/login`, async (req, res) => {
   const accountFromUser = req.query as AccountFromUser;
-  console.log(accountFromUser);
+  // console.log(accountFromUser);
   const accountListFromDB = await getAllLoginInfo();
   const accountValidationResult = isUserAccountValidated(
     accountFromUser,
@@ -204,6 +204,7 @@ function isUserAccountValidated(
   const matchedUserName = accountListFromDB.find((account: UserAccount) => {
     return account.user_name === accountFromUser.username;
   });
+  // console.log(matchedUserName);
   if (matchedUserName === undefined) {
     return false;
   } else {
@@ -214,5 +215,3 @@ function isUserAccountValidated(
     }
   }
 }
-
-// find if user exist -> check password is right
