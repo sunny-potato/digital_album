@@ -81,3 +81,13 @@ export async function deleteFolder(id: number) {
 export async function getAllLoginInfo() {
   return await sql`select * from user_account`;
 }
+
+export async function findPassword(password: string) {
+  return await sql`select * from user_account where password=${password}`;
+}
+
+//sigup
+
+export async function findUsername(username: string) {
+  return await sql`select * from user_account where user_name=${username}`;
+}

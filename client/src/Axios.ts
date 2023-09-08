@@ -33,16 +33,12 @@ export async function getAllImagesInFolder(folderId: number) {
 export async function postImageInfolder(images: File[], folderId: number) {
   const form = new FormData();
   Array.from(images).map((img) => form.append("image", img));
-  // for (const [key, value] of form) {
-  //   console.log(key, value);
-  // }
   return await axios.post(`/albumFolder/postImage?folderId=${folderId}`, form, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
 
 export async function deleteImageInfolder(image: Image) {
-  // console.log(typeof image.id);
   return await axios.delete(
     `/albumFolder/deleteImage?imageId=${image.id}&imageUuid=${image.uuid}`
   );
@@ -86,4 +82,10 @@ export async function validateLoginInfo(loginInfo: login) {
   return await axios.get(
     `/login?username=${loginInfo.username}&&password=${loginInfo.password}`
   );
+}
+
+//signup
+export async function checkUsernameAvailability(currentUsername: string) {
+  // console.log("current username : ", currentUsername);
+  return await axios.get(`/signup?username=${currentUsername}`);
 }

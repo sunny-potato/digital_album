@@ -12,6 +12,8 @@ import {
   createFolder,
   deleteFolder,
   getAllLoginInfo,
+  findPassword,
+  findUsername,
 } from "./query";
 import multer from "multer";
 import { uploadFile, downloadFile, deleteFile } from "./imageStorage";
@@ -204,7 +206,6 @@ function isUserAccountValidated(
   const matchedUserName = accountListFromDB.find((account: UserAccount) => {
     return account.user_name === accountFromUser.username;
   });
-  // console.log(matchedUserName);
   if (matchedUserName === undefined) {
     return false;
   } else {
@@ -215,3 +216,16 @@ function isUserAccountValidated(
     }
   }
 }
+
+//signup
+router.get(`/signup`, async (req, res) => {
+  const usernameFromUser = req.query.username;
+  const foundUsername = await findUsername(usernameFromUser as string);
+  let isUsernameValid;
+  if (foundUsername.length === 1) {
+    isUsernameValid = false;
+  } else {
+    isUsernameValid = true;
+  }
+  res.status(200).send(isUsernameValid);
+});
