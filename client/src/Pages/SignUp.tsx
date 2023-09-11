@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Signup, Login } from "../Types/Login";
 import { checkUsernameAvailability } from "../Axios";
-import "../Styles/Signup.css";
+import s from "../Styles/Signup.module.css";
 import { useFormInput } from "../Hooks/useFormInput";
+import PhoneInput from "react-phone-number-input";
+import { E164Number } from "libphonenumber-js/min";
+import "react-phone-number-input/style.css";
 
 function SignUp() {
   const [signupInfo, setSignupInfo] = useState<Signup>({
@@ -21,17 +24,23 @@ function SignUp() {
   const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isPasswordsMatched, setIsPasswordsMatched] = useState<boolean>(false);
+  const [nationalNumber, setNationalNumber] = useState<E164Number>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // console.log(signupInfo);
   // console.log(loginInfo);
   // console.log(confirmPassword);
-
-  //what to check when button clicked
-  //1. password = confirm password
-  //2. all necessary infomation is given
+  // console.log(nationalNumber);
 
   // const usernameInput = useFormInput("");
   // console.log(usernameInput);
+
+  useEffect(() => {
+    setSignupInfo({
+      ...signupInfo,
+      ["telephone"]: nationalNumber as E164Number,
+    });
+  }, [nationalNumber]);
 
   async function usernameHandler(currentUsername: string) {
     setLoginInfo({
@@ -56,21 +65,34 @@ function SignUp() {
       return <div>username must be 5 to 15 characters </div>;
     }
     if (loginInfo.username.length !== 0 && isUsernameValid) {
-      return <div> valid username</div>;
+      return <div className={s.successNote}> valid username</div>;
     }
     if (loginInfo.username.length !== 0 && !isUsernameValid) {
-      return <div> invalid username</div>;
+      return <div className={s.warningNote}> invalid username</div>;
     }
+  }
+
+  function passwordHandler(currentPassword: string) {
+    setLoginInfo({
+      ...loginInfo,
+      ["password"]: currentPassword,
+    });
+    checkPasswordStrength(currentPassword);
+  }
+
+  function checkPasswordStrength(currentPassword: string) {
+    [...currentPassword].map((e) => console.log(e)); ////////////////////////
   }
 
   function matchPasswords(confirmPassword: string) {
     setConfirmPassword(confirmPassword);
-    // console.log(confirmPassword === loginInfo.password ? true : false);
+    console.log(confirmPassword === loginInfo.password ? true : false);
     if (confirmPassword === loginInfo.password) {
       setIsPasswordsMatched(true);
+    } else {
+      setIsPasswordsMatched(false);
     }
-    setIsPasswordsMatched(false);
-    displaypasswordsmatch(); ////////////???????????????
+    displaypasswordsmatch();
   }
 
   function displaypasswordsmatch() {
@@ -78,63 +100,85 @@ function SignUp() {
       return <div></div>;
     }
     if (confirmPassword.length !== 0 && isPasswordsMatched) {
-      return <div>passwords are matching</div>;
+      return <div className={s.successNote}>passwords are matching</div>;
     }
     if (confirmPassword.length !== 0 && !isPasswordsMatched) {
-      return <div>passwords are not matching</div>;
+      return <div className={s.warningNote}>passwords are not matching</div>;
+    }
+  }
+  function submitForm(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!isLoading) {
+      setIsLoading(true);
+      const isAllRequirementsMet = checkRequirements();
+      if (isAllRequirementsMet) {
+        //send all the data to server
+        console.log("Submit");
+      } else {
+        console.log("all requirements is not met");
+      }
+    } else {
+      setIsLoading(false);
+    }
+  }
+
+  function checkRequirements() {
+    if (isUsernameValid && isPasswordsMatched) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   return (
-    <div className="signupContainer">
-      <div className="formContainer">
+    <div className={s.signupContainer}>
+      <form className={s.formContainer} onSubmit={(event) => submitForm(event)}>
         <div>Sign up</div>
-        <div className="username signupInput">
-          <div className="inputLabel"> Username*</div>
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Username*</div>
           <label htmlFor="username">
             <input
               type="text"
               name="username"
+              required
               value={loginInfo.username}
               onChange={(event) => usernameHandler(event.currentTarget.value)}
             />
           </label>
           {displayUsernameAvailability()}
         </div>
-        <div className="password signupInput">
-          <div className="inputLabel"> Password*</div>
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Password*</div>
           <label htmlFor="password">
             <input
               type="text"
               name="password"
+              required
               value={loginInfo.password}
-              onChange={(event) =>
-                setLoginInfo({
-                  ...loginInfo,
-                  ["password"]: event.currentTarget.value,
-                })
-              }
+              onChange={(event) => passwordHandler(event.currentTarget.value)}
             />
           </label>
         </div>
-        <div className="confirmPassword signupInput">
-          <div className="inputLabel"> Confirm Password*</div>
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Confirm Password*</div>
           <label htmlFor="confirmPassword">
             <input
               type="password"
               name="confirmPassword"
+              required
               value={confirmPassword}
               onChange={(event) => matchPasswords(event.currentTarget.value)}
             />
           </label>
           {displaypasswordsmatch()}
         </div>
-        <div className="firstName signupInput">
-          <div className="inputLabel"> First name*</div>
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> First name*</div>
           <label htmlFor="firstName">
             <input
               type="text"
               name="firstName"
+              required
               value={signupInfo.firstname}
               onChange={(event) =>
                 setSignupInfo({
@@ -145,12 +189,13 @@ function SignUp() {
             />
           </label>
         </div>
-        <div className="lastname signupInput">
-          <div className="inputLabel"> Last name*</div>
-          <label className="inputNameForm" htmlFor="lastname">
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Last name*</div>
+          <label className={s.inputNameForm} htmlFor="lastname">
             <input
               type="text"
               name="lastname"
+              required
               value={signupInfo.lastname}
               onChange={(event) =>
                 setSignupInfo({
@@ -161,12 +206,13 @@ function SignUp() {
             />
           </label>
         </div>
-        <div className="birthday signupInput">
-          <div className="inputLabel"> Birthday*</div>
-          <label className="inputNameForm" htmlFor="birthday">
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Birthday*</div>
+          <label className={s.inputNameForm} htmlFor="birthday">
             <input
               type="date"
               name="birthday"
+              required
               value={signupInfo.birthday}
               onChange={(event) =>
                 setSignupInfo({
@@ -177,12 +223,13 @@ function SignUp() {
             />
           </label>
         </div>
-        <div className="email signupInput">
-          <div className="inputLabel"> Email*</div>
-          <label className="inputNameForm" htmlFor="email">
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Email*</div>
+          <label className={s.inputNameForm} htmlFor="email">
             <input
               type="email"
               name="email"
+              required
               value={signupInfo.email}
               onChange={(event) =>
                 setSignupInfo({
@@ -193,25 +240,18 @@ function SignUp() {
             />
           </label>
         </div>
-        <div className="telephone signupInput">
-          <div className="inputLabel"> Telephone*</div>
-          <label className="inputNameForm" htmlFor="telephone">
-            <input
-              type="number"
-              name="telephone"
-              value={signupInfo.telephone}
-              onChange={(event) =>
-                setSignupInfo({
-                  ...signupInfo,
-                  ["telephone"]: event.currentTarget.value,
-                })
-              }
-            />
-          </label>
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Telephone*</div>
+          <PhoneInput
+            placeholder="Enter phone number"
+            required
+            value={nationalNumber}
+            onChange={setNationalNumber}
+          />
         </div>
-        <div className="address signupInput">
-          <div className="inputLabel"> Address</div>
-          <label className="inputNameForm" htmlFor="address">
+        <div className={s.signupInput}>
+          <div className={s.inputLabel}> Address</div>
+          <label className={s.inputNameForm} htmlFor="address">
             <input
               type="text"
               name="address"
@@ -225,8 +265,8 @@ function SignUp() {
             />
           </label>
         </div>
-        <button>Sign up</button>
-      </div>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
   );
 }

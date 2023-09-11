@@ -22,3 +22,10 @@
   /* background-color: red; */
   width: 8em;
 }
+
+.warningNote {
+  color: red;
+}
+.successNote {
+  color: green;
+}

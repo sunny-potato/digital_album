@@ -1,3 +1,5 @@
+import { E164Number } from "libphonenumber-js/min";
+
 export type Login = {
   username: string;
   password: string;
@@ -15,6 +17,6 @@ export type Signup = {
   lastname: string;
   birthday: string;
   email: string;
-  telephone: string;
+  telephone: E164Number;
   address: string;
 };
