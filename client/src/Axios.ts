@@ -2,7 +2,7 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Buffer } from "buffer";
 import { Folder, Image } from "./Types/Folder";
-import { Login as login } from "Types/Login";
+import { Login as login, Signup as signup } from "Types/Login";
 
 // export async function getImage(fileName: string) {
 //   const response = await axios.get(
@@ -86,6 +86,12 @@ export async function validateLoginInfo(loginInfo: login) {
 
 //signup
 export async function checkUsernameAvailability(currentUsername: string) {
-  // console.log("current username : ", currentUsername);
   return await axios.get(`/signup?username=${currentUsername}`);
+}
+export async function createNewAccount(userInfo: {
+  login: login;
+  signup: signup;
+}) {
+  console.log(userInfo);
+  return await axios.post(`/signup/newuser`, userInfo);
 }

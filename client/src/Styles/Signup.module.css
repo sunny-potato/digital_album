@@ -1,28 +1,36 @@
 .signupContainer {
   height: 100vh;
   background-color: lightslategray;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
 }
 
 .formContainer {
   width: 80%;
+  max-width: 50rem;
   margin: auto;
-  padding-top: 4em;
-  background-color: lightgray;
+  padding-top: 4rem;
+}
+.signupWrapperContainer {
+  display: flex;
+}
+.signupWrapperContainer div {
+  width: 50%;
 }
 
 .signupInput {
-  display: flex;
-  padding: 0.3em 0;
+  padding: 0.3rem 0;
 }
 
-.inputLabel {
-  /* background-color: red; */
-  width: 8em;
+.signupInput input {
+  width: 100%;
+  height: 2rem;
+  border-radius: 0.5rem;
 }
 
+.passwordCheckList,
+.passwordCheckList span {
+  /* background-color: lightpink; */
+  padding-left: 0.5rem;
+}
 .warningNote {
   color: red;
 }

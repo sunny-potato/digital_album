@@ -91,3 +91,21 @@ export async function findPassword(password: string) {
 export async function findUsername(username: string) {
   return await sql`select * from user_account where user_name=${username}`;
 }
+
+export async function createNewUserInfo(userInfo: {
+  firstName: string;
+  lastName: string;
+  birthdate: string;
+  email: string;
+  telephon: number;
+  address: string;
+}) {
+  return await sql`insert into user_info(first_name, last_name, birthdate, email, telephon, address) values(${userInfo.firstName}, ${userInfo.lastName},${userInfo.birthdate},${userInfo.email},${userInfo.telephon},${userInfo.address}) returning id`;
+}
+export async function createNewUserAccount(userAccount: {
+  username: string;
+  password: string;
+  userId: number;
+}) {
+  return await sql`insert into user_account(user_name, user_password, user_id) values(${userAccount.username}, ${userAccount.password}, ${userAccount.userId}) `;
+}

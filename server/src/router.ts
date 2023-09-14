@@ -14,10 +14,12 @@ import {
   getAllLoginInfo,
   findPassword,
   findUsername,
+  createNewUserInfo,
+  createNewUserAccount,
 } from "./query";
 import multer from "multer";
 import { uploadFile, downloadFile, deleteFile } from "./imageStorage";
-import crypto from "crypto";
+import crypto, { sign } from "crypto";
 import { Row } from "postgres";
 import { throws } from "assert";
 import { Console } from "console";
@@ -228,4 +230,13 @@ router.get(`/signup`, async (req, res) => {
     isUsernameValid = true;
   }
   res.status(200).send(isUsernameValid);
+});
+
+router.post(`/signup/newuser`, async (req, res) => {
+  const logInfo = req.body.loginInfo;
+  const signupInfo = req.body.signupInfo;
+  console.log(logInfo, signupInfo);
+  const newUser = await createNewUserInfo(signupInfo);
+  console.log(newUser); ////////////////////////
+  // res.status(200).send("success");
 });
