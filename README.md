@@ -55,3 +55,10 @@ or
 import {hello as newHello} from "./helloWorld"
 console.log(newHello); // output "Hello, world";
 ```
+
+4. how to check error under coding
+   throw new Error()
+
+5. component vs function
+   -> component : return HTML?
+   -> function : no return HTML?

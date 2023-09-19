@@ -235,8 +235,18 @@ router.get(`/signup`, async (req, res) => {
 router.post(`/signup/newuser`, async (req, res) => {
   const logInfo = req.body.loginInfo;
   const signupInfo = req.body.signupInfo;
-  console.log(logInfo, signupInfo);
   const newUser = await createNewUserInfo(signupInfo);
-  console.log(newUser); ////////////////////////
-  // res.status(200).send("success");
+  const newUserId = Number(newUser[0].id);
+  if (newUserId) {
+    const accountInfo = {
+      username: logInfo.username,
+      password: logInfo.password,
+      userId: newUserId,
+    };
+    console.log(accountInfo);
+    const newAccount = await createNewUserAccount(accountInfo);
+    // throw new Error(" this is error test");
+    // console.log(newAccount);
+    res.status(200).send("success");
+  }
 });

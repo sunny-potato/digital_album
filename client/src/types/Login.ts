@@ -15,8 +15,11 @@ export type Signup = {
   id: number | undefined;
   firstname: string;
   lastname: string;
-  birthday: string;
+  birthdate: string;
   email: string;
-  telephone: E164Number;
+  telephon: E164Number;
   address: string;
+  username: string;
+  password: string;
+  confirmedPassword: string;
 };

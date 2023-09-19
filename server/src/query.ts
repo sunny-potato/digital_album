@@ -93,14 +93,14 @@ export async function findUsername(username: string) {
 }
 
 export async function createNewUserInfo(userInfo: {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   birthdate: string;
   email: string;
-  telephon: number;
+  telephon: string;
   address: string;
 }) {
-  return await sql`insert into user_info(first_name, last_name, birthdate, email, telephon, address) values(${userInfo.firstName}, ${userInfo.lastName},${userInfo.birthdate},${userInfo.email},${userInfo.telephon},${userInfo.address}) returning id`;
+  return await sql`insert into user_info(first_name, last_name, birthdate, email, telephon, address) values(${userInfo.firstname}, ${userInfo.lastname},${userInfo.birthdate},${userInfo.email},${userInfo.telephon},${userInfo.address}) returning id`;
 }
 export async function createNewUserAccount(userAccount: {
   username: string;
