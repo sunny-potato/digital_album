@@ -89,6 +89,5 @@ export async function checkUsernameAvailability(currentUsername: string) {
   return await axios.get(`/signup?username=${currentUsername}`);
 }
 export async function createNewAccount(signupInfo: Signup) {
-  // console.log(userInfo);
   return await axios.post(`/signup/newuser`, signupInfo);
 }

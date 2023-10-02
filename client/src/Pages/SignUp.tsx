@@ -94,6 +94,7 @@ function SignUp() {
       if (isAllRequirementsMet) {
         const result = await createNewAccount(signupInfo);
         if (result.status === 200) {
+          console.log("success");
           // page reloaded with login?
         }
       }
@@ -216,10 +217,10 @@ function SignUp() {
           />
         </div>
         <Input
-          label={"Address*"}
+          label={"Address"}
           type={"text"}
           name="address"
-          required={true}
+          required={false}
           value={signupInfo.address}
           onChange={(event) => inputHanlder(event, "address")}
           style={s}
