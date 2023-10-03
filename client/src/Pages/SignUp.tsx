@@ -30,6 +30,7 @@ function SignUp() {
   const [isPasswordsMatched, setIsPasswordsMatched] = useState<boolean>(false);
   const [nationalNumber, setNationalNumber] = useState<E164Number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSignupSucceeded, setIsSignupSucceeded] = useState<boolean>(false);
 
   useEffect(() => {
     setSignupInfo({
@@ -97,8 +98,7 @@ function SignUp() {
       if (isAllRequirementsMet) {
         const result = await createNewAccount(signupInfo);
         if (result.status === 200) {
-          console.log("success with signup");
-          navigate("/login");
+          setIsSignupSucceeded(true);
         }
       }
     } else {
@@ -116,9 +116,20 @@ function SignUp() {
 
   return (
     <div className={s.signupContainer}>
+      <div
+        className={s.popupContainer}
+        style={{ visibility: isSignupSucceeded ? "visible" : "hidden" }}
+      >
+        <div className={s.popupInner}>
+          <div className={s.popupTitle}>Thanks for signing up!</div>
+          <div className={s.popupSubtitle}>
+            Please login with the created account
+          </div>
+          <button onClick={() => navigate("/login")}>Go to login</button>
+        </div>
+      </div>
       <form className={s.formContainer} onSubmit={(event) => submitForm(event)}>
         <div>Sign up</div>
-
         <Input
           label={"Username*"}
           type={"text"}
