@@ -2,6 +2,38 @@
   height: 100vh;
   background-color: lightslategray;
 }
+.popupContainer {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popupInner {
+  height: 7rem;
+  width: 20rem;
+  background-color: lightgray;
+  margin-bottom: 5rem;
+  padding: 0.5rem;
+  position: relative;
+  border-radius: 0.5rem;
+}
+.popupTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+.popupSubtitle {
+  text-align: center;
+}
+.popupInner button {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translate(-50%, 0);
+}
 
 .formContainer {
   width: 80%;
