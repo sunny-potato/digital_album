@@ -1,4 +1,5 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Signup, Login } from "../Types/Login";
 import { checkUsernameAvailability, createNewAccount } from "../Axios";
 import s from "../Styles/Signup.module.css";
@@ -11,6 +12,8 @@ import { E164Number } from "libphonenumber-js/min";
 import "react-phone-number-input/style.css";
 
 function SignUp() {
+  const navigate = useNavigate();
+  console.log(navigate);
   const [signupInfo, setSignupInfo] = useState<Signup>({
     id: undefined,
     firstname: "",
@@ -27,7 +30,7 @@ function SignUp() {
   const [isPasswordsMatched, setIsPasswordsMatched] = useState<boolean>(false);
   const [nationalNumber, setNationalNumber] = useState<E164Number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // console.log(signupInfo);
+
   useEffect(() => {
     setSignupInfo({
       ...signupInfo,
@@ -94,8 +97,8 @@ function SignUp() {
       if (isAllRequirementsMet) {
         const result = await createNewAccount(signupInfo);
         if (result.status === 200) {
-          console.log("success");
-          // page reloaded with login?
+          console.log("success with signup");
+          navigate("/login");
         }
       }
     } else {

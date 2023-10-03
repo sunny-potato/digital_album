@@ -2,7 +2,7 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Buffer } from "buffer";
 import { Folder, Image } from "./Types/Folder";
-import { Login as login, Signup } from "Types/Login";
+import { Login as login, Signup } from "./Types/Login";
 
 // export async function getImage(fileName: string) {
 //   const response = await axios.get(
