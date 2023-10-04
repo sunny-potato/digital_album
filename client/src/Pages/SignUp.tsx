@@ -13,7 +13,7 @@ import "react-phone-number-input/style.css";
 
 function SignUp() {
   const navigate = useNavigate();
-  console.log(navigate);
+  // console.log(navigate);
   const [signupInfo, setSignupInfo] = useState<Signup>({
     id: undefined,
     firstname: "",

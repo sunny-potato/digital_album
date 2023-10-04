@@ -189,11 +189,11 @@ router.post(`/myAlbum/newFolder`, async (req, res) => {
 export default router;
 
 // login
-
 router.get(`/login`, async (req, res) => {
   const accountFromUser = req.query as AccountFromUser;
   // console.log(accountFromUser);
   const accountListFromDB = await getAllLoginInfo();
+  console.log(accountListFromDB);
   const accountValidationResult = isUserAccountValidated(
     accountFromUser,
     accountListFromDB
@@ -209,12 +209,16 @@ function isUserAccountValidated(
     return account.user_name === accountFromUser.username;
   });
   if (matchedUserName === undefined) {
-    return false;
+    return { result: false };
   } else {
     if (matchedUserName.user_password === accountFromUser.password) {
-      return true;
+      return {
+        result: true,
+        username: matchedUserName.user_name,
+        userId: matchedUserName.user_id,
+      };
     } else {
-      return false;
+      return { result: false };
     }
   }
 }

@@ -1,26 +1,22 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Login as login } from "../Types/Login";
+import { Login as login, UserData } from "../Types/Login";
 import { validateLoginInfo } from "../Axios";
 import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
 import "../Styles/Login.css";
 
-function Login({
-  setUserData,
-}: {
-  setUserData: (userData: { username: string }) => void;
-}) {
+function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<login>({
     username: "",
     password: "",
   });
+  // console.log(loginInfo);
   const [isLoginInfoValid, setIsLoginInfoValid] = useState<boolean>(true);
   const [isLoginValidated, setIsLoginValidated] = useState<boolean>(true);
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
-  // console.log(loginInfo);
 
   function loginInputHandler(key: string, value: string) {
     setLoginInfo({ ...loginInfo, [key]: value });
@@ -29,16 +25,24 @@ function Login({
   async function checkValidation(loginInfo: login) {
     if (loginInfo.username !== "" && loginInfo.password !== "") {
       const isLoginValidated = await validateLoginInfo(loginInfo);
+      // console.log(isLoginValidated.data.result);
       displayValidationResult(isLoginValidated.data);
       setIsLoginInfoValid(true);
     } else {
       setIsLoginInfoValid(false);
     }
   }
-  function displayValidationResult(validationResult: boolean) {
-    if (validationResult) {
+  function displayValidationResult(validation: {
+    result: boolean;
+    username: string;
+    userId: number;
+  }) {
+    if (validation.result) {
       setIsLoginValidated(true);
-      const userData = { username: loginInfo.username };
+      const userData = {
+        username: validation.username,
+        userId: validation.userId,
+      };
       setUserData(userData);
       navigate("/");
     } else {

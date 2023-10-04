@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
 import styles from "../Styles/Navigation.module.css";
+import { UserData } from "../Types/Login";
 // import "../Styles/Navigation.module.css";
+// type UserData = { username: string };
 
-function NavigationAfterLogin() {
+function NavigationAfterLogin({ userData }: { userData: UserData }) {
   return (
     <div className={styles.navContainer}>
       <div className={styles.navHome}>
-        <Link to={"/"}>Home</Link>
+        <Link to={`/`}>Home</Link>
       </div>
       {/* <Link to={"/about"}>About</Link> */}
       {/* <Link to={"/albumFolder"}>Folder</Link> */}
       <div className={styles.navRight}>
-        <Link to={"/myAlbum"}>My album</Link>
-        <Link to={"/myPage"}>My page</Link>
-        <span>USERNAME</span>
+        <Link to={`/myAlbum/${userData.userId}`}>My album</Link>
+        <Link to={"/myPage"}>User:{userData.username}</Link>
       </div>
     </div>
   );

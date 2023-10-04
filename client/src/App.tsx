@@ -9,17 +9,21 @@ import MyAlbum from "./Pages/MyAlbum";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import NotFoundPage from "./Pages/NotFound";
+import { UserData } from "./Types/Login";
 
 function App() {
-  const [userData, setUserData] = useState<{ username: string }>();
-  // console.log({ userData });
+  const [userData, setUserData] = useState<UserData>();
+  console.log(userData);
   // console.log(userData ? true : false);
-
   // useEffect(() => {}, [userData]);
   return (
     <>
       <BrowserRouter>
-        {userData ? <NavigationAfterLogin /> : <NavigationBeforeLogin />}
+        {userData ? (
+          <NavigationAfterLogin userData={userData} />
+        ) : (
+          <NavigationBeforeLogin />
+        )}
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route

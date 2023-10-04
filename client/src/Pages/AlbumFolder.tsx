@@ -117,7 +117,7 @@ function AlbumFolder() {
           <div className="displayTitle">Uploaded photos</div>
           {isImageClicked ? (
             <PopupEachImage
-              clickedImage={uploadedImageList[clickedImageIndex]}
+              clickedImage={uploadedImageList[clickedImageIndex as number]}
             />
           ) : (
             <div className="displayContent">
