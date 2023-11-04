@@ -5,7 +5,7 @@ import { Login as login, UserData } from "../Types/Login";
 import { validateLoginInfo } from "../Axios";
 import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
-import "../Styles/Login.css";
+import s from "../Styles/Login.module.css";
 
 function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
   const navigate = useNavigate();
@@ -13,7 +13,6 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
     username: "",
     password: "",
   });
-  // console.log(loginInfo);
   const [isLoginInfoValid, setIsLoginInfoValid] = useState<boolean>(true);
   const [isLoginValidated, setIsLoginValidated] = useState<boolean>(true);
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
@@ -25,7 +24,6 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
   async function checkValidation(loginInfo: login) {
     if (loginInfo.username !== "" && loginInfo.password !== "") {
       const isLoginValidated = await validateLoginInfo(loginInfo);
-      // console.log(isLoginValidated.data.result);
       displayValidationResult(isLoginValidated.data);
       setIsLoginInfoValid(true);
     } else {
@@ -56,15 +54,15 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
   }
 
   return (
-    <div className="pageContainer">
-      <div className="pageContents">
-        <div className="loginPageTitle">Sign in</div>
-        <div className="loginPageContents">
+    <div className={s.pageContainer}>
+      <div className={s.pageContents}>
+        <div className={s.loginPageTitle}>Sign in</div>
+        <div className={s.loginPageContents}>
           <form
-            className="loginInformation"
+            className={s.loginInformation}
             onSubmit={(event) => submitLoginInfo(event)}
           >
-            <div className="userName loginList">
+            <div className={s.userName}>
               <label htmlFor="userName">Username</label>
               <input
                 type="text"
@@ -74,7 +72,7 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
                 }
               />
             </div>
-            <div className="passWord loginList">
+            <div className={s.passWord}>
               <label htmlFor="passWord">Password</label>
               <input
                 type={isPasswordHidden ? "password" : "text"}
@@ -83,9 +81,9 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
                   loginInputHandler("password", event.currentTarget.value)
                 }
               />
-              <div className="eyeIcon">
+              <div className={s.eyeIcon}>
                 <img
-                  className="hideEyeIcon"
+                  className={s.hideEyeIcon}
                   src={hideEyeIcon}
                   style={{
                     display: isPasswordHidden ? "block" : "none",
@@ -93,7 +91,7 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
                   onClick={() => setIsPasswordHidden(false)}
                 ></img>
                 <img
-                  className="viewEyeIcon"
+                  className={s.viewEyeIcon}
                   src={viewEyeIcon}
                   style={{
                     display: isPasswordHidden ? "none" : "block",
@@ -102,15 +100,15 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
                 ></img>
               </div>
             </div>
-            <button className="loginButton">Log in</button>
+            <button className={s.loginButton}>Log in</button>
             <div
-              className="invalidMessage"
+              className={s.invalidMessage}
               style={{ visibility: isLoginInfoValid ? "hidden" : "visible" }}
             >
               username and password should not be empty
             </div>
             <div
-              className="failedValidationMessage"
+              className={s.failedValidationMessage}
               style={{ visibility: isLoginValidated ? "hidden" : "visible" }}
             >
               Incorrect username or password

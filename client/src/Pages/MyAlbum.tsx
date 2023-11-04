@@ -7,7 +7,7 @@ import {
   postMyAlbumTitle,
   getMyAlbumImage,
 } from "../Axios";
-import "../Styles/MyAlbum.css";
+import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
 
 function MyAlbum() {
@@ -17,12 +17,12 @@ function MyAlbum() {
   const [folderList, setFolderList] = useState<Folder[]>([]);
   const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  // console.log(userId);
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // console.log({ isEditMode, isLoading });
   useEffect(() => {
     async function getAlbumInfo() {
       const result = await getMyAlbumInfo(userId);
-      console.log(result);
+      // console.log(result);
       if (result.folder.length !== 0) {
         setFolderList(result.folder);
       }
@@ -50,40 +50,46 @@ function MyAlbum() {
     if (isEditMode) {
       setIsEditMode(false);
       const HaveAllName = folderList.every((folder) => folder.name !== "");
-      if (HaveAllName) {
+      if (HaveAllName && !isLoading) {
+        setIsLoading(true);
         const eachFolder = folderList.map((name) => name);
         const newFolder = await createFolder(eachFolder, userId);
         const result = await getMyAlbumInfo(userId);
-        console.log(result);
         if (result.folder.length !== 0) {
           setFolderList(result.folder);
         }
+        if (updatedAlbumPhoto) {
+          await postMyAlbumImage(userId, updatedAlbumPhoto);
+        }
+        if (currentAlbumTitle) {
+          await postMyAlbumTitle(userId, currentAlbumTitle);
+        }
       } else {
+        setIsLoading(false);
         setIsEditMode(true);
-        console.log("all folder should have its own name"); //popup
+        console.log("all folder should have its own name"); //popup!!!!!!!!
       }
-      if (updatedAlbumPhoto) {
-        await postMyAlbumImage(userId, updatedAlbumPhoto);
-      }
-      if (currentAlbumTitle) {
-        await postMyAlbumTitle(userId, currentAlbumTitle);
-      }
+      setIsLoading(false);
     } else {
       setIsEditMode(true);
     }
   }
   return (
-    <div className="pageContainer">
-      <div className="albumBox">
-        <button className="editAlbumButton" onClick={saveAlbumInfo}>
+    <div className={s.pageContainer}>
+      <div className={s.albumBox}>
+        <button
+          className={s.editAlbumButton}
+          disabled={isLoading ? true : false}
+          onClick={saveAlbumInfo}
+        >
           {isEditMode ? "Save" : "Edit"}
         </button>
         {isEditMode && (
-          <div className="editAlbumBox">
-            <div className="albumPhotoBox">
-              <div className="albumPhoto">
+          <div className={s.editAlbumBox}>
+            <div className={s.albumPhotoBox}>
+              <div className={s.albumPhoto}>
                 {displayAlbumPhoto && (
-                  <div className="imageInput">
+                  <div className={s.imageInput}>
                     <img src={displayAlbumPhoto}></img>
                     <input
                       type="file"
@@ -93,8 +99,8 @@ function MyAlbum() {
                   </div>
                 )}
                 {!displayAlbumPhoto && (
-                  <div className="imageInput">
-                    <div className="noImageDiv">No image</div>
+                  <div className={s.imageInput}>
+                    <div className={s.noImageDiv}>No image</div>
                     <input
                       type="file"
                       accept="image/*"
@@ -103,7 +109,7 @@ function MyAlbum() {
                   </div>
                 )}
               </div>
-              <div className="albumTitle">
+              <div className={s.albumTitle}>
                 <input
                   type="text"
                   placeholder="album title"
@@ -114,9 +120,9 @@ function MyAlbum() {
                 ></input>
               </div>
             </div>
-            <div className="albumListBox">
-              <div className="albumList">
-                <div className="albumListTitle">Album List</div>
+            <div className={s.albumListBox}>
+              <div className={s.albumList}>
+                <div className={s.albumListTitle}>Album List</div>
                 {folderList &&
                   folderList.map((folder, index) => {
                     return (
@@ -138,7 +144,7 @@ function MyAlbum() {
                           }}
                         ></input>
                         <button
-                          className="deleteAlbumList"
+                          className={s.deleteAlbumList}
                           onClick={() => {
                             const delteFolder = [
                               ...folderList.slice(0, index),
@@ -154,7 +160,7 @@ function MyAlbum() {
                   })}
                 <div>
                   <button
-                    className="addAlbumList"
+                    className={s.addAlbumList}
                     onClick={() => {
                       const newFolder: Folder = {
                         id: undefined,
@@ -173,22 +179,24 @@ function MyAlbum() {
           </div>
         )}
         {!isEditMode && (
-          <div className="displayAlbumBox">
-            <div className="albumPhotoBox">
-              <div className="albumPhoto">
+          <div className={s.displayAlbumBox}>
+            <div className={s.albumPhotoBox}>
+              <div className={s.albumPhoto}>
                 {displayAlbumPhoto && <img src={displayAlbumPhoto}></img>}
                 {!displayAlbumPhoto && (
-                  <div className="noImageDiv">No image</div>
+                  <div className={s.noImageDiv}>No image</div>
                 )}
               </div>
-              {!currentAlbumTitle && <div className="albumTitle">No title</div>}
+              {!currentAlbumTitle && (
+                <div className={s.albumTitle}>No title</div>
+              )}
               {currentAlbumTitle && (
-                <div className="albumTitle">{currentAlbumTitle}</div>
+                <div className={s.albumTitle}>{currentAlbumTitle}</div>
               )}
             </div>
-            <div className="albumListBox">
-              <div className="albumList">
-                <div className="albumListTitle">Album List</div>
+            <div className={s.albumListBox}>
+              <div className={s.albumList}>
+                <div className={s.albumListTitle}>Album List</div>
                 {folderList.length !== 0 &&
                   folderList.map((folder) => (
                     <li key={folder.id}>

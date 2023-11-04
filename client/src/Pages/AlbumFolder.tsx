@@ -6,7 +6,7 @@ import {
   deleteImageInfolder,
 } from "../Axios";
 import { Image } from "../Types/Folder";
-import "../Styles/AlbumFolder.css";
+import s from "../Styles/AlbumFolder.module.css";
 import upload from "../Images/upload.png";
 import addImage from "../Images/addImage.png";
 import PopupEachImage from "../Components/PopupEachImage";
@@ -19,7 +19,8 @@ function AlbumFolder() {
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
   const [isImageClicked, setIsImageClicked] = useState<boolean>(false);
   const [clickedImageIndex, setClickedImageIndex] = useState<number>();
-  // console.log(isImageClicked, clickedImageIndex);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  console.log({ isImageClicked, clickedImageIndex });
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
@@ -32,16 +33,6 @@ function AlbumFolder() {
       setSelectedImageList((selectedImageList) => [...selectedImageList, file]);
     });
   }
-  // useEffect(() => {
-  //   async function test() {
-  //     if (sendImage) {
-  //       await insertImage(sendImage);
-  //       const image = await getImage(28);
-  //       setImageFromDB(image);
-  //     }
-  //   }
-  //   void test();
-  // }, [sendImage]);{}
 
   useEffect(() => {
     async function getImages() {
@@ -68,11 +59,16 @@ function AlbumFolder() {
     try {
       if (selectedImageList.length == 0) {
         console.log("no image that can be sendt to DB"); // it should be popup
-      }
-      const response = await postImageInfolder(selectedImageList, folderId);
-      if (response.status === 200) {
-        cancelSelectedImage();
-        window.location.reload();
+      } else {
+        if (!isLoading) {
+          setIsLoading(true);
+          const response = await postImageInfolder(selectedImageList, folderId);
+          if (response.status === 200) {
+            cancelSelectedImage();
+            window.location.reload();
+          }
+        }
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -85,6 +81,7 @@ function AlbumFolder() {
   }
 
   async function deleteSavedImage(imageIndex: number) {
+    console.log("x is clicked");
     const deletedImage = uploadedImageList[imageIndex];
     // console.log(deletedImage);
     const result = await deleteImageInfolder(deletedImage);
@@ -95,13 +92,13 @@ function AlbumFolder() {
   }
 
   return (
-    <div className="uploadPageContainer">
-      <div className="contentContainer">
-        <div className="uploadImageBox">
-          <img className="uploadIcon" src={upload} alt="upload image"></img>
-          <div className="uploadInput">
-            <span className="uploadDragDrop">Drag and drop, </span>
-            <label className="uploadImages" htmlFor="uploadImages">
+    <div className={s.uploadPageContainer}>
+      <div className={s.contentContainer}>
+        <div className={s.uploadImageBox}>
+          <img className={s.uploadIcon} src={upload} alt="upload image"></img>
+          <div className={s.uploadInput}>
+            <span className={s.uploadDragDrop}>Drag and drop, </span>
+            <label className={s.uploadImages} htmlFor="uploadImages">
               or
               <input
                 name="uploadImages"
@@ -113,61 +110,57 @@ function AlbumFolder() {
             </label>
           </div>
         </div>
-        <div className="displayImageBox">
-          <div className="displayTitle">Uploaded photos</div>
-          {isImageClicked ? (
-            <PopupEachImage
-              clickedImage={uploadedImageList[clickedImageIndex as number]}
-            />
-          ) : (
-            <div className="displayContent">
-              {uploadedImageList &&
-                uploadedImageList.map((image, index) => (
-                  <div
-                    key={image.id}
-                    className="uploadedImage"
-                    onClick={() => {
-                      if (isImageClicked) {
-                        setIsImageClicked(false);
-                      } else {
-                        setIsImageClicked(true), setClickedImageIndex(index);
+        <div className={s.displayImageBox}>
+          <div className={s.displayTitle}>Uploaded photos</div>
+          <div className={s.displayContent}>
+            {uploadedImageList &&
+              uploadedImageList.map((image, index) => (
+                <div
+                  key={image.id}
+                  className={s.uploadedImage}
+                  onClick={() => {
+                    // console.log("image is clicked");
+                    setIsImageClicked(true), setClickedImageIndex(index);
+                    <PopupEachImage
+                      clickedImage={
+                        uploadedImageList[clickedImageIndex as number]
                       }
+                    />;
+                    // }
+                  }}
+                >
+                  <button
+                    className={s.deleteImageButton}
+                    onClick={() => {
+                      setIsImageClicked(false), console.log("X is clicked");
                     }}
+                    // deleteSavedImage(index)}
                   >
-                    <button
-                      className="deleteImageButton"
-                      onClick={() => deleteSavedImage(index)}
-                    >
-                      x
-                    </button>
-                    <img
-                      src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
-                      alt={image.origianl_name}
-                    ></img>
-                  </div>
-                ))}
-            </div>
-          )}
-
-          {/* <button className="saveImageButton" onClick={saveImage}>
-            Save
-          </button> */}
+                    x
+                  </button>
+                  <img
+                    src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
+                    alt={image.origianl_name}
+                  ></img>
+                </div>
+              ))}
+          </div>
         </div>
         <div
-          className="popupBackgroundDiv"
+          className={s.popupBackgroundDiv}
           style={{
             display: selectedImageBlob.length > 0 ? "block" : "none",
           }}
         >
-          <div className="displayInputPopupBox">
-            <div className="uploadInputPopupBox">
-              <div className="uploadInputPopup">
+          <div className={s.displayInputPopupBox}>
+            <div className={s.uploadInputPopupBox}>
+              <div className={s.uploadInputPopup}>
                 <img
-                  className="addImageIcon"
+                  className={s.addImageIcon}
                   src={addImage}
                   alt="add image"
                 ></img>
-                <label className="uploadImages" htmlFor="uploadImages">
+                <label className={s.uploadImages} htmlFor="uploadImages">
                   more images? :)
                   <input
                     name="uploadImages"
@@ -179,13 +172,13 @@ function AlbumFolder() {
                 </label>
               </div>
             </div>
-            <div className="displayPopupTitle">Selected photos</div>
-            <div className="displayPopupContent">
+            <div className={s.displayPopupTitle}>Selected photos</div>
+            <div className={s.displayPopupContent}>
               {selectedImageBlob &&
                 selectedImageBlob.map((img, index) => (
-                  <div key={index} className="selectedImage">
+                  <div key={index} className={s.selectedImage}>
                     <button
-                      className="deleteImageButton"
+                      className={s.deleteImageButton}
                       onClick={() => deleteSelectedImage(index)}
                     >
                       x
@@ -196,13 +189,15 @@ function AlbumFolder() {
             </div>
             <div>
               <button
-                className="saveSelectedImageButton"
+                className={s.saveSelectedImageButton}
+                disabled={isLoading ? true : false}
                 onClick={saveSelectedImage}
               >
                 Save
               </button>
               <button
-                className="cancelSelectedImageButton"
+                className={s.cancelSelectedImageButton}
+                disabled={isLoading ? true : false}
                 onClick={cancelSelectedImage}
               >
                 Cancel

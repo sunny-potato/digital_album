@@ -1,4 +1,32 @@
-##
+# Digital album
+
+## Getting started with the project
+
+To run client side, open a new terminal from the root of the project and move to "client" file:
+
+```bash
+cd client
+```
+
+Then run the following command to start vite/react:
+
+```bash
+npm run dev
+```
+
+To run server side, open a new terminal from the root of the project and move to "server" file:
+
+```bash
+cd server
+```
+
+Then run the following command to start node:
+
+```bash
+npm run dev
+```
+
+## Tech stack
 
 -Frontend : react, vite, axios
 -API : node.js(express)
@@ -7,7 +35,7 @@
 -> multer :
 -> uuid(Universally unique identifier) : create unique id for images
 
-##
+## Memo
 
 1. relative url vs absolute url when <Link> is used in React
 

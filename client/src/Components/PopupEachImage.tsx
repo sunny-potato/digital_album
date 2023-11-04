@@ -11,7 +11,8 @@ type Props = {
 
 function PopupEachImage(props: Props) {
   const imageInfo = props.clickedImage;
-  console.log(imageInfo);
+  console.log("image is clicked");
+  // console.log(imageInfo);
   // const swiperElRef = useRef(null);
 
   useEffect(() => {

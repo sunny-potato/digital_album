@@ -1,3 +1,11 @@
+.pageContainer {
+  height: 100vh;
+  background-color: lightslategray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .loginInformation {
   /* background-color: lightgoldenrodyellow; */
 }
