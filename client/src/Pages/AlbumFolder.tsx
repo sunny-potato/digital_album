@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, Outlet } from "react-router-dom";
 import {
   postImageInfolder,
   getAllImagesInFolder,
@@ -13,14 +13,12 @@ import addImage from "../Images/addImage.png";
 
 function AlbumFolder() {
   const folderId = Number(useParams().folderId);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
-  // const [isImageClicked, setIsImageClicked] = useState<boolean>(false);
   const [clickedImageIndex, setClickedImageIndex] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // console.log({ isImageClicked, clickedImageIndex });
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
@@ -120,19 +118,13 @@ function AlbumFolder() {
                   >
                     x
                   </button>
-                  <button
-                    key={image.id}
-                    className={s.uploadedImage}
-                    onClick={
-                      () => setClickedImageIndex(index)
-                      // move to slider including image??????????????????
-                    }
-                  >
+                  <Link className={s.uploadedImage} to={`image/${image.id}`}>
                     <img
+                      className={s.uploadedImage}
                       src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
                       alt={image.origianl_name}
                     />
-                  </button>
+                  </Link>
                 </div>
               ))}
           </div>
@@ -196,6 +188,7 @@ function AlbumFolder() {
             </div>
           </div>
         </div>
+        <Outlet />
       </div>
     </div>
   );
