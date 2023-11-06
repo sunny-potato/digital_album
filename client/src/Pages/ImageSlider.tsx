@@ -1,15 +1,13 @@
-"use client";
 import { useEffect, useRef } from "react";
 import styles from "../Styles/PopupEachImage.module.css";
 import { Image } from "../Types/Folder";
 import { register } from "swiper/element/bundle";
-register();
 
 type Props = {
   clickedImage: Image;
 };
 
-function PopupEachImage(props: Props) {
+function ImageSlider(props: Props) {
   const imageInfo = props.clickedImage;
   console.log("image is clicked");
   // console.log(imageInfo);
@@ -39,4 +37,4 @@ function PopupEachImage(props: Props) {
   );
 }
 
-export default PopupEachImage;
+export default ImageSlider;

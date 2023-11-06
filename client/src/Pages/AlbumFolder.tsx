@@ -9,7 +9,7 @@ import { Image } from "../Types/Folder";
 import s from "../Styles/AlbumFolder.module.css";
 import upload from "../Images/upload.png";
 import addImage from "../Images/addImage.png";
-import PopupEachImage from "../Components/PopupEachImage";
+// import PopupEachImage from "../Components/PopupEachImage";
 
 function AlbumFolder() {
   const folderId = Number(useParams().folderId);
@@ -17,10 +17,10 @@ function AlbumFolder() {
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
-  const [isImageClicked, setIsImageClicked] = useState<boolean>(false);
+  // const [isImageClicked, setIsImageClicked] = useState<boolean>(false);
   const [clickedImageIndex, setClickedImageIndex] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  console.log({ isImageClicked, clickedImageIndex });
+  // console.log({ isImageClicked, clickedImageIndex });
 
   function handleFiles(fileList: FileList | null) {
     if (fileList === null) return;
@@ -81,9 +81,7 @@ function AlbumFolder() {
   }
 
   async function deleteSavedImage(imageIndex: number) {
-    console.log("x is clicked");
     const deletedImage = uploadedImageList[imageIndex];
-    // console.log(deletedImage);
     const result = await deleteImageInfolder(deletedImage);
     if (result.status == 200) {
       const getImageList = await getAllImagesInFolder(folderId);
@@ -115,33 +113,26 @@ function AlbumFolder() {
           <div className={s.displayContent}>
             {uploadedImageList &&
               uploadedImageList.map((image, index) => (
-                <div
-                  key={image.id}
-                  className={s.uploadedImage}
-                  onClick={() => {
-                    // console.log("image is clicked");
-                    setIsImageClicked(true), setClickedImageIndex(index);
-                    <PopupEachImage
-                      clickedImage={
-                        uploadedImageList[clickedImageIndex as number]
-                      }
-                    />;
-                    // }
-                  }}
-                >
+                <div className={s.imageBox} key={index}>
                   <button
                     className={s.deleteImageButton}
-                    onClick={() => {
-                      setIsImageClicked(false), console.log("X is clicked");
-                    }}
-                    // deleteSavedImage(index)}
+                    onClick={() => deleteSavedImage(index)}
                   >
                     x
                   </button>
-                  <img
-                    src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
-                    alt={image.origianl_name}
-                  ></img>
+                  <button
+                    key={image.id}
+                    className={s.uploadedImage}
+                    onClick={
+                      () => setClickedImageIndex(index)
+                      // move to slider including image??????????????????
+                    }
+                  >
+                    <img
+                      src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
+                      alt={image.origianl_name}
+                    />
+                  </button>
                 </div>
               ))}
           </div>

@@ -64,6 +64,10 @@ input[type="file"]:after {
   /* auto-fill vs auto-fit*/
 }
 
+.imageBox {
+  position: relative;
+}
+
 /* @media (min-width: 1000px) {
   .displayContents {
     grid-template-columns: repeat(4, 1fr);
@@ -71,19 +75,17 @@ input[type="file"]:after {
 } */
 
 .uploadedImage {
-  position: relative;
   aspect-ratio: 1;
+  padding: 0;
 }
+
 .uploadedImage img {
   width: 100%;
   height: 100%;
-  /* object-fit: cover; */
 }
 .deleteImageButton {
-  z-index: 10;
   position: absolute;
   right: 0%;
-  /* background-color: "pink"; */
 }
 
 .saveImageButton {

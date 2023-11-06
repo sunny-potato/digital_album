@@ -16,9 +16,20 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
   const [isLoginInfoValid, setIsLoginInfoValid] = useState<boolean>(true);
   const [isLoginValidated, setIsLoginValidated] = useState<boolean>(true);
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function loginInputHandler(key: string, value: string) {
     setLoginInfo({ ...loginInfo, [key]: value });
+  }
+
+  function submitLoginInfo(event: React.FormEvent<HTMLFormElement>) {
+    if (!isLoading) {
+      setIsLoading(true);
+      event.preventDefault();
+      checkValidation(loginInfo);
+    } else {
+      setIsLoading(false);
+    }
   }
 
   async function checkValidation(loginInfo: login) {
@@ -46,11 +57,6 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
     } else {
       setIsLoginValidated(false);
     }
-  }
-
-  function submitLoginInfo(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    checkValidation(loginInfo);
   }
 
   return (
@@ -100,7 +106,12 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
                 ></img>
               </div>
             </div>
-            <button className={s.loginButton}>Log in</button>
+            <button
+              className={s.loginButton}
+              disabled={isLoading ? true : false}
+            >
+              Log in
+            </button>
             <div
               className={s.invalidMessage}
               style={{ visibility: isLoginInfoValid ? "hidden" : "visible" }}
