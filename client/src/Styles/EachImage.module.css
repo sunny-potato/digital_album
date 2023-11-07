@@ -1,0 +1,25 @@
+.popUpBackground {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background: rgba(50, 50, 50, 0.8);
+  display: none;
+}
+
+.popUpWindow {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 80%;
+  border-radius: 1rem;
+  background: lightpink;
+}
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

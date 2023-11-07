@@ -9,11 +9,10 @@ import { Image } from "../Types/Folder";
 import s from "../Styles/AlbumFolder.module.css";
 import upload from "../Images/upload.png";
 import addImage from "../Images/addImage.png";
-// import PopupEachImage from "../Components/PopupEachImage";
 
 function AlbumFolder() {
   const folderId = Number(useParams().folderId);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);

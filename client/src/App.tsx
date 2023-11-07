@@ -10,13 +10,10 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import NotFoundPage from "./Pages/NotFound";
 import { UserData } from "./Types/Login";
-import ImageSlider from "./Pages/ImageSlider";
+import EachImage from "./Pages/EachImage";
 
 function App() {
   const [userData, setUserData] = useState<UserData>();
-  console.log(userData);
-  // console.log(userData ? true : false);
-  // useEffect(() => {}, [userData]);
   return (
     <>
       <BrowserRouter>
@@ -29,7 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/myAlbum/:userId" element={<MyAlbum />} />
           <Route path="/albumFolder/:folderId" element={<AlbumFolder />}>
-            <Route path="image/:imageId" element={<ImageSlider />} />
+            <Route path="image/:imageId" element={<EachImage />} />
           </Route>
           <Route path="/login" element={<Login setUserData={setUserData} />} />
           <Route path="/signup" element={<SignUp />} />
