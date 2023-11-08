@@ -1,14 +1,44 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
+import s from "../Styles/ImageSlider.module.css";
+import upload from "../Images/upload.png";
 
-function ImageSlider() {
-  // const swiperElRef
+type ImageSlider = {
+  currentImageIndex: number | undefined;
+  imageList: Image[];
+  defaultURL: string;
+};
+
+function ImageSlider({
+  currentImageIndex,
+  imageList,
+  defaultURL,
+}: ImageSlider) {
+  // console.log(currentImage);
   return (
-    <swiper-container>
-      <swiper-slide>Slide 1</swiper-slide>
-      <swiper-slide>Slide 2</swiper-slide>
-      <swiper-slide>Slide 3</swiper-slide>
-      ...
-    </swiper-container>
+    <CarouselProvider
+      naturalSlideWidth={100}
+      naturalSlideHeight={125}
+      totalSlides={3}
+      className={s.sliderContainer}
+    >
+      <Slider className={s.sliderWrapper}>
+        <Slide index={0} innerClassName={s.sliderInner}>
+          <img src={currentImage} className={s.currentImg} />
+        </Slide>
+        <Slide index={1}>I am the second Slide.</Slide>
+        <Slide index={2}>I am the third Slide.</Slide>
+      </Slider>
+      <ButtonBack>Back</ButtonBack>
+      <ButtonNext>Next</ButtonNext>
+    </CarouselProvider>
   );
 }
 

@@ -110,6 +110,7 @@ function AlbumFolder() {
           <div className={s.displayContent}>
             {uploadedImageList &&
               uploadedImageList.map((image, index) => (
+                // console.log(image),
                 <div className={s.imageBox} key={index}>
                   <button
                     className={s.deleteImageButton}
@@ -117,7 +118,15 @@ function AlbumFolder() {
                   >
                     x
                   </button>
-                  <Link className={s.uploadedImage} to={`image/${image.id}`}>
+                  <Link
+                    className={s.uploadedImage}
+                    to={`image/${image.id}`}
+                    state={{
+                      currentImageIndex: index,
+                      defaultURL: "http://localhost:8000/albumFolder/image/",
+                      imageList: uploadedImageList,
+                    }}
+                  >
                     <img
                       className={s.uploadedImage}
                       src={`http://localhost:8000/albumFolder/image/${image.uuid}`}

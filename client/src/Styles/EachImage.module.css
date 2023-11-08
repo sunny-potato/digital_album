@@ -17,6 +17,8 @@
   height: 80%;
   border-radius: 1rem;
   background: lightpink;
+  display: flex;
+  justify-content: center;
 }
 .closeButton {
   position: absolute;

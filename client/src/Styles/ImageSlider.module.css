@@ -1,0 +1,24 @@
+.sliderContainer {
+  height: 100%;
+  width: 50%;
+  background: lightgreen;
+}
+.sliderWrapper {
+  height: 80%;
+  width: 80%;
+  background-color: black;
+}
+
+.sliderInner {
+  height: 50%;
+  width: 50%;
+  background-color: lightblue;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.currentImg {
+  max-height: 100%;
+  height: auto;
+  /* width: 100%; */
+}
