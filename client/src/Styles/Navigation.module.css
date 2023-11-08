@@ -3,7 +3,7 @@
   position: fixed;
   width: 100%;
   padding: 0.5em;
-  background-color: aquamarine;
+  background-color: #e1eedd;
   display: flex;
   justify-content: space-between;
 }
@@ -14,4 +14,9 @@
 .navRight {
   padding: 0 1em;
   /* margin: auto; */
+}
+
+a {
+  color: #183a1d;
+  font-weight: bolder;
 }

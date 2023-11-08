@@ -1,6 +1,6 @@
 .pageContainer {
   height: 100vh;
-  background-color: lightslategray;
+  background-color: #fefbe9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,10 +8,6 @@
 
 .loginInformation {
   /* background-color: lightgoldenrodyellow; */
-}
-
-.loginList {
-  /* background-color: red; */
 }
 .passWord {
   display: flex;

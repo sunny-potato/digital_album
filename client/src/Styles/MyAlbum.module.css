@@ -1,6 +1,6 @@
 .pageContainer {
   height: 100vh;
-  background-color: lightslategray;
+  background-color: #fefbe9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,8 +10,8 @@
   position: relative;
   width: 40em;
   height: 30em;
-  border: 0.1em black solid;
-  /* display: flex; */
+  border: 0.1em #183a1d solid;
+  border-radius: 2rem;
 }
 .albumBox:hover .editAlbumButton {
   visibility: visible;
@@ -79,7 +79,7 @@
   height: 100%;
   line-height: 17em;
   border-radius: 1em;
-  border: 0.2em lightgray dotted;
+  border: 0.2em #183a1d dotted;
   text-align: center;
 }
 

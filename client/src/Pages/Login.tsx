@@ -62,7 +62,7 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
 
   return (
     <div className={s.pageContainer}>
-      <div className={s.pageContents}>
+      <div>
         <div className={s.loginPageTitle}>Sign in</div>
         <div className={s.loginPageContents}>
           <form

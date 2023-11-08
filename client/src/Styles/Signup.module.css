@@ -1,6 +1,7 @@
 .signupContainer {
   height: 100vh;
-  background-color: lightslategray;
+  background-color: #fefbe9;
+  color: #183a1d;
 }
 .popupContainer {
   position: fixed;

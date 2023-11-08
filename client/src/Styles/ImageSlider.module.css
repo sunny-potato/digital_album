@@ -1,17 +1,17 @@
 .sliderContainer {
   height: 100%;
   width: 50%;
-  background: lightgreen;
+  background-color: #e1eedd;
 }
 .sliderWrapper {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-color: #e1eedd;
 }
 
 .sliderInner {
   height: 100%;
-  background-color: lightblue;
+  background-color: #e1eedd;
 }
 .currentImg {
   max-height: 100%;
