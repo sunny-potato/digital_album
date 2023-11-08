@@ -6,31 +6,29 @@ import ImageSlider from "../Components/ImageSlider";
 
 function EachImage() {
   const { state } = useLocation(); // to pass data using state of uselocation()
-  console.log(state.currentImageIndex);
   const navigate = useNavigate();
-  // const { imageId } = useParams();
-  // const [imageIdNumber, setImageIdNumber] = useState<number>();
   const [currentImageIndex, setCurrentImageIndex] = useState<number>();
   const [imageList, setImageList] = useState<Image[]>([]);
-  const [defaultURL. setDefaultURL]= useState<string>("");
+  const [defaultURL, setDefaultURL] = useState<string>("");
 
   useEffect(() => {
-    if (state.currentImageIndex) {
-      const currentImageIndex = state.currentImageIndex;
-      setCurrentImageIndex(currentImageIndex);
-      setImageList(state.imageList);
-      setDefaultURL(state.defaultURL);
-    }
-  });
+    setCurrentImageIndex(state.currentImageIndex);
+    setImageList(state.imageList);
+    setDefaultURL(state.defaultURL);
+  }, [state]);
 
   return (
     <div>
       <div
         className={s.popUpBackground}
-        style={{ display: currentImageIndex ? "block" : "none" }}
+        style={{ display: imageList ? "block" : "none" }}
       >
         <div className={s.popUpWindow}>
-          {/* <ImageSlider currentImage={currentImage} /> */}
+          <ImageSlider
+            currentImageIndex={currentImageIndex}
+            imageList={imageList}
+            defaultURL={defaultURL}
+          />
           <button className={s.closeButton} onClick={() => navigate(-1)}>
             X
           </button>

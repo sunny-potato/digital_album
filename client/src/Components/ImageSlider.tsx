@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -8,36 +8,37 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import s from "../Styles/ImageSlider.module.css";
-import upload from "../Images/upload.png";
+import { ImageSlider as ImageSliderProps } from "../Types/Folder";
 
-type ImageSlider = {
-  currentImageIndex: number | undefined;
-  imageList: Image[];
-  defaultURL: string;
-};
+// to do list
+// fit image by keeping aspect-ratio
+// change url without reload
 
 function ImageSlider({
   currentImageIndex,
   imageList,
   defaultURL,
-}: ImageSlider) {
-  // console.log(currentImage);
+}: ImageSliderProps) {
   return (
     <CarouselProvider
       naturalSlideWidth={100}
       naturalSlideHeight={125}
-      totalSlides={3}
+      totalSlides={imageList.length}
       className={s.sliderContainer}
     >
       <Slider className={s.sliderWrapper}>
-        <Slide index={0} innerClassName={s.sliderInner}>
-          <img src={currentImage} className={s.currentImg} />
-        </Slide>
-        <Slide index={1}>I am the second Slide.</Slide>
-        <Slide index={2}>I am the third Slide.</Slide>
+        {imageList.length !== 0 &&
+          imageList.map((image, index) => (
+            <Slide key={index} index={index} innerClassName={s.sliderInner}>
+              <img
+                src={`${defaultURL}${image.uuid}`}
+                className={s.currentImg}
+              />
+            </Slide>
+          ))}
       </Slider>
-      <ButtonBack>Back</ButtonBack>
-      <ButtonNext>Next</ButtonNext>
+      <ButtonBack className={s.buttonBack}>Back</ButtonBack>
+      <ButtonNext className={s.buttonNext}>Next</ButtonNext>
     </CarouselProvider>
   );
 }

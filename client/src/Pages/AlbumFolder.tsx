@@ -12,7 +12,6 @@ import addImage from "../Images/addImage.png";
 
 function AlbumFolder() {
   const folderId = Number(useParams().folderId);
-  // const navigate = useNavigate();
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
@@ -110,7 +109,6 @@ function AlbumFolder() {
           <div className={s.displayContent}>
             {uploadedImageList &&
               uploadedImageList.map((image, index) => (
-                // console.log(image),
                 <div className={s.imageBox} key={index}>
                   <button
                     className={s.deleteImageButton}

@@ -14,3 +14,9 @@ export type Image = {
   uuid: string;
   folder_id?: number;
 };
+
+export type ImageSlider = {
+  currentImageIndex: number | undefined;
+  imageList: Image[];
+  defaultURL: string;
+};

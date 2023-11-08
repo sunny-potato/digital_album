@@ -4,21 +4,28 @@
   background: lightgreen;
 }
 .sliderWrapper {
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   background-color: black;
 }
 
 .sliderInner {
-  height: 50%;
-  width: 50%;
+  height: 100%;
   background-color: lightblue;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 .currentImg {
   max-height: 100%;
   height: auto;
-  /* width: 100%; */
+}
+
+.buttonBack {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.buttonNext {
+  position: absolute;
+  top: 50%;
+  right: 0;
 }
