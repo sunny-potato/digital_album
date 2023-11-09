@@ -1,54 +1,43 @@
-import {
-  ButtonBack,
-  ButtonNext,
-  CarouselProvider,
-  Slide,
-  Slider,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import s from "../Styles/ImageSlider.module.css";
 import { ImageSlider as ImageSliderProps } from "../Types/Folder";
-
-// to do list
-// fit image by keeping aspect-ratio
-// change url without reload
 
 function ImageSlider({
   currentImageIndex,
   imageList,
   defaultURL,
 }: ImageSliderProps) {
-  const navigate = useNavigate();
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  console.log(imageList[currentIndex]);
+
+  useEffect(() => {
+    if (imageList.length !== 0 && currentImageIndex) {
+      setCurrentIndex(currentImageIndex);
+    }
+  }, []);
+
+  const nextImage = () => {
+    if (currentIndex === imageList.length - 1) {
+      return setCurrentIndex(0);
+    }
+    return setCurrentIndex(currentIndex + 1);
+  };
 
   return (
-    <CarouselProvider
-      naturalSlideWidth={10}
-      naturalSlideHeight={10}
-      totalSlides={imageList.length}
-      className={s.sliderContainer}
-    >
-      <Slider className={s.sliderWrapper}>
-        {imageList.length !== 0 &&
-          imageList.map((image, index) => (
-            <Slide key={index} index={index} innerClassName={s.sliderInner}>
-              <img
-                src={`${defaultURL}${image.uuid}`}
-                className={s.currentImg}
-              />
-            </Slide>
-          ))}
-      </Slider>
-      <ButtonBack
-        className={s.buttonBack}
-        onClick={() => {
-          navigate("/albumFolder/64/image/80", { replace: true });
-        }}
-      >
-        Back
-      </ButtonBack>
-      <ButtonNext className={s.buttonNext}>Next</ButtonNext>
-    </CarouselProvider>
+    <div className={s.sliderContainer}>
+      <div className={s.sliderWrapper}>
+        <img
+          src={`${defaultURL}${imageList[currentIndex].uuid}`}
+          className={s.testimage}
+        ></img>
+      </div>
+      <button className={s.buttonBack}>Prev</button>
+      <button className={s.buttonNext} onClick={() => nextImage()}>
+        Next
+      </button>
+    </div>
   );
 }
 

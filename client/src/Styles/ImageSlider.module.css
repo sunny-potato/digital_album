@@ -1,23 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
 .sliderContainer {
   height: 100%;
-  width: 50%;
-  background-color: #e1eedd;
+  width: 80%;
+  background-color: lightcoral;
+  /* background-color: #e1eedd; */
 }
 .sliderWrapper {
   height: 100%;
   width: 100%;
-  background-color: #e1eedd;
+  background-color: black;
+  /* background-color: #e1eedd; */
+  display: flex;
+  overflow: hidden;
 }
 
-.sliderInner {
-  height: 100%;
-  background-color: #e1eedd;
-}
 .currentImg {
-  /* max-height: 100%;
-  height: auto;
-  max-width: 100%;
-  width: auto; */
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -33,4 +33,12 @@
   position: absolute;
   top: 50%;
   right: 0;
+}
+.testimage {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  background: lightgreen;
+  flex-grow: 1;
+  flex-shrink: 0;
 }

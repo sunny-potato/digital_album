@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./Styles/App.css";
 import NavigationBeforeLogin from "./Components/NavigationBeforeLogin";
 import NavigationAfterLogin from "./Components/NavigationAfterLogin";
 import Home from "./Pages/Home";
@@ -11,6 +10,7 @@ import SignUp from "./Pages/SignUp";
 import NotFoundPage from "./Pages/NotFound";
 import { UserData } from "./Types/Login";
 import EachImage from "./Pages/EachImage";
+// import ImageSlider from "./Components/ImageSlider";
 
 function App() {
   const [userData, setUserData] = useState<UserData>();

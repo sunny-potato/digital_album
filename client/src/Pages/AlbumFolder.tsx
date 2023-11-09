@@ -116,15 +116,7 @@ function AlbumFolder() {
                   >
                     x
                   </button>
-                  <Link
-                    className={s.uploadedImage}
-                    to={`image/${image.id}`}
-                    state={{
-                      currentImageIndex: index,
-                      defaultURL: "http://localhost:8000/albumFolder/image/",
-                      imageList: uploadedImageList,
-                    }}
-                  >
+                  <Link className={s.uploadedImage} to={`image/${image.id}`}>
                     <img
                       className={s.uploadedImage}
                       src={`http://localhost:8000/albumFolder/image/${image.uuid}`}

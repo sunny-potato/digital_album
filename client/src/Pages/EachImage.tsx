@@ -3,21 +3,31 @@ import { Image } from "../Types/Folder";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import s from "../Styles/EachImage.module.css";
 import ImageSlider from "../Components/ImageSlider";
+import { getAllImagesInFolder } from "../Axios";
+import { Image as ImageProps } from "../Types/Folder";
 
 function EachImage() {
-  const { state } = useLocation(); // to pass data using state of uselocation()
+  const { folderId, imageId } = useParams();
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState<number>();
   const [imageList, setImageList] = useState<Image[]>([]);
-  const [defaultURL, setDefaultURL] = useState<string>("");
-
-  console.log(state);
+  const [defaultURL, setDefaultURL] = useState<string>(
+    "http://localhost:8000/albumFolder/image/"
+  );
 
   useEffect(() => {
-    setCurrentImageIndex(state.currentImageIndex);
-    setImageList(state.imageList);
-    setDefaultURL(state.defaultURL);
-  }, [state]);
+    const getImages = async () => {
+      const images = await getAllImagesInFolder(Number(folderId));
+      if (images.length !== 0) {
+        setImageList(images);
+        const selectedImageIndex = images.findIndex(
+          (image: ImageProps) => image.id === Number(imageId)
+        );
+        setCurrentImageIndex(selectedImageIndex);
+      }
+    };
+    getImages();
+  }, []);
 
   return (
     <div>

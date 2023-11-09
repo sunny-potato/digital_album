@@ -19,6 +19,7 @@
   background-color: #fefbe9;
   display: flex;
   justify-content: center;
+  /* align-items: center; */
 }
 .closeButton {
   position: absolute;
