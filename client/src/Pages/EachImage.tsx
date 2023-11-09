@@ -11,6 +11,8 @@ function EachImage() {
   const [imageList, setImageList] = useState<Image[]>([]);
   const [defaultURL, setDefaultURL] = useState<string>("");
 
+  console.log(state);
+
   useEffect(() => {
     setCurrentImageIndex(state.currentImageIndex);
     setImageList(state.imageList);

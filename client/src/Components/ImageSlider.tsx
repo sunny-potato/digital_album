@@ -1,12 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
 import {
-  CarouselProvider,
-  Slider,
-  Slide,
   ButtonBack,
   ButtonNext,
+  CarouselProvider,
+  Slide,
+  Slider,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { useNavigate } from "react-router-dom";
 import s from "../Styles/ImageSlider.module.css";
 import { ImageSlider as ImageSliderProps } from "../Types/Folder";
 
@@ -19,10 +19,12 @@ function ImageSlider({
   imageList,
   defaultURL,
 }: ImageSliderProps) {
+  const navigate = useNavigate();
+
   return (
     <CarouselProvider
-      naturalSlideWidth={100}
-      naturalSlideHeight={125}
+      naturalSlideWidth={10}
+      naturalSlideHeight={10}
       totalSlides={imageList.length}
       className={s.sliderContainer}
     >
@@ -37,7 +39,14 @@ function ImageSlider({
             </Slide>
           ))}
       </Slider>
-      <ButtonBack className={s.buttonBack}>Back</ButtonBack>
+      <ButtonBack
+        className={s.buttonBack}
+        onClick={() => {
+          navigate("/albumFolder/64/image/80", { replace: true });
+        }}
+      >
+        Back
+      </ButtonBack>
       <ButtonNext className={s.buttonNext}>Next</ButtonNext>
     </CarouselProvider>
   );
