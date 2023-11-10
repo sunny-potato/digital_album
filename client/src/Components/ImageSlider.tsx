@@ -5,32 +5,25 @@ import { ImageSlider as ImageSliderProps } from "../Types/Folder";
 
 function ImageSlider({
   currentImageIndex,
+  setCurrentImageIndex,
   imageList,
   defaultURL,
 }: ImageSliderProps) {
-  const [currentIndex, setCurrentIndex] = useState<number>();
-
-  console.log("imageSlider", { currentImageIndex, currentIndex, imageList });
-
-  useEffect(() => {
-    setCurrentIndex(currentImageIndex);
-  }, [currentImageIndex]);
-
   const showPrevImage = () => {
-    if (currentIndex === 0) {
-      return setCurrentIndex(imageList.length - 1);
+    if (currentImageIndex === 0) {
+      return setCurrentImageIndex(imageList.length - 1);
     }
-    return setCurrentIndex((currentIndex as number) - 1);
+    return setCurrentImageIndex((currentImageIndex as number) - 1);
   };
 
   const showNextImage = () => {
-    if (currentIndex === imageList.length - 1) {
-      return setCurrentIndex(0);
+    if (currentImageIndex === imageList.length - 1) {
+      return setCurrentImageIndex(0);
     }
-    return setCurrentIndex((currentIndex as number) + 1);
+    return setCurrentImageIndex((currentImageIndex as number) + 1);
   };
 
-  if (!currentImageIndex) {
+  if (currentImageIndex === undefined) {
     return <div>Loading...</div>;
   }
 
@@ -38,7 +31,7 @@ function ImageSlider({
     <div className={s.sliderContainer}>
       <div className={s.sliderWrapper}>
         <img
-          src={`${defaultURL}${imageList[currentIndex as number].uuid}`}
+          src={`${defaultURL}${imageList[currentImageIndex as number].uuid}`}
           className={s.testimage}
         ></img>
       </div>
