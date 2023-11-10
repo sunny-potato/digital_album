@@ -9,13 +9,11 @@ import { Image as ImageProps } from "../Types/Folder";
 function EachImage() {
   const { folderId, imageId } = useParams();
   const navigate = useNavigate();
-  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>();
   const [imageList, setImageList] = useState<Image[]>([]);
   const [defaultURL, setDefaultURL] = useState<string>(
     "http://localhost:8000/albumFolder/image/"
   );
-
-  console.log("eachimage", { imageList, currentImageIndex });
 
   useEffect(() => {
     const getImages = async () => {
@@ -25,16 +23,11 @@ function EachImage() {
         const selectedImageIndex = images.findIndex(
           (image: ImageProps) => image.id === Number(imageId)
         );
-        // console.log({ selectedImageIndex });
         setCurrentImageIndex(selectedImageIndex);
       }
     };
     getImages();
   }, []);
-
-  // if (!currentImageIndex) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <div>
@@ -45,6 +38,7 @@ function EachImage() {
         <div className={s.popUpWindow}>
           <ImageSlider
             currentImageIndex={currentImageIndex}
+            setCurrentImageIndex={setCurrentImageIndex}
             imageList={imageList}
             defaultURL={defaultURL}
           />
