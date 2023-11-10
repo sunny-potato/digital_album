@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Login as login, UserData } from "../Types/Login";
+import { Login as login } from "../Types/Login";
 import { validateLoginInfo } from "../Axios";
 import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
 import s from "../Styles/Login.module.css";
+import { UserContext } from "../AppContext";
 
-function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
+function Login({ setUsername }: { setUsername: (value: string) => void }) {
+  const { setUserId } = useContext(UserContext);
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<login>({
     username: "",
@@ -49,11 +51,8 @@ function Login({ setUserData }: { setUserData: (userData: UserData) => void }) {
   }) {
     if (validation.result) {
       setIsLoginValidated(true);
-      const userData = {
-        username: validation.username,
-        userId: validation.userId,
-      };
-      setUserData(userData);
+      setUsername(validation.username);
+      setUserId(validation.userId);
       navigate("/");
     } else {
       setIsLoginValidated(false);

@@ -1,20 +1,16 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import s from "../Styles/Home.module.css";
+import { UserContext } from "../AppContext";
+import { useContext } from "react";
+
 function Home() {
-  const location = useLocation();
-  // location.state =null -> no logined user
-  // console.log(location);
-  const userData = location.state;
-  // console.log(userData);
-  if (userData === null) {
-    return;
-  }
+  const { userId } = useContext(UserContext);
   return (
     <>
-      {userData === null ? (
-        <div>shasfasfasfasfow?</div>
+      {userId ? (
+        <div style={{ padding: "100px" }}>Homew with logined user</div>
       ) : (
-        <div className={s.test}>logined user</div>
+        <div style={{ padding: "100px" }}>Homew without logined user</div>
       )}
     </>
   );

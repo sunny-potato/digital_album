@@ -23,7 +23,8 @@ export type Signup = {
   password: string;
   confirmedPassword: string;
 };
-export type UserData = {
-  username: string;
-  userId: number;
+
+export type UserContext = {
+  userId: number | undefined;
+  setUserId: (value: number | undefined) => void;
 };

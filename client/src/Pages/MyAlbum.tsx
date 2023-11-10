@@ -18,11 +18,11 @@ function MyAlbum() {
   const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // console.log({ isEditMode, isLoading });
+
   useEffect(() => {
     async function getAlbumInfo() {
       const result = await getMyAlbumInfo(userId);
-      // console.log(result);
+
       if (result.folder.length !== 0) {
         setFolderList(result.folder);
       }
