@@ -8,33 +8,44 @@ function ImageSlider({
   imageList,
   defaultURL,
 }: ImageSliderProps) {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>();
 
-  console.log(imageList[currentIndex]);
+  console.log("imageSlider", { currentImageIndex, currentIndex, imageList });
 
   useEffect(() => {
-    if (imageList.length !== 0 && currentImageIndex) {
-      setCurrentIndex(currentImageIndex);
-    }
-  }, []);
+    setCurrentIndex(currentImageIndex);
+  }, [currentImageIndex]);
 
-  const nextImage = () => {
+  const showPrevImage = () => {
+    if (currentIndex === 0) {
+      return setCurrentIndex(imageList.length - 1);
+    }
+    return setCurrentIndex((currentIndex as number) - 1);
+  };
+
+  const showNextImage = () => {
     if (currentIndex === imageList.length - 1) {
       return setCurrentIndex(0);
     }
-    return setCurrentIndex(currentIndex + 1);
+    return setCurrentIndex((currentIndex as number) + 1);
   };
+
+  if (!currentImageIndex) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={s.sliderContainer}>
       <div className={s.sliderWrapper}>
         <img
-          src={`${defaultURL}${imageList[currentIndex].uuid}`}
+          src={`${defaultURL}${imageList[currentIndex as number].uuid}`}
           className={s.testimage}
         ></img>
       </div>
-      <button className={s.buttonBack}>Prev</button>
-      <button className={s.buttonNext} onClick={() => nextImage()}>
+      <button className={s.buttonBack} onClick={() => showPrevImage()}>
+        Prev
+      </button>
+      <button className={s.buttonNext} onClick={() => showNextImage()}>
         Next
       </button>
     </div>
