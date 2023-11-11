@@ -90,3 +90,8 @@ console.log(newHello); // output "Hello, world";
 5. component vs function
    -> component : return HTML?
    -> function : no return HTML?
+
+## design
+
+title : font-size 1.5 rem
+subTitle: font-szie 1.2 rem

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import s from "../Styles/Navigation.module.css";
-import { useContext, useState } from "react";
+import s from "../Styles/Nav.module.css";
+import { useContext } from "react";
 import { UserContext } from "../AppContext";
 
 function Nav({ username }: { username: string | undefined }) {
@@ -8,8 +8,13 @@ function Nav({ username }: { username: string | undefined }) {
   console.log({ userId });
   return (
     <div className={s.navContainer}>
-      <div className={s.navHome}>
+      <div className={s.navLeft}>
         <Link to={`/`}>Home</Link>
+      </div>
+      <div className={s.navCenter}>
+        <Link to={"/"} className={s.pageTitle}>
+          Digital Album
+        </Link>
       </div>
       {userId ? (
         <div className={s.navRight}>
@@ -18,8 +23,12 @@ function Nav({ username }: { username: string | undefined }) {
         </div>
       ) : (
         <div className={s.navRight}>
-          <Link to={"/login"}>Login</Link>
-          <Link to={"/signup"}>Sign up</Link>
+          <Link to={"/login"} className={s.login}>
+            Login
+          </Link>
+          <Link to={"/signup"} className={s.signup}>
+            Sign up
+          </Link>
         </div>
       )}
     </div>

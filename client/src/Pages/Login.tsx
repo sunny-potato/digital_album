@@ -61,14 +61,15 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
 
   return (
     <div className={s.pageContainer}>
-      <div>
-        <div className={s.loginPageTitle}>Sign in</div>
-        <div className={s.loginPageContents}>
+      <div className={s.imageContainer}>put image here</div>
+      <div className={s.contentContainer}>
+        <div className={s.loginContainer}>
+          <div className={s.loginTitle}>Sign in</div>
           <form
-            className={s.loginInformation}
+            className={s.loginInput}
             onSubmit={(event) => submitLoginInfo(event)}
           >
-            <div className={s.userName}>
+            <div className={s.usernameInput}>
               <label htmlFor="userName">Username</label>
               <input
                 type="text"
@@ -78,7 +79,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
                 }
               />
             </div>
-            <div className={s.passWord}>
+            <div className={s.passwordInput}>
               <label htmlFor="passWord">Password</label>
               <input
                 type={isPasswordHidden ? "password" : "text"}
@@ -124,13 +125,15 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
             >
               Incorrect username or password
             </div>
-            <div>
+          </form>
+          <div>
+            <div className={s.loginInformation}>
               <Link to={"/"}>Forgotten password?</Link>
             </div>
             <div>
               <Link to={"/signup"}>Sign up?</Link>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

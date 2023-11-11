@@ -2,19 +2,50 @@
   height: 100vh;
   background-color: #fefbe9;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-
-.loginInformation {
-  /* background-color: lightgoldenrodyellow; */
+.imageContainer {
+  height: 100%;
+  width: 50%;
+  padding-top: 5rem;
+  margin-left: 10%;
+  background-color: greenyellow;
 }
-.passWord {
+
+.contentContainer {
+  height: 100%;
+  width: 50%;
+  padding-top: 5rem;
+  margin-right: 10%;
+  background-color: green;
+}
+
+.loginContainer {
+  width: 80%;
+  /* height: 80%; */
+  margin-left: 10%;
+  background-color: aquamarine;
+}
+
+.loginTitle {
+  background-color: pink;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.loginInput {
+  background-color: red;
+}
+.usernameInput {
+}
+
+.passwordInput {
   display: flex;
 }
 .hideEyeIcon,
 .viewEyeIcon {
   width: 1em;
-  /* height: 100%; */
   margin: 0.2em;
 }

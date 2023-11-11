@@ -6,17 +6,30 @@
   background-color: #e1eedd;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.navHome {
-  padding: 0 1em;
+.navLeft {
+  padding: 0 1.5rem;
 }
+
+.navCenter {
+}
+
 .navRight {
-  padding: 0 1em;
+  padding: 0 1.5rem;
   /* margin: auto; */
 }
 
 a {
   color: #183a1d;
   font-weight: bolder;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  color: #f0a04b;
+}
+.login {
+  margin-right: 1rem;
 }
