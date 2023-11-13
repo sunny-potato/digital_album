@@ -5,47 +5,103 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  color: #183a1d;
 }
 .imageContainer {
-  height: 100%;
-  width: 50%;
-  padding-top: 5rem;
+  height: 70%;
+  width: 70%;
   margin-left: 10%;
-  background-color: greenyellow;
+  background-color: #e1eedd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-right: 1px solid #183a1d; */
+}
+
+.welcomeImage {
+  height: 60%;
 }
 
 .contentContainer {
-  height: 100%;
-  width: 50%;
-  padding-top: 5rem;
+  height: 70%;
+  width: 70%;
   margin-right: 10%;
-  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e1eedd;
 }
 
 .loginContainer {
-  width: 80%;
-  /* height: 80%; */
-  margin-left: 10%;
-  background-color: aquamarine;
+  width: 100%;
+  padding: 0 1rem;
+  /* background-color: aquamarine; */
 }
 
 .loginTitle {
-  background-color: pink;
-  font-size: 1.5rem;
-  margin: 1rem 0;
+  font-size: 2rem;
+  font-weight: bolder;
+  margin: 2rem 0;
 }
 
+/* .loginTitle {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+} */
+
 .loginInput {
-  background-color: red;
 }
-.usernameInput {
+
+.usernameInput,
+.passwordInput {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5em;
+}
+
+label {
+  width: 5rem;
+  margin-bottom: 0.5em;
+}
+input {
+  border-color: lightgray;
+  height: 2rem;
+  border-width: 0.1em;
+  border-radius: 0.5rem;
+  padding: 0 0.8em;
+  margin-bottom: 0.5em;
 }
 
 .passwordInput {
-  display: flex;
+  position: relative;
 }
+
+.eyeIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(-20%, -30%);
+}
+
 .hideEyeIcon,
 .viewEyeIcon {
   width: 1em;
   margin: 0.2em;
+}
+
+.loginButton {
+  height: 2rem;
+  padding: 0.5rem 3rem;
+  border-radius: 0.5rem;
+  border-width: 0.1em;
+  margin-top: 0.3rem;
+}
+
+.invalidMessage,
+.failedValidationMessage {
+  color: red;
+}
+
+.linkInformation {
+  padding-bottom: 0.7rem;
 }

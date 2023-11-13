@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Login as login } from "../Types/Login";
 import { validateLoginInfo } from "../Axios";
+import { UserContext } from "../AppContext";
+import s from "../Styles/Login.module.css";
 import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
-import s from "../Styles/Login.module.css";
-import { UserContext } from "../AppContext";
+import welcomeImage from "../Images/welcome.svg";
 
 function Login({ setUsername }: { setUsername: (value: string) => void }) {
   const { setUserId } = useContext(UserContext);
@@ -61,10 +61,16 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
 
   return (
     <div className={s.pageContainer}>
-      <div className={s.imageContainer}>put image here</div>
+      <div className={s.imageContainer}>
+        <img
+          className={s.welcomeImage}
+          src={welcomeImage}
+          alt="welcome image"
+        />
+      </div>
       <div className={s.contentContainer}>
         <div className={s.loginContainer}>
-          <div className={s.loginTitle}>Sign in</div>
+          <div className={s.loginTitle}>Welcome to Digital Album</div>
           <form
             className={s.loginInput}
             onSubmit={(event) => submitLoginInfo(event)}
@@ -87,11 +93,12 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
                 onChange={(event) =>
                   loginInputHandler("password", event.currentTarget.value)
                 }
-              />
+              ></input>
               <div className={s.eyeIcon}>
                 <img
                   className={s.hideEyeIcon}
                   src={hideEyeIcon}
+                  alt="hide password icon"
                   style={{
                     display: isPasswordHidden ? "block" : "none",
                   }}
@@ -100,6 +107,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
                 <img
                   className={s.viewEyeIcon}
                   src={viewEyeIcon}
+                  alt="view password icon"
                   style={{
                     display: isPasswordHidden ? "none" : "block",
                   }}
@@ -117,7 +125,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
               className={s.invalidMessage}
               style={{ visibility: isLoginInfoValid ? "hidden" : "visible" }}
             >
-              username and password should not be empty
+              Username and password should not be empty
             </div>
             <div
               className={s.failedValidationMessage}
@@ -127,10 +135,10 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
             </div>
           </form>
           <div>
-            <div className={s.loginInformation}>
+            <div className={s.linkInformation}>
               <Link to={"/"}>Forgotten password?</Link>
             </div>
-            <div>
+            <div className={s.linkInformation}>
               <Link to={"/signup"}>Sign up?</Link>
             </div>
           </div>
