@@ -16,10 +16,12 @@
   justify-content: center;
   align-items: center;
   /* border-right: 1px solid #183a1d; */
+  position: relative;
 }
 
 .welcomeImage {
   height: 60%;
+  z-index: 1;
 }
 
 .contentContainer {
@@ -80,7 +82,7 @@ input {
   position: absolute;
   bottom: 0;
   right: 0;
-  transform: translate(-20%, -30%);
+  transform: translate(-20%, -50%);
 }
 
 .hideEyeIcon,
@@ -94,7 +96,9 @@ input {
   padding: 0.5rem 3rem;
   border-radius: 0.5rem;
   border-width: 0.1em;
+  border-color: #183a1d;
   margin-top: 0.3rem;
+  background-color: #f0a04b;
 }
 
 .invalidMessage,

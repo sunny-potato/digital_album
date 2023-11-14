@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Login as login } from "../Types/Login";
 import { validateLoginInfo } from "../Axios";
@@ -7,8 +7,10 @@ import s from "../Styles/Login.module.css";
 import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
 import welcomeImage from "../Images/welcome.svg";
+import ConfettiEffect from "../Components/ConfettiEffect";
 
 function Login({ setUsername }: { setUsername: (value: string) => void }) {
+  // const confettiRef = useRef(0);
   const { setUserId } = useContext(UserContext);
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<login>({
@@ -19,6 +21,10 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
   const [isLoginValidated, setIsLoginValidated] = useState<boolean>(true);
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // useEffect(() => {
+  //   console.log(confettiRef.current.offsetWidth);
+  // }, []);
 
   function loginInputHandler(key: string, value: string) {
     setLoginInfo({ ...loginInfo, [key]: value });
@@ -62,6 +68,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
   return (
     <div className={s.pageContainer}>
       <div className={s.imageContainer}>
+        <ConfettiEffect />
         <img
           className={s.welcomeImage}
           src={welcomeImage}

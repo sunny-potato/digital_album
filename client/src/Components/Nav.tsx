@@ -5,7 +5,7 @@ import { UserContext } from "../AppContext";
 
 function Nav({ username }: { username: string | undefined }) {
   const { userId } = useContext(UserContext);
-  console.log({ userId });
+  // console.log({ userId });
   return (
     <div className={s.navContainer}>
       <div className={s.navLeft}>
