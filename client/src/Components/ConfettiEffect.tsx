@@ -9,7 +9,7 @@ function ConfettiEffect() {
     if (!confetti.current) return;
 
     const pageWidth = confetti.current.offsetWidth;
-    const pageHeight = confetti.current.offsetHeight;
+    // const pageHeight = confetti.current.offsetHeight;
     const colorList = [
       "DodgerBlue",
       "OliveDrab",
