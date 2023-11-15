@@ -22,3 +22,20 @@ export type ImageSlider = {
   imageList: Image[];
   defaultURL: string;
 };
+
+export type MyalbumDisplay = {
+  displayAlbumPhoto: string | undefined;
+  currentAlbumTitle: string | undefined;
+  folderList: Folder[];
+};
+
+export type MyAlbumEdit = {
+  displayAlbumPhoto: string | undefined;
+  setDisplayAlbumPhoto: (value: string) => void;
+  currentAlbumTitle: string | undefined;
+  setCurrentAlbumTitle: (value: string) => void;
+  folderList: Folder[];
+  setFolderList: (value: Folder[]) => void;
+  setUpdatedAlbumPhoto: (value: File) => void;
+  userId: number;
+};

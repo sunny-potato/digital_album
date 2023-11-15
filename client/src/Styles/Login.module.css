@@ -15,7 +15,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-right: 1px solid #183a1d; */
   position: relative;
 }
 
@@ -37,7 +36,6 @@
 .loginContainer {
   width: 100%;
   padding: 0 1rem;
-  /* background-color: aquamarine; */
 }
 
 .loginTitle {
@@ -99,6 +97,15 @@ input {
   border-color: #183a1d;
   margin-top: 0.3rem;
   background-color: #f0a04b;
+}
+
+.loginButton:disabled {
+  background-color: #ebefe9;
+}
+
+.loginButton:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 4px darkgray;
 }
 
 .invalidMessage,

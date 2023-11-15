@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Login as login } from "../Types/Login";
 import { validateLoginInfo } from "../Axios";
@@ -10,7 +10,6 @@ import welcomeImage from "../Images/welcome.svg";
 import ConfettiEffect from "../Components/ConfettiEffect";
 
 function Login({ setUsername }: { setUsername: (value: string) => void }) {
-  // const confettiRef = useRef(0);
   const { setUserId } = useContext(UserContext);
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<login>({
@@ -22,16 +21,11 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   console.log(confettiRef.current.offsetWidth);
-  // }, []);
-
   function loginInputHandler(key: string, value: string) {
     setLoginInfo({ ...loginInfo, [key]: value });
   }
 
   function submitLoginInfo(event: React.FormEvent<HTMLFormElement>) {
-    //????????????????????????
     if (!isLoading) {
       setIsLoading(true);
       event.preventDefault();
@@ -47,6 +41,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
       displayValidationResult(isLoginValidated.data);
       setIsLoginInfoValid(true);
     } else {
+      // setIsLoading(false);
       setIsLoginInfoValid(false);
     }
   }
@@ -61,6 +56,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
       setUserId(validation.userId);
       navigate("/");
     } else {
+      // setIsLoading(false);
       setIsLoginValidated(false);
     }
   }

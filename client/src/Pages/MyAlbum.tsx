@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   createFolder,
   getMyAlbumInfo,
@@ -9,6 +9,8 @@ import {
 } from "../Axios";
 import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
+import MyAlbumDisplay from "../Components/MyAlbumDisplay";
+import MyAlbumEdit from "../Components/MyAlbumEdit";
 
 function MyAlbum() {
   const userId = Number(useParams().userId);
@@ -36,15 +38,8 @@ function MyAlbum() {
         if (albumTitle) setCurrentAlbumTitle(albumTitle);
       }
     }
-    void getAlbumInfo();
+    getAlbumInfo();
   }, [userId]);
-
-  function handleFile(file: FileList | null) {
-    if (file !== null) {
-      setUpdatedAlbumPhoto(file[0]);
-      setDisplayAlbumPhoto(URL.createObjectURL(file[0]));
-    }
-  }
 
   async function saveAlbumInfo() {
     if (isEditMode) {
@@ -85,130 +80,23 @@ function MyAlbum() {
           {isEditMode ? "Save" : "Edit"}
         </button>
         {isEditMode && (
-          <div className={s.editAlbumBox}>
-            <div className={s.albumPhotoBox}>
-              <div className={s.albumPhoto}>
-                {displayAlbumPhoto && (
-                  <div className={s.imageInput}>
-                    <img src={displayAlbumPhoto}></img>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(event) => handleFile(event.target.files)}
-                    ></input>
-                  </div>
-                )}
-                {!displayAlbumPhoto && (
-                  <div className={s.imageInput}>
-                    <div className={s.noImageDiv}>No image</div>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(event) => handleFile(event.target.files)}
-                    ></input>
-                  </div>
-                )}
-              </div>
-              <div className={s.albumTitle}>
-                <input
-                  type="text"
-                  placeholder="album title"
-                  value={currentAlbumTitle}
-                  onChange={(event) => {
-                    setCurrentAlbumTitle(event.target.value);
-                  }}
-                ></input>
-              </div>
-            </div>
-            <div className={s.albumListBox}>
-              <div className={s.albumList}>
-                <div className={s.albumListTitle}>Album List</div>
-                {folderList &&
-                  folderList.map((folder, index) => {
-                    return (
-                      <li key={index}>
-                        <input
-                          type="text"
-                          placeholder="Album name"
-                          value={folder.name}
-                          onChange={(event) => {
-                            const updateFolder = [
-                              ...folderList.slice(0, index),
-                              {
-                                ...folder,
-                                ["name"]: event.target.value,
-                              },
-                              ...folderList.slice(index + 1),
-                            ];
-                            setFolderList(updateFolder);
-                          }}
-                        ></input>
-                        <button
-                          className={s.deleteAlbumList}
-                          onClick={() => {
-                            const delteFolder = [
-                              ...folderList.slice(0, index),
-                              ...folderList.slice(index + 1),
-                            ];
-                            setFolderList(delteFolder);
-                          }}
-                        >
-                          X
-                        </button>
-                      </li>
-                    );
-                  })}
-                <div>
-                  <button
-                    className={s.addAlbumList}
-                    onClick={() => {
-                      const newFolder: Folder = {
-                        id: undefined,
-                        name: "",
-                        user_id: userId,
-                        order_value: 0,
-                      };
-                      setFolderList([...folderList, newFolder]);
-                    }}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MyAlbumEdit
+            displayAlbumPhoto={displayAlbumPhoto}
+            setDisplayAlbumPhoto={setDisplayAlbumPhoto}
+            currentAlbumTitle={currentAlbumTitle}
+            setCurrentAlbumTitle={setCurrentAlbumTitle}
+            folderList={folderList}
+            setFolderList={setFolderList}
+            setUpdatedAlbumPhoto={setUpdatedAlbumPhoto}
+            userId={userId}
+          />
         )}
         {!isEditMode && (
-          <div className={s.displayAlbumBox}>
-            <div className={s.albumPhotoBox}>
-              <div className={s.albumPhoto}>
-                {displayAlbumPhoto && <img src={displayAlbumPhoto}></img>}
-                {!displayAlbumPhoto && (
-                  <div className={s.noImageDiv}>No image</div>
-                )}
-              </div>
-              {!currentAlbumTitle && (
-                <div className={s.albumTitle}>No title</div>
-              )}
-              {currentAlbumTitle && (
-                <div className={s.albumTitle}>{currentAlbumTitle}</div>
-              )}
-            </div>
-            <div className={s.albumListBox}>
-              <div className={s.albumList}>
-                <div className={s.albumListTitle}>Album List</div>
-                {folderList.length !== 0 &&
-                  folderList.map((folder) => (
-                    <li key={folder.id}>
-                      <Link to={`/albumFolder/${folder.id}`}>
-                        {folder.name}
-                      </Link>
-                    </li>
-                  ))}
-                {folderList.length === 0 && <li>No albums</li>}
-              </div>
-            </div>
-          </div>
+          <MyAlbumDisplay
+            displayAlbumPhoto={displayAlbumPhoto}
+            currentAlbumTitle={currentAlbumTitle}
+            folderList={folderList}
+          />
         )}
       </div>
     </div>

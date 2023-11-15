@@ -1,0 +1,39 @@
+.displayAlbumBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  grid-template-columns: repeat(2, 1fr);
+}
+.albumPhotoBox {
+  height: 100%;
+  width: 100%;
+}
+.albumPhoto {
+  margin: 1em;
+  height: 17em;
+}
+
+.albumPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+}
+.albumTitle {
+  text-align: center;
+}
+.albumPhotoBox,
+.albumListBox {
+  width: 100%;
+  height: 100%;
+  padding: 2em 0;
+}
+
+.albumList li {
+  margin: 1em;
+  list-style: none;
+}
+.albumListTitle {
+  font-size: 1.2em;
+  font-weight: bolder;
+  text-align: center;
+}
