@@ -1,6 +1,11 @@
 import { Folder, MyAlbumEdit as MyAlbumEditProps } from "../Types/Folder";
 import s from "../Styles/MyAlbumEdit.module.css";
 
+// to do list
+//1) delete album image
+//2) scroll folder list when it is long
+//3) popup all folder should have its own name
+
 function MyAlbumEdit({
   displayAlbumPhoto,
   setDisplayAlbumPhoto,
@@ -22,31 +27,23 @@ function MyAlbumEdit({
     <div className={s.editAlbumBox}>
       <div className={s.albumPhotoBox}>
         <div className={s.albumPhoto}>
-          {displayAlbumPhoto && (
-            <div className={s.imageInput}>
+          <div className={s.imageInput}>
+            {displayAlbumPhoto ? (
               <img src={displayAlbumPhoto}></img>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(event) => handleFile(event.target.files)}
-              ></input>
-            </div>
-          )}
-          {!displayAlbumPhoto && (
-            <div className={s.imageInput}>
+            ) : (
               <div className={s.noImageDiv}>No image</div>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(event) => handleFile(event.target.files)}
-              ></input>
-            </div>
-          )}
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) => handleFile(event.target.files)}
+            ></input>
+          </div>
         </div>
         <div className={s.albumTitle}>
           <input
             type="text"
-            placeholder="album title"
+            placeholder="Album title"
             value={currentAlbumTitle}
             onChange={(event) => {
               setCurrentAlbumTitle(event.target.value);
@@ -56,14 +53,26 @@ function MyAlbumEdit({
       </div>
       <div className={s.albumListBox}>
         <div className={s.albumList}>
-          <div className={s.albumListTitle}>Album List</div>
+          <div className={s.albumListTitle}>Folder List</div>
           {folderList &&
             folderList.map((folder, index) => {
               return (
-                <li key={index}>
+                <li key={index} className={s.folderList}>
+                  <button
+                    className={s.deleteFolderListButton}
+                    onClick={() => {
+                      const delteFolder = [
+                        ...folderList.slice(0, index),
+                        ...folderList.slice(index + 1),
+                      ];
+                      setFolderList(delteFolder);
+                    }}
+                  >
+                    x
+                  </button>
                   <input
                     type="text"
-                    placeholder="Album name"
+                    placeholder="Folder name"
                     value={folder.name}
                     onChange={(event) => {
                       const updateFolder = [
@@ -77,24 +86,12 @@ function MyAlbumEdit({
                       setFolderList(updateFolder);
                     }}
                   ></input>
-                  <button
-                    className={s.deleteAlbumList}
-                    onClick={() => {
-                      const delteFolder = [
-                        ...folderList.slice(0, index),
-                        ...folderList.slice(index + 1),
-                      ];
-                      setFolderList(delteFolder);
-                    }}
-                  >
-                    X
-                  </button>
                 </li>
               );
             })}
-          <div>
+          <li>
             <button
-              className={s.addAlbumList}
+              className={s.addFolderListButton}
               onClick={() => {
                 const newFolder: Folder = {
                   id: undefined,
@@ -107,7 +104,7 @@ function MyAlbumEdit({
             >
               +
             </button>
-          </div>
+          </li>
         </div>
       </div>
     </div>

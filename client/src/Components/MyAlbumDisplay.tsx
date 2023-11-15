@@ -1,6 +1,7 @@
 import s from "../Styles/MyalbumDisplay.module.css";
 import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/Folder";
 import { Link } from "react-router-dom";
+import folderIcon from "../Images/folderIcon.svg";
 
 function MyAlbumDisplay({
   displayAlbumPhoto,
@@ -11,12 +12,16 @@ function MyAlbumDisplay({
     <div className={s.displayAlbumBox}>
       <div className={s.albumPhotoBox}>
         <div className={s.albumPhoto}>
-          {displayAlbumPhoto && <img src={displayAlbumPhoto}></img>}
-          {!displayAlbumPhoto && <div className={s.noImageDiv}>No image</div>}
+          {displayAlbumPhoto ? (
+            <img src={displayAlbumPhoto}></img>
+          ) : (
+            <div className={s.noImageDiv}>No image</div>
+          )}
         </div>
-        {!currentAlbumTitle && <div className={s.albumTitle}>No title</div>}
-        {currentAlbumTitle && (
+        {currentAlbumTitle ? (
           <div className={s.albumTitle}>{currentAlbumTitle}</div>
+        ) : (
+          <div className={s.albumTitle}>No title</div>
         )}
       </div>
       <div className={s.albumListBox}>
@@ -25,6 +30,7 @@ function MyAlbumDisplay({
           {folderList.length !== 0 &&
             folderList.map((folder) => (
               <li key={folder.id}>
+                <img src={folderIcon} className={s.folderIcon}></img>
                 <Link to={`/albumFolder/${folder.id}`}>{folder.name}</Link>
               </li>
             ))}

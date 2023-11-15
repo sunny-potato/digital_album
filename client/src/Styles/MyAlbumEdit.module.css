@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   grid-template-columns: repeat(2, 1fr);
+  overflow: hidden;
 }
 .albumPhotoBox {
   height: 100%;
@@ -28,8 +29,9 @@
 }
 
 .albumList li {
-  margin: 1em;
+  margin: 0.5rem;
   list-style: none;
+  /* background-color: red; */
 }
 .albumListTitle {
   font-size: 1.2em;
@@ -64,11 +66,39 @@
   text-align: center;
 }
 
-.addAlbumList {
-  margin: 1em;
-  background-color: white;
+.imageInput > input {
+  background-color: red;
+}
+
+.albumTitle > input {
+  border-color: lightgray;
+  height: 2rem;
+  border-width: 0.1em;
+  border-radius: 0.5rem;
+  padding: 0 0.8em;
+  margin-bottom: 0.5em;
+}
+
+/* .folderList {
+} */
+.deleteFolderListButton {
+  background-color: #fefbe9;
   font-weight: bolder;
-  border-radius: 50%;
-  margin: auto;
-  z-index: 100%;
+  border-radius: 0.3rem;
+  margin-right: 0.2rem;
+  z-index: 100;
+}
+.folderList > input {
+  width: 100%;
+  padding: 0 0.5rem;
+  border-width: 0.1em;
+  border-radius: 0.3rem;
+  z-index: 100;
+}
+
+.addFolderListButton {
+  background-color: #fefbe9;
+  font-weight: bolder;
+  border-radius: 0.3rem;
+  z-index: 100;
 }
