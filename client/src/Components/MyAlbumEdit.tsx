@@ -3,10 +3,6 @@ import s from "../Styles/MyAlbumEdit.module.css";
 import { useSubmit } from "react-router-dom";
 import { useState } from "react";
 
-// to do list
-//1) delete album image
-//2) scroll folder list when it is long
-
 function MyAlbumEdit({
   displayAlbumPhoto,
   setDisplayAlbumPhoto,

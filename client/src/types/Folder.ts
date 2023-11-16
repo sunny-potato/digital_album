@@ -16,7 +16,6 @@ export type Image = {
 };
 
 export type ImageSlider = {
-  // imageId: number | undefined;
   currentImageIndex: number | undefined;
   setCurrentImageIndex: (value: number | undefined) => void;
   imageList: Image[];

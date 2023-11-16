@@ -11,6 +11,11 @@ import NotFoundPage from "./Pages/NotFound";
 import EachImage from "./Pages/EachImage";
 import MyPage from "./Pages/MyPage";
 
+// to do list
+//1) delete album image - myalbumeidt
+//2) scroll folder list when it is long - myalbumdisplay
+//3) drag and drop - folder
+
 function App() {
   const [username, setUsername] = useState<string | undefined>();
   return (
