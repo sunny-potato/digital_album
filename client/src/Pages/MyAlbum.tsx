@@ -22,8 +22,6 @@ function MyAlbum() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAllFoldersNamed, setIsAllFoldersNamed] = useState<boolean>(true);
 
-  console.log("parent : ", isAllFoldersNamed);
-
   useEffect(() => {
     async function getAlbumInfo() {
       const result = await getMyAlbumInfo(userId);

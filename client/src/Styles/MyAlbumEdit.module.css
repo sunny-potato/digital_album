@@ -8,8 +8,6 @@
   display: flex;
   grid-template-columns: repeat(2, 1fr);
   overflow: hidden;
-  /* background-color: aquamarine; */
-  /* z-index: 100; */
 }
 
 /* .popupBackground {
@@ -80,7 +78,6 @@
 .albumList li {
   margin: 0.5rem;
   list-style: none;
-  /* background-color: red; */
 }
 .albumListTitle {
   font-size: 1.2em;

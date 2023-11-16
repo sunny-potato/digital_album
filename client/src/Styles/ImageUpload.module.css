@@ -1,0 +1,36 @@
+.uploadImageBox {
+  height: 10em;
+  border: 0.1em #183a1d dashed;
+  border-radius: 0.5em;
+  background-color: #e1eedd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadIcon {
+  width: 3em;
+  background-color: #e1eedd;
+}
+.uploadInput {
+  background-color: #e1eedd;
+}
+.uploadDragDrop {
+  margin-left: 9em;
+}
+.uploadImages {
+  background-color: #e1eedd;
+}
+input[type="file"]::file-selector-button {
+  margin-left: 0.3rem;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+input[type="file"] {
+  color: transparent;
+}
+input[type="file"]:after {
+  content: "";
+}

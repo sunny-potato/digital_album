@@ -1,3 +1,5 @@
+import ImageUpload from "../Components/ImageUpload";
+
 export type Folder = {
   id: number | undefined;
   name: string;
@@ -39,4 +41,17 @@ export type MyAlbumEdit = {
   userId: number;
   isAllFoldersNamed: boolean;
   setIsAllFoldersNamed: (value: boolean) => void;
+};
+
+export type ImageUpload = {
+  setSelectedImageBlob: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedImageList: React.Dispatch<React.SetStateAction<File[]>>;
+};
+
+export type ImagePreviewPopup = {
+  selectedImageBlob: string[];
+  setSelectedImageBlob: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedImageList: File[];
+  setSelectedImageList: React.Dispatch<React.SetStateAction<File[]>>;
+  folderId: number;
 };
