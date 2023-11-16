@@ -24,31 +24,6 @@ function AlbumFolder() {
     void getImages();
   }, []);
 
-  // async function saveSelectedImage() {
-  //   try {
-  //     if (selectedImageList.length == 0) {
-  //       console.log("no image that can be sendt to DB"); // it should be popup
-  //     } else {
-  //       if (!isLoading) {
-  //         setIsLoading(true);
-  //         const response = await postImageInfolder(selectedImageList, folderId);
-  //         if (response.status === 200) {
-  //           cancelSelectedImage();
-  //           window.location.reload();
-  //         }
-  //       }
-  //       setIsLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // function cancelSelectedImage() {
-  //   setSelectedImageList([]);
-  //   setSelectedImageBlob([]);
-  // }
-
   async function deleteSavedImage(imageIndex: number) {
     const deletedImage = uploadedImageList[imageIndex];
     const result = await deleteImageInfolder(deletedImage);
