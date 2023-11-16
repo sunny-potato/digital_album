@@ -38,4 +38,6 @@ export type MyAlbumEdit = {
   setFolderList: (value: Folder[]) => void;
   setUpdatedAlbumPhoto: (value: File) => void;
   userId: number;
+  isAllFoldersNamed: boolean;
+  setIsAllFoldersNamed: (value: boolean) => void;
 };

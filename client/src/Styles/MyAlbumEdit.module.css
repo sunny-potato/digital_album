@@ -1,10 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
 .editAlbumBox {
   width: 100%;
   height: 100%;
   display: flex;
   grid-template-columns: repeat(2, 1fr);
   overflow: hidden;
+  /* background-color: aquamarine; */
+  /* z-index: 100; */
 }
+
+/* .popupBackground {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+} */
+
+.warningPopupBackground {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(50, 50, 50, 0.4);
+  z-index: 20;
+  visibility: hidden;
+}
+.displayWarningPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18rem;
+  height: 5rem;
+  border-radius: 1rem;
+  background-color: #e1eedd;
+  z-index: 21;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.displayWarningPopup > button {
+  background-color: #f0a04b;
+  color: #183a1d;
+  width: 3rem;
+  height: 1.8rem;
+  border-radius: 0.5rem;
+  border-color: #183a1d;
+}
+
 .albumPhotoBox {
   height: 100%;
   width: 100%;
@@ -27,7 +77,6 @@
   height: 100%;
   padding: 2em 0;
 }
-
 .albumList li {
   margin: 0.5rem;
   list-style: none;
@@ -66,9 +115,9 @@
   text-align: center;
 }
 
-.imageInput > input {
+/* .imageInput > input {
   background-color: red;
-}
+} */
 
 .albumTitle > input {
   border-color: lightgray;
@@ -86,19 +135,19 @@
   font-weight: bolder;
   border-radius: 0.3rem;
   margin-right: 0.2rem;
-  z-index: 100;
+  z-index: 10;
 }
 .folderList > input {
   width: 100%;
   padding: 0 0.5rem;
   border-width: 0.1em;
   border-radius: 0.3rem;
-  z-index: 100;
+  z-index: 10;
 }
 
 .addFolderListButton {
   background-color: #fefbe9;
   font-weight: bolder;
   border-radius: 0.3rem;
-  z-index: 100;
+  z-index: 10;
 }

@@ -55,3 +55,8 @@ li {
   height: 1rem;
   margin-right: 0.2rem;
 }
+
+.folderList {
+  height: 25rem;
+  background-color: red;
+}

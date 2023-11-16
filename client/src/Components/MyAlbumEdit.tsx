@@ -1,10 +1,11 @@
 import { Folder, MyAlbumEdit as MyAlbumEditProps } from "../Types/Folder";
 import s from "../Styles/MyAlbumEdit.module.css";
+import { useSubmit } from "react-router-dom";
+import { useState } from "react";
 
 // to do list
 //1) delete album image
 //2) scroll folder list when it is long
-//3) popup all folder should have its own name
 
 function MyAlbumEdit({
   displayAlbumPhoto,
@@ -15,6 +16,8 @@ function MyAlbumEdit({
   setFolderList,
   setUpdatedAlbumPhoto,
   userId,
+  isAllFoldersNamed,
+  setIsAllFoldersNamed,
 }: MyAlbumEditProps) {
   function handleFile(file: FileList | null) {
     if (file !== null) {
@@ -25,6 +28,17 @@ function MyAlbumEdit({
 
   return (
     <div className={s.editAlbumBox}>
+      <div
+        className={s.warningPopupBackground}
+        style={{
+          visibility: isAllFoldersNamed ? "hidden" : "visible",
+        }}
+      >
+        <div className={s.displayWarningPopup}>
+          <div>All folders should be named</div>
+          <button onClick={() => setIsAllFoldersNamed(true)}>OK</button>
+        </div>
+      </div>
       <div className={s.albumPhotoBox}>
         <div className={s.albumPhoto}>
           <div className={s.imageInput}>

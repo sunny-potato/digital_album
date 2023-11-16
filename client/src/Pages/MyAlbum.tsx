@@ -20,6 +20,9 @@ function MyAlbum() {
   const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isAllFoldersNamed, setIsAllFoldersNamed] = useState<boolean>(true);
+
+  console.log("parent : ", isAllFoldersNamed);
 
   useEffect(() => {
     async function getAlbumInfo() {
@@ -62,7 +65,7 @@ function MyAlbum() {
       } else {
         setIsLoading(false);
         setIsEditMode(true);
-        console.log("all folder should have its own name"); //popup!!!!!!!!
+        setIsAllFoldersNamed(false);
       }
       setIsLoading(false);
     } else {
@@ -89,6 +92,8 @@ function MyAlbum() {
             setFolderList={setFolderList}
             setUpdatedAlbumPhoto={setUpdatedAlbumPhoto}
             userId={userId}
+            isAllFoldersNamed={isAllFoldersNamed}
+            setIsAllFoldersNamed={setIsAllFoldersNamed}
           />
         )}
         {!isEditMode && (
