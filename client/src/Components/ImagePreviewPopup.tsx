@@ -67,19 +67,20 @@ function ImagePreviewPopup({
               src={addImage}
               alt="add image"
             ></img>
-            <label className={s.uploadImages} htmlFor="uploadImages">
-              more images? :)
-              <input
-                name="uploadImages"
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={imageFilesHandler({
-                  setSelectedImageBlob,
-                  setSelectedImageList,
-                })}
-              />
-            </label>
+            <div className={s.addImage}>
+              <div className={s.addImageText}> More images?</div>
+              <label className={s.addImageInput}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={imageFilesHandler({
+                    setSelectedImageBlob,
+                    setSelectedImageList,
+                  })}
+                />
+              </label>
+            </div>
           </div>
         </div>
         <div className={s.displayPopupContent}>
@@ -90,26 +91,26 @@ function ImagePreviewPopup({
                   className={s.deleteImageButton}
                   onClick={() => deleteSelectedImage(index)}
                 >
-                  x
+                  X
                 </button>
                 <img src={img}></img>
               </div>
             ))}
         </div>
-        <div>
-          <button
-            className={s.saveSelectedImageButton}
-            disabled={isLoading ? true : false}
-            onClick={saveSelectedImage}
-          >
-            Save
-          </button>
+        <div className={s.buttonBox}>
           <button
             className={s.cancelSelectedImageButton}
             disabled={isLoading ? true : false}
             onClick={cancelSelectedImage}
           >
             Cancel
+          </button>
+          <button
+            className={s.saveSelectedImageButton}
+            disabled={isLoading ? true : false}
+            onClick={saveSelectedImage}
+          >
+            Save
           </button>
         </div>
       </div>
