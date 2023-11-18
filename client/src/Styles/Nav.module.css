@@ -9,17 +9,19 @@
   align-items: center;
 }
 
-.navLeft {
-  padding: 0 1.5rem;
-}
-
-.navCenter {
-}
-
+.navLeft,
 .navRight {
   padding: 0 1.5rem;
-  /* margin: auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.about {
+  margin-right: 1rem;
+}
+/* .navCenter {
+} */
 
 a {
   color: #183a1d;
@@ -30,6 +32,14 @@ a {
   font-size: 1.5rem;
   color: #f0a04b;
 }
-.login {
+.login,
+.user,
+.home {
   margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+.logout {
+  display: flex;
+  align-items: center;
 }

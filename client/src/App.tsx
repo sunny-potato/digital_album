@@ -10,12 +10,14 @@ import SignUp from "./Pages/SignUp";
 import NotFoundPage from "./Pages/NotFound";
 import EachImage from "./Pages/EachImage";
 import MyPage from "./Pages/MyPage";
+import About from "./Pages/About";
 
 // to do list
 //1) delete album image - myalbumeidt
 //2) scroll folder list when it is long - myalbumdisplay
 //3) drag and drop - folder
 //4) brighten of x button
+//5) cancel button for album edit
 
 function App() {
   const [username, setUsername] = useState<string | undefined>();
@@ -26,6 +28,7 @@ function App() {
           <Nav username={username} />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/myAlbum/:userId" element={<MyAlbum />} />
             <Route path="/albumFolder/:folderId" element={<AlbumFolder />}>
               <Route path="image/:imageId" element={<EachImage />} />
