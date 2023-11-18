@@ -32,13 +32,13 @@ function ImageSlider({
       <div className={s.sliderWrapper}>
         <img
           src={`${defaultURL}${imageList[currentImageIndex as number].uuid}`}
-          className={s.testimage}
+          className={s.displayedImage}
         ></img>
       </div>
-      <button className={s.buttonBack} onClick={() => showPrevImage()}>
+      <button className={s.backButton} onClick={() => showPrevImage()}>
         Prev
       </button>
-      <button className={s.buttonNext} onClick={() => showNextImage()}>
+      <button className={s.nextButton} onClick={() => showNextImage()}>
         Next
       </button>
     </div>

@@ -76,15 +76,15 @@
   padding: 2em 0;
 }
 .albumList li {
-  margin: 0.5rem;
+  margin: 0.7rem;
   list-style: none;
 }
 .albumListTitle {
   font-size: 1.2em;
   font-weight: bolder;
   text-align: center;
+  padding-bottom: 0.5rem;
 }
-/* edit mode*/
 .editAlbumButton {
   position: absolute;
   right: 0;

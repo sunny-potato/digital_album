@@ -98,6 +98,7 @@ label {
   border-color: #183a1d;
   margin-top: 0.3rem;
   background-color: #f0a04b;
+  font-weight: bolder;
 }
 
 .loginButton:disabled {

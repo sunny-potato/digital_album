@@ -36,7 +36,7 @@ function MyAlbumDisplay({
       </div>
       <div className={s.albumListBox}>
         <div className={s.albumList}>
-          <div className={s.albumListTitle}>Album List</div>
+          <div className={s.albumListTitle}>Folder List</div>
           <div className={s.folderList}>
             {folderList.length !== 0 &&
               folderList.map((folder) => (

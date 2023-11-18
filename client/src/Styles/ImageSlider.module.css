@@ -5,13 +5,13 @@
 .sliderContainer {
   height: 100%;
   width: 80%;
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
   /* background-color: #e1eedd; */
 }
 .sliderWrapper {
   height: 100%;
   width: 100%;
-  background-color: black;
+  /* backgrousnd-color: black; */
   /* background-color: #e1eedd; */
   display: flex;
   overflow: hidden;
@@ -23,22 +23,36 @@
   object-fit: contain;
 }
 
-.buttonBack {
+.backButton {
   position: absolute;
   top: 50%;
   left: 0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 1rem;
+  background-color: #f0a04b;
+  font-weight: bolder;
 }
 
-.buttonNext {
+.nextButton {
   position: absolute;
   top: 50%;
   right: 0;
+  margin: 0.5em;
+  /* color: #183a1d; */
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 1rem;
+  /* border-width: 0.1em;
+  border-color: #183a1d; */
+  background-color: #f0a04b;
+  font-weight: bolder;
 }
-.testimage {
+.displayedImage {
   height: 100%;
   width: 100%;
   object-fit: contain;
-  background: lightgreen;
+  /* background: lightgreen; */
   flex-grow: 1;
   flex-shrink: 0;
 }

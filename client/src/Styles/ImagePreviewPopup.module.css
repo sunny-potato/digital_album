@@ -90,6 +90,7 @@
   border-color: #183a1d;
   border-width: 0.01rem;
   margin: 0.7rem 0;
+  font-weight: bolder;
 }
 .saveSelectedImageButton {
   background-color: #f0a04b;

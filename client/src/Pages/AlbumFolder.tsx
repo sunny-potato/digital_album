@@ -49,7 +49,7 @@ function AlbumFolder() {
                     className={s.deleteImageButton}
                     onClick={() => deleteSavedImage(index)}
                   >
-                    x
+                    X
                   </button>
                   <Link className={s.uploadedImage} to={`image/${image.id}`}>
                     <img

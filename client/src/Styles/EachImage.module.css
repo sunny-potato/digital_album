@@ -23,6 +23,8 @@
 }
 .closeButton {
   position: absolute;
-  top: 0;
-  right: 0;
+  right: 0%;
+  background-color: #fefbe9;
+  font-weight: bolder;
+  border-radius: 0.4rem;
 }
