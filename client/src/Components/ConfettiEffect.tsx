@@ -1,5 +1,5 @@
 import s from "../Styles/ConfettiEffect.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { getRandomNumber, getRandomInt } from "../Utils/calculations";
 
 function ConfettiEffect() {

@@ -16,8 +16,6 @@ import About from "./Pages/About";
 //1) delete album image - myalbumeidt
 //2) scroll folder list when it is long - myalbumdisplay
 //3) drag and drop - folder
-//4) brighten of x button
-//5) cancel button for album edit
 
 function App() {
   const [username, setUsername] = useState<string | undefined>();

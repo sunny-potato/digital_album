@@ -12,8 +12,27 @@
   border: 0.1em #183a1d solid;
   border-radius: 2rem;
 }
+
 .albumBox:hover .editAlbumButton {
   visibility: visible;
+}
+
+.albumBox:hover .cancelAlbumButton {
+  visibility: visible;
+}
+
+.cancelAlbumButton {
+  position: absolute;
+  left: 0;
+  margin: 0.5em;
+  visibility: hidden;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 1rem;
+  border-width: 0.1em;
+  border-color: #183a1d;
+  background-color: lightgrey;
+  font-weight: bolder;
 }
 
 .editAlbumButton {
@@ -28,4 +47,5 @@
   border-color: #183a1d;
   background-color: #f0a04b;
   font-weight: bolder;
+  width: 4rem;
 }

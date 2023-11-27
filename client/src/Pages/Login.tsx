@@ -20,7 +20,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
   const [isLoginValidated, setIsLoginValidated] = useState<boolean>(true);
   const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  console.log("start: ", { isLoading });
+
   function loginInputHandler(key: string, value: string) {
     setLoginInfo({ ...loginInfo, [key]: value });
   }

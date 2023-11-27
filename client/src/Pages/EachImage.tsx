@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Image } from "../Types/Folder";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import s from "../Styles/EachImage.module.css";

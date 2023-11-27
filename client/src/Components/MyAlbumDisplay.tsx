@@ -2,22 +2,12 @@ import s from "../Styles/MyalbumDisplay.module.css";
 import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/Folder";
 import { Link } from "react-router-dom";
 import folderIcon from "../Images/folderIcon.svg";
-import { useEffect, useRef } from "react";
 
 function MyAlbumDisplay({
   displayAlbumPhoto,
   currentAlbumTitle,
   folderList,
 }: MyalbumDisplayProps) {
-  // const folderListBox = useRef<HTMLDivElement>(null);
-  // useEffect(() => {
-  //   if (!folderListBox.current) return;
-  //   folderListBox.current.scrollIntoView({
-  //     behavior: "smooth",
-  //     block: "start",
-  //   });
-  // });
-
   return (
     <div className={s.displayAlbumBox}>
       <div className={s.albumPhotoBox}>

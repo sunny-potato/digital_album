@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import {
   createFolder,
@@ -13,6 +13,7 @@ import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 
 function MyAlbum() {
+  const albumInfo = useRef<any>(null); //?????????
   const userId = Number(useParams().userId);
   const [updatedAlbumPhoto, setUpdatedAlbumPhoto] = useState<File>();
   const [currentAlbumTitle, setCurrentAlbumTitle] = useState<string>();
@@ -43,40 +44,70 @@ function MyAlbum() {
   }, [userId]);
 
   async function saveAlbumInfo() {
-    if (isEditMode) {
-      setIsEditMode(false);
-      const HaveAllName = folderList.every((folder) => folder.name !== "");
-      if (HaveAllName && !isLoading) {
-        setIsLoading(true);
-        const eachFolder = folderList.map((name) => name);
-        const newFolder = await createFolder(eachFolder, userId);
-        const result = await getMyAlbumInfo(userId);
-        if (result.folder.length !== 0) {
-          setFolderList(result.folder);
-        }
-        if (updatedAlbumPhoto) {
-          await postMyAlbumImage(userId, updatedAlbumPhoto);
-        }
-        if (currentAlbumTitle) {
-          await postMyAlbumTitle(userId, currentAlbumTitle);
-        }
-      } else {
-        setIsLoading(false);
-        setIsEditMode(true);
-        setIsAllFoldersNamed(false);
+    const HaveAllName = folderList.every((folder) => folder.name !== "");
+    if (HaveAllName && !isLoading) {
+      setIsLoading(true);
+      const eachFolder = folderList.map((name) => name);
+      const newFolder = await createFolder(eachFolder, userId);
+      const result = await getMyAlbumInfo(userId);
+      if (result.folder.length !== 0) {
+        setFolderList(result.folder);
       }
-      setIsLoading(false);
+      if (updatedAlbumPhoto) {
+        await postMyAlbumImage(userId, updatedAlbumPhoto);
+      }
+      if (currentAlbumTitle) {
+        await postMyAlbumTitle(userId, currentAlbumTitle);
+      }
     } else {
+      setIsLoading(false);
       setIsEditMode(true);
+      setIsAllFoldersNamed(false);
+    }
+    setIsLoading(false);
+  }
+
+  function cancelAlbumInfo() {
+    setIsEditMode(false);
+    for (const [key, value] of Object.entries(albumInfo.current)) {
+      if (key === "folderList") {
+        setFolderList(value as Folder[]);
+      } else if (key === "displayAlbumPhoto") {
+        setDisplayAlbumPhoto(value as string);
+      } else if (key === "currentAlbumTitle") {
+        setCurrentAlbumTitle(value as string);
+      }
     }
   }
+
   return (
     <div className={s.pageContainer}>
       <div className={s.albumBox}>
+        {isEditMode ? (
+          <button
+            className={s.cancelAlbumButton}
+            onClick={() => cancelAlbumInfo()}
+          >
+            Cancel
+          </button>
+        ) : (
+          ""
+        )}
         <button
           className={s.editAlbumButton}
           disabled={isLoading ? true : false}
-          onClick={saveAlbumInfo}
+          onClick={() => {
+            if (isEditMode) {
+              setIsEditMode(false), saveAlbumInfo();
+            } else {
+              setIsEditMode(true);
+              albumInfo.current = {
+                folderList,
+                displayAlbumPhoto,
+                currentAlbumTitle,
+              };
+            }
+          }}
         >
           {isEditMode ? "Save" : "Edit"}
         </button>
