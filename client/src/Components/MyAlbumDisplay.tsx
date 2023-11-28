@@ -28,13 +28,15 @@ function MyAlbumDisplay({
         <div className={s.albumList}>
           <div className={s.albumListTitle}>Folder List</div>
           <div className={s.folderList}>
-            {folderList.length !== 0 &&
-              folderList.map((folder) => (
-                <li key={folder.id}>
-                  <img src={folderIcon} className={s.folderIcon}></img>
-                  <Link to={`/albumFolder/${folder.id}`}>{folder.name}</Link>
-                </li>
-              ))}
+            <div className={s.folderListInner}>
+              {folderList.length !== 0 &&
+                folderList.map((folder) => (
+                  <li key={folder.id}>
+                    <img src={folderIcon} className={s.folderIcon}></img>
+                    <Link to={`/albumFolder/${folder.id}`}>{folder.name}</Link>
+                  </li>
+                ))}
+            </div>
             {folderList.length === 0 && <li>No albums</li>}
           </div>
         </div>

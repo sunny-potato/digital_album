@@ -13,9 +13,8 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // to do list
-//1) delete album image - myalbumeidt
-//2) scroll folder list when it is long - myalbumdisplay
 //3) drag and drop - folder
+//no change of data
 
 function App() {
   const [username, setUsername] = useState<string | undefined>();

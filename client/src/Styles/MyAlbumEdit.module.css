@@ -10,15 +10,6 @@
   overflow: hidden;
 }
 
-/* .popupBackground {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-} */
-
 .warningPopupBackground {
   width: 100%;
   height: 100%;
@@ -85,6 +76,34 @@
   text-align: center;
   padding-bottom: 0.5rem;
 }
+.albumList {
+  height: 100%;
+}
+.folderList {
+  position: relative;
+  height: 94%;
+  overflow-y: auto;
+}
+
+.folderListInner {
+  position: absolute;
+  width: 100%;
+}
+
+.folderList::-webkit-scrollbar {
+  width: 0.7rem;
+}
+.folderList::-webkit-scrollbar-thumb {
+  background: #183a1d;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+}
+.folderList::-webkit-scrollbar-track {
+  background: #e1eedd;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+}
+
 .editAlbumButton {
   position: absolute;
   right: 0;
@@ -112,10 +131,6 @@
   text-align: center;
 }
 
-/* .imageInput > input {
-  background-color: red;
-} */
-
 .albumTitle > input {
   border-color: lightgray;
   height: 2rem;
@@ -125,8 +140,6 @@
   margin-bottom: 0.5em;
 }
 
-/* .folderList {
-} */
 .deleteFolderListButton {
   background-color: #fefbe9;
   font-weight: bolder;
