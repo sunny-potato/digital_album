@@ -8,8 +8,8 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 function Nav({ username }: { username: string | undefined }) {
-  const { userId } = useContext(UserContext);
-
+  const { userId, setUserId } = useContext(UserContext);
+  console.log("navigation : ", { userId }, userId ? "yes" : "no");
   return (
     <div className={s.navContainer}>
       <div className={s.navLeft}>
@@ -33,20 +33,24 @@ function Nav({ username }: { username: string | undefined }) {
             <PersonOutlineIcon />
             {username}
           </Link>
-          <Link to={"/login"} className={s.logout}>
+          <Link
+            to={"/login"}
+            className={s.logout}
+            onClick={() => setUserId(null)}
+          >
             <LogoutIcon />
             Log out
           </Link>
         </div>
       ) : (
         <div className={s.navRight}>
+          <div className={s.signup}>
+            <Link to={"/signup"}>Sign up</Link>
+          </div>
           <Link to={"/login"} className={s.login}>
             <LoginIcon />
             Log in
           </Link>
-          <div className={s.signup}>
-            <Link to={"/signup"}>Sign up</Link>
-          </div>
         </div>
       )}
     </div>

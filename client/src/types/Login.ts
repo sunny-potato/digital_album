@@ -25,6 +25,6 @@ export type Signup = {
 };
 
 export type UserContext = {
-  userId: number | undefined;
-  setUserId: (value: number | undefined) => void;
+  userId: number | null;
+  setUserId: (value: number | null) => void;
 };

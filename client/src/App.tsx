@@ -13,8 +13,8 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // to do list
-//3) drag and drop - folder
-//no change of data
+//1) drag and drop of file - folder
+//2) keep data from server
 
 function App() {
   const [username, setUsername] = useState<string | undefined>();

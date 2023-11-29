@@ -39,6 +39,15 @@ a {
   display: flex;
   align-items: center;
 }
+
+.login {
+  display: flex;
+  align-items: center;
+}
+
+.signup {
+  margin-right: 1rem;
+}
 .logout {
   display: flex;
   align-items: center;
