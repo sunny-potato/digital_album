@@ -1,4 +1,4 @@
-import s from "../Styles/MyalbumDisplay.module.css";
+import s from "../Styles/MyAlbumDisplay.module.css";
 import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/Folder";
 import { Link } from "react-router-dom";
 import folderIcon from "../Images/folderIcon.svg";

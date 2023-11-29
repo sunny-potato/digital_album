@@ -42,7 +42,7 @@ function AlbumFolder() {
         />
         <div className={s.displayImageBox}>
           <div className={s.displayContent}>
-            {uploadedImageList &&
+            {uploadedImageList.length !== 0 &&
               uploadedImageList.map((image, index) => (
                 <div className={s.imageBox} key={index}>
                   <button
@@ -60,6 +60,9 @@ function AlbumFolder() {
                   </Link>
                 </div>
               ))}
+            {uploadedImageList.length === 0 && (
+              <div className={s.notifyNoImage}> No uploaded images </div>
+            )}
           </div>
         </div>
         <ImagePreviewPopup
