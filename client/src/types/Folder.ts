@@ -42,8 +42,13 @@ export type MyAlbumEdit = {
   isAllFoldersNamed: boolean;
   setIsAllFoldersNamed: (value: boolean) => void;
 };
-
 export type ImageUpload = {
+  setSelectedImageBlob: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedImageList: React.Dispatch<React.SetStateAction<File[]>>;
+};
+
+export type ImageFilesHandler = {
+  fileList: FileList | null;
   setSelectedImageBlob: React.Dispatch<React.SetStateAction<string[]>>;
   setSelectedImageList: React.Dispatch<React.SetStateAction<File[]>>;
 };

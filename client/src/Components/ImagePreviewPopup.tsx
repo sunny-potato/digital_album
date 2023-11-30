@@ -4,6 +4,11 @@ import { imageFilesHandler } from "../Utils/imageFilesHandler";
 import addImage from "../Images/addImage.png";
 import { postImageInfolder } from "../Axios";
 import s from "../Styles/ImagePreviewPopup.module.css";
+import {
+  handleDragOver,
+  handleOnDrop,
+  handleDragLeave,
+} from "../Utils/dragAndDrop";
 
 function ImagePreviewPopup({
   selectedImageBlob,
@@ -13,6 +18,13 @@ function ImagePreviewPopup({
   folderId,
 }: ImagePreviewPopupProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDragDone, setIsDragDone] = useState<boolean>(true);
+
+  const changeBackgroundColor = () => {
+    return {
+      filter: isDragDone ? "brightness(100%)" : "brightness(105%)",
+    };
+  };
 
   function deleteSelectedImage(imageIndex: number) {
     const updateSelectedImageBlob = [
@@ -55,13 +67,19 @@ function ImagePreviewPopup({
   return (
     <div
       className={s.popupBackground}
+      onDragOver={handleDragOver(setIsDragDone)}
+      onDrop={handleOnDrop(setIsDragDone, {
+        setSelectedImageBlob,
+        setSelectedImageList,
+      })}
+      onDragLeave={handleDragLeave(setIsDragDone)}
       style={{
         display: selectedImageBlob.length > 0 ? "block" : "none",
       }}
     >
       <div className={s.displayInputPopupBox}>
         <div className={s.uploadInputPopupBox}>
-          <div className={s.uploadInputPopup}>
+          <div className={s.uploadInputPopup} style={changeBackgroundColor()}>
             <img
               className={s.addImageIcon}
               src={addImage}
@@ -74,10 +92,14 @@ function ImagePreviewPopup({
                   type="file"
                   accept="image/*"
                   multiple
-                  onChange={imageFilesHandler({
-                    setSelectedImageBlob,
-                    setSelectedImageList,
-                  })}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const fileList = event.target.files;
+                    imageFilesHandler({
+                      fileList,
+                      setSelectedImageBlob,
+                      setSelectedImageList,
+                    });
+                  }}
                 />
               </label>
             </div>

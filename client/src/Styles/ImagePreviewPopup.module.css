@@ -15,19 +15,8 @@
   /* max-height: 70%; how to fix top?*/
   background-color: #e1eedd;
 }
-/* .uploadImagePopupBox {
-  border: 0.1em #183a1d dashed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  padding: 1em 0;
-} */
-
 .uploadInputPopupBox {
   width: 100%;
-  /* margin: 1rem; */
 }
 .uploadInputPopup {
   margin: 2rem;
@@ -51,9 +40,6 @@
 }
 .addImageText {
   line-height: 2rem;
-}
-.addImageInput input {
-  /* background-color: red; */
 }
 .displayPopupContent {
   display: grid;
