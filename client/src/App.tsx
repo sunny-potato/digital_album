@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContextProvider } from "./AppContext";
 import Nav from "./Components/Nav";
@@ -11,6 +10,9 @@ import NotFoundPage from "./Pages/NotFound";
 import EachImage from "./Pages/EachImage";
 import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
+
+// things to do
+// 2) add isloading function to save button in imagepreviewopopup
 
 function App() {
   return (

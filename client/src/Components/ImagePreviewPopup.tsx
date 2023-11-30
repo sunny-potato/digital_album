@@ -22,7 +22,7 @@ function ImagePreviewPopup({
 
   const changeBackgroundColor = () => {
     return {
-      filter: isDragDone ? "brightness(100%)" : "brightness(105%)",
+      filter: isDragDone ? "brightness(100%)" : "brightness(103%)",
     };
   };
 

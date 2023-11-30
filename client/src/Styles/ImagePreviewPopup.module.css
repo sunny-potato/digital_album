@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #fefbe9;
+  background-color: rgb(255, 251, 232, 0.8);
 }
 .displayInputPopupBox {
   position: absolute;
@@ -12,8 +12,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
-  /* max-height: 70%; how to fix top?*/
   background-color: #e1eedd;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .uploadInputPopupBox {
   width: 100%;
@@ -46,6 +49,20 @@
   grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
   justify-content: center;
   padding: 0.5em 0;
+  overflow-y: auto;
+}
+.displayPopupContent::-webkit-scrollbar {
+  width: 0.7rem;
+}
+.displayPopupContent::-webkit-scrollbar-thumb {
+  background: #183a1d;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+}
+.displayPopupContent::-webkit-scrollbar-track {
+  background: #e1eedd;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
 }
 .displayPopupContent img {
   width: 100%;
