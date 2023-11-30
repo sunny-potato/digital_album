@@ -15,8 +15,7 @@ function AlbumFolder() {
   const [selectedImageList, setSelectedImageList] = useState<File[]>([]);
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
-  console.log({ selectedImageList });
-  console.log({ selectedImageBlob });
+
   useEffect(() => {
     async function getImages() {
       const getImageList = await getAllImagesInFolder(folderId);

@@ -12,7 +12,6 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
-// 2) add isloading function to save button in imagepreviewopopup
 
 function App() {
   return (

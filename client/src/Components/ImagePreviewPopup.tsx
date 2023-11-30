@@ -19,6 +19,7 @@ function ImagePreviewPopup({
 }: ImagePreviewPopupProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isDragDone, setIsDragDone] = useState<boolean>(true);
+  console.log({ isLoading });
 
   const changeBackgroundColor = () => {
     return {
@@ -41,21 +42,17 @@ function ImagePreviewPopup({
 
   async function saveSelectedImage() {
     try {
-      if (selectedImageList.length == 0) {
-        console.log("no image that can be sendt to DB");
-      } else {
-        if (!isLoading) {
-          setIsLoading(true);
-          const response = await postImageInfolder(selectedImageList, folderId);
-          if (response.status === 200) {
-            cancelSelectedImage();
-            window.location.reload();
-          }
+      if (!isLoading) {
+        setIsLoading(true);
+        const response = await postImageInfolder(selectedImageList, folderId);
+        if (response.status === 200) {
+          cancelSelectedImage();
+          window.location.reload();
         }
-        setIsLoading(false);
       }
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
