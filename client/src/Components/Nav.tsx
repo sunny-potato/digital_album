@@ -11,6 +11,7 @@ import { getUsername } from "../Axios";
 function Nav() {
   const { userId, setUserId } = useContext(UserContext);
   const [username, setUsername] = useState<string>("");
+
   useEffect(() => {
     if (userId) {
       const retrieveUserName = async () => {
@@ -23,7 +24,8 @@ function Nav() {
       };
       retrieveUserName();
     }
-  }, []);
+  }, [userId]);
+
   return (
     <div className={s.navContainer}>
       <div className={s.navLeft}>

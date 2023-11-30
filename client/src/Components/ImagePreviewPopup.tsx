@@ -19,7 +19,6 @@ function ImagePreviewPopup({
 }: ImagePreviewPopupProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isDragDone, setIsDragDone] = useState<boolean>(true);
-  console.log({ isLoading });
 
   const changeBackgroundColor = () => {
     return {

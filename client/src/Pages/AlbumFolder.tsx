@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, Outlet } from "react-router-dom";
-import {
-  postImageInfolder,
-  getAllImagesInFolder,
-  deleteImageInfolder,
-} from "../Axios";
+import { getAllImagesInFolder, deleteImageInfolder } from "../Axios";
 import { Image } from "../Types/Folder";
 import s from "../Styles/AlbumFolder.module.css";
 import ImageUpload from "../Components/ImageUpload";

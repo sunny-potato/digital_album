@@ -34,6 +34,7 @@ npm run dev
 
 -> multer :
 -> uuid(Universally unique identifier) : create unique id for images
+-> icon : https://mui.com/
 
 ## Memo
 

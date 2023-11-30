@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import s from "../Styles/ImageSlider.module.css";
 import { ImageSlider as ImageSliderProps } from "../Types/Folder";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 
 function ImageSlider({
   currentImageIndex,
@@ -36,10 +38,10 @@ function ImageSlider({
         ></img>
       </div>
       <button className={s.backButton} onClick={() => showPrevImage()}>
-        Prev
+        <ArrowBackIosNewIcon fontSize="medium" />
       </button>
       <button className={s.nextButton} onClick={() => showNextImage()}>
-        Next
+        <ArrowForwardIosSharpIcon fontSize="medium" />
       </button>
     </div>
   );

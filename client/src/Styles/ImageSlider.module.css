@@ -27,27 +27,28 @@
   position: absolute;
   top: 50%;
   left: 0;
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.7rem;
-  border-radius: 1rem;
-  background-color: #f0a04b;
-  font-weight: bolder;
+  background-color: transparent;
+  border-width: 0;
 }
 
 .nextButton {
   position: absolute;
   top: 50%;
   right: 0;
-  margin: 0.5em;
-  /* color: #183a1d; */
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.7rem;
-  border-radius: 1rem;
-  /* border-width: 0.1em;
-  border-color: #183a1d; */
-  background-color: #f0a04b;
-  font-weight: bolder;
+  background-color: transparent;
+  border-width: 0;
 }
+
+.backButton:hover,
+.nextButton:hover {
+  background-color: rgb(240, 161, 76, 0.8);
+}
+
+.backButton:active,
+.nextButton:active {
+  background: red;
+}
+
 .displayedImage {
   height: 100%;
   width: 100%;
