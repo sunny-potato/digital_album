@@ -16,7 +16,6 @@ import About from "./Pages/About";
 //1) drag and drop of file - folder
 
 function App() {
-  // const [username, setUsername] = useState<string | undefined>();
   return (
     <>
       <BrowserRouter>

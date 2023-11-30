@@ -1,15 +1,29 @@
 import { Link } from "react-router-dom";
 import s from "../Styles/Nav.module.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../AppContext";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { getUsername } from "../Axios";
 
-function Nav({ username }: { username: string | undefined }) {
+function Nav() {
   const { userId, setUserId } = useContext(UserContext);
-  console.log("navigation : ", { userId }, userId ? "yes" : "no");
+  const [username, setUsername] = useState<string>("");
+  useEffect(() => {
+    if (userId) {
+      const retrieveUserName = async () => {
+        const username = await getUsername(userId);
+        if (username) {
+          setUsername(username);
+        } else {
+          console.error("no username");
+        }
+      };
+      retrieveUserName();
+    }
+  }, []);
   return (
     <div className={s.navContainer}>
       <div className={s.navLeft}>

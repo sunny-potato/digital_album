@@ -1,28 +1,31 @@
 import express from "express";
+import multer from "multer";
+import { uploadFile, downloadFile, deleteFile } from "./imageStorage";
+import crypto from "crypto";
+import { getAllImagesInFolder, postImage, deleteImage } from "./query/image";
 import {
-  getAllImagesInFolder,
-  postImage,
-  deleteImage,
   getMyAlbum,
   createMyAlbum,
   updateMyAlbumImage,
   updateMyAlbumTitle,
+} from "./query/myalbum";
+import {
   getFolder,
   updateFolder,
   createFolder,
   deleteFolder,
+} from "./query/folder";
+import {
   getAllLoginInfo,
   findPassword,
   findUsername,
   createNewUserInfo,
   createNewUserAccount,
-} from "./query";
-import multer from "multer";
-import { uploadFile, downloadFile, deleteFile } from "./imageStorage";
-import crypto, { sign } from "crypto";
-import { Row } from "postgres";
-import { throws } from "assert";
-import { Console } from "console";
+  getUsername,
+} from "./query/user";
+// import { Row } from "postgres";
+// import { throws } from "assert";
+// import { Console } from "console";
 import { FolderList, UserAccount, AccountFromUser } from "../src/types";
 
 const router = express.Router();
@@ -62,7 +65,7 @@ router.post(
           let newImageName = getUnikImageName();
           newImageName += fileType;
           const result = await postImage(file, newImageName, folderId); // error, how to stop??????????
-          console.log(`Image updated : ${result}`);
+          // console.log(`Image updated : ${result}`);
           await uploadFile(newImageName, file.buffer);
         } catch (error) {
           console.error(error);
@@ -191,9 +194,8 @@ export default router;
 // login
 router.get(`/login`, async (req, res) => {
   const accountFromUser = req.query as AccountFromUser;
-  // console.log(accountFromUser);
   const accountListFromDB = await getAllLoginInfo();
-  console.log(accountListFromDB);
+  // console.log(accountListFromDB);
   const accountValidationResult = isUserAccountValidated(
     accountFromUser,
     accountListFromDB
@@ -257,4 +259,11 @@ router.post(`/signup/newuser`, async (req, res) => {
     const newAccount = await createNewUserAccount(accountInfo);
     res.status(200).send("success");
   }
+});
+
+//nav
+router.get("/navigation", async (req, res) => {
+  const userId = Number(req.query.userId);
+  const username = await getUsername(userId);
+  res.status(200).send(username[0].user_name);
 });

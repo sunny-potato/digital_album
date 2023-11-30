@@ -9,7 +9,7 @@ import viewEyeIcon from "../Images/view.png";
 import welcomeImage from "../Images/welcome.svg";
 import ConfettiEffect from "../Components/ConfettiEffect";
 
-function Login({ setUsername }: { setUsername: (value: string) => void }) {
+function Login() {
   const { setUserId } = useContext(UserContext);
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<login>({
@@ -53,7 +53,7 @@ function Login({ setUsername }: { setUsername: (value: string) => void }) {
   }) {
     if (validation.result) {
       setIsLoginValidated(true);
-      setUsername(validation.username);
+      // setUsername(validation.username);
       setUserId(validation.userId);
       navigate("/");
     } else {

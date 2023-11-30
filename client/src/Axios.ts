@@ -16,6 +16,7 @@ import { Login as login, Signup } from "./Types/Login";
 //   }
 // }
 
+// images
 export async function getAllImagesInFolder(folderId: number) {
   const response = await axios.get(
     `/albumFolder/getAllImages?folderId=${folderId}`
@@ -44,6 +45,7 @@ export async function deleteImageInfolder(image: Image) {
   );
 }
 
+//My album
 export async function getMyAlbumInfo(userId: number) {
   const response = await axios.get(`/myAlbum?userId=${userId}`);
   return response.data;
@@ -77,17 +79,21 @@ export async function createFolder(folderList: Folder[], userId: number) {
   return await axios.post(`/myAlbum/newFolder?userId=${userId}`, folderList);
 }
 
-// login
+// User
 export async function validateLoginInfo(loginInfo: login) {
   return await axios.get(
     `/login?username=${loginInfo.username}&&password=${loginInfo.password}`
   );
 }
 
-//signup
 export async function checkUsernameAvailability(currentUsername: string) {
   return await axios.get(`/signup?username=${currentUsername}`);
 }
 export async function createNewAccount(signupInfo: Signup) {
   return await axios.post(`/signup/newuser`, signupInfo);
+}
+
+export async function getUsername(userId: number) {
+  const response = await axios.get(`/navigation?userId=${userId}`);
+  return response.data;
 }
