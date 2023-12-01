@@ -7,6 +7,10 @@
 .albumPhotoBox {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2rem;
 }
 .albumPhoto {
   margin: 1em;
@@ -21,7 +25,7 @@
 .albumTitle {
   text-align: center;
 }
-.albumPhotoBox,
+
 .albumListBox {
   width: 100%;
   height: 100%;

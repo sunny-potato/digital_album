@@ -1,7 +1,10 @@
 .albumPhotoBox {
   width: 100%;
   height: 100%;
-  padding: 2em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 1rem;
 }
 .albumPhoto {
   margin: 1em;
@@ -12,6 +15,26 @@
   height: 100%;
   object-fit: scale-down;
 }
+.imageInput {
+  height: 17em;
+  position: relative;
+}
+.imageInput input {
+  width: 100%;
+  position: absolute;
+  left: 0%;
+  top: 90%;
+  transform: translate(32%, 0%);
+}
+.noImageDiv {
+  width: 100%;
+  height: 100%;
+  line-height: 17em;
+  border-radius: 1em;
+  border: 0.2em #183a1d dotted;
+  text-align: center;
+}
+
 .albumTitle {
   text-align: center;
 }
@@ -22,23 +45,4 @@
   border-radius: 0.5rem;
   padding: 0 0.8em;
   margin-bottom: 0.5em;
-}
-.imageInput {
-  height: 17em;
-  position: relative;
-}
-.imageInput input {
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  top: 90%;
-  transform: translate(-18%, 0%);
-}
-.noImageDiv {
-  width: 100%;
-  height: 100%;
-  line-height: 17em;
-  border-radius: 1em;
-  border: 0.2em #183a1d dotted;
-  text-align: center;
 }
