@@ -12,7 +12,6 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
-// 1) save data when save button clicked (seperated data)
 // 2) sort & filter in my album
 // 3) sort & filter in folder
 // 4) show info on pic -> pic name, saved data, dimention? size?

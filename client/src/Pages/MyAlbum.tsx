@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   createFolder,
@@ -9,12 +9,12 @@ import {
 } from "../Axios";
 import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
+import { CurrentMyalbumData } from "../Types/MyAlbum";
 import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 
 function MyAlbum() {
   const userId = Number(useParams().userId);
-  const albumInfo = useRef<any>(null); //?????????
   const [albumTitle, setAlbumTitle] = useState<string>();
   const [albumImageFile, setAlbumImageFile] = useState<File>();
   const [albumImageBuffer, setAlbumImageBuffer] = useState<string>();
@@ -22,6 +22,9 @@ function MyAlbum() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isAllFoldersNamed, setIsAllFoldersNamed] = useState<boolean>(true);
+  const [currentMyAlbumData, setCurrentMyAlbumData] = useState<
+    CurrentMyalbumData | undefined
+  >(undefined);
 
   useEffect(() => {
     async function getAlbumInfo() {
@@ -69,7 +72,8 @@ function MyAlbum() {
 
   function cancelAlbumInfo() {
     setIsEditMode(false);
-    for (const [key, value] of Object.entries(albumInfo.current)) {
+    if (currentMyAlbumData === undefined) return;
+    for (const [key, value] of Object.entries(currentMyAlbumData)) {
       if (key === "folderList") {
         setFolderList(value as Folder[]);
       } else if (key === "albumImageBuffer") {
@@ -101,11 +105,11 @@ function MyAlbum() {
               setIsEditMode(false), saveAlbumInfo();
             } else {
               setIsEditMode(true);
-              albumInfo.current = {
+              setCurrentMyAlbumData({
                 folderList,
                 albumImageBuffer,
                 albumTitle,
-              };
+              });
             }
           }}
         >

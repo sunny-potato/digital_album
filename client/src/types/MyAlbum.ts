@@ -31,3 +31,8 @@ export type MyAlbumEditFolder = {
   setFolderList: (value: Folder[]) => void;
   userId: number;
 };
+export type CurrentMyalbumData = {
+  folderList: Folder[];
+  albumImageBuffer: string | undefined;
+  albumTitle: string | undefined;
+};
