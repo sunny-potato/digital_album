@@ -13,14 +13,14 @@ import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 
 function MyAlbum() {
-  const albumInfo = useRef<any>(null); //?????????
   const userId = Number(useParams().userId);
-  const [updatedAlbumPhoto, setUpdatedAlbumPhoto] = useState<File>();
-  const [currentAlbumTitle, setCurrentAlbumTitle] = useState<string>();
+  const albumInfo = useRef<any>(null); //?????????
+  const [albumTitle, setAlbumTitle] = useState<string>();
+  const [albumImageFile, setAlbumImageFile] = useState<File>();
+  const [albumImageBuffer, setAlbumImageBuffer] = useState<string>();
   const [folderList, setFolderList] = useState<Folder[]>([]);
-  const [displayAlbumPhoto, setDisplayAlbumPhoto] = useState<string>();
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isAllFoldersNamed, setIsAllFoldersNamed] = useState<boolean>(true);
 
   useEffect(() => {
@@ -31,13 +31,13 @@ function MyAlbum() {
         setFolderList(result.folder);
       }
       if (result.album.length !== 0) {
-        const albumImage = result.album[0].image_uuid;
-        const albumTitle = result.album[0].title;
-        if (albumImage) {
-          const imageBuffer = await getMyAlbumImage(albumImage);
-          setDisplayAlbumPhoto(imageBuffer);
+        const initialAlbumImage = result.album[0].image_uuid;
+        const initialAlbumTitle = result.album[0].title;
+        if (initialAlbumImage) {
+          const imageBuffer = await getMyAlbumImage(initialAlbumImage);
+          setAlbumImageBuffer(imageBuffer);
         }
-        if (albumTitle) setCurrentAlbumTitle(albumTitle);
+        if (initialAlbumTitle) setAlbumTitle(initialAlbumTitle);
       }
     }
     getAlbumInfo();
@@ -53,11 +53,11 @@ function MyAlbum() {
       if (result.folder.length !== 0) {
         setFolderList(result.folder);
       }
-      if (updatedAlbumPhoto) {
-        await postMyAlbumImage(userId, updatedAlbumPhoto);
+      if (albumImageFile) {
+        await postMyAlbumImage(userId, albumImageFile);
       }
-      if (currentAlbumTitle) {
-        await postMyAlbumTitle(userId, currentAlbumTitle);
+      if (albumTitle) {
+        await postMyAlbumTitle(userId, albumTitle);
       }
     } else {
       setIsLoading(false);
@@ -72,10 +72,10 @@ function MyAlbum() {
     for (const [key, value] of Object.entries(albumInfo.current)) {
       if (key === "folderList") {
         setFolderList(value as Folder[]);
-      } else if (key === "displayAlbumPhoto") {
-        setDisplayAlbumPhoto(value as string);
-      } else if (key === "currentAlbumTitle") {
-        setCurrentAlbumTitle(value as string);
+      } else if (key === "albumImageBuffer") {
+        setAlbumImageBuffer(value as string);
+      } else if (key === "albumTitle") {
+        setAlbumTitle(value as string);
       }
     }
   }
@@ -103,8 +103,8 @@ function MyAlbum() {
               setIsEditMode(true);
               albumInfo.current = {
                 folderList,
-                displayAlbumPhoto,
-                currentAlbumTitle,
+                albumImageBuffer,
+                albumTitle,
               };
             }
           }}
@@ -113,13 +113,13 @@ function MyAlbum() {
         </button>
         {isEditMode && (
           <MyAlbumEdit
-            displayAlbumPhoto={displayAlbumPhoto}
-            setDisplayAlbumPhoto={setDisplayAlbumPhoto}
-            currentAlbumTitle={currentAlbumTitle}
-            setCurrentAlbumTitle={setCurrentAlbumTitle}
+            albumImageBuffer={albumImageBuffer}
+            setAlbumImageBuffer={setAlbumImageBuffer}
+            albumTitle={albumTitle}
+            setAlbumTitle={setAlbumTitle}
             folderList={folderList}
             setFolderList={setFolderList}
-            setUpdatedAlbumPhoto={setUpdatedAlbumPhoto}
+            setAlbumImageFile={setAlbumImageFile}
             userId={userId}
             isAllFoldersNamed={isAllFoldersNamed}
             setIsAllFoldersNamed={setIsAllFoldersNamed}
@@ -127,8 +127,8 @@ function MyAlbum() {
         )}
         {!isEditMode && (
           <MyAlbumDisplay
-            displayAlbumPhoto={displayAlbumPhoto}
-            currentAlbumTitle={currentAlbumTitle}
+            albumImageBuffer={albumImageBuffer}
+            albumTitle={albumTitle}
             folderList={folderList}
           />
         )}

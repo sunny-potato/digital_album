@@ -96,4 +96,4 @@ console.log(newHello); // output "Hello, world";
 
 title : font-size 1.5 rem
 subTitle: font-szie 1.2 rem
-color : #f6c453 #fefbe9 #f0a04b #183a1d #e1eedd #e7e7e7(cancel)
+color : #f6c453 #fefbe9 #f0a04b #183a1d #e1eedd #e7e7e7(cancel) rgba(50, 50, 50, 0.4)(popupbackground)

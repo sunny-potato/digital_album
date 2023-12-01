@@ -1,6 +1,6 @@
 import { DragEvent } from "react";
 import { imageFilesHandler } from "./imageFilesHandler";
-import { ImageUpload as ImageUploadProps } from "../types/Folder";
+import { ImageUpload as ImageUploadProps } from "../Types/Folder";
 
 export const handleDragOver = (setIsDragDone: (value: boolean) => void) => {
   return (event: DragEvent<HTMLDivElement>) => {

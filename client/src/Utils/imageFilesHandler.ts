@@ -1,4 +1,4 @@
-import { ImageFilesHandler as ImageFilesHandlerProps } from "../types/Folder";
+import { ImageFilesHandler as ImageFilesHandlerProps } from "../Types/Folder";
 
 export function imageFilesHandler({
   fileList,

@@ -1,0 +1,44 @@
+.albumPhotoBox {
+  width: 100%;
+  height: 100%;
+  padding: 2em 0;
+}
+.albumPhoto {
+  margin: 1em;
+  height: 17em;
+}
+.albumPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+}
+.albumTitle {
+  text-align: center;
+}
+.albumTitle > input {
+  border-color: lightgray;
+  height: 2rem;
+  border-width: 0.1em;
+  border-radius: 0.5rem;
+  padding: 0 0.8em;
+  margin-bottom: 0.5em;
+}
+.imageInput {
+  height: 17em;
+  position: relative;
+}
+.imageInput input {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-18%, 0%);
+}
+.noImageDiv {
+  width: 100%;
+  height: 100%;
+  line-height: 17em;
+  border-radius: 1em;
+  border: 0.2em #183a1d dotted;
+  text-align: center;
+}

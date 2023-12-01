@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ImagePreviewPopup as ImagePreviewPopupProps } from "../types/Folder";
+import { ImagePreviewPopup as ImagePreviewPopupProps } from "../Types/Folder";
 import { imageFilesHandler } from "../Utils/imageFilesHandler";
 import addImage from "../Images/addImage.png";
 import { postImageInfolder } from "../Axios";
