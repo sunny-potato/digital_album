@@ -25,7 +25,6 @@ function MyAlbum() {
   const [currentMyAlbumData, setCurrentMyAlbumData] = useState<
     CurrentMyalbumData | undefined
   >(undefined);
-
   useEffect(() => {
     async function getAlbumInfo() {
       const result = await getMyAlbumInfo(userId);
@@ -50,8 +49,7 @@ function MyAlbum() {
     const HaveAllName = folderList.every((folder) => folder.name !== "");
     if (HaveAllName && !isLoading) {
       setIsLoading(true);
-      const eachFolder = folderList.map((name) => name);
-      const newFolder = await createFolder(eachFolder, userId);
+      const newFolder = await createFolder(folderList, userId);
       const result = await getMyAlbumInfo(userId);
       if (result.folder.length !== 0) {
         setFolderList(result.folder);

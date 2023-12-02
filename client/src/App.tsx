@@ -16,7 +16,8 @@ import About from "./Pages/About";
 // 3) sort & filter in folder
 // 4) show info on pic -> pic name, saved data, dimention? size?
 // 5) share image to social media
-// 6) move to another file
+// 6) move image to another file
+// 7) add alt attribute to images & icons
 
 function App() {
   return (

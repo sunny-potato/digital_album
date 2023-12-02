@@ -19,11 +19,11 @@ function MyAlbumEditFolder({
                   <button
                     className={s.deleteFolderListButton}
                     onClick={() => {
-                      const delteFolder = [
+                      const deleteFolder = [
                         ...folderList.slice(0, index),
                         ...folderList.slice(index + 1),
                       ];
-                      setFolderList(delteFolder);
+                      setFolderList(deleteFolder);
                     }}
                   >
                     x
@@ -56,6 +56,7 @@ function MyAlbumEditFolder({
                     name: "",
                     user_id: userId,
                     order_value: 0,
+                    created_at: undefined,
                   };
                   setFolderList([...folderList, newFolder]);
                 }}

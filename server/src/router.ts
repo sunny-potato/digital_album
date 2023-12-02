@@ -23,9 +23,6 @@ import {
   createNewUserAccount,
   getUsername,
 } from "./query/user";
-// import { Row } from "postgres";
-// import { throws } from "assert";
-// import { Console } from "console";
 import { FolderList, UserAccount, AccountFromUser } from "../src/types";
 
 const router = express.Router();
@@ -87,6 +84,8 @@ router.get("/myAlbum", async (req, res) => {
   const userId = Number(req.query.userId);
   const album = await getMyAlbum(userId);
   const folder = await getFolder(userId);
+  // const testTime = new Date();
+  // console.log("what", folder[0].created_date, folder[0].created_time);
   const result = { album, folder };
   res.status(200).send(result);
 });
@@ -152,17 +151,20 @@ router.post(`/myAlbum/newFolder`, async (req, res) => {
   const folderListFromDB = await getFolder(userId);
 
   for (const [index, folder] of folderListFromClient.entries()) {
-    if (folder.id === undefined) {
+    if (folder.id === undefined && folder.created_at === undefined) {
       const result = await createFolder({
         name: folder.name,
         order_value: index + 1,
         user_id: userId,
+        created_at: new Date(),
       });
-    } else {
+    }
+    if (folder.id !== undefined && folder.created_at !== undefined) {
       const result = await updateFolder({
         id: folder.id,
         name: folder.name,
         order_value: index + 1,
+        created_at: folder.created_at,
       });
     }
   }

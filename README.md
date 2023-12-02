@@ -32,9 +32,11 @@ npm run dev
 -API : node.js(express)
 -database : Noen.tech(serverless postgres), Google cloudstorage(store images)
 
+-postgres: https://github.com/porsager/postgres
 -> multer :
 -> uuid(Universally unique identifier) : create unique id for images
 -> icon : https://mui.com/
+-> sharp(https://sharp.pixelplumbing.com/): optimize image
 
 ## Memo
 

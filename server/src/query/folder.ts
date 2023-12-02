@@ -8,19 +8,22 @@ export async function createFolder(folder: {
   name: string;
   order_value: number;
   user_id: number;
+  created_at: Date;
 }) {
-  return await sql`insert into folder(name, order_value, user_id) values(${folder.name}, ${folder.order_value}, ${folder.user_id}) returning id`;
+  return await sql`insert into folder(name, order_value, user_id, created_at) values(${folder.name}, ${folder.order_value}, ${folder.user_id}, ${folder.created_at}) returning id`;
 }
 
 export async function updateFolder(folder: {
   id: number;
   name: string;
   order_value: number;
+  created_at: Date;
 }) {
   return await sql`
       update folder
       set name=${folder.name},
-      order_value=${folder.order_value}
+      order_value=${folder.order_value},
+      created_at=${folder.created_at}
       where id=${folder.id}
       returning *
     `;
