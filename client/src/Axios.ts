@@ -48,6 +48,7 @@ export async function deleteImageInfolder(image: Image) {
 //My album
 export async function getMyAlbumInfo(userId: number) {
   const response = await axios.get(`/myAlbum?userId=${userId}`);
+  // console.log(response.data);
   return response.data;
 }
 
@@ -77,6 +78,18 @@ export async function postMyAlbumTitle(userId: number, albumTitle: string) {
 
 export async function createFolder(folderList: Folder[], userId: number) {
   return await axios.post(`/myAlbum/newFolder?userId=${userId}`, folderList);
+}
+
+export async function sortFoldersInMyAlbum(
+  userId: number,
+  sortBy: string,
+  orderBy: string
+) {
+  const response = await axios.get(
+    `/myAlbum/${userId}/folders?sortBy=${sortBy}&orderBy=${orderBy}`
+  );
+  console.log(response.data);
+  return response.data;
 }
 
 // User

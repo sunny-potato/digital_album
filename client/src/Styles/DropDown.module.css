@@ -1,0 +1,37 @@
+/* .forlderListSortBox {
+} */
+.folderListSort {
+  width: fit-content;
+  display: flex;
+  margin-right: auto;
+  margin-left: 0.5rem;
+  border: #183a1d solid 0.1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  position: relative;
+}
+/* .sortIcon {
+} */
+.sortText {
+  padding: 0 0.1rem;
+}
+.sortByList {
+  position: absolute;
+  top: 100%;
+  background-color: #fefbe9;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: #183a1d solid 0.1rem;
+  width: 8rem;
+}
+
+.sortByList li {
+  margin: 0.1rem 0.5rem;
+  border: #183a1d solid 0;
+}
+.sortByList li:nth-child(3) {
+  border-bottom: #183a1d solid 0.1rem;
+}
+.checkIconBox {
+  margin-left: auto;
+}

@@ -14,6 +14,7 @@ import {
   updateFolder,
   createFolder,
   deleteFolder,
+  sortFolders,
 } from "./query/folder";
 import {
   getAllLoginInfo,
@@ -191,8 +192,6 @@ router.post(`/myAlbum/newFolder`, async (req, res) => {
   res.status(200).send("updated folder!");
 });
 
-export default router;
-
 // login
 router.get(`/login`, async (req, res) => {
   const accountFromUser = req.query as AccountFromUser;
@@ -269,3 +268,22 @@ router.get("/navigation", async (req, res) => {
   const username = await getUsername(userId);
   res.status(200).send(username[0].user_name);
 });
+
+router.get("/myAlbum/:userId/folders", async (req, res) => {
+  const userId = Number(req.params.userId);
+  console.log(req.query.sortBy);
+  let sortBy = "";
+  if (req.query.sortBy === "Name") {
+    sortBy = "name";
+  }
+  if (req.query.sortBy === "Date") {
+    sortBy = "created_at";
+  }
+  const getSortedFolders = await sortFolders(
+    userId,
+    sortBy
+    // req.query.orderBy as string
+  );
+  console.log(getSortedFolders);
+});
+export default router;

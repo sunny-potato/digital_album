@@ -36,3 +36,8 @@ export type CurrentMyalbumData = {
   albumImageBuffer: string | undefined;
   albumTitle: string | undefined;
 };
+
+export type DropDownList = {
+  sortBy: string;
+  orderBy: string;
+};

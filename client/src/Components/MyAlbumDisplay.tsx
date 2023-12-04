@@ -1,15 +1,39 @@
-import s from "../Styles/MyAlbumDisplay.module.css";
-import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/MyAlbum";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import folderIcon from "../Images/folderIcon.svg";
-import SortIcon from "@mui/icons-material/Sort";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import s from "../Styles/MyAlbumDisplay.module.css";
+import {
+  DropDownList,
+  MyalbumDisplay as MyalbumDisplayProps,
+} from "../Types/MyAlbum";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
+import DropDown from "./DropDown";
+import { sortFoldersInMyAlbum } from "../Axios";
 
 function MyAlbumDisplay({
   albumImageBuffer,
   albumTitle,
   folderList,
 }: MyalbumDisplayProps) {
+  const [myAlbumDropDownList, setMyAlbumDropDownList] = useState<DropDownList>({
+    sortBy: "Name",
+    orderBy: "A-Z",
+  });
+  const myAlbumDropDownContent = [
+    { type: "sortBy", name: "Name" },
+    { type: "sortBy", name: "Date" },
+    { type: "sortBy", name: "Size" },
+    { type: "orderBy", name: "A-Z" },
+    { type: "orderBy", name: "Z-A" },
+  ];
+  useEffect(() => {
+    sortFoldersInMyAlbum(
+      35,
+      myAlbumDropDownList.sortBy,
+      myAlbumDropDownList.orderBy
+    );
+    console.log("useEffect runs");
+  }, [myAlbumDropDownList]);
+
   return (
     <div className={s.displayAlbumBox}>
       <div className={s.albumPhotoBox}>
@@ -28,26 +52,17 @@ function MyAlbumDisplay({
       </div>
       <div className={s.albumListBox}>
         <div className={s.albumList}>
-          {/* <div className={s.forlderListSortBox}> */}
-          <div className={s.folderListSort}>
-            {/* <SortIcon fontSize="small" className={s.sortIcon} /> */}
-            <div className={s.sortText}>Sort by</div>
-            <ExpandMoreIcon fontSize="small" className={s.expandIcon} />
-            <div className={s.sortByList}>
-              <li>Name</li>
-              <li>Date</li>
-              <li>Size</li>
-              <li>A-Z</li>
-              <li>Z-A</li>
-            </div>
-          </div>
-          {/* </div> */}
+          <DropDown
+            dropDownList={myAlbumDropDownList}
+            setDropDownList={setMyAlbumDropDownList}
+            dropDownContent={myAlbumDropDownContent}
+          />
           <div className={s.folderList}>
             <div className={s.folderListInner}>
               {folderList.length !== 0 &&
                 folderList.map((folder) => (
                   <li key={folder.id}>
-                    <img src={folderIcon} className={s.folderIcon}></img>
+                    <FolderOpenIcon fontSize="small" className={s.folderIcon} />
                     <Link to={`/albumFolder/${folder.id}`}>{folder.name}</Link>
                   </li>
                 ))}

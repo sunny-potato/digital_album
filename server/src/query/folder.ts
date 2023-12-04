@@ -32,3 +32,11 @@ export async function updateFolder(folder: {
 export async function deleteFolder(id: number) {
   return await sql`delete from folder where id=${id} `;
 }
+
+export async function sortFolders(
+  userId: number,
+  sortBy: string
+  // orderBy: string
+) {
+  return await sql`select * from folder where user_id=${userId} order by ${sortBy} desc`;
+}
