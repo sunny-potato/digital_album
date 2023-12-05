@@ -12,12 +12,13 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
-// 2) sort & filter in my album
 // 3) sort & filter in folder
 // 4) show info on pic -> pic name, saved data, dimention? size?
 // 5) share image to social media
 // 6) move image to another file
 // 7) add alt attribute to images & icons
+// 8) close element when outside of the element clicked -> sortby in myalbum
+// 9) calculate size of folders in my album
 
 function App() {
   return (

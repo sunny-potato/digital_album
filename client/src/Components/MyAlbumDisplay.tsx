@@ -13,6 +13,8 @@ function MyAlbumDisplay({
   albumImageBuffer,
   albumTitle,
   folderList,
+  setFolderList,
+  userId,
 }: MyalbumDisplayProps) {
   const [myAlbumDropDownList, setMyAlbumDropDownList] = useState<DropDownList>({
     sortBy: "Name",
@@ -25,13 +27,17 @@ function MyAlbumDisplay({
     { type: "orderBy", name: "A-Z" },
     { type: "orderBy", name: "Z-A" },
   ];
+
   useEffect(() => {
-    sortFoldersInMyAlbum(
-      35,
-      myAlbumDropDownList.sortBy,
-      myAlbumDropDownList.orderBy
-    );
-    console.log("useEffect runs");
+    const getSortedFolderList = async () => {
+      const result = await sortFoldersInMyAlbum(
+        userId,
+        myAlbumDropDownList.sortBy,
+        myAlbumDropDownList.orderBy
+      );
+      setFolderList(result);
+    };
+    getSortedFolderList();
   }, [myAlbumDropDownList]);
 
   return (

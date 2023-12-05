@@ -88,7 +88,6 @@ export async function sortFoldersInMyAlbum(
   const response = await axios.get(
     `/myAlbum/${userId}/folders?sortBy=${sortBy}&orderBy=${orderBy}`
   );
-  console.log(response.data);
   return response.data;
 }
 

@@ -4,6 +4,8 @@ export type MyalbumDisplay = {
   albumImageBuffer: string | undefined;
   albumTitle: string | undefined;
   folderList: Folder[];
+  setFolderList: (value: Folder[]) => void;
+  userId: number;
 };
 export type MyAlbumEdit = {
   albumImageBuffer: string | undefined;
@@ -35,9 +37,4 @@ export type CurrentMyalbumData = {
   folderList: Folder[];
   albumImageBuffer: string | undefined;
   albumTitle: string | undefined;
-};
-
-export type DropDownList = {
-  sortBy: string;
-  orderBy: string;
 };

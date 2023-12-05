@@ -132,6 +132,8 @@ function MyAlbum() {
             albumImageBuffer={albumImageBuffer}
             albumTitle={albumTitle}
             folderList={folderList}
+            setFolderList={setFolderList}
+            userId={userId}
           />
         )}
       </div>
