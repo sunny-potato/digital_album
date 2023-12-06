@@ -9,7 +9,7 @@ import {
 } from "../Axios";
 import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
-import { CurrentMyalbumData } from "../Types/MyAlbum";
+import { CurrentMyalbumData, SortOrderType } from "../Types/MyAlbum";
 import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 
@@ -18,6 +18,10 @@ function MyAlbum() {
   const [albumTitle, setAlbumTitle] = useState<string>();
   const [albumImageFile, setAlbumImageFile] = useState<File>();
   const [albumImageBuffer, setAlbumImageBuffer] = useState<string>();
+  const [sortOrderType, setSortOrderType] = useState<SortOrderType>({
+    sortBy: "",
+    orderBy: "",
+  });
   const [folderList, setFolderList] = useState<Folder[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -25,18 +29,25 @@ function MyAlbum() {
   const [currentMyAlbumData, setCurrentMyAlbumData] = useState<
     CurrentMyalbumData | undefined
   >(undefined);
+
   useEffect(() => {
     async function getAlbumInfo() {
+      console.log({ userId }, "from myalbum");
       const result = await getMyAlbumInfo(userId);
-
       if (result.folder.length !== 0) {
         setFolderList(result.folder);
       }
       if (result.album.length !== 0) {
         const initialAlbumImage = result.album[0].image_uuid;
         const initialAlbumTitle = result.album[0].title;
+        const initialSortOrder = {
+          sortBy: result.album[0].sort_by,
+          orderBy: result.album[0].order_by,
+        };
+        setSortOrderType(initialSortOrder);
+
         if (initialAlbumImage) {
-          const imageBuffer = await getMyAlbumImage(initialAlbumImage);
+          const imageBuffer = await getMyAlbumImage(userId, initialAlbumImage);
           setAlbumImageBuffer(imageBuffer);
         }
         if (initialAlbumTitle) setAlbumTitle(initialAlbumTitle);

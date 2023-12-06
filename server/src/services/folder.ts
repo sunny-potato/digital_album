@@ -1,4 +1,4 @@
-import sql from "../db";
+import sql from "../configs/db.config";
 
 export async function getFolder(userId: number) {
   return await sql`select * from folder where user_id=${userId}`;

@@ -22,7 +22,7 @@ function AlbumFolder() {
 
   async function deleteSavedImage(imageIndex: number) {
     const deletedImage = uploadedImageList[imageIndex];
-    const result = await deleteImageInfolder(deletedImage);
+    const result = await deleteImageInfolder(folderId, deletedImage);
     if (result.status == 200) {
       const getImageList = await getAllImagesInFolder(folderId);
       setUploadedImageList(getImageList);

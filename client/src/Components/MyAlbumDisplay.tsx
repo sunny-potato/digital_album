@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import s from "../Styles/MyAlbumDisplay.module.css";
-import {
-  DropDownList,
-  MyalbumDisplay as MyalbumDisplayProps,
-} from "../Types/MyAlbum";
+import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/MyAlbum";
+import { DropDownList } from "../Types/Commonness";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import DropDown from "./DropDown";
 import { sortFoldersInMyAlbum } from "../Axios";
@@ -21,8 +19,8 @@ function MyAlbumDisplay({
     orderBy: "A-Z",
   });
   const myAlbumDropDownContent = [
-    { type: "sortBy", name: "Name" },
     { type: "sortBy", name: "Date" },
+    { type: "sortBy", name: "Name" },
     { type: "sortBy", name: "Size" },
     { type: "orderBy", name: "A-Z" },
     { type: "orderBy", name: "Z-A" },

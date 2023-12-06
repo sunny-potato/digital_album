@@ -1,4 +1,4 @@
-import sql from "../db";
+import sql from "../configs/db.config";
 
 export async function getMyAlbum(userId: number) {
   return await sql`select * from album where user_id=${userId}`;

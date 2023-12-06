@@ -38,3 +38,7 @@ export type CurrentMyalbumData = {
   albumImageBuffer: string | undefined;
   albumTitle: string | undefined;
 };
+export type SortOrderType = {
+  sortBy: string;
+  orderBy: string;
+};

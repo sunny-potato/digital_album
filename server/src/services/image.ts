@@ -1,10 +1,10 @@
-import sql from "../db";
+import sql from "../configs/db.config";
 
-export async function getAllImagesInFolder(folder_id: number) {
+export async function getImagesInFolder(folder_id: number) {
   return await sql`select * from image where folder_id=${folder_id}`;
 }
 
-export async function postImage(
+export async function createImage(
   file: Express.Multer.File,
   uuid: string,
   folder_id: number

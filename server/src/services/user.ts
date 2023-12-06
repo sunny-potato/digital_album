@@ -1,14 +1,19 @@
-import sql from "../db";
+import sql from "../configs/db.config";
 
-export async function getAllLoginInfo() {
+export async function getAllUserAccounts() {
   return await sql`select * from user_account`;
 }
 
-export async function findPassword(password: string) {
-  return await sql`select * from user_account where password=${password}`;
-}
-export async function findUsername(username: string) {
+// export async function findPassword(password: string) {
+//   return await sql`select * from user_account where password=${password}`;
+// }
+
+export async function getTheSameUsername(username: string) {
   return await sql`select * from user_account where user_name=${username}`;
+}
+
+export async function getUsername(userId: number) {
+  return await sql`select user_name from user_account where user_id=${userId}`;
 }
 
 export async function createNewUserInfo(userInfo: {
@@ -27,8 +32,4 @@ export async function createNewUserAccount(userAccount: {
   userId: number;
 }) {
   return await sql`insert into user_account(user_name, user_password, user_id) values(${userAccount.username}, ${userAccount.password}, ${userAccount.userId}) `;
-}
-
-export async function getUsername(userId: number) {
-  return await sql`select user_name from user_account where user_id=${userId}`;
 }

@@ -19,7 +19,7 @@ import { Login as login, Signup } from "./Types/Login";
 // images
 export async function getAllImagesInFolder(folderId: number) {
   const response = await axios.get(
-    `/albumFolder/getAllImages?folderId=${folderId}`
+    `/albumFolder/${folderId}/allImages`
     // ,
     // { responseType: "arraybuffer" }
   );
@@ -34,27 +34,26 @@ export async function getAllImagesInFolder(folderId: number) {
 export async function postImageInfolder(images: File[], folderId: number) {
   const form = new FormData();
   Array.from(images).map((img) => form.append("image", img));
-  return await axios.post(`/albumFolder/postImage?folderId=${folderId}`, form, {
+  return await axios.post(`/albumFolder/${folderId}/newImage`, form, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
 
-export async function deleteImageInfolder(image: Image) {
+export async function deleteImageInfolder(folderId: number, image: Image) {
   return await axios.delete(
-    `/albumFolder/deleteImage?imageId=${image.id}&imageUuid=${image.uuid}`
+    `/albumFolder/${folderId}/deleteImage?imageId=${image.id}&imageUuid=${image.uuid}`
   );
 }
 
 //My album
 export async function getMyAlbumInfo(userId: number) {
-  const response = await axios.get(`/myAlbum?userId=${userId}`);
-  // console.log(response.data);
+  const response = await axios.get(`/myAlbum/${userId}`);
   return response.data;
 }
 
-export async function getMyAlbumImage(fileName: string) {
+export async function getMyAlbumImage(userId: number, fileName: string) {
   const response = await axios.get(
-    `/myAlbum/getAlbumImage?filename=${fileName}`,
+    `/myAlbum/${userId}/albumImage?filename=${fileName}`,
     { responseType: "arraybuffer" }
   );
   if (response.data) {
@@ -67,17 +66,17 @@ export async function getMyAlbumImage(fileName: string) {
 export async function postMyAlbumImage(userId: number, albumImage: File) {
   const form = new FormData();
   form.append("albumImage", albumImage);
-  return await axios.post(`/myAlbum/newAlbumImage?userId=${userId}`, form, {
+  return await axios.post(`/myAlbum/${userId}/newAlbumImage`, form, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
 
 export async function postMyAlbumTitle(userId: number, albumTitle: string) {
-  return await axios.post(`/myAlbum/albumTitle?userId=${userId}`, albumTitle);
+  return await axios.post(`/myAlbum/${userId}/albumTitle`, albumTitle);
 }
 
 export async function createFolder(folderList: Folder[], userId: number) {
-  return await axios.post(`/myAlbum/newFolder?userId=${userId}`, folderList);
+  return await axios.post(`/myAlbum/${userId}/newFolder}`, folderList);
 }
 
 export async function sortFoldersInMyAlbum(
@@ -106,6 +105,6 @@ export async function createNewAccount(signupInfo: Signup) {
 }
 
 export async function getUsername(userId: number) {
-  const response = await axios.get(`/navigation?userId=${userId}`);
+  const response = await axios.get(`/user?userId=${userId}`);
   return response.data;
 }
