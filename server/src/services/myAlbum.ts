@@ -2,7 +2,6 @@ import sql from "../configs/db.config";
 
 export async function getMyAlbum(userId: number) {
   const result = await sql`select * from album where user_id=${userId}`;
-  console.log("from sql", result);
   return result;
 }
 

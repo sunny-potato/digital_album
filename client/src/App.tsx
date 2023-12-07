@@ -12,6 +12,7 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
+// 1) re-organize Axios file
 // 2) hover over folder -> show info on the folder
 // 3) sort & filter in folder
 // 4) show info on pic -> pic name, saved data, dimention? size?
