@@ -71,7 +71,7 @@ function MyAlbumDisplay({
                   </li>
                 ))}
             </div>
-            {folderList.length === 0 && <li>No folders</li>}
+            {folderList.length === 0 && <li key={0}>No folders</li>}
           </div>
         </div>
       </div>

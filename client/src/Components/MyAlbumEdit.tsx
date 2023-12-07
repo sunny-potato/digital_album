@@ -5,10 +5,10 @@ import MyAlbumEditPhoto from "./MyAlbumEditPhoto";
 import MyAlbumEditFolder from "./MyAlbumEditFolder";
 
 function MyAlbumEdit({
+  albumData,
+  setAlbumData,
   albumImageBuffer,
   setAlbumImageBuffer,
-  albumTitle,
-  setAlbumTitle,
   folderList,
   setFolderList,
   setAlbumImageFile,
@@ -25,10 +25,10 @@ function MyAlbumEdit({
         buttonMessage={"OK"}
       />
       <MyAlbumEditPhoto
+        albumData={albumData}
+        setAlbumData={setAlbumData}
         albumImageBuffer={albumImageBuffer}
         setAlbumImageBuffer={setAlbumImageBuffer}
-        albumTitle={albumTitle}
-        setAlbumTitle={setAlbumTitle}
         setAlbumImageFile={setAlbumImageFile}
       />
       <MyAlbumEditFolder

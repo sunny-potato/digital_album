@@ -9,19 +9,23 @@ import {
 } from "../Axios";
 import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
-import { CurrentMyalbumData, SortOrderType } from "../Types/MyAlbum";
+import { AlbumData, CurrentMyalbumData } from "../Types/MyAlbum";
 import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 
 function MyAlbum() {
+  const defaultAlbumData = {
+    id: undefined,
+    image_uuid: undefined,
+    order_by: undefined,
+    sort_by: undefined,
+    title: undefined,
+    user_id: undefined,
+  };
   const userId = Number(useParams().userId);
-  const [albumTitle, setAlbumTitle] = useState<string>();
+  const [albumData, setAlbumData] = useState<AlbumData>(defaultAlbumData);
   const [albumImageFile, setAlbumImageFile] = useState<File>();
   const [albumImageBuffer, setAlbumImageBuffer] = useState<string>();
-  const [sortOrderType, setSortOrderType] = useState<SortOrderType>({
-    sortBy: "",
-    orderBy: "",
-  });
   const [folderList, setFolderList] = useState<Folder[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -33,23 +37,14 @@ function MyAlbum() {
   useEffect(() => {
     async function getAlbumInfo() {
       const result = await getMyAlbumInfo(userId);
-      if (result.folder.length !== 0) {
-        setFolderList(result.folder);
-      }
+      setFolderList(result.folder);
       if (result.album.length !== 0) {
+        setAlbumData(result.album[0]);
         const initialAlbumImage = result.album[0].image_uuid;
-        const initialAlbumTitle = result.album[0].title;
-        const initialSortOrder = {
-          sortBy: result.album[0].sort_by,
-          orderBy: result.album[0].order_by,
-        };
-        setSortOrderType(initialSortOrder);
-
         if (initialAlbumImage) {
           const imageBuffer = await getMyAlbumImage(userId, initialAlbumImage);
           setAlbumImageBuffer(imageBuffer);
         }
-        if (initialAlbumTitle) setAlbumTitle(initialAlbumTitle);
       }
     }
     getAlbumInfo();
@@ -67,8 +62,8 @@ function MyAlbum() {
       if (albumImageFile) {
         await postMyAlbumImage(userId, albumImageFile);
       }
-      if (albumTitle) {
-        await postMyAlbumTitle(userId, albumTitle);
+      if (albumData.title) {
+        await postMyAlbumTitle(userId, albumData.title);
       }
     } else {
       setIsLoading(false);
@@ -86,8 +81,8 @@ function MyAlbum() {
         setFolderList(value as Folder[]);
       } else if (key === "albumImageBuffer") {
         setAlbumImageBuffer(value as string);
-      } else if (key === "albumTitle") {
-        setAlbumTitle(value as string);
+      } else if (key === "albumData") {
+        setAlbumData(value as AlbumData);
       }
     }
   }
@@ -115,8 +110,8 @@ function MyAlbum() {
               setIsEditMode(true);
               setCurrentMyAlbumData({
                 folderList,
+                albumData,
                 albumImageBuffer,
-                albumTitle,
               });
             }
           }}
@@ -125,10 +120,10 @@ function MyAlbum() {
         </button>
         {isEditMode && (
           <MyAlbumEdit
+            albumData={albumData}
+            setAlbumData={setAlbumData}
             albumImageBuffer={albumImageBuffer}
             setAlbumImageBuffer={setAlbumImageBuffer}
-            albumTitle={albumTitle}
-            setAlbumTitle={setAlbumTitle}
             folderList={folderList}
             setFolderList={setFolderList}
             setAlbumImageFile={setAlbumImageFile}
@@ -140,7 +135,7 @@ function MyAlbum() {
         {!isEditMode && (
           <MyAlbumDisplay
             albumImageBuffer={albumImageBuffer}
-            albumTitle={albumTitle}
+            albumTitle={albumData.title}
             folderList={folderList}
             setFolderList={setFolderList}
             userId={userId}

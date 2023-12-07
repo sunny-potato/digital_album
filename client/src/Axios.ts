@@ -102,6 +102,7 @@ export async function createNewAccount(signupInfo: Signup) {
 }
 
 export async function getUsername(userId: number) {
+  console.log("from Axios", { userId });
   const response = await axios.get(`/user?userId=${userId}`);
   return response.data;
 }

@@ -22,18 +22,24 @@ import { convertSortAndOrder } from "../utils/sortAndOrder";
 export const getAllAboutMyAlbum: RequestHandler = async (req, res) => {
   const userId = Number(req.params.userId);
   const album = await getMyAlbum(userId);
-  const folder = await getFolder(userId);
-  const sortByName = await getSortBy(album[0].sort_by);
-  const orderByName = await getOrderBy(album[0].order_by);
+  let result;
+  if (album.length === 0) {
+    // new user have no my album yet, so send empty data to client
+    result = { album: [], folder: [] };
+  } else {
+    const folder = await getFolder(userId);
+    const sortByName = await getSortBy(album[0].sort_by);
+    const orderByName = await getOrderBy(album[0].order_by);
 
-  convertSortAndOrder(
-    sortByName[0].name,
-    album[0].sort_by,
-    orderByName[0].name,
-    album[0].order_by
-  );
-
-  const result = { album, folder };
+    convertSortAndOrder(
+      sortByName[0].name,
+      album[0].sort_by,
+      orderByName[0].name,
+      album[0].order_by
+    );
+    result = { album, folder };
+  }
+  console.log({ result });
   res.status(200).send(result);
 };
 

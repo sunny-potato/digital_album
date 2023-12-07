@@ -2,13 +2,13 @@ import s from "../Styles/MyAlbumEditPhoto.module.css";
 import { MyAlbumEditPhoto as MyAlbumEditPhotoProps } from "../Types/MyAlbum";
 
 function MyAlbumEditPhoto({
+  albumData,
+  setAlbumData,
   albumImageBuffer,
   setAlbumImageBuffer,
-  albumTitle,
-  setAlbumTitle,
   setAlbumImageFile,
 }: MyAlbumEditPhotoProps) {
-  function handleFile(file: FileList | null) {
+  function handleAlbumImageFile(file: FileList | null) {
     if (file !== null) {
       setAlbumImageFile(file[0]);
       setAlbumImageBuffer(URL.createObjectURL(file[0]));
@@ -27,7 +27,7 @@ function MyAlbumEditPhoto({
           <input
             type="file"
             accept="image/*"
-            onChange={(event) => handleFile(event.target.files)}
+            onChange={(event) => handleAlbumImageFile(event.target.files)}
           ></input>
         </div>
       </div>
@@ -35,9 +35,9 @@ function MyAlbumEditPhoto({
         <input
           type="text"
           placeholder="Album title"
-          value={albumTitle}
+          value={albumData.title}
           onChange={(event) => {
-            setAlbumTitle(event.target.value);
+            setAlbumData({ ...albumData, ["title"]: event.target.value });
           }}
         ></input>
       </div>
