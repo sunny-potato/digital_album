@@ -4,6 +4,7 @@ import { Buffer } from "buffer";
 import { Folder, Image } from "./Types/Folder";
 import { Login as login, Signup } from "./Types/Login";
 
+// two ways to get image 1)
 // export async function getImage(fileName: string) {
 //   const response = await axios.get(
 //     `/albumFolder/getImage?filename=${fileName}`,
@@ -16,18 +17,14 @@ import { Login as login, Signup } from "./Types/Login";
 //   }
 // }
 
-// images
+// two ways to get image 2)
+// the following return data as a localhost link
+// ex) http://localhost:8000/albumFolder/image/${image.uuid}
+// Folder
 export async function getAllImagesInFolder(folderId: number) {
-  const response = await axios.get(
-    `/albumFolder/${folderId}/allImages`
-    // ,
-    // { responseType: "arraybuffer" }
-  );
+  const response = await axios.get(`/albumFolder/${folderId}/allImages`);
   if (response.data) {
     return response.data;
-    // const base64 = Buffer.from(response.data, "binary").toString("base64");
-    // const image = `data:${response.headers["content-type"]};base64,${base64}`;
-    // return image;
   }
 }
 
@@ -76,7 +73,7 @@ export async function postMyAlbumTitle(userId: number, albumTitle: string) {
 }
 
 export async function createFolder(folderList: Folder[], userId: number) {
-  return await axios.post(`/myAlbum/${userId}/newFolder}`, folderList);
+  return await axios.post(`/myAlbum/${userId}/newFolder`, folderList);
 }
 
 export async function sortFoldersInMyAlbum(

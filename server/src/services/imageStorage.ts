@@ -22,9 +22,6 @@ export async function downloadFile(fileName: string) {
   return contents[0];
 }
 
-// const deleteOptions = {
-//   ifGenerationMatch: generationMatchPrecondition,
-// };
 export async function deleteFile(fileName: string) {
   await storage.bucket(bucketName).file(fileName).delete();
   console.log(`${fileName} in ${bucketName} is deleted from imageStorage`);

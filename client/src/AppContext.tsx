@@ -11,7 +11,6 @@ export const UserContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [userId, setUserIdState] = useState<number | null>(() => {
-    console.log("Reading from localStorage");
     return JSON.parse(localStorage.getItem("userId") as string);
   });
 

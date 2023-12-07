@@ -1,19 +1,15 @@
-import express, { RequestHandler } from "express";
-import multer from "multer";
+import { RequestHandler } from "express";
 import { deleteFile, downloadFile, uploadFile } from "../services/imageStorage";
 import { deleteImage, getImagesInFolder, createImage } from "../services/image";
 import { getUnikImageName } from "../utils/image";
 
-const router = express.Router();
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-// router.get("/image/:uuid", async (req, res) => {
-//   const imageName = req.params.uuid;
-//   const imageBuffer = await downloadFile(imageName);
-//   res.contentType("image/jpg");
-//   res.send(imageBuffer);
-// });
+export const displayImage: RequestHandler = async (req, res) => {
+  const imageName = req.params.uuid;
+  const imageBuffer = await downloadFile(imageName);
+  res.contentType("image/jpg");
+  res.send(imageBuffer);
+};
+//display images in albumFolder.tsx
 
 export const getAllImagesInFolder: RequestHandler = async (req, res) => {
   const folderId = Number(req.params.folderId);
@@ -32,7 +28,6 @@ export const createNewImageInFolder: RequestHandler = async (req, res) => {
         let newImageName = getUnikImageName();
         newImageName += fileType;
         const result = await createImage(file, newImageName, folderId); // error, how to stop??????????
-        // console.log(`Image updated : ${result}`);
         await uploadFile(newImageName, file.buffer);
       } catch (error) {
         console.error(error);
@@ -48,5 +43,3 @@ export const deleteImageInfolder: RequestHandler = async (req, res) => {
   await deleteImage(imageId);
   res.status(200).send(`imageId=${imageId} deleted!`);
 };
-
-export default router;

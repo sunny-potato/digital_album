@@ -16,6 +16,7 @@ function ImagePreviewPopup({
   selectedImageList,
   setSelectedImageList,
   folderId,
+  onClose,
 }: ImagePreviewPopupProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isDragDone, setIsDragDone] = useState<boolean>(true);
@@ -46,7 +47,7 @@ function ImagePreviewPopup({
         const response = await postImageInfolder(selectedImageList, folderId);
         if (response.status === 200) {
           cancelSelectedImage();
-          window.location.reload();
+          onClose();
         }
       }
       setIsLoading(false);

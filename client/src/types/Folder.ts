@@ -42,4 +42,5 @@ export type ImagePreviewPopup = {
   selectedImageList: File[];
   setSelectedImageList: React.Dispatch<React.SetStateAction<File[]>>;
   folderId: number;
+  onClose: () => void;
 };

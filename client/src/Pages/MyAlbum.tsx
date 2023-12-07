@@ -32,7 +32,6 @@ function MyAlbum() {
 
   useEffect(() => {
     async function getAlbumInfo() {
-      console.log({ userId }, "from myalbum");
       const result = await getMyAlbumInfo(userId);
       if (result.folder.length !== 0) {
         setFolderList(result.folder);

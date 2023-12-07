@@ -12,12 +12,13 @@ function AlbumFolder() {
   const [selectedImageBlob, setSelectedImageBlob] = useState<string[]>([]);
   const [uploadedImageList, setUploadedImageList] = useState<Image[]>([]);
 
+  async function getImages() {
+    const getImageList = await getAllImagesInFolder(folderId);
+    setUploadedImageList(getImageList);
+  }
+
   useEffect(() => {
-    async function getImages() {
-      const getImageList = await getAllImagesInFolder(folderId);
-      setUploadedImageList(getImageList);
-    }
-    void getImages();
+    getImages();
   }, []);
 
   async function deleteSavedImage(imageIndex: number) {
@@ -67,6 +68,7 @@ function AlbumFolder() {
           selectedImageList={selectedImageList}
           setSelectedImageList={setSelectedImageList}
           folderId={folderId}
+          onClose={getImages}
         />
         <Outlet />
       </div>

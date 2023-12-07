@@ -20,6 +20,7 @@ import About from "./Pages/About";
 // 7) add alt attribute to images & icons
 // 8) close element when outside of the element clicked -> sortby in myalbum
 // 9) calculate size of folders in my album
+// 10) fetch images from database quickly by using google CDN
 
 function App() {
   return (
