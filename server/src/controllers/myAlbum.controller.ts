@@ -39,7 +39,7 @@ export const getAllAboutMyAlbum: RequestHandler = async (req, res) => {
     );
     result = { album, folder };
   }
-  console.log({ result });
+
   res.status(200).send(result);
 };
 
