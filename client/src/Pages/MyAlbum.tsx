@@ -6,7 +6,7 @@ import {
   postMyAlbumImage,
   postMyAlbumTitle,
   getMyAlbumImage,
-} from "../Axios";
+} from "../Services/myAlbum";
 import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
 import { AlbumData, CurrentMyalbumData } from "../Types/MyAlbum";
@@ -32,8 +32,6 @@ function MyAlbum() {
   const [currentMyAlbumData, setCurrentMyAlbumData] = useState<
     CurrentMyalbumData | undefined
   >(undefined);
-
-  console.log({ albumData });
 
   useEffect(() => {
     async function getAlbumInfo() {

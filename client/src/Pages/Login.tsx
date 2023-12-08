@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Login as login } from "../Types/Login";
-import { validateLoginInfo } from "../Axios";
+import { validateLoginInfo } from "../Services/user";
 import { UserContext } from "../AppContext";
 import s from "../Styles/Login.module.css";
 import hideEyeIcon from "../Images/hide.png";

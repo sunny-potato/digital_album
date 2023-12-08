@@ -6,7 +6,6 @@ import {
   uploadAlumImage,
   updateAlbumTitle,
   createNewFolder,
-  // sortFoldersInMyAlbum,
 } from "../controllers/myAlbum.controller";
 
 const router = express.Router();

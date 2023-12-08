@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ImagePreviewPopup as ImagePreviewPopupProps } from "../Types/Folder";
 import { imageFilesHandler } from "../Utils/imageFilesHandler";
 import addImage from "../Images/addImage.png";
-import { postImageInfolder } from "../Axios";
+import { postImageInfolder } from "../Services/folder";
 import s from "../Styles/ImagePreviewPopup.module.css";
 import {
   handleDragOver,

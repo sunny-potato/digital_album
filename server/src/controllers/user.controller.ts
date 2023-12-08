@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { getUsername } from "../services/user";
+import { getUsername } from "../services/user.service";
 
 export const getUsernameController: RequestHandler = async (req, res) => {
   const userId = Number(req.query.userId);

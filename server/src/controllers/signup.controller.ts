@@ -3,7 +3,7 @@ import {
   createNewUserAccount,
   createNewUserInfo,
   getTheSameUsername,
-} from "../services/user";
+} from "../services/user.service";
 
 export const checkUsernameValidation: RequestHandler = async (req, res) => {
   const usernameFromClient = req.query.username;

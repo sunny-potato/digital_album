@@ -3,7 +3,7 @@ import { Image } from "../Types/Folder";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import s from "../Styles/EachImage.module.css";
 import ImageSlider from "../Components/ImageSlider";
-import { getAllImagesInFolder } from "../Axios";
+import { getAllImagesInFolder } from "../Services/folder";
 import { Image as ImageProps } from "../Types/Folder";
 
 function EachImage() {

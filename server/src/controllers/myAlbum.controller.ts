@@ -6,14 +6,18 @@ import {
   sortFoldersByAsc,
   sortFoldersByDesc,
   updateFolder,
-} from "../services/folder";
+} from "../services/folder.service";
 import {
   createMyAlbum,
   getMyAlbum,
   updateMyAlbumImage,
   updateMyAlbumTitle,
-} from "../services/myAlbum";
-import { deleteFile, downloadFile, uploadFile } from "../services/imageStorage";
+} from "../services/myAlbum.service";
+import {
+  deleteFile,
+  downloadFile,
+  uploadFile,
+} from "../services/imageStorage.service";
 import { FolderList } from "../models/types";
 import { getUnikImageName } from "../utils/image";
 // import { convertSortAndOrderForClient } from "../utils/sortAndOrder";
@@ -136,23 +140,3 @@ export const createNewFolder: RequestHandler = async (req, res) => {
 
   res.status(200).send("updated folder!");
 };
-
-// export const sortFoldersInMyAlbum: RequestHandler = async (req, res) => {
-//   const userId = Number(req.params.userId);
-//   let sortBy = "";
-//   let getSortedFolders;
-
-//   if (req.query.sortBy === "Name") {
-//     sortBy = "name";
-//   }
-//   if (req.query.sortBy === "Date") {
-//     sortBy = "created_at";
-//   }
-//   if (req.query.orderBy == "A-Z") {
-//     getSortedFolders = await sortFoldersByAsc(userId, sortBy);
-//   }
-//   if (req.query.orderBy == "Z-A") {
-//     getSortedFolders = await sortFoldersByDesc(userId, sortBy);
-//   }
-//   res.status(200).send(getSortedFolders);
-// };

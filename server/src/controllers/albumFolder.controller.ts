@@ -1,6 +1,14 @@
 import { RequestHandler } from "express";
-import { deleteFile, downloadFile, uploadFile } from "../services/imageStorage";
-import { deleteImage, getImagesInFolder, createImage } from "../services/image";
+import {
+  deleteFile,
+  downloadFile,
+  uploadFile,
+} from "../services/imageStorage.service";
+import {
+  deleteImage,
+  getImagesInFolder,
+  createImage,
+} from "../services/image.service";
 import { getUnikImageName } from "../utils/image";
 
 export const displayImage: RequestHandler = async (req, res) => {

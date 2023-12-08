@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Signup, Login } from "../Types/Login";
-import { checkUsernameAvailability, createNewAccount } from "../Axios";
+import { checkUsernameAvailability, createNewAccount } from "../Services/user";
 import s from "../Styles/Signup.module.css";
 import { UsernameAvailability } from "../Components/UsernameAvailability";
 import { Input } from "../Components/Input";

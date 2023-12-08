@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { AccountFromUser, UserAccount } from "../models/types";
-import { getAllUserAccounts } from "../services/user";
+import { getAllUserAccounts } from "../services/user.service";
 
 export const checkUserProfileMatch: RequestHandler = async (req, res) => {
   const userProfileFromClient = req.query as AccountFromUser;
