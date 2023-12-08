@@ -52,7 +52,7 @@ function AlbumFolder() {
                     <img
                       className={s.uploadedImage}
                       src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
-                      alt={image.origianl_name}
+                      alt={image.origianl_name} /* need to change????? */
                     />
                   </Link>
                 </div>

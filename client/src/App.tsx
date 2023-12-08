@@ -17,7 +17,6 @@ import About from "./Pages/About";
 // 4) show info on pic -> pic name, saved data, dimention? size?
 // 5) share image to social media
 // 6) move image to another file
-// 7) add alt attribute to images & icons
 // 8) close element when outside of the element clicked -> sortby in myalbum
 // 9) calculate size of folders in my album
 // 10) fetch images from database quickly by using google CDN

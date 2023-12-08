@@ -20,7 +20,7 @@ function MyAlbumEditPhoto({
       <div className={s.albumPhoto}>
         <div className={s.imageInput}>
           {albumImageBuffer ? (
-            <img src={albumImageBuffer}></img>
+            <img src={albumImageBuffer} alt="myalbum main image"></img>
           ) : (
             <div className={s.noImageDiv}>No image</div>
           )}

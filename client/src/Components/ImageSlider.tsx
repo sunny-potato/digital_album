@@ -35,7 +35,9 @@ function ImageSlider({
       <div className={s.sliderWrapper}>
         <img
           src={`${defaultURL}${imageList[currentImageIndex as number].uuid}`}
-          alt={`${imageList[currentImageIndex as number].origianl_name}`}
+          alt={`${
+            imageList[currentImageIndex as number].origianl_name
+          }`} /* need to change????? */
           className={s.displayedImage}
         ></img>
       </div>

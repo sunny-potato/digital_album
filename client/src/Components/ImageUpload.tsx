@@ -37,7 +37,7 @@ function ImageUpload({
         className={s.uploadIcon}
         style={changeBackgroundColor()}
         src={upload}
-        alt="upload image"
+        alt="upload icon"
       ></img>
       <div className={s.uploadInput} style={changeBackgroundColor()}>
         <span className={s.uploadDragDrop} style={changeBackgroundColor()}>

@@ -42,7 +42,7 @@ function MyAlbumDisplay({
       <div className={s.albumPhotoBox}>
         <div className={s.albumPhoto}>
           {albumImageBuffer ? (
-            <img src={albumImageBuffer}></img>
+            <img src={albumImageBuffer} alt="myalbum main image"></img>
           ) : (
             <div className={s.noImageDiv}>No image</div>
           )}
