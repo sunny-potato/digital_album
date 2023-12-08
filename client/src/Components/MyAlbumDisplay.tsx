@@ -5,19 +5,19 @@ import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/MyAlbum";
 import { DropDownList } from "../Types/Commonness";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import DropDown from "./DropDown";
-import { sortFoldersInMyAlbum } from "../Axios";
 
 function MyAlbumDisplay({
+  albumData,
+  setAlbumData,
   albumImageBuffer,
-  albumTitle,
   folderList,
-  setFolderList,
-  userId,
 }: MyalbumDisplayProps) {
-  const [myAlbumDropDownList, setMyAlbumDropDownList] = useState<DropDownList>({
-    sortBy: "Name",
-    orderBy: "A-Z",
+  const [myAlbumDropDownList, setMyAlbumDropDownList] = useState({
+    sortBy: albumData.sort_by,
+    orderBy: albumData.order_by,
   });
+
+  // export list
   const myAlbumDropDownContent = [
     { type: "sortBy", name: "Date" },
     { type: "sortBy", name: "Name" },
@@ -27,15 +27,14 @@ function MyAlbumDisplay({
   ];
 
   useEffect(() => {
-    const getSortedFolderList = async () => {
-      const result = await sortFoldersInMyAlbum(
-        userId,
-        myAlbumDropDownList.sortBy,
-        myAlbumDropDownList.orderBy
-      );
-      setFolderList(result);
+    const getDropDownValue = () => {
+      setAlbumData({
+        ...albumData,
+        ["sort_by"]: `${myAlbumDropDownList.sortBy}`,
+        ["order_by"]: `${myAlbumDropDownList.orderBy}`,
+      });
     };
-    getSortedFolderList();
+    getDropDownValue();
   }, [myAlbumDropDownList]);
 
   return (
@@ -48,8 +47,8 @@ function MyAlbumDisplay({
             <div className={s.noImageDiv}>No image</div>
           )}
         </div>
-        {albumTitle ? (
-          <div className={s.albumTitle}>{albumTitle}</div>
+        {albumData.title ? (
+          <div className={s.albumTitle}>{albumData.title}</div>
         ) : (
           <div className={s.albumTitle}>No title</div>
         )}

@@ -1,7 +1,7 @@
 import sql from "../configs/db.config";
 
 export async function getMyAlbum(userId: number) {
-  const result = await sql`select * from album where user_id=${userId}`;
+  const result = await sql`SELECT * FROM album where user_id=${userId}`;
   return result;
 }
 

@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import s from "../Styles/DropDown.module.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
-import { DropDownProps } from "../Types/Commonness";
+import { DropDown as DropDownProps } from "../Types/Commonness";
 
 function DropDown({
   dropDownList,
@@ -12,11 +12,30 @@ function DropDown({
 }: DropDownProps) {
   const [isDropDownClicked, setIsDropDownClicked] = useState<boolean>(false);
 
-  const isItClicked = (currentValue: string) => {
-    if (dropDownList.sortBy === currentValue) {
+  // export the function
+  const convertDropDownDataForm = (dataType: string, dataName: string) => {
+    let newDataName;
+    if (dataType === "sortBy") {
+      newDataName = dataName.toLocaleLowerCase();
+    } else {
+      if (dataName === "A-Z") {
+        newDataName = "asc";
+      } else {
+        newDataName = "desc";
+      }
+    }
+    return newDataName;
+  };
+
+  const isItClicked = (currentType: string, currentValue: string) => {
+    const convertedCurrentValue = convertDropDownDataForm(
+      currentType,
+      currentValue
+    );
+    if (dropDownList.sortBy === convertedCurrentValue) {
       return true;
     }
-    if (dropDownList.orderBy === currentValue) {
+    if (dropDownList.orderBy === convertedCurrentValue) {
       return true;
     }
     return false;
@@ -31,7 +50,7 @@ function DropDown({
     }
     setDropDownList({
       ...dropDownList,
-      [newType]: newName,
+      [newType]: convertDropDownDataForm(newType, newName),
     });
   };
 
@@ -73,7 +92,8 @@ function DropDown({
                   className={s.checkIconBox}
                   style={{
                     visibility:
-                      isItClicked(eachContent.name) && isDropDownClicked
+                      isItClicked(eachContent.type, eachContent.name) &&
+                      isDropDownClicked
                         ? "visible"
                         : "hidden",
                   }}

@@ -10,7 +10,7 @@ export type DropDownList = {
   orderBy: string;
 };
 
-export type DropDownProps = {
+export type DropDown = {
   dropDownList: DropDownList;
   setDropDownList: (value: DropDownList) => void;
   dropDownContent: Record<string, string>[];

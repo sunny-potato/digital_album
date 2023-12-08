@@ -76,17 +76,6 @@ export async function createFolder(folderList: Folder[], userId: number) {
   return await axios.post(`/myAlbum/${userId}/newFolder`, folderList);
 }
 
-export async function sortFoldersInMyAlbum(
-  userId: number,
-  sortBy: string,
-  orderBy: string
-) {
-  const response = await axios.get(
-    `/myAlbum/${userId}/folders?sortBy=${sortBy}&orderBy=${orderBy}`
-  );
-  return response.data;
-}
-
 // User
 export async function validateLoginInfo(loginInfo: login) {
   return await axios.get(

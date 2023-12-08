@@ -14,15 +14,14 @@ import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 
 function MyAlbum() {
-  const defaultAlbumData = {
-    id: undefined,
-    image_uuid: undefined,
-    order_by: undefined,
-    sort_by: undefined,
-    title: undefined,
-    user_id: undefined,
-  };
   const userId = Number(useParams().userId);
+  const defaultAlbumData = {
+    image_uuid: undefined,
+    order_by: "asc",
+    sort_by: "date",
+    title: undefined,
+    user_id: userId,
+  };
   const [albumData, setAlbumData] = useState<AlbumData>(defaultAlbumData);
   const [albumImageFile, setAlbumImageFile] = useState<File>();
   const [albumImageBuffer, setAlbumImageBuffer] = useState<string>();
@@ -33,6 +32,8 @@ function MyAlbum() {
   const [currentMyAlbumData, setCurrentMyAlbumData] = useState<
     CurrentMyalbumData | undefined
   >(undefined);
+
+  console.log({ albumData });
 
   useEffect(() => {
     async function getAlbumInfo() {
@@ -134,11 +135,10 @@ function MyAlbum() {
         )}
         {!isEditMode && (
           <MyAlbumDisplay
+            albumData={albumData}
+            setAlbumData={setAlbumData}
             albumImageBuffer={albumImageBuffer}
-            albumTitle={albumData.title}
             folderList={folderList}
-            setFolderList={setFolderList}
-            userId={userId}
           />
         )}
       </div>

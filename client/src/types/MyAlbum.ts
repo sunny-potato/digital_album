@@ -1,20 +1,21 @@
 import { Folder } from "./Folder";
 
 export type AlbumData = {
-  id: number | undefined;
   image_uuid: string | undefined;
-  order_by: string | undefined;
-  sort_by: string | undefined;
+  order_by: string;
+  sort_by: string;
   title: string | undefined;
-  user_id: number | undefined;
+  user_id: number;
 };
 
 export type MyalbumDisplay = {
+  albumData: AlbumData;
+  setAlbumData: (value: AlbumData) => void;
   albumImageBuffer: string | undefined;
-  albumTitle: string | undefined;
+  // albumTitle: string | undefined;
   folderList: Folder[];
-  setFolderList: (value: Folder[]) => void;
-  userId: number;
+  // setFolderList: (value: Folder[]) => void;
+  // userId: number;
 };
 export type MyAlbumEdit = {
   albumData: AlbumData;

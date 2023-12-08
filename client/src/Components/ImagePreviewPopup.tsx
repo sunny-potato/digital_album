@@ -112,7 +112,7 @@ function ImagePreviewPopup({
                 >
                   X
                 </button>
-                <img src={img}></img>
+                <img src={img} alt="delte image"></img>
               </div>
             ))}
         </div>
