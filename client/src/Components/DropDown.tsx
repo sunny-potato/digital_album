@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import s from "../Styles/DropDown.module.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -32,6 +32,7 @@ function DropDown({
       currentType,
       currentValue
     );
+
     if (dropDownList.sortBy === convertedCurrentValue) {
       return true;
     }

@@ -11,13 +11,13 @@ import {
 } from "../services/image.service";
 import { getUnikImageName } from "../utils/image";
 
+//display images in albumFolder.tsx
 export const displayImage: RequestHandler = async (req, res) => {
   const imageName = req.params.uuid;
   const imageBuffer = await downloadFile(imageName);
   res.contentType("image/jpg");
   res.send(imageBuffer);
 };
-//display images in albumFolder.tsx
 
 export const getAllImagesInFolder: RequestHandler = async (req, res) => {
   const folderId = Number(req.params.folderId);

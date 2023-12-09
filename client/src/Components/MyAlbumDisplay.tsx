@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import s from "../Styles/MyAlbumDisplay.module.css";
 import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/MyAlbum";
 import { DropDownList } from "../Types/Commonness";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import DropDown from "./DropDown";
+import { getSortedFoldersInMyAlubm } from "../Services/myAlbum";
+import {
+  getLocalStorageData,
+  setLocalStorageData,
+} from "../Utils/localstorage";
 
 function MyAlbumDisplay({
   albumData,
-  setAlbumData,
   albumImageBuffer,
   folderList,
+  setFolderList,
 }: MyalbumDisplayProps) {
-  const [myAlbumDropDownList, setMyAlbumDropDownList] = useState({
-    sortBy: albumData.sort_by,
-    orderBy: albumData.order_by,
-  });
+  const userId = Number(useParams().userId);
+  const [myAlbumDropDownList, setMyAlbumDropDownList] = useState<DropDownList>(
+    () => {
+      let sortValue = getLocalStorageData("myAlbumDropDownList");
+      if (!sortValue) {
+        const defaultValue = { sortBy: "date", orderBy: "asc" };
+        sortValue = defaultValue;
+      }
+      return sortValue;
+    }
+  );
 
   // export list
   const myAlbumDropDownContent = [
@@ -27,14 +39,17 @@ function MyAlbumDisplay({
   ];
 
   useEffect(() => {
-    const getDropDownValue = () => {
-      setAlbumData({
-        ...albumData,
-        ["sort_by"]: `${myAlbumDropDownList.sortBy}`,
-        ["order_by"]: `${myAlbumDropDownList.orderBy}`,
-      });
+    const updateDropDownList = async () => {
+      const result = await getSortedFoldersInMyAlubm(
+        userId,
+        myAlbumDropDownList
+      );
+      const sortedFolders = result.data;
+      setLocalStorageData("myAlbumDropDownList", myAlbumDropDownList);
+      setLocalStorageData("sortedFolders", sortedFolders); // need it??
+      setFolderList(sortedFolders);
     };
-    getDropDownValue();
+    updateDropDownList();
   }, [myAlbumDropDownList]);
 
   return (

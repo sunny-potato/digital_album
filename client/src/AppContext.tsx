@@ -17,7 +17,7 @@ export const UserContextProvider = ({
   const setUserId = (userId: number | null) => {
     setUserIdState(userId);
     localStorage.setItem("userId", JSON.stringify(userId));
-    console.log("Saving to localStorage!", userId);
+    // console.log("Saving to localStorage!", userId);
   };
 
   const value = { userId, setUserId };

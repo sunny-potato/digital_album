@@ -7,6 +7,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { getUsername } from "../Services/user";
+import { removeLocalStorageData } from "../Utils/localstorage";
 
 function Nav() {
   const { userId, setUserId } = useContext(UserContext);
@@ -52,7 +53,9 @@ function Nav() {
           <Link
             to={"/login"}
             className={s.logout}
-            onClick={() => setUserId(null)}
+            onClick={() => (
+              setUserId(null), removeLocalStorageData("myAlbumDropDownList")
+            )}
           >
             <LogoutIcon />
             Log out

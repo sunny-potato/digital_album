@@ -2,10 +2,10 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Buffer } from "buffer";
 import { Folder } from "../Types/Folder";
+import { DropDownList } from "../Types/Commonness";
 
 export async function getMyAlbumInfo(userId: number) {
-  const response = await axios.get(`/myAlbum/${userId}`);
-  return response.data;
+  return await axios.get(`/myAlbum/${userId}`);
 }
 
 export async function getMyAlbumImage(userId: number, fileName: string) {
@@ -34,4 +34,13 @@ export async function postMyAlbumTitle(userId: number, albumTitle: string) {
 
 export async function createFolder(folderList: Folder[], userId: number) {
   return await axios.post(`/myAlbum/${userId}/newFolder`, folderList);
+}
+
+export async function getSortedFoldersInMyAlubm(
+  userId: number,
+  sortKeywordList: DropDownList
+) {
+  return await axios.get(
+    `/myAlbum/${userId}/sortedFolders?sortBy=${sortKeywordList.sortBy}&orderBy=${sortKeywordList.orderBy}`
+  );
 }

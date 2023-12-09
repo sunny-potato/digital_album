@@ -6,23 +6,23 @@ export async function getMyAlbum(userId: number) {
 }
 
 export async function createMyAlbum(album: {
-  image_uuid: string;
+  imageUuid: string;
   title: string;
-  user_id: number;
+  userId: number;
 }) {
-  return await sql`insert into album(image_uuid, title, user_id) values(${album.image_uuid}, ${album.title}, ${album.user_id}) returning id`;
+  return await sql`insert into album(image_uuid, title, user_id) values(${album.imageUuid}, ${album.title}, ${album.userId}) returning id`;
 }
 
 export async function updateMyAlbumImage(album: {
-  image_uuid: string;
-  user_id: number;
+  imageUuid: string;
+  userId: number;
 }) {
-  return await sql`update album set image_uuid=${album.image_uuid} where user_id= ${album.user_id}`;
+  return await sql`update album set image_uuid=${album.imageUuid} where user_id= ${album.userId}`;
 }
 
 export async function updateMyAlbumTitle(album: {
   title: string;
-  user_id: number;
+  userId: number;
 }) {
-  return await sql`update album set title=${album.title} where user_id=${album.user_id}`;
+  return await sql`update album set title=${album.title} where user_id=${album.userId}`;
 }

@@ -33,12 +33,12 @@ export async function deleteFolder(id: number) {
   return await sql`delete from folder where id=${id} `;
 }
 
-export async function sortFoldersByAsc(userId: number, sortBy: string) {
+export async function getSortedFoldersByAsc(userId: number, sortBy: string) {
   return await sql`select * from folder where user_id=${userId} order by ${sql(
     sortBy
   )} asc`;
 }
-export async function sortFoldersByDesc(userId: number, sortBy: string) {
+export async function getSortedFoldersByDesc(userId: number, sortBy: string) {
   return await sql`select * from folder where user_id=${userId} order by ${sql(
     sortBy
   )} desc`;

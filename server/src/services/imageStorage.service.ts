@@ -5,7 +5,6 @@ const bucketName = "my_digital_album";
 // const destFileName = "upload.png"; // The new ID for your GCS file
 // const generationMatchPrecondition = 0;
 
-// Creates a client
 const projectId = "core-ridge-394012";
 const keyFilename = "key.json";
 const storage = new Storage({ projectId, keyFilename });

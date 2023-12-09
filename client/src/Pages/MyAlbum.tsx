@@ -6,46 +6,63 @@ import {
   postMyAlbumImage,
   postMyAlbumTitle,
   getMyAlbumImage,
+  getSortedFoldersInMyAlubm,
 } from "../Services/myAlbum";
 import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
 import { AlbumData, CurrentMyalbumData } from "../Types/MyAlbum";
 import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
+import { getLocalStorageData } from "../Utils/localstorage";
 
 function MyAlbum() {
   const userId = Number(useParams().userId);
   const defaultAlbumData = {
+    id: undefined,
     image_uuid: undefined,
-    order_by: "asc",
-    sort_by: "date",
     title: undefined,
     user_id: userId,
   };
   const [albumData, setAlbumData] = useState<AlbumData>(defaultAlbumData);
-  const [albumImageFile, setAlbumImageFile] = useState<File>();
   const [albumImageBuffer, setAlbumImageBuffer] = useState<string>();
   const [folderList, setFolderList] = useState<Folder[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [isAllFoldersNamed, setIsAllFoldersNamed] = useState<boolean>(true);
+  const [albumImageFile, setAlbumImageFile] = useState<File>();
   const [currentMyAlbumData, setCurrentMyAlbumData] = useState<
     CurrentMyalbumData | undefined
   >(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [isAllFoldersNamed, setIsAllFoldersNamed] = useState<boolean>(true);
 
-  useEffect(() => {
-    async function getAlbumInfo() {
-      const result = await getMyAlbumInfo(userId);
-      setFolderList(result.folder);
-      if (result.album.length !== 0) {
-        setAlbumData(result.album[0]);
-        const initialAlbumImage = result.album[0].image_uuid;
-        if (initialAlbumImage) {
-          const imageBuffer = await getMyAlbumImage(userId, initialAlbumImage);
-          setAlbumImageBuffer(imageBuffer);
-        }
+  async function getAlbumInfo() {
+    const albumInfo = await getMyAlbumInfo(userId);
+    const result = albumInfo.data;
+    if (result.album.length !== 0) {
+      setAlbumData(result.album[0]);
+      const initialAlbumImage = result.album[0].image_uuid;
+      if (initialAlbumImage) {
+        const imageBuffer = await getMyAlbumImage(userId, initialAlbumImage);
+        setAlbumImageBuffer(imageBuffer);
       }
     }
+    if (result.folder.length > 1) {
+      await getSortedFolders();
+    } else {
+      setFolderList(result.folder);
+    }
+  }
+
+  async function getSortedFolders() {
+    let currentSortKeywords = getLocalStorageData("myAlbumDropDownList");
+    const defaultSortKeywords = { sortBy: "date", orderBy: "asc" };
+    if (!currentSortKeywords) {
+      currentSortKeywords = defaultSortKeywords;
+    }
+    const result = await getSortedFoldersInMyAlubm(userId, currentSortKeywords);
+    setFolderList(result.data);
+  }
+
+  useEffect(() => {
     getAlbumInfo();
   }, [userId]);
 
@@ -53,17 +70,14 @@ function MyAlbum() {
     const HaveAllName = folderList.every((folder) => folder.name !== "");
     if (HaveAllName && !isLoading) {
       setIsLoading(true);
-      const newFolder = await createFolder(folderList, userId);
-      const result = await getMyAlbumInfo(userId);
-      if (result.folder.length !== 0) {
-        setFolderList(result.folder);
-      }
+      await createFolder(folderList, userId);
       if (albumImageFile) {
         await postMyAlbumImage(userId, albumImageFile);
       }
       if (albumData.title) {
         await postMyAlbumTitle(userId, albumData.title);
       }
+      await getAlbumInfo();
     } else {
       setIsLoading(false);
       setIsEditMode(true);
@@ -134,9 +148,9 @@ function MyAlbum() {
         {!isEditMode && (
           <MyAlbumDisplay
             albumData={albumData}
-            setAlbumData={setAlbumData}
             albumImageBuffer={albumImageBuffer}
             folderList={folderList}
+            setFolderList={setFolderList}
           />
         )}
       </div>

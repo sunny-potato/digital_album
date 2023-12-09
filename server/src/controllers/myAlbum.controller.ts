@@ -3,8 +3,8 @@ import {
   createFolder,
   deleteFolder,
   getFolder,
-  sortFoldersByAsc,
-  sortFoldersByDesc,
+  getSortedFoldersByAsc,
+  getSortedFoldersByDesc,
   updateFolder,
 } from "../services/folder.service";
 import {
@@ -20,19 +20,12 @@ import {
 } from "../services/imageStorage.service";
 import { FolderList } from "../models/types";
 import { getUnikImageName } from "../utils/image";
-// import { convertSortAndOrderForClient } from "../utils/sortAndOrder";
 
 export const getAllAboutMyAlbum: RequestHandler = async (req, res) => {
   const userId = Number(req.params.userId);
   const album = await getMyAlbum(userId);
-  let result;
-  if (album.length === 0) {
-    // new user have no my album yet, so send empty data to client
-    result = { album: [], folder: [] };
-  } else {
-    const folder = await getFolder(userId);
-    result = { album, folder };
-  }
+  const folder = await getFolder(userId);
+  const result = { album, folder };
 
   res.status(200).send(result);
 };
@@ -56,15 +49,15 @@ export const uploadAlumImage: RequestHandler = async (req, res) => {
         newImageName += fileType;
         const findUser = await getMyAlbum(userId);
         if (findUser.length === 0) {
-          createNewAlbumImage(userId, newImageName, file.buffer);
+          await createNewAlbumImage(userId, newImageName, file.buffer);
         } else {
-          await updateMyAlbumImage({
-            image_uuid: newImageName,
-            user_id: userId,
-          });
-          await uploadFile(newImageName, file.buffer);
           const oldImageName = findUser[0].image_uuid;
-          await deleteFile(oldImageName);
+          await updateAlbumImage(
+            userId,
+            newImageName,
+            file.buffer,
+            oldImageName
+          );
         }
       } catch (error) {
         console.error(error);
@@ -79,19 +72,34 @@ export const createNewAlbumImage = async (
   newImageBuffer: string | Buffer
 ) => {
   const album = {
-    image_uuid: newImageName,
+    imageUuid: newImageName,
     title: "",
-    user_id: userId,
+    userId: userId,
   };
   await createMyAlbum(album);
+  console.log(`new album for userId with ${userId} created`);
   await uploadFile(newImageName, newImageBuffer);
 };
 
-export const updateAlbumTitle: RequestHandler = async (req, res) => {
-  const user_id = Number(req.params.userId);
-  const title = Object.keys(req.body)[0] as string;
-  await updateMyAlbumTitle({ title, user_id });
+export const updateAlbumImage = async (
+  userId: number,
+  newImageName: string,
+  newImageBuffer: string | Buffer,
+  oldImageName: string
+) => {
+  await updateMyAlbumImage({
+    userId: userId,
+    imageUuid: newImageName,
+  });
+  console.log(`album Image for userId with ${userId} updated`);
+  await uploadFile(newImageName, newImageBuffer);
+  await deleteFile(oldImageName);
+};
 
+export const updateAlbumTitle: RequestHandler = async (req, res) => {
+  const userId = Number(req.params.userId);
+  const title = Object.keys(req.body)[0] as string;
+  await updateMyAlbumTitle({ title, userId });
   res.status(200).send("updated albumTitle");
 };
 
@@ -139,4 +147,20 @@ export const createNewFolder: RequestHandler = async (req, res) => {
   }
 
   res.status(200).send("updated folder!");
+};
+
+export const sortFoldersInMyAlbum: RequestHandler = async (req, res) => {
+  const userId = Number(req.params.userId);
+  const orderBy = req.query.orderBy;
+  let sortBy = req.query.sortBy;
+  if (req.query.sortBy === "date") {
+    sortBy = "created_at";
+  }
+  let sortedFoldersList;
+  if (orderBy === "asc") {
+    sortedFoldersList = await getSortedFoldersByAsc(userId, sortBy as string);
+  } else {
+    sortedFoldersList = await getSortedFoldersByDesc(userId, sortBy as string);
+  }
+  res.status(200).send(sortedFoldersList);
 };
