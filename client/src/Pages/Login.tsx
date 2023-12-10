@@ -6,8 +6,8 @@ import { UserContext } from "../AppContext";
 import s from "../Styles/Login.module.css";
 import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
-import welcomeImage from "../Images/welcome.svg";
 import ConfettiEffect from "../Components/ConfettiEffect";
+import WelcomeMan from "../Components/Animation/WelcomeMan";
 
 function Login() {
   const { setUserId } = useContext(UserContext);
@@ -66,11 +66,14 @@ function Login() {
     <div className={s.pageContainer}>
       <div className={s.imageContainer}>
         <ConfettiEffect />
-        <img
+        <div className={s.imageInner}>
+          <WelcomeMan />
+        </div>
+        {/* <img
           className={s.welcomeImage}
           src={welcomeImage}
           alt="welcome image"
-        />
+        /> */}
       </div>
       <div className={s.contentContainer}>
         <div className={s.loginContainer}>

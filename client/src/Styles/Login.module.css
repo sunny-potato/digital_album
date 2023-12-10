@@ -17,11 +17,58 @@
   align-items: center;
   position: relative;
 }
-
-.welcomeImage {
+.imageInner {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.welcomeManImage {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+/* .welcomeWavingHand {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  bottom: 15%;
+  left: 8%;
+  animation: waveHand 3s ease-in-out infinite;
+}
+@keyframes waveHand {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  } 
+  100% {
+    transform: rotate(0deg);
+  }
+}  */
+/* .welcomeImage {
   height: 60%;
   z-index: 1;
 }
+.welcomeWavingHandImage {
+  height: 60%;
+  z-index: 1;
+} */
 
 .contentContainer {
   height: 70%;
