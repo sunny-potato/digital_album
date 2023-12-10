@@ -5,7 +5,7 @@
 .welcomeWavingArm {
   background-color: red;
   transform-origin: center 70%;
-  animation: waveArm 3s ease-in-out infinite;
+  animation: waveArm 1.5s ease-in-out infinite;
 }
 @keyframes waveArm {
   0%,
@@ -18,7 +18,7 @@
 }
 .welcomeWavingHand {
   transform-origin: 30% 55%;
-  animation: waveHand 3s ease-in-out infinite;
+  animation: waveHand 1.5s ease-in-out infinite;
 }
 @keyframes waveHand {
   0%,

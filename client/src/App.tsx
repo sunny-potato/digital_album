@@ -18,7 +18,7 @@ import About from "./Pages/About";
 // 5) share image to social media
 // 6) move image to another file
 // 8) close element when outside of the element clicked -> sortby in myalbum
-// 9) calculate size of folders in my album
+// 9) calculate size of folders in my album -> sum all images in each folder in real-time using sql
 // 10) fetch images from database quickly by using google CDN
 
 function App() {
