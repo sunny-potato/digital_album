@@ -53,7 +53,6 @@ function Login() {
   }) {
     if (validation.result) {
       setIsLoginValidated(true);
-      // setUsername(validation.username);
       setUserId(validation.userId);
       navigate("/");
     } else {
@@ -69,11 +68,6 @@ function Login() {
         <div className={s.imageInner}>
           <WelcomeMan />
         </div>
-        {/* <img
-          className={s.welcomeImage}
-          src={welcomeImage}
-          alt="welcome image"
-        /> */}
       </div>
       <div className={s.contentContainer}>
         <div className={s.loginContainer}>
