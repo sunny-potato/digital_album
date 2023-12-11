@@ -1,6 +1,7 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Image } from "../Types/Folder";
+import { DropDownList } from "../Types/Commonness";
 
 // two ways to get image 1)
 // export async function getImage(fileName: string) {
@@ -37,5 +38,14 @@ export async function postImageInfolder(images: File[], folderId: number) {
 export async function deleteImageInfolder(folderId: number, image: Image) {
   return await axios.delete(
     `/albumFolder/${folderId}/deleteImage?imageId=${image.id}&imageUuid=${image.uuid}`
+  );
+}
+
+export async function getSortedImagesInfolder(
+  folderId: number,
+  sortKeywordList: DropDownList
+) {
+  return await axios.get(
+    `/albumFolder/${folderId}/sortedImages?sortBy=${sortKeywordList.sortBy}&orderBy=${sortKeywordList.orderBy}`
   );
 }

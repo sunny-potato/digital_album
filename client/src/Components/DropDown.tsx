@@ -4,6 +4,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
 import { DropDown as DropDownProps } from "../Types/Commonness";
+import { convertDropDownDataForm } from "../Utils/dropDown";
 
 function DropDown({
   dropDownList,
@@ -11,21 +12,6 @@ function DropDown({
   dropDownContent,
 }: DropDownProps) {
   const [isDropDownClicked, setIsDropDownClicked] = useState<boolean>(false);
-
-  // export the function
-  const convertDropDownDataForm = (dataType: string, dataName: string) => {
-    let newDataName;
-    if (dataType === "sortBy") {
-      newDataName = dataName.toLocaleLowerCase();
-    } else {
-      if (dataName === "A-Z") {
-        newDataName = "asc";
-      } else {
-        newDataName = "desc";
-      }
-    }
-    return newDataName;
-  };
 
   const isItClicked = (currentType: string, currentValue: string) => {
     const convertedCurrentValue = convertDropDownDataForm(

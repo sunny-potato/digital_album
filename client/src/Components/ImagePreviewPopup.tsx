@@ -9,6 +9,7 @@ import {
   handleOnDrop,
   handleDragLeave,
 } from "../Utils/dragAndDrop";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 function ImagePreviewPopup({
   selectedImageBlob,

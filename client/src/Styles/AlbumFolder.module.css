@@ -7,56 +7,7 @@
   padding-top: 4em;
   background-color: #fefbe9;
 }
-.displayImageBox {
-  width: 100%;
-  padding-top: 1.5em;
-  background-color: #fefbe9;
-}
-.displayContent {
-  background-color: #fefbe9;
-  padding: 0.5em 0 1.5em 0;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  /* auto-fill vs auto-fit*/
-}
-.imageBox {
-  position: relative;
-}
-.imageBox:hover {
-  position: relative;
-  transform: scale(1.01);
-}
-.imageBox:hover .deleteImageButton {
-  visibility: visible;
-}
-
-/* @media (min-width: 1000px) {
-  .displayContents {
-    grid-template-columns: repeat(4, 1fr);
-  }
-} */
-
-.uploadedImage {
-  aspect-ratio: 1;
-  padding: 0;
-}
-.uploadedImage img {
-  width: 100%;
-  height: 100%;
-}
-.deleteImageButton {
-  position: absolute;
-  right: 0%;
-  background-color: #fefbe9;
-  font-weight: bolder;
-  border-radius: 0.3rem;
-  visibility: hidden;
-}
 .saveImageButton {
   margin-top: 1em;
   font-weight: bolder;
-}
-.notifyNoImage {
-  text-align: center;
 }

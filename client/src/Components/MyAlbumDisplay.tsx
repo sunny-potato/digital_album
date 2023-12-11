@@ -6,10 +6,8 @@ import { DropDownList } from "../Types/Commonness";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import DropDown from "./DropDown";
 import { getSortedFoldersInMyAlubm } from "../Services/myAlbum";
-import {
-  getLocalStorageData,
-  setLocalStorageData,
-} from "../Utils/localstorage";
+import { setLocalStorageData } from "../Utils/localstorage";
+import { dropDownContent, getDropDownDefaultValue } from "../Utils/dropDown";
 
 function MyAlbumDisplay({
   albumData,
@@ -19,24 +17,8 @@ function MyAlbumDisplay({
 }: MyalbumDisplayProps) {
   const userId = Number(useParams().userId);
   const [myAlbumDropDownList, setMyAlbumDropDownList] = useState<DropDownList>(
-    () => {
-      let sortValue = getLocalStorageData("myAlbumDropDownList");
-      if (!sortValue) {
-        const defaultValue = { sortBy: "date", orderBy: "asc" };
-        sortValue = defaultValue;
-      }
-      return sortValue;
-    }
+    getDropDownDefaultValue("myAlbumDropDownList")
   );
-
-  // export list
-  const myAlbumDropDownContent = [
-    { type: "sortBy", name: "Date" },
-    { type: "sortBy", name: "Name" },
-    { type: "sortBy", name: "Size" },
-    { type: "orderBy", name: "A-Z" },
-    { type: "orderBy", name: "Z-A" },
-  ];
 
   useEffect(() => {
     const updateDropDownList = async () => {
@@ -46,7 +28,7 @@ function MyAlbumDisplay({
       );
       const sortedFolders = result.data;
       setLocalStorageData("myAlbumDropDownList", myAlbumDropDownList);
-      setLocalStorageData("sortedFolders", sortedFolders); // need it??
+      // setLocalStorageData("sortedFolders", sortedFolders); // need it??
       setFolderList(sortedFolders);
     };
     updateDropDownList();
@@ -57,7 +39,7 @@ function MyAlbumDisplay({
       <div className={s.albumPhotoBox}>
         <div className={s.albumPhoto}>
           {albumImageBuffer ? (
-            <img src={albumImageBuffer} alt="myalbum main image"></img>
+            <img src={albumImageBuffer} alt="my album main image"></img>
           ) : (
             <div className={s.noImageDiv}>No image</div>
           )}
@@ -73,7 +55,7 @@ function MyAlbumDisplay({
           <DropDown
             dropDownList={myAlbumDropDownList}
             setDropDownList={setMyAlbumDropDownList}
-            dropDownContent={myAlbumDropDownContent}
+            dropDownContent={dropDownContent}
           />
           <div className={s.folderList}>
             <div className={s.folderListInner}>

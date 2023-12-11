@@ -4,6 +4,7 @@ import {
   deleteImageInfolder,
   displayImage,
   getAllImagesInFolder,
+  getSortedImagesInfolder,
 } from "../controllers/albumFolder.controller";
 import multer from "multer";
 
@@ -22,5 +23,7 @@ router.post(
 );
 
 router.delete("/:folderId/deleteImage", deleteImageInfolder);
+
+router.get("/:folderId/sortedImages", getSortedImagesInfolder);
 
 export default router;

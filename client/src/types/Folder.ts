@@ -44,3 +44,8 @@ export type ImagePreviewPopup = {
   folderId: number;
   onClose: () => void;
 };
+
+export type ImageDisplay = {
+  uploadedImageList: Image[];
+  setUploadedImageList: (value: Image[]) => void;
+};
