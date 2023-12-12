@@ -12,15 +12,13 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
-// 3) calculate size of folder,
-// 4) show info on pic -> pic name, saved data, dimention? size?
-// 5) share image to social media
-// 6) move image to another file
-// 8) close element when outside of the element clicked -> sortby in myalbum
-// 9) calculate size of folders in my album -> sum all images in each folder in real-time using sql
-// 10) fetch images from database quickly by using google CDN
-// 11) loading ui while uploading images
-// 12) tool tip using mui
+// 1) close element when outside of the element clicked -> sortby in myalbum
+// 3) show info on pic -> pic name, saved data, dimention? size?
+// 4) tool tip using mui
+// 5) move image to another file
+// 6) share image to social media
+// 7) fetch images from database quickly by using google CDN
+// 8) loading ui while uploading images
 
 function App() {
   return (

@@ -2,8 +2,8 @@ export type FolderList = {
   id: number | undefined;
   name: string;
   userId: number;
-  order_value: number;
-  created_at: Date | undefined;
+  orderValue: number;
+  createdAt: Date | undefined;
 }[];
 
 export type UserAccount = {

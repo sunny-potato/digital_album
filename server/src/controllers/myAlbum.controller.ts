@@ -1,10 +1,12 @@
 import { RequestHandler } from "express";
 import {
+  calculateFolderSize,
   createFolder,
   deleteFolder,
   getFolder,
   getSortedFoldersByAsc,
   getSortedFoldersByDesc,
+  updateFoderSize,
   updateFolder,
 } from "../services/folder.service";
 import {
@@ -24,9 +26,14 @@ import { getUnikImageName } from "../utils/image";
 export const getAllAboutMyAlbum: RequestHandler = async (req, res) => {
   const userId = Number(req.params.userId);
   const album = await getMyAlbum(userId);
-  const folder = await getFolder(userId);
-  const result = { album, folder };
-
+  let folders = await getFolder(userId);
+  folders.map(async (folder) => {
+    const sumImages = await calculateFolderSize(folder.id);
+    await updateFoderSize(folder.id, sumImages[0].total);
+  });
+  const updatedFolders = await getFolder(userId);
+  folders = updatedFolders;
+  const result = { album, folders };
   res.status(200).send(result);
 };
 
@@ -109,7 +116,7 @@ export const createNewFolder: RequestHandler = async (req, res) => {
   const folderListFromDB = await getFolder(userId);
 
   for (const [index, folder] of folderListFromClient.entries()) {
-    if (folder.id === undefined && folder.created_at === undefined) {
+    if (folder.id === undefined && folder.createdAt === undefined) {
       const result = await createFolder({
         name: folder.name,
         order_value: index + 1,
@@ -117,12 +124,12 @@ export const createNewFolder: RequestHandler = async (req, res) => {
         created_at: new Date(),
       });
     }
-    if (folder.id !== undefined && folder.created_at !== undefined) {
+    if (folder.id !== undefined && folder.createdAt !== undefined) {
       const result = await updateFolder({
         id: folder.id,
         name: folder.name,
         order_value: index + 1,
-        created_at: folder.created_at,
+        created_at: folder.createdAt,
       });
     }
   }

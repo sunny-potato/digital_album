@@ -6,7 +6,7 @@ import {
   postMyAlbumImage,
   postMyAlbumTitle,
   getMyAlbumImage,
-  getSortedFoldersInMyAlubm,
+  getSortedFoldersInMyAlbum,
 } from "../Services/myAlbum";
 import s from "../Styles/MyAlbum.module.css";
 import { Folder } from "../Types/Folder";
@@ -14,6 +14,8 @@ import { AlbumData, CurrentMyalbumData } from "../Types/MyAlbum";
 import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 import { getLocalStorageData } from "../Utils/localstorage";
+import { AxiosResponse } from "axios";
+// import { getFolderSizeListInMyAlbum } from "../Services/myAlbum";
 
 function MyAlbum() {
   const userId = Number(useParams().userId);
@@ -45,10 +47,13 @@ function MyAlbum() {
         setAlbumImageBuffer(imageBuffer);
       }
     }
-    if (result.folder.length > 1) {
-      await getSortedFolders();
+    if (result.folders.length === 0) {
+      setFolderList(result.folders);
     } else {
-      setFolderList(result.folder);
+      const sortedFolderList = await getSortedFolders();
+      console.log(sortedFolderList.data);
+      // await getFolderSizeListInMyAlbum(userId, sortedFolderList.data);
+      //get foldersize
     }
   }
 
@@ -58,8 +63,9 @@ function MyAlbum() {
     if (!currentSortKeywords) {
       currentSortKeywords = defaultSortKeywords;
     }
-    const result = await getSortedFoldersInMyAlubm(userId, currentSortKeywords);
+    const result = await getSortedFoldersInMyAlbum(userId, currentSortKeywords);
     setFolderList(result.data);
+    return result;
   }
 
   useEffect(() => {

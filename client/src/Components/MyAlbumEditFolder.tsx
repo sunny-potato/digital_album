@@ -57,6 +57,7 @@ function MyAlbumEditFolder({
                     user_id: userId,
                     order_value: 0,
                     created_at: undefined,
+                    size: null,
                   };
                   setFolderList([...folderList, newFolder]);
                 }}

@@ -5,7 +5,7 @@ import { MyalbumDisplay as MyalbumDisplayProps } from "../Types/MyAlbum";
 import { DropDownList } from "../Types/Commonness";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import DropDown from "./DropDown";
-import { getSortedFoldersInMyAlubm } from "../Services/myAlbum";
+import { getSortedFoldersInMyAlbum } from "../Services/myAlbum";
 import { setLocalStorageData } from "../Utils/localstorage";
 import { dropDownContent, getDropDownDefaultValue } from "../Utils/dropDown";
 
@@ -22,7 +22,7 @@ function MyAlbumDisplay({
 
   useEffect(() => {
     const updateDropDownList = async () => {
-      const result = await getSortedFoldersInMyAlubm(
+      const result = await getSortedFoldersInMyAlbum(
         userId,
         myAlbumDropDownList
       );

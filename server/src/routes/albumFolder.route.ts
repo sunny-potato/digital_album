@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  // calculateFolderSize,
   createNewImageInFolder,
   deleteImageInfolder,
   displayImage,
@@ -25,5 +26,7 @@ router.post(
 router.delete("/:folderId/deleteImage", deleteImageInfolder);
 
 router.get("/:folderId/sortedImages", getSortedImagesInfolder);
+
+// router.get("/:folderId/folderSizeList", calculateFolderSize);
 
 export default router;

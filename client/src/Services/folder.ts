@@ -1,6 +1,6 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
-import { Image } from "../Types/Folder";
+import { Folder, Image } from "../Types/Folder";
 import { DropDownList } from "../Types/Commonness";
 
 // two ways to get image 1)
@@ -49,3 +49,12 @@ export async function getSortedImagesInfolder(
     `/albumFolder/${folderId}/sortedImages?sortBy=${sortKeywordList.sortBy}&orderBy=${sortKeywordList.orderBy}`
   );
 }
+
+// export async function getFolderSizeList(
+//   folderId: number,
+//   folderList: Folder[]
+// ) {
+//   return await axios.get(`/albumFolder/${folderId}/folderSize?`, {
+//     params: folderList,
+//   });
+// }

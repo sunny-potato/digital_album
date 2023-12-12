@@ -6,6 +6,7 @@ export type Folder = {
   user_id: number;
   order_value: number;
   created_at: Date | undefined;
+  size: number | null;
 };
 
 export type Image = {

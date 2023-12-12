@@ -43,3 +43,11 @@ export async function getSortedFoldersByDesc(userId: number, sortBy: string) {
     sortBy
   )} desc`;
 }
+
+export async function calculateFolderSize(folderId: number) {
+  return await sql`select sum(size) as total from image where folder_id=${folderId}`;
+}
+
+export async function updateFoderSize(folderid: number, folderSize: number) {
+  return await sql`update folder set size = ${folderSize} where id=${folderid}`;
+}

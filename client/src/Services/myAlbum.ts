@@ -36,7 +36,7 @@ export async function createFolder(folderList: Folder[], userId: number) {
   return await axios.post(`/myAlbum/${userId}/newFolder`, folderList);
 }
 
-export async function getSortedFoldersInMyAlubm(
+export async function getSortedFoldersInMyAlbum(
   userId: number,
   sortKeywordList: DropDownList
 ) {
@@ -44,3 +44,12 @@ export async function getSortedFoldersInMyAlubm(
     `/myAlbum/${userId}/sortedFolders?sortBy=${sortKeywordList.sortBy}&orderBy=${sortKeywordList.orderBy}`
   );
 }
+
+// export async function getFolderSizeListInMyAlbum(
+//   userId: number,
+//   folderList: Folder[]
+// ) {
+//   return await axios.get(`/myAlbum/${userId}/folderSizeList`, {
+//     params: folderList,
+//   });
+// }
