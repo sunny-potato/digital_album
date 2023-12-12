@@ -51,7 +51,7 @@ function MyAlbum() {
       setFolderList(result.folders);
     } else {
       const sortedFolderList = await getSortedFolders();
-      console.log(sortedFolderList.data);
+      // console.log(sortedFolderList.data);
       // await getFolderSizeListInMyAlbum(userId, sortedFolderList.data);
       //get foldersize
     }

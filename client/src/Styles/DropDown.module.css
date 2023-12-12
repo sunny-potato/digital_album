@@ -23,16 +23,16 @@
   z-index: 1;
   border: #183a1d solid 0.1rem;
   width: 8rem;
-  /* background-color: red; */
 }
 
 .sortByList li {
+  list-style: none;
+  font-size: 1.05rem;
   margin: 0.1rem 0.5rem;
   border: #183a1d solid 0;
+  display: flex;
+  justify-content: space-between;
 }
 .sortByList li:nth-child(3) {
   border-bottom: #183a1d solid 0.1rem;
-}
-.checkIconBox {
-  margin-left: auto;
 }

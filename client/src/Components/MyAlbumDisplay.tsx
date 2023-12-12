@@ -8,6 +8,8 @@ import DropDown from "./DropDown";
 import { getSortedFoldersInMyAlbum } from "../Services/myAlbum";
 import { setLocalStorageData } from "../Utils/localstorage";
 import { dropDownContent, getDropDownDefaultValue } from "../Utils/dropDown";
+import { Tooltip } from "@mui/material";
+import { formatFileSize, formatDateTime } from "../Utils/formatData";
 
 function MyAlbumDisplay({
   albumData,
@@ -61,10 +63,28 @@ function MyAlbumDisplay({
             <div className={s.folderListInner}>
               {folderList.length !== 0 &&
                 folderList.map((folder) => (
-                  <li key={folder.id}>
-                    <FolderOpenIcon fontSize="small" className={s.folderIcon} />
-                    <Link to={`/albumFolder/${folder.id}`}>{folder.name}</Link>
-                  </li>
+                  <div key={folder.id} className={s.folderCard}>
+                    <Link
+                      to={`/albumFolder/${folder.id}`}
+                      className={s.contentInCard}
+                    >
+                      <FolderOpenIcon
+                        fontSize="large"
+                        className={s.folderIcon}
+                      />
+                      <div className={s.contentInner}>
+                        <div className={s.folderTitle}>{folder.name}</div>
+                        <div className={s.folderData}>
+                          <div className={s.folderSize}>
+                            {formatFileSize(folder.size)}
+                          </div>
+                          <div className={s.folderCreatedDate}>
+                            {formatDateTime(folder.created_at)}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
                 ))}
             </div>
             {folderList.length === 0 && <li key={0}>No folders</li>}

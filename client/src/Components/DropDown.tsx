@@ -74,9 +74,8 @@ function DropDown({
                   updateDropDownList(eachContent.type, eachContent.name)
                 }
               >
-                {eachContent.name}
+                <div className={s.dropDownContentName}>{eachContent.name}</div>
                 <div
-                  className={s.checkIconBox}
                   style={{
                     visibility:
                       isItClicked(eachContent.type, eachContent.name) &&
@@ -85,10 +84,7 @@ function DropDown({
                         : "hidden",
                   }}
                 >
-                  <CheckIcon
-                    className={s.checkIcon}
-                    style={{ fontSize: "0.7rem" }}
-                  />
+                  <CheckIcon style={{ fontSize: "0.7rem" }} />
                 </div>
               </li>
             );

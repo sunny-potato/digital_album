@@ -31,3 +31,5 @@ export const getDropDownDefaultValue = (dropDownListName: string) => {
   }
   return sortValue;
 };
+
+export const detectOutsideDropDown = () => {};

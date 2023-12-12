@@ -3,7 +3,7 @@ import {
   calculateFolderSize,
   createFolder,
   deleteFolder,
-  getFolder,
+  getFolders,
   getSortedFoldersByAsc,
   getSortedFoldersByDesc,
   updateFoderSize,
@@ -26,13 +26,18 @@ import { getUnikImageName } from "../utils/image";
 export const getAllAboutMyAlbum: RequestHandler = async (req, res) => {
   const userId = Number(req.params.userId);
   const album = await getMyAlbum(userId);
-  let folders = await getFolder(userId);
-  folders.map(async (folder) => {
+  let folders = await getFolders(userId);
+
+  const promises = folders.map(async (folder) => {
     const sumImages = await calculateFolderSize(folder.id);
     await updateFoderSize(folder.id, sumImages[0].total);
+    console.log("inside map", folder.id);
   });
-  const updatedFolders = await getFolder(userId);
+  await Promise.all(promises);
+  console.log("After map");
+  const updatedFolders = await getFolders(userId);
   folders = updatedFolders;
+
   const result = { album, folders };
   res.status(200).send(result);
 };
@@ -113,7 +118,7 @@ export const updateAlbumTitle: RequestHandler = async (req, res) => {
 export const createNewFolder: RequestHandler = async (req, res) => {
   const userId = Number(req.params.userId);
   const folderListFromClient = req.body as FolderList;
-  const folderListFromDB = await getFolder(userId);
+  const folderListFromDB = await getFolders(userId);
 
   for (const [index, folder] of folderListFromClient.entries()) {
     if (folder.id === undefined && folder.createdAt === undefined) {

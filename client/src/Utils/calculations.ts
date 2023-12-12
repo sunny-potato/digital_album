@@ -5,7 +5,7 @@ export function getRandomNumber(min: number, max: number) {
 export function getRandomInt(min: number, max: number) {
   return Math.random() * (max - min + 1) + min;
 }
-export function formatFileSize(bytes: number) {
+export function getFileSize(bytes: number) {
   const kilobyte = 1024;
   const megabyte = kilobyte * 1024;
   const gigabyte = megabyte * 1024;
