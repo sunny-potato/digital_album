@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ImagePreviewPopup as ImagePreviewPopupProps } from "../Types/Folder";
-import { imageFilesHandler } from "../Utils/imageFilesHandler";
+import { imageFilesHandler } from "../Utils/inputHandler";
 import addImage from "../Images/addImage.png";
 import { postImageInfolder } from "../Services/folder";
 import s from "../Styles/ImagePreviewPopup.module.css";

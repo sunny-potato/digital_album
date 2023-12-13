@@ -17,5 +17,5 @@ export function formatDateTime(inputDateTime: Date) {
   const minutes = String(inputDate.getMinutes()).padStart(2, "0");
   const ampm = inputDate.getHours() >= 12 ? "PM" : "AM";
 
-  return `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
+  return `Created at ${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
 }

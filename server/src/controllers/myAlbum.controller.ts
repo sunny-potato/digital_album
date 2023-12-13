@@ -28,13 +28,12 @@ export const getAllAboutMyAlbum: RequestHandler = async (req, res) => {
   const album = await getMyAlbum(userId);
   let folders = await getFolders(userId);
 
+  // fix calculateFolderSize when images are deleted or updated!!!
   const promises = folders.map(async (folder) => {
     const sumImages = await calculateFolderSize(folder.id);
     await updateFoderSize(folder.id, sumImages[0].total);
-    console.log("inside map", folder.id);
   });
   await Promise.all(promises);
-  console.log("After map");
   const updatedFolders = await getFolders(userId);
   folders = updatedFolders;
 

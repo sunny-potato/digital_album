@@ -30,7 +30,6 @@ function MyAlbumDisplay({
       );
       const sortedFolders = result.data;
       setLocalStorageData("myAlbumDropDownList", myAlbumDropDownList);
-      // setLocalStorageData("sortedFolders", sortedFolders); // need it??
       setFolderList(sortedFolders);
     };
     updateDropDownList();

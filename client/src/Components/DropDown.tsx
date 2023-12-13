@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { LegacyRef, useState } from "react";
 import s from "../Styles/DropDown.module.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
 import { DropDown as DropDownProps } from "../Types/Commonness";
 import { convertDropDownDataForm } from "../Utils/dropDown";
+import { detectClickOutsideDropDwon } from "../Utils/dropDown";
 
 function DropDown({
   dropDownList,
@@ -12,7 +13,8 @@ function DropDown({
   dropDownContent,
 }: DropDownProps) {
   const [isDropDownClicked, setIsDropDownClicked] = useState<boolean>(false);
-
+  const ref: LegacyRef<HTMLDivElement> | undefined =
+    detectClickOutsideDropDwon(setIsDropDownClicked);
   const isItClicked = (currentType: string, currentValue: string) => {
     const convertedCurrentValue = convertDropDownDataForm(
       currentType,
@@ -43,12 +45,13 @@ function DropDown({
 
   return (
     <div
+      ref={ref}
       className={s.folderListSort}
-      onClick={() => {
-        isDropDownClicked
-          ? setIsDropDownClicked(false)
-          : setIsDropDownClicked(true);
-      }}
+      // onClick={() => {
+      //   isDropDownClicked
+      //     ? setIsDropDownClicked(false)
+      //     : setIsDropDownClicked(true);
+      // }}
     >
       <div className={s.sortText}>Sort by</div>
       <ExpandMoreIcon

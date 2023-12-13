@@ -33,7 +33,8 @@ grid-template-columns: repeat(4, 1fr);
 
 .uploadedImage {
   aspect-ratio: 1;
-  padding: 0;
+  /* padding: 0; */
+  /* background: red; */
 }
 .uploadedImage img {
   width: 100%;

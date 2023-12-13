@@ -1,6 +1,6 @@
 import { useState } from "react";
 import s from "../Styles/ImageUpload.module.css";
-import { imageFilesHandler } from "../Utils/imageFilesHandler";
+import { imageFilesHandler } from "../Utils/inputHandler";
 import { ImageUpload as ImageUploadProps } from "../Types/Folder";
 import upload from "../Images/upload.png";
 import {

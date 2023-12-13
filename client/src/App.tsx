@@ -12,7 +12,7 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
-// 1) close element when outside of the element clicked -> sortby in myalbum
+// 2) update code of calculateFolderSize
 // 3) show info on pic -> pic name, saved data, dimention? size?
 // 4) tool tip using mui
 // 5) move image to another file

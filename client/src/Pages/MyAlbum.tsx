@@ -15,7 +15,6 @@ import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 import { getLocalStorageData } from "../Utils/localstorage";
 import { AxiosResponse } from "axios";
-// import { getFolderSizeListInMyAlbum } from "../Services/myAlbum";
 
 function MyAlbum() {
   const userId = Number(useParams().userId);
@@ -50,10 +49,7 @@ function MyAlbum() {
     if (result.folders.length === 0) {
       setFolderList(result.folders);
     } else {
-      const sortedFolderList = await getSortedFolders();
-      // console.log(sortedFolderList.data);
-      // await getFolderSizeListInMyAlbum(userId, sortedFolderList.data);
-      //get foldersize
+      await getSortedFolders();
     }
   }
 

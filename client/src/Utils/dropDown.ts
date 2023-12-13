@@ -1,4 +1,4 @@
-import { DropDownList } from "../Types/Commonness";
+import { useEffect, useRef } from "react";
 import { getLocalStorageData } from "./localstorage";
 
 export const dropDownContent = [
@@ -32,4 +32,18 @@ export const getDropDownDefaultValue = (dropDownListName: string) => {
   return sortValue;
 };
 
-export const detectOutsideDropDown = () => {};
+export const detectClickOutsideDropDwon = (setIsItDropDown: any) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const clickHandler = (event: MouseEvent) => {
+      const isItDropDown = ref.current?.contains(event.target as Node);
+      if (isItDropDown === undefined || !isItDropDown) {
+        setIsItDropDown(false);
+      } else {
+        setIsItDropDown(true);
+      }
+    };
+    document.addEventListener("click", clickHandler);
+  }, []);
+  return ref;
+};
