@@ -5,7 +5,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
 import { DropDown as DropDownProps } from "../Types/Commonness";
 import { convertDropDownDataForm } from "../Utils/dropDown";
-import { detectClickOutsideDropDown } from "../Utils/dropDown";
+import { useDetectClickOutsideDropDown } from "../Hooks/useDetectClickOutsideDropDown";
 
 function DropDown({
   dropDownList,
@@ -13,14 +13,13 @@ function DropDown({
   dropDownContent,
 }: DropDownProps) {
   const [isDropDownClicked, setIsDropDownClicked] = useState<boolean>(false);
-  const ref: LegacyRef<HTMLDivElement> | undefined =
-    detectClickOutsideDropDown(setIsDropDownClicked);
+  const ref = useDetectClickOutsideDropDown(setIsDropDownClicked);
+  console.log(isDropDownClicked);
   const isItClicked = (currentType: string, currentValue: string) => {
     const convertedCurrentValue = convertDropDownDataForm(
       currentType,
       currentValue
     );
-
     if (dropDownList.sortBy === convertedCurrentValue) {
       return true;
     }
@@ -47,11 +46,11 @@ function DropDown({
     <div
       ref={ref}
       className={s.folderListSort}
-      // onClick={() => {
-      //   isDropDownClicked
-      //     ? setIsDropDownClicked(false)
-      //     : setIsDropDownClicked(true);
-      // }}
+      onClick={() => {
+        isDropDownClicked
+          ? setIsDropDownClicked(false)
+          : setIsDropDownClicked(true);
+      }}
     >
       <div className={s.sortText}>Sort by</div>
       <ExpandMoreIcon

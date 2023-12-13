@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { getLocalStorageData } from "./localstorage";
 
 export const dropDownContent = [
@@ -30,26 +29,4 @@ export const getDropDownDefaultValue = (dropDownListName: string) => {
     sortValue = defaultValue;
   }
   return sortValue;
-};
-
-export const detectClickOutsideDropDown = (setIsItDropDown: any) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const clickHandler = (event: MouseEvent) => {
-      const isItDropDown = ref.current?.contains(event.target as Node);
-      if (isItDropDown === undefined || !isItDropDown) {
-        setIsItDropDown(false);
-      } else {
-        setIsItDropDown(true);
-      }
-    };
-
-    document.addEventListener("click", clickHandler);
-
-    return () => {
-      console.log("Cleanup skjera?");
-      document.removeEventListener("click", clickHandler);
-    };
-  }, [setIsItDropDown]);
-  return ref;
 };
