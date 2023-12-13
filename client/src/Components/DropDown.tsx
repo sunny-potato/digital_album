@@ -5,7 +5,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
 import { DropDown as DropDownProps } from "../Types/Commonness";
 import { convertDropDownDataForm } from "../Utils/dropDown";
-import { detectClickOutsideDropDwon } from "../Utils/dropDown";
+import { detectClickOutsideDropDown } from "../Utils/dropDown";
 
 function DropDown({
   dropDownList,
@@ -14,7 +14,7 @@ function DropDown({
 }: DropDownProps) {
   const [isDropDownClicked, setIsDropDownClicked] = useState<boolean>(false);
   const ref: LegacyRef<HTMLDivElement> | undefined =
-    detectClickOutsideDropDwon(setIsDropDownClicked);
+    detectClickOutsideDropDown(setIsDropDownClicked);
   const isItClicked = (currentType: string, currentValue: string) => {
     const convertedCurrentValue = convertDropDownDataForm(
       currentType,

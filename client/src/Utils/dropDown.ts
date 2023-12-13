@@ -32,7 +32,7 @@ export const getDropDownDefaultValue = (dropDownListName: string) => {
   return sortValue;
 };
 
-export const detectClickOutsideDropDwon = (setIsItDropDown: any) => {
+export const detectClickOutsideDropDown = (setIsItDropDown: any) => {
   const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const clickHandler = (event: MouseEvent) => {
