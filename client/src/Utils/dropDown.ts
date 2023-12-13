@@ -43,7 +43,13 @@ export const detectClickOutsideDropDown = (setIsItDropDown: any) => {
         setIsItDropDown(true);
       }
     };
+
     document.addEventListener("click", clickHandler);
-  }, []);
+
+    return () => {
+      console.log("Cleanup skjera?");
+      document.removeEventListener("click", clickHandler);
+    };
+  }, [setIsItDropDown]);
   return ref;
 };
