@@ -19,10 +19,11 @@
 }
 
 .imageBox:hover .deleteImageButton,
-.imageBox:hover .downloadImageIcon {
+.imageBox:hover .downloadImageIcon,
+.imageBox:hover .displayImageName {
   visibility: visible;
 }
-img:hover {
+.imageBox img:hover {
   filter: brightness(0.7) saturate(0%);
 }
 
@@ -45,7 +46,6 @@ grid-template-columns: repeat(4, 1fr);
   height: 25px;
   top: 5%;
   right: 5%;
-  /* padding: 0 0.3rem; */
   background-color: #ffffff;
   font-size: 1.2rem;
   font-weight: 600;
@@ -61,6 +61,14 @@ grid-template-columns: repeat(4, 1fr);
   background-color: #ffffff;
   padding: 0 0.1rem;
   border-radius: 0.3rem;
+  visibility: hidden;
+  z-index: 1;
+}
+.displayImageName {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  color: #ffffff;
   visibility: hidden;
   z-index: 1;
 }

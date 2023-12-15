@@ -11,7 +11,7 @@ export type Folder = {
 
 export type Image = {
   id: number;
-  origianl_name: string;
+  original_name: string;
   encoding: string;
   size: number;
   type: string;
