@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import s from "../Styles/ImageDisplay.module.css";
 import { deleteImageInfolder, getAllImagesInFolder } from "../Services/folder";
 import { ImageDisplay as ImageDisplayProps } from "../Types/Folder";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 function ImageDisplay({
   uploadedImageList,
@@ -16,6 +17,7 @@ function ImageDisplay({
       setUploadedImageList(getImageList);
     }
   }
+
   return (
     <div className={s.displayImageBox}>
       <div className={s.displayContent}>
@@ -26,13 +28,19 @@ function ImageDisplay({
                 className={s.deleteImageButton}
                 onClick={() => deleteSavedImage(index)}
               >
-                X
+                x
               </button>
+              <a
+                className={s.downloadImageIcon}
+                href={`http://localhost:8000/albumFolder/image/${image.uuid}`}
+              >
+                <FileDownloadOutlinedIcon />
+              </a>
               <Link className={s.uploadedImage} to={`image/${image.id}`}>
                 <img
                   className={s.uploadedImage}
                   src={`http://localhost:8000/albumFolder/image/${image.uuid}`}
-                  alt={image.origianl_name} /* need to change????? */
+                  alt={image.origianl_name}
                 />
               </Link>
             </div>

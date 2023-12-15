@@ -57,6 +57,10 @@
   height: 94%;
   overflow-y: auto;
 }
+
+.folderList li {
+  list-style-type: none;
+}
 .folderListInner::-webkit-scrollbar {
   width: 0.7rem;
 }

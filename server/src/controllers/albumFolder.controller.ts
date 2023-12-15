@@ -18,6 +18,7 @@ export const displayImage: RequestHandler = async (req, res) => {
   const imageName = req.params.uuid;
   const imageBuffer = await downloadFile(imageName);
   res.contentType("image/jpg");
+  res.header("Content-Disposition", "attachment"); // save image in local
   res.send(imageBuffer);
 };
 

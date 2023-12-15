@@ -14,7 +14,6 @@ function DropDown({
 }: DropDownProps) {
   const [isDropDownClicked, setIsDropDownClicked] = useState<boolean>(false);
   const ref = useDetectClickOutsideDropDown(setIsDropDownClicked);
-  console.log(isDropDownClicked);
   const isItClicked = (currentType: string, currentValue: string) => {
     const convertedCurrentValue = convertDropDownDataForm(
       currentType,

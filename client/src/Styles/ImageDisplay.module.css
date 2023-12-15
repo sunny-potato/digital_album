@@ -10,10 +10,6 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   /* auto-fill vs auto-fit*/
 }
-/* .displayDropDown {
-  width: 100%;
-  background-color: red;
-} */
 .imageBox {
   position: relative;
 }
@@ -21,8 +17,13 @@
   position: relative;
   transform: scale(1.01);
 }
-.imageBox:hover .deleteImageButton {
+
+.imageBox:hover .deleteImageButton,
+.imageBox:hover .downloadImageIcon {
   visibility: visible;
+}
+img:hover {
+  filter: brightness(0.7) saturate(0%);
 }
 
 /* @media (min-width: 1000px) {
@@ -33,8 +34,6 @@ grid-template-columns: repeat(4, 1fr);
 
 .uploadedImage {
   aspect-ratio: 1;
-  /* padding: 0; */
-  /* background: red; */
 }
 .uploadedImage img {
   width: 100%;
@@ -42,11 +41,28 @@ grid-template-columns: repeat(4, 1fr);
 }
 .deleteImageButton {
   position: absolute;
-  right: 0%;
-  background-color: #fefbe9;
-  font-weight: bolder;
+  width: 25px;
+  height: 25px;
+  top: 5%;
+  right: 5%;
+  /* padding: 0 0.3rem; */
+  background-color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 0.3rem;
+  border-width: 0;
+  visibility: hidden;
+  z-index: 1;
+}
+.downloadImageIcon {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background-color: #ffffff;
+  padding: 0 0.1rem;
   border-radius: 0.3rem;
   visibility: hidden;
+  z-index: 1;
 }
 .notifyNoImage {
   text-align: center;
