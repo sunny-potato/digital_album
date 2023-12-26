@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Folder, Image } from "../Types/Folder";
 import { DropDownList } from "../Types/Commonness";
@@ -50,11 +50,15 @@ export async function getSortedImagesInfolder(
   );
 }
 
-// export async function getFolderSizeList(
-//   folderId: number,
-//   folderList: Folder[]
-// ) {
-//   return await axios.get(`/albumFolder/${folderId}/folderSize?`, {
-//     params: folderList,
-//   });
-// }
+export async function downloadImageFile(image: Image) {
+  const getAPIs = [
+    axios.get(`/albumFolder/download/image/${image.uuid}`, {
+      responseType: "arraybuffer",
+    }),
+    axios.get(`/albumFolder/donwload/imageName/${image.uuid}`),
+  ];
+  // send multiple requests
+  return await Promise.all(
+    getAPIs.map((API) => API.then((response) => response))
+  ).then((response) => response);
+}

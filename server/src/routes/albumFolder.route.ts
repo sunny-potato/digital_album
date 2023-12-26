@@ -4,7 +4,9 @@ import {
   createNewImageInFolder,
   deleteImageInfolder,
   displayImage,
+  downloadImage,
   getAllImagesInFolder,
+  getOriginalImageName,
   getSortedImagesInfolder,
 } from "../controllers/albumFolder.controller";
 import multer from "multer";
@@ -14,6 +16,10 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 router.get("/image/:uuid", displayImage); //display images in albumFolder.tsx
+
+router.get("/download/image/:uuid", downloadImage);
+
+router.get("/donwload/imageName/:uuid", getOriginalImageName);
 
 router.get("/:folderId/allImages", getAllImagesInFolder);
 

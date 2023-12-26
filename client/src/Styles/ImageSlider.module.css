@@ -5,14 +5,10 @@
 .sliderContainer {
   height: 100%;
   width: 80%;
-  /* background-color: lightcoral; */
-  /* background-color: #e1eedd; */
 }
 .sliderWrapper {
   height: 100%;
   width: 100%;
-  /* backgrousnd-color: black; */
-  /* background-color: #e1eedd; */
   display: flex;
   overflow: hidden;
 }
@@ -53,7 +49,6 @@
   height: 100%;
   width: 100%;
   object-fit: contain;
-  /* background: lightgreen; */
   flex-grow: 1;
   flex-shrink: 0;
 }

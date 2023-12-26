@@ -10,6 +10,7 @@ import {
   createImage,
   getSortedImagesByAsc,
   getSortedImagesByDesc,
+  getImageName,
 } from "../services/image.service";
 import { getUnikImageName } from "../utils/image";
 
@@ -20,6 +21,20 @@ export const displayImage: RequestHandler = async (req, res) => {
   res.contentType("image/jpg");
   res.header("Content-Disposition", "attachment"); // save image in local
   res.send(imageBuffer);
+};
+
+export const downloadImage: RequestHandler = async (req, res) => {
+  const imageName = req.params.uuid;
+  const imageBuffer = await downloadFile(imageName);
+  res.contentType("image/jpg");
+  res.header("Content-Disposition", "attachment"); // save image in local
+  res.send(imageBuffer);
+};
+
+export const getOriginalImageName: RequestHandler = async (req, res) => {
+  const imageName = req.params.uuid;
+  const originalImageName = await getImageName(imageName);
+  res.send(originalImageName[0].original_name);
 };
 
 export const getAllImagesInFolder: RequestHandler = async (req, res) => {

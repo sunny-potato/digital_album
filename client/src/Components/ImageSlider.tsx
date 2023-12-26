@@ -28,16 +28,14 @@ function ImageSlider({
   if (currentImageIndex === undefined) {
     return <div>Loading...</div>;
   }
-  console.log({ imageList });
+  // console.log({ imageList });
 
   return (
     <div className={s.sliderContainer}>
       <div className={s.sliderWrapper}>
         <img
-          src={`${defaultURL}${imageList[currentImageIndex as number].uuid}`}
-          alt={`${
-            imageList[currentImageIndex as number].origianl_name
-          }`} /* need to change????? */
+          src={`${defaultURL}${imageList[currentImageIndex].uuid}`}
+          alt={`${imageList[currentImageIndex].original_name}`}
           className={s.displayedImage}
         ></img>
       </div>

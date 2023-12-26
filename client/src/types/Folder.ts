@@ -17,6 +17,7 @@ export type Image = {
   type: string;
   uuid: string;
   folder_id?: number;
+  created_at: Date | undefined;
 };
 
 export type ImageSlider = {
