@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Image } from "../Types/Folder";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import s from "../Styles/EachImage.module.css";
 import ImageSlider from "../Components/ImageSlider";
-import { downloadImageFile, getAllImagesInFolder } from "../Services/folder";
+import { getAllImagesInFolder } from "../Services/folder";
 import { Image as ImageProps } from "../Types/Folder";
 import { formatFileSize, formatDateTime } from "../Utils/formatData";
 import ShareIcon from "@mui/icons-material/Share";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import { downloadImage } from "../Utils/downloadImage";
 
 function EachImage() {
   const { folderId, imageId } = useParams();
@@ -17,8 +18,6 @@ function EachImage() {
   const [defaultURL, setDefaultURL] = useState<string>(
     "http://localhost:8000/albumFolder/image/"
   );
-
-  console.log(imageList);
 
   useEffect(() => {
     const getImages = async () => {
@@ -51,23 +50,6 @@ function EachImage() {
       return <div></div>;
     }
   };
-  const downloadImage = async () => {
-    const result = await downloadImageFile(
-      imageList[currentImageIndex as number]
-    );
-    const arrayBuffer = result[0].data as ArrayBuffer;
-    const imageOriginalName = result[1].data as string;
-    console.log(arrayBuffer, imageOriginalName);
-    const imageBlob = new Blob([arrayBuffer]);
-    const imageUrl = URL.createObjectURL(imageBlob);
-    const a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style.display = "none";
-    a.href = imageUrl;
-    a.download = `${imageOriginalName}`;
-    a.click();
-    URL.revokeObjectURL(imageUrl);
-  };
 
   return (
     <div>
@@ -95,7 +77,12 @@ function EachImage() {
                 <ShareIcon />
                 <div>Share</div>
               </button>
-              <button className={s.downloadButton} onClick={downloadImage}>
+              <button
+                className={s.downloadButton}
+                onClick={() =>
+                  downloadImage(imageList[currentImageIndex as number])
+                }
+              >
                 <FileDownloadOutlinedIcon />
                 <a>Download</a>
               </button>

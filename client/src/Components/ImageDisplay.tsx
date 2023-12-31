@@ -3,6 +3,7 @@ import s from "../Styles/ImageDisplay.module.css";
 import { deleteImageInfolder, getAllImagesInFolder } from "../Services/folder";
 import { ImageDisplay as ImageDisplayProps } from "../Types/Folder";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import { downloadImage } from "../Utils/downloadImage";
 
 function ImageDisplay({
   uploadedImageList,
@@ -17,7 +18,6 @@ function ImageDisplay({
       setUploadedImageList(getImageList);
     }
   }
-
   return (
     <div className={s.displayImageBox}>
       <div className={s.displayContent}>
@@ -30,12 +30,10 @@ function ImageDisplay({
               >
                 x
               </button>
-              <a
+              <FileDownloadOutlinedIcon
                 className={s.downloadImageIcon}
-                href={`http://localhost:8000/albumFolder/image/${image.uuid}`}
-              >
-                <FileDownloadOutlinedIcon />
-              </a>
+                onClick={() => downloadImage(image)}
+              />
               <div className={s.displayImageName}>{image.original_name}</div>
               <Link className={s.uploadedImage} to={`image/${image.id}`}>
                 <img
