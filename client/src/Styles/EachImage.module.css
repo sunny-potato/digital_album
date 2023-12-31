@@ -63,11 +63,17 @@
   border-radius: 0.3rem;
   background-color: #fefbe9;
   cursor: pointer;
-  background: red;
+  background: transparent;
 }
 
 .popOverButtons button:hover {
-  background-color: red;
+  transform: scale(1.01);
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  background-color: #f0a04b;
+}
+.popOverButtons button:active {
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
 }
 
 .shareButton,
