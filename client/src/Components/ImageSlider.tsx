@@ -4,6 +4,8 @@ import s from "../Styles/ImageSlider.module.css";
 import { ImageSlider as ImageSliderProps } from "../Types/Folder";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import { pink } from "@mui/material/colors";
+import shadows from "@mui/material/styles/shadows";
 
 function ImageSlider({
   currentImageIndex,
@@ -28,7 +30,6 @@ function ImageSlider({
   if (currentImageIndex === undefined) {
     return <div>Loading...</div>;
   }
-  // console.log({ imageList });
 
   return (
     <div className={s.sliderContainer}>
@@ -39,12 +40,40 @@ function ImageSlider({
           className={s.displayedImage}
         ></img>
       </div>
-      <button className={s.backButton} onClick={() => showPrevImage()}>
-        <ArrowBackIosNewIcon fontSize="medium" />
-      </button>
-      <button className={s.nextButton} onClick={() => showNextImage()}>
-        <ArrowForwardIosSharpIcon fontSize="medium" />
-      </button>
+      <ArrowBackIosNewIcon
+        fontSize="medium"
+        sx={[
+          {
+            "&:hover": {
+              opacity: 0.5,
+            },
+          },
+          {
+            "&:active": {
+              opacity: 0.8,
+            },
+          },
+        ]}
+        className={s.backButton}
+        onClick={() => showPrevImage()}
+      />
+      <ArrowForwardIosSharpIcon
+        fontSize="medium"
+        sx={[
+          {
+            "&:hover": {
+              opacity: 0.5,
+            },
+          },
+          {
+            "&:active": {
+              opacity: 0.8,
+            },
+          },
+        ]}
+        className={s.nextButton}
+        onClick={() => showNextImage()}
+      />
     </div>
   );
 }

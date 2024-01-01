@@ -12,7 +12,6 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
-// 1) click effect for share & download button
 // 2) update code of calculateFolderSize
 // 4) tool tip using mui
 // 5) move image to another file

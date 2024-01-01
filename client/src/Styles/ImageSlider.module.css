@@ -23,6 +23,7 @@
   position: absolute;
   top: 50%;
   left: 0;
+  transform: translate(0%, -50%);
   background-color: transparent;
   border-width: 0;
 }
@@ -31,18 +32,9 @@
   position: absolute;
   top: 50%;
   right: 0;
+  transform: translate(0%, -50%);
   background-color: transparent;
   border-width: 0;
-}
-
-.backButton:hover,
-.nextButton:hover {
-  background-color: rgb(240, 161, 76, 0.8);
-}
-
-.backButton:active,
-.nextButton:active {
-  background: red;
 }
 
 .displayedImage {
