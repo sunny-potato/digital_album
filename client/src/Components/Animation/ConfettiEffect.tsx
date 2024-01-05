@@ -1,6 +1,6 @@
-import s from "../Styles/ConfettiEffect.module.css";
+import s from "../../Styles/ConfettiEffect.module.css";
 import { useEffect, useRef } from "react";
-import { getRandomNumber, getRandomInt } from "../Utils/calculations";
+import { getRandomNumber, getRandomInt } from "../../Utils/calculations";
 
 function ConfettiEffect() {
   const confetti = useRef<HTMLDivElement>(null);

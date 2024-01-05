@@ -16,7 +16,7 @@
   right: 0;
   overflow: hidden;
 }
-span {
+.confettiWrapper span {
   animation: confetti 7s linear infinite;
 }
 

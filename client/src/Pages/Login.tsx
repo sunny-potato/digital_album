@@ -6,7 +6,7 @@ import { UserContext } from "../AppContext";
 import s from "../Styles/Login.module.css";
 import hideEyeIcon from "../Images/hide.png";
 import viewEyeIcon from "../Images/view.png";
-import ConfettiEffect from "../Components/ConfettiEffect";
+import ConfettiEffect from "../Components/Animation/ConfettiEffect";
 import WelcomeMan from "../Components/Animation/WelcomeMan";
 
 function Login() {

@@ -1,4 +1,4 @@
-import welcomeManImage from "../../Images/welcomeMan.svg";
+// import welcomeManImage from "../../Images/welcomeMan.svg";
 import s from "../../Styles/Animation/WelcomeMan.module.css";
 
 function WelcomeMan() {

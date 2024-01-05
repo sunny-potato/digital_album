@@ -1,3 +1,6 @@
-.test {
-  padding-top: 10em;
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 2.8rem;
+  /* background-color: red; */
 }

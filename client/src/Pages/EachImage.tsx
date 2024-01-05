@@ -9,6 +9,7 @@ import { formatFileSize, formatDateTime } from "../Utils/formatData";
 import ShareIcon from "@mui/icons-material/Share";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import { downloadImage } from "../Utils/downloadImage";
+import { Tooltip } from "@mui/material";
 
 function EachImage() {
   const { folderId, imageId } = useParams();
@@ -18,6 +19,8 @@ function EachImage() {
   const [defaultURL, setDefaultURL] = useState<string>(
     "http://localhost:8000/albumFolder/image/"
   );
+
+  console.log(window.location.href)
 
   useEffect(() => {
     const getImages = async () => {
@@ -70,22 +73,26 @@ function EachImage() {
             />
             {getImageInformation()}
             <div className={s.popOverButtons}>
-              <button
-                className={s.shareButton}
-                onClick={() => console.log("clicked")}
-              >
-                <ShareIcon />
-                <div>Share</div>
-              </button>
-              <button
-                className={s.downloadButton}
-                onClick={() =>
-                  downloadImage(imageList[currentImageIndex as number])
-                }
-              >
-                <FileDownloadOutlinedIcon />
-                <a>Download</a>
-              </button>
+              <Tooltip title="Share" placement="left" arrow>
+                <button
+                  className={s.shareButton}
+                  onClick={() => console.log("clicked")}
+                >
+                  <ShareIcon />
+                  {/* <div>Share</div> */}
+                </button>
+              </Tooltip>
+              <Tooltip title="Download" placement="left" arrow>
+                <button
+                  className={s.downloadButton}
+                  onClick={() =>
+                    downloadImage(imageList[currentImageIndex as number])
+                  }
+                >
+                  <FileDownloadOutlinedIcon />
+                  {/* <a>Download</a> */}
+                </button>
+              </Tooltip>
             </div>
           </div>
         </div>
