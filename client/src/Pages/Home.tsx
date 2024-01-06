@@ -9,7 +9,7 @@ function Home() {
   return (
     <>
       {userId ? (
-        <div style={{ padding: "100px" }}>Homew with logined user</div>
+        <div style={{ padding: "100px" }}>Home with logined user</div>
       ) : (
         <div className={s.pageContainer}>
           <MemoryImages />

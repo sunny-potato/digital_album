@@ -2,5 +2,7 @@
   width: 100vw;
   height: 100vh;
   padding-top: 2.8rem;
-  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
