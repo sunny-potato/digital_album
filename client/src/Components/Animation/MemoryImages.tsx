@@ -797,7 +797,7 @@ function memoryImages() {
             />
           </g>
         </g>
-        <g id="picture1">
+        <g id="picture1" className={s.centerImage}>
           <rect x="200.5" y="162.5" width="113" height="84" stroke="black" />
           <rect
             id="Rectangle 80"
@@ -1089,7 +1089,7 @@ function memoryImages() {
             </g>
           </g>
         </g>
-        <g id="picture2">
+        <g id="picture2" className={s.rightImage}>
           <rect x="701.5" y="20.5" width="168" height="118" stroke="black" />
           <rect
             id="Rectangle 81"

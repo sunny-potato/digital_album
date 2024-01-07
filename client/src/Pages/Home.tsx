@@ -12,7 +12,14 @@ function Home() {
         <div style={{ padding: "100px" }}>Home with logined user</div>
       ) : (
         <div className={s.pageContainer}>
-          <MemoryImages />
+          <div className={s.contentContainer}>
+            <div className={s.pageTitle}>
+              <div>Keep</div>
+              <div>your memories</div>
+              <div>alive</div>
+            </div>
+            <MemoryImages />
+          </div>
         </div>
       )}
     </>

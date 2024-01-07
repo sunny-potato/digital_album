@@ -38,6 +38,10 @@ npm run dev
 -> icon : https://mui.com/
 -> sharp(https://sharp.pixelplumbing.com/): optimize image
 
+##
+
+animation with SVG
+
 ## Memo
 
 1. relative url vs absolute url when <Link> is used in React
