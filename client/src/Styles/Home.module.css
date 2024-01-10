@@ -1,18 +1,15 @@
 .pageContainer {
-  width: 100vw;
   height: 100vh;
-  padding-top: 2.8rem;
 }
 .contentContainer {
   height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 .pageTitle {
   width: 40%;
-  height: 80%;
-  font-size: 5vw;
+  height: 70%;
+  font-size: 5.5vw;
   font-weight: 900;
   color: #183a1d;
   background-color: #e1eedd;
@@ -21,7 +18,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: left;
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   padding: 0 1rem;
 }
 .pageImage {
