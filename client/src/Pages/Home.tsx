@@ -18,7 +18,9 @@ function Home() {
               <div>your memories</div>
               <div>alive</div>
             </div>
-            <MemoryImages />
+            <div className={s.pageImage}>
+              <MemoryImages />
+            </div>
           </div>
         </div>
       )}
