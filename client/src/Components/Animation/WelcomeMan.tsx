@@ -188,8 +188,8 @@ function WelcomeMan() {
           <g id="hand" className={s.welcomeWavingHand}>
             <g id="Union" filter="url(#filter0_d_11_469)">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M273.221 423.164C272.065 418.283 275.086 413.388 279.968 412.232C284.85 411.076 289.744 414.096 290.9 418.978L293.433 429.673C292.29 424.798 295.309 419.915 300.184 418.761C305.066 417.605 309.96 420.625 311.116 425.507L322.561 473.843C322.605 473.879 322.648 473.915 322.691 473.951L324.614 449.403C325.008 444.369 329.394 440.754 334.411 441.329C339.427 441.904 343.174 446.451 342.78 451.485L338.561 505.364C340.04 525.95 327.324 544.89 307.715 549.533C285.796 554.723 263.565 540.084 258.061 516.836C257.911 516.205 257.776 515.575 257.654 514.945C257.563 514.676 257.484 514.401 257.417 514.119L243.3 454.497C242.144 449.615 245.165 444.721 250.047 443.565C254.921 442.41 259.808 445.42 260.974 450.289L257.717 436.535C256.561 431.653 259.582 426.758 264.463 425.602C269.345 424.446 274.24 427.467 275.396 432.349L283.51 466.617L273.221 423.164Z"
                 fill="white"
               />
@@ -198,37 +198,37 @@ function WelcomeMan() {
               id="Vector 1"
               d="M249.866 443.607V443.607C254.848 442.428 259.842 445.51 261.022 450.491L268.94 483.931"
               stroke="black"
-              stroke-width="4"
+              strokeWidth="4"
             />
             <path
               id="Vector 5"
               d="M334.376 441.379V441.379C339.246 441.925 342.892 446.329 342.52 451.215L338.746 500.787"
               stroke="black"
-              stroke-width="4"
+              strokeWidth="4"
             />
             <path
               id="Vector 2"
               d="M264.283 425.645V425.645C269.265 424.465 274.259 427.548 275.439 432.529L286.48 479.16"
               stroke="black"
-              stroke-width="4"
+              strokeWidth="4"
             />
             <path
               id="Vector 3"
               d="M279.732 412.288V412.288C284.775 411.094 289.83 414.213 291.024 419.256L304.126 474.59"
               stroke="black"
-              stroke-width="4"
+              strokeWidth="4"
             />
             <path
               id="Vector 4"
               d="M300.094 419.186V419.186C305.076 418.007 310.07 421.089 311.25 426.07L321.834 470.773"
               stroke="black"
-              stroke-width="4"
+              strokeWidth="4"
             />
             <path
               id="Vector 6"
               d="M338.429 499.018C340.446 523.154 335.415 535.574 318.699 544.857C313.154 547.937 306.963 549.78 300.642 550.307C284.14 551.684 272.21 546.32 259.197 521.636"
               stroke="black"
-              stroke-width="4"
+              strokeWidth="4"
             />
           </g>
           <path
@@ -251,9 +251,9 @@ function WelcomeMan() {
           width="107.755"
           height="146.593"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

@@ -29,7 +29,7 @@ function Login() {
     if (!isLoading) {
       setIsLoading(true);
       event.preventDefault();
-      checkValidation(loginInfo);
+      void checkValidation(loginInfo);
     } else {
       setIsLoading(false);
     }
