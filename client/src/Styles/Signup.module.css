@@ -81,3 +81,15 @@
 .successNote {
   color: green;
 }
+
+.formContainer > input[type="submit"] {
+  margin-top: 0.5rem;
+  border-width: 0.01rem;
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  background-color: #f0a04b;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  color: #183a1d;
+  font-weight: bolder;
+  cursor: pointer;
+}
