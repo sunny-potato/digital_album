@@ -25,8 +25,6 @@ function EachImage() {
   const [isShareClicked, setIsShareClicked] = useState<boolean>(false);
   const [isURLCopied, setIsURLCopied] = useState<boolean>(false);
 
-  console.log(isURLCopied);
-
   useEffect(() => {
     const getImages = async () => {
       const images = await getAllImagesInFolder(Number(folderId));

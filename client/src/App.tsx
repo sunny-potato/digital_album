@@ -12,7 +12,6 @@ import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
 
 // things to do
-// 2) share image to social media
 // 5) move image to another file
 // 7) fetch images from database quickly by using google CDN
 

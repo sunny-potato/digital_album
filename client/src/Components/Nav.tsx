@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import s from "../Styles/Nav.module.css";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../AppContext";
-import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+// import LoginIcon from "@mui/icons-material/Login";
+// import LogoutIcon from "@mui/icons-material/Logout";
+// import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { getUsername } from "../Services/user";
 import { removeLocalStorageData } from "../Utils/localstorage";
 
@@ -31,7 +31,7 @@ function Nav() {
     <div className={s.navContainer}>
       <div className={s.navLeft}>
         <Link to={"/"} className={s.home}>
-          <HomeOutlinedIcon />
+          {/* <HomeOutlinedIcon /> */}
           Home
         </Link>
         <Link to={"/about"} className={s.about}>
@@ -57,7 +57,7 @@ function Nav() {
               setUserId(null), removeLocalStorageData("myAlbumDropDownList")
             )}
           >
-            <LogoutIcon />
+            {/* <LogoutIcon /> */}
             Log out
           </Link>
         </div>
@@ -67,7 +67,7 @@ function Nav() {
             <Link to={"/signup"}>Sign up</Link>
           </div>
           <Link to={"/login"} className={s.login}>
-            <LoginIcon />
+            {/* <LoginIcon /> */}
             Log in
           </Link>
         </div>

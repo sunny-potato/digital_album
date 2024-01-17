@@ -7,7 +7,7 @@
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(50, 50, 50, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,11 +15,22 @@
 .popupInner {
   height: 7rem;
   width: 20rem;
-  background-color: lightgray;
+  background-color: #fefbe9;
   margin-bottom: 5rem;
   padding: 0.5rem;
   position: relative;
   border-radius: 0.5rem;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+}
+.popupInner > button {
+  border-width: 0.01rem;
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  background-color: #f0a04b;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  color: #183a1d;
+  font-weight: bolder;
+  cursor: pointer;
 }
 .popupTitle {
   text-align: center;
