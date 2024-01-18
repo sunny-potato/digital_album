@@ -137,7 +137,7 @@ function Login() {
           </form>
           <div>
             <div className={s.linkInformation}>
-              <Link to={"/"}>Forgotten password?</Link>
+              <Link to={"/findAccount"}>Forgotten username or password?</Link>
             </div>
             <div className={s.linkInformation}>
               <Link to={"/signup"}>Sign up?</Link>

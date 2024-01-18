@@ -20,3 +20,8 @@ export async function getUsername(userId: number) {
   const response = await axios.get(`/user?userId=${userId}`);
   return response.data;
 }
+
+export async function findUserAccount(userInput: string) {
+  const response = await axios.get(`/user/findAccount?userInput=${userInput}`);
+  return response.data;
+}

@@ -10,6 +10,7 @@ import NotFoundPage from "./Pages/NotFound";
 import EachImage from "./Pages/EachImage";
 import MyPage from "./Pages/MyPage";
 import About from "./Pages/About";
+import FindAccount from "./Pages/FindAccount";
 
 // things to do
 // 5) move image to another file
@@ -31,6 +32,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/myPage/:userId" element={<MyPage />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/findAccount" element={<FindAccount />} />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </UserContextProvider>

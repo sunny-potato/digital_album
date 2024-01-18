@@ -11,6 +11,9 @@ export async function getAllUserAccounts() {
 export async function getTheSameUsername(username: string) {
   return await sql`select * from user_account where user_name=${username}`;
 }
+export async function getTheSameEmail(email: string) {
+  return await sql`select * from user_info where email=${email}`;
+}
 
 export async function getUsername(userId: number) {
   return await sql`select user_name from user_account where user_id=${userId}`;
