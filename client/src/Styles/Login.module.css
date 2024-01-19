@@ -118,3 +118,6 @@ label {
 .linkInformation {
   padding-bottom: 0.7rem;
 }
+.linkInformation:hover {
+  text-decoration-line: underline;
+}

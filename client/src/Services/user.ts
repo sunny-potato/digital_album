@@ -18,10 +18,10 @@ export async function createNewAccount(signupInfo: Signup) {
 
 export async function getUsername(userId: number) {
   const response = await axios.get(`/user?userId=${userId}`);
-  return response.data;
+  return response.data as string;
 }
 
 export async function findUserAccount(userInput: string) {
   const response = await axios.get(`/user/findAccount?userInput=${userInput}`);
-  return response.data;
+  return response.data as number;
 }

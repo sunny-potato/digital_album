@@ -1,0 +1,43 @@
+.tabContent > .tabInActive {
+  display: none;
+}
+.tabInner {
+}
+.pageDescription {
+  padding: 0.5rem 0;
+}
+
+input {
+  width: 100%;
+  margin-top: 0.8rem;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+}
+
+.buttonContainer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: end;
+}
+
+.searchButton,
+.goToLoginButton,
+.continueButton {
+  margin-left: 0.3rem;
+  border-radius: 0.3rem;
+  border-width: 0.01rem;
+  background-color: #f0a04b;
+  padding: 0.3rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancelButton {
+  margin-left: 0.3rem;
+  border-radius: 0.3rem;
+  border-width: 0.01rem;
+  background-color: lightgray;
+  padding: 0.3rem;
+  font-weight: bold;
+  cursor: pointer;
+}
