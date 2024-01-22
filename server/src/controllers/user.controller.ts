@@ -21,3 +21,14 @@ export const findUserAccount: RequestHandler = async (req, res) => {
   }
   res.status(200).send(`${result.length}`);
 };
+
+export const getUsernameWithEmail: RequestHandler = async (req, res) => {
+  const email = req.query.userEmail as string;
+  const userId = await getTheSameEmail(email);
+  const username = await getUsername(userId[0].id);
+  const result = username[0].user_name;
+  res.status(200).send(result);
+};
+export const sendEmailVerificationCode: RequestHandler = async (req, res) => {
+  console.log(req.query);
+};
