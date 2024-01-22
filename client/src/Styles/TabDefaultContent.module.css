@@ -41,3 +41,7 @@ input {
   font-weight: bold;
   cursor: pointer;
 }
+
+.warningMessage {
+  color: red;
+}

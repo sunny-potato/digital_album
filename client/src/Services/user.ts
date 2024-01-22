@@ -21,7 +21,18 @@ export async function getUsername(userId: number) {
   return response.data as string;
 }
 
+export async function getUsernameWithEmail(userEmail: string) {
+  const response = await axios.get(`/user/getUsername?userEmail=${userEmail}`);
+  return response.data as string;
+}
 export async function findUserAccount(userInput: string) {
   const response = await axios.get(`/user/findAccount?userInput=${userInput}`);
   return response.data as number;
+}
+
+export async function sendEmailVerificationCode(userEmail: string) {
+  const response = await axios.get(
+    `/user/getEmailVerificationCode?userEmail=${userEmail}`
+  );
+  console.log(response);
 }
