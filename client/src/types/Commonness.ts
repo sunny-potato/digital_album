@@ -15,3 +15,8 @@ export type DropDown = {
   setDropDownList: (value: DropDownList) => void;
   dropDownContent: Record<string, string>[];
 };
+
+export type userInput = {
+  username: string;
+  email: string;
+};

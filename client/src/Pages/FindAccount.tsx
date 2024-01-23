@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import s from "../Styles/FindAccount.module.css";
 import { useState } from "react";
-import TabDefaultContent from "../Components/TabDefaultContent";
 import TabNoMatchContent from "../Components/TabNoMatchContent";
-import TabConfirmEmail from "../Components/TabConfirmUsername";
-import TabConfirmUsername from "../Components/TabConfirmUsername";
-
+import TabConfirmEmail from "../Components/TabUsernameConfirm";
+import TabConfirmUsername from "../Components/TabUsernameConfirm";
+import TabUsernameDefault from "../Components/TabUsernameDefault";
+import TabPasswordDefault from "../Components/TabPasswordDefault";
+import TabPasswordConfirm from "../Components/TabPasswordConfirm";
+type userInput = {
+  username: string;
+  email: string;
+};
 function FindAccount() {
   // const navigate = useNavigate();
   const [usernameStatus, setUsernameStatus] = useState<{
@@ -18,9 +23,12 @@ function FindAccount() {
     isActive: boolean;
     status: string;
   }>({ name: "password", isActive: false, status: "default" });
-  const [userInputData, setUserInputData] = useState<string>();
-  const getUserInput = (userData: string) => {
-    setUserInputData(userData);
+  const [userInputData, setUserInputData] = useState<userInput>({
+    username: "",
+    email: "",
+  });
+  const getUserInput = ({ username, email }: userInput) => {
+    setUserInputData({ username, email });
   };
 
   return (
@@ -55,12 +63,9 @@ function FindAccount() {
           </div>
           <div className={s.tabContent}>
             {usernameStatus.isActive && usernameStatus.status === "default" && (
-              <TabDefaultContent
-                tabDescription={"Please enter email to search your account"}
-                // tabInputPlaceholder={"Enter your email address"}
+              <TabUsernameDefault
                 activeTab={usernameStatus}
                 setActiveTabStatus={setUsernameStatus}
-                incorrectFormatMessage={"Please enter a valid email address"}
                 getUserInput={getUserInput}
               />
             )}
@@ -77,19 +82,13 @@ function FindAccount() {
               usernameStatus.status === "confirmUsername" && (
                 <TabConfirmUsername
                   activeTab={usernameStatus}
-                  // setActiveTabStatus={setUsernameStatus}
                   userData={userInputData}
                 />
               )}
             {passwordStatus.isActive && passwordStatus.status === "default" && (
-              <TabDefaultContent
-                tabDescription={
-                  "Please enter your username or email to search your account"
-                }
-                // tabInputPlaceholder={"Enter your username or email address"}
+              <TabPasswordDefault
                 activeTab={passwordStatus}
                 setActiveTabStatus={setPasswordStatus}
-                incorrectFormatMessage={"Please enter a valid email address"}
                 getUserInput={getUserInput}
               />
             )}
@@ -102,6 +101,13 @@ function FindAccount() {
                 setActiveTabStatus={setPasswordStatus}
               />
             )}
+            {passwordStatus.isActive &&
+              passwordStatus.status === "confirmPassword" && (
+                <TabPasswordConfirm
+                  activeTab={passwordStatus}
+                  userData={userInputData}
+                />
+              )}
           </div>
         </div>
       }

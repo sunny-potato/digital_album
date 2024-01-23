@@ -2,31 +2,22 @@ import { useEffect, useState } from "react";
 import s from "../Styles/TabDefaultContent.module.css";
 import { getUsernameWithEmail } from "../Services/user";
 import { useNavigate } from "react-router-dom";
+import { userInput } from "../Types/Commonness";
 
-type TabConfirmUsername = {
+type TabUsernameConfirm = {
   activeTab: { name: string; isActive: boolean; status: string };
-  // setActiveTabStatus: (value: {
-  //   name: string;
-  //   isActive: boolean;
-  //   status: string;
-  // }) => void;
-  userData: undefined | string;
+  userData: userInput;
 };
 
-function TabConfirmUsername({
-  activeTab,
-  // setActiveTabStatus,
-  userData,
-}: TabConfirmUsername) {
+function TabUsernameConfirm({ activeTab, userData }: TabUsernameConfirm) {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
 
-  console.log(activeTab.isActive);
-
   useEffect(() => {
     const getUsername = async () => {
+      console.log(userData);
       if (userData) {
-        const result = await getUsernameWithEmail(userData);
+        const result = await getUsernameWithEmail(userData.email);
         setUsername(result);
       }
     };
@@ -48,4 +39,4 @@ function TabConfirmUsername({
   );
 }
 
-export default TabConfirmUsername;
+export default TabUsernameConfirm;

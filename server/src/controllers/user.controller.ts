@@ -3,6 +3,7 @@ import {
   getTheSameEmail,
   getTheSameUsername,
   getUsername,
+  getUserInfoWithUsernameAndEmail,
 } from "../services/user.service";
 
 export const getUsernameController: RequestHandler = async (req, res) => {
@@ -12,14 +13,14 @@ export const getUsernameController: RequestHandler = async (req, res) => {
 };
 
 export const findUserAccount: RequestHandler = async (req, res) => {
-  const userInput = req.query.userInput as string;
-  let result;
-  if (userInput.includes("@")) {
-    result = await getTheSameEmail(userInput);
-  } else {
-    result = await getTheSameUsername(userInput);
-  }
-  res.status(200).send(`${result.length}`);
+  const username = req.query.username as string;
+  const email = req.query.email as string;
+  const userAccount = await getUserInfoWithUsernameAndEmail({
+    username,
+    email,
+  });
+
+  res.status(200).send(userAccount[0]);
 };
 
 export const getUsernameWithEmail: RequestHandler = async (req, res) => {

@@ -19,6 +19,13 @@ export async function getUsername(userId: number) {
   return await sql`select user_name from user_account where user_id=${userId}`;
 }
 
+export async function getUserInfoWithUsernameAndEmail(userInput: {
+  username: string;
+  email: string;
+}) {
+  return await sql`select * from user_account inner join user_info on user_info.id=user_account.user_id where user_account.user_name=${userInput.username} and user_info.email=${userInput.email}`;
+}
+
 export async function createNewUserInfo(userInfo: {
   firstname: string;
   lastname: string;
