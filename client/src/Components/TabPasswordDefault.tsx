@@ -3,18 +3,18 @@ import s from "../Styles/TabDefaultContent.module.css";
 import { useState } from "react";
 import { findUserAccount } from "../Services/user";
 import emailValidation from "../Utils/emailValidation";
+import { userInput } from "../Types/Commonness";
 
 type TabPasswordDefault = {
-  // tabDescription: string;
-  // tabInputPlaceholder: string;
   activeTab: { name: string; isActive: boolean; status: string };
   setActiveTabStatus: (value: {
     name: string;
     isActive: boolean;
     status: string;
   }) => void;
-  getUserInput: (value: string) => void;
+  getUserInput: (value: userInput) => void;
 };
+
 function TabPasswordDefault({
   activeTab,
   setActiveTabStatus,
@@ -27,7 +27,6 @@ function TabPasswordDefault({
   }>({ username: "", email: "" });
   const [usernameErrorMessage, setUsernameErrorMessage] = useState<string>("");
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>("");
-  // console.log({ usernameErrorMessage, emailErrorMessage });
 
   const isUsernameValid = () => {
     if (userInput.username === "") {
@@ -88,7 +87,6 @@ function TabPasswordDefault({
         <button
           className={s.searchButton}
           onClick={async () => {
-            // console.log(isUsernameValid(), isEmailValid());
             if (isUsernameValid() && isEmailValid()) {
               const isUserAccountFound = await findUserAccount(userInput);
               console.log(isUserAccountFound);
@@ -97,7 +95,7 @@ function TabPasswordDefault({
                   ...activeTab,
                   ["status"]: "confirmPassword",
                 });
-                getUserInput(userInput.email);
+                getUserInput(userInput);
               } else {
                 setActiveTabStatus({ ...activeTab, ["status"]: "noMatch" });
               }

@@ -21,8 +21,8 @@ export async function getUsername(userId: number) {
   return response.data as string;
 }
 
-export async function getUsernameWithEmail(userEmail: string) {
-  const response = await axios.get(`/user/getUsername?userEmail=${userEmail}`);
+export async function getUsernameWithEmail(email: string) {
+  const response = await axios.get(`/user/getUsername?email=${email}`);
   return response.data as string;
 }
 export async function findUserAccount(userInput: {
@@ -30,19 +30,10 @@ export async function findUserAccount(userInput: {
   email: string;
 }) {
   const response = await axios.get(
-    `/user/findUserAccount?username=${userInput.username}&&email=${userInput.email}`
+    `/user/findUserAccount?username=${userInput.username}&email=${userInput.email}`
   );
   return response.data as string;
 }
-// export async function findUserAccount(userInput: string) {
-//   const response = await axios.get(`/user/findAccount?userInput=${userInput}`);
-//   return response.data as number;
-// }
-
-// export async function findUserAccount(userInput: string) {
-//   const response = await axios.get(`/user/findAccount?userInput=${userInput}`);
-//   return response.data as number;
-// }
 
 export async function sendEmailVerificationCode(userEmail: string) {
   const response = await axios.get(

@@ -8,8 +8,8 @@ import {
 
 const router = express.Router();
 router.get("/", getUsernameController);
-router.get("/findUserAccount", findUserAccount);
 router.get("/getUsername", getUsernameWithEmail);
+router.get("/findUserAccount", findUserAccount);
 router.get("/getEmailVerificationCode", sendEmailVerificationCode);
 
 export default router;

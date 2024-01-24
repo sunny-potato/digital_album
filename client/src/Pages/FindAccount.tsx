@@ -7,10 +7,8 @@ import TabConfirmUsername from "../Components/TabUsernameConfirm";
 import TabUsernameDefault from "../Components/TabUsernameDefault";
 import TabPasswordDefault from "../Components/TabPasswordDefault";
 import TabPasswordConfirm from "../Components/TabPasswordConfirm";
-type userInput = {
-  username: string;
-  email: string;
-};
+import { userInput } from "../Types/Commonness";
+
 function FindAccount() {
   // const navigate = useNavigate();
   const [usernameStatus, setUsernameStatus] = useState<{
@@ -30,7 +28,7 @@ function FindAccount() {
   const getUserInput = ({ username, email }: userInput) => {
     setUserInputData({ username, email });
   };
-
+  console.log(userInputData);
   return (
     <div className={s.pageContainer}>
       {
