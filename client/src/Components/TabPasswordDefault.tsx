@@ -89,7 +89,6 @@ function TabPasswordDefault({
           onClick={async () => {
             if (isUsernameValid() && isEmailValid()) {
               const isUserAccountFound = await findUserAccount(userInput);
-              console.log(isUserAccountFound);
               if (isUserAccountFound) {
                 setActiveTabStatus({
                   ...activeTab,

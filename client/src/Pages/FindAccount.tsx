@@ -8,6 +8,7 @@ import TabUsernameDefault from "../Components/TabUsernameDefault";
 import TabPasswordDefault from "../Components/TabPasswordDefault";
 import TabPasswordConfirm from "../Components/TabPasswordConfirm";
 import { userInput } from "../Types/Commonness";
+import TabPasswordSecurityCode from "../Components/TabPasswordSecurityCode";
 
 function FindAccount() {
   // const navigate = useNavigate();
@@ -103,7 +104,17 @@ function FindAccount() {
               passwordStatus.status === "confirmPassword" && (
                 <TabPasswordConfirm
                   activeTab={passwordStatus}
+                  setActiveTabStatus={setPasswordStatus}
                   userData={userInputData}
+                  getUserInput={getUserInput}
+                />
+              )}
+            {passwordStatus.isActive &&
+              passwordStatus.status === "securityCode" && (
+                <TabPasswordSecurityCode
+                  activeTab={passwordStatus}
+                  setActiveTabStatus={setPasswordStatus}
+                  getUserInput={getUserInput}
                 />
               )}
           </div>
