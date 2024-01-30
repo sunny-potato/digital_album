@@ -1,6 +1,7 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Login as login, Signup } from "../Types/Login";
+import { userInput } from "../Types/Commonness";
 
 // User
 export async function validateLoginInfo(loginInfo: login) {
@@ -35,9 +36,19 @@ export async function findUserAccount(userInput: {
   return response.data as string;
 }
 
-export async function sendEmailVerificationCode(userEmail: string) {
+export async function sendEmailVerificationCode(userData: userInput) {
   const response = await axios.get(
-    `/user/getEmailVerificationCode?userEmail=${userEmail}`
+    `/user/getEmailVerificationCode?useremail=${userData.email}&username=${userData.username}`
   );
-  console.log(response);
+  return response.data as boolean;
+}
+
+export async function checkVerificationCode(
+  userData: userInput,
+  securityCode: number
+) {
+  const response = await axios.get(
+    `/user/checkVerificationCode?useremail=${userData.email}&username=${userData.username}&sercuritycode=${securityCode}`
+  );
+  return response.data;
 }

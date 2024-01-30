@@ -43,3 +43,21 @@ export async function createNewUserAccount(userAccount: {
 }) {
   return await sql`insert into user_account(user_name, user_password, user_id) values(${userAccount.username}, ${userAccount.password}, ${userAccount.userId}) `;
 }
+
+export async function saveSecurityCode(codeInfo: {
+  code: number;
+  userId: number;
+}) {
+  return await sql`insert into security_code(code, user_id) values(${codeInfo.code},${codeInfo.userId} )`;
+}
+
+export async function matchSecurityCode(userId: number) {
+  return await sql`select * from security_code where user_id=${userId}`;
+}
+
+export async function deleteSecurityCode(codeInfo: {
+  code: number;
+  userId: number;
+}) {
+  return await sql`delete from security_code where user_id=${codeInfo.userId} `;
+}

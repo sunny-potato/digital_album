@@ -17,3 +17,10 @@ export type AccountFromUser = {
   username: string;
   password: string;
 };
+
+export type sendEmail = {
+  to: string;
+  subject: string;
+  text: string;
+  html: string;
+};
