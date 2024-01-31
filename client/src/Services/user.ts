@@ -3,7 +3,6 @@ axios.defaults.baseURL = "http://localhost:8000";
 import { Login as login, Signup } from "../Types/Login";
 import { userInput } from "../Types/Commonness";
 
-// User
 export async function validateLoginInfo(loginInfo: login) {
   return await axios.get(
     `/login?username=${loginInfo.username}&&password=${loginInfo.password}`
@@ -49,6 +48,17 @@ export async function checkVerificationCode(
 ) {
   const response = await axios.get(
     `/user/checkVerificationCode?useremail=${userData.email}&username=${userData.username}&sercuritycode=${securityCode}`
+  );
+  return response.data as boolean;
+}
+
+export async function updatePassword(userData: {
+  username: string;
+  newPassword: string;
+}) {
+  const response = await axios.post(
+    `/user/${userData.username}/updatePassword`,
+    userData
   );
   return response.data;
 }

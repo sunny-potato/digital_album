@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import s from "../Styles/TabDefaultContent.module.css";
-// import { getUsernameWithEmail } from "../Services/user";
-// import { useNavigate } from "react-router-dom";
 import { userInput } from "../Types/Commonness";
 import { sendEmailVerificationCode } from "../Services/user";
 
@@ -24,7 +22,7 @@ function TabPasswordConfirm({
 }: TabPasswordConfirm) {
   const [isCodeSendingSuccess, setIsCodeSendingSuccess] =
     useState<boolean>(true);
-  console.log(userData, activeTab);
+
   return (
     <div
       className={`${s.tabPassword}  ${

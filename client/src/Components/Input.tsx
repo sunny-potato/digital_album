@@ -23,8 +23,8 @@ export function Input({
     <div className={style.signupInput}>
       <label>
         <div>
-          {label}
-          {valueAvailability}
+          <div>{label}</div>
+          <div>{valueAvailability}</div>
         </div>
         <input
           type={type}

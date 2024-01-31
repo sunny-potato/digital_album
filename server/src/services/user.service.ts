@@ -61,3 +61,10 @@ export async function deleteSecurityCode(codeInfo: {
 }) {
   return await sql`delete from security_code where user_id=${codeInfo.userId} `;
 }
+
+export async function updatePassword(userData: {
+  username: string;
+  newPassword: string;
+}) {
+  return await sql`update user_account set user_password=${userData.newPassword} where user_name=${userData.username} `;
+}

@@ -10,6 +10,7 @@ import { PasswordMatch } from "../Components/PasswordMatch";
 import PhoneInput from "react-phone-number-input";
 import { E164Number } from "libphonenumber-js/min";
 import "react-phone-number-input/style.css";
+import { checkPasswordStrength } from "../Utils/checkPasswordStrength";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -176,7 +177,6 @@ function SignUp() {
             <PasswordMatch
               passwordLength={signupInfo.confirmedPassword.length}
               isPasswordsMatched={isPasswordsMatched}
-              style={s}
             />
           }
         />
@@ -245,33 +245,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
-function checkPasswordStrength(currentPassword: string) {
-  const numberRegex = new RegExp("(?=.*[0-9])");
-  const uppercaseRegex = new RegExp("(?=.*[A-Z])");
-  const lowercaseRegex = new RegExp("(?=.*[a-z])");
-  const specialcharacterRegex = new RegExp("(?=.*[$&+,:;=?@#|'<>.^*()%!-/])");
-  const lengthRegex = new RegExp("(?=\\S+$).{8,20}");
-  const isNumberIncluded = numberRegex.test(currentPassword);
-  const isUppercaseIncluded = uppercaseRegex.test(currentPassword);
-  const isLowercaseIncluded = lowercaseRegex.test(currentPassword);
-  const isSpecialcharacterIncluded =
-    specialcharacterRegex.test(currentPassword);
-  const isLengthValid = lengthRegex.test(currentPassword);
-
-  const isPasswordValid =
-    isNumberIncluded &&
-    isUppercaseIncluded &&
-    isLowercaseIncluded &&
-    isSpecialcharacterIncluded &&
-    isLengthValid;
-
-  return {
-    isPasswordValid,
-    isNumberIncluded,
-    isUppercaseIncluded,
-    isLowercaseIncluded,
-    isSpecialcharacterIncluded,
-    isLengthValid,
-  };
-}

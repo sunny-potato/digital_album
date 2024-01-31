@@ -7,6 +7,7 @@ import {
   saveSecurityCode,
   matchSecurityCode,
   deleteSecurityCode,
+  updatePassword,
 } from "../services/user.service";
 import sendEmail from "../configs/nodemailer.config";
 import { createVerificationCode } from "../utils/emailOauth";
@@ -93,4 +94,10 @@ export const checkVerificationCode: RequestHandler = async (req, res) => {
     isCodeMatched = false;
   }
   res.status(200).send(isCodeMatched);
+};
+
+export const updateUserPassword: RequestHandler = async (req, res) => {
+  const userData = req.body;
+  await updatePassword(userData);
+  res.status(200).send(true);
 };

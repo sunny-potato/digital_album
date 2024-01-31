@@ -62,12 +62,12 @@ function TabPasswordSecurityCode({
                 ["status"]: "resetPassword",
               });
             } else {
-              setErrorMessage("The varification invalid");
+              setErrorMessage("The verification code is invalid");
               // how to handle when it is not valid????????????
             }
           }}
         >
-          Search
+          Continue
         </button>
       </div>
     </div>
