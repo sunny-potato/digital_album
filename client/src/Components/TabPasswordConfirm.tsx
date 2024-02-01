@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import s from "../Styles/TabDefaultContent.module.css";
+import s from "../Styles/TabCommon.module.css";
 import { userInput } from "../Types/Commonness";
 import { sendEmailVerificationCode } from "../Services/user";
 

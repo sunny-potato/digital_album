@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import s from "../Styles/TabDefaultContent.module.css";
+import s from "../Styles/TabCommon.module.css";
 import { userInput } from "../Types/Commonness";
 import { useState } from "react";
 import { Input } from "./Input";

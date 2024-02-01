@@ -1,24 +1,13 @@
-import s from "../Styles/TabDefaultContent.module.css";
+import s from "../Styles/TabCommon.module.css";
 import { userInput } from "../Types/Commonness";
 import { useNavigate } from "react-router-dom";
 
 type TabPasswordDone = {
   activeTab: { name: string; isActive: boolean; status: string };
-  setActiveTabStatus: (value: {
-    name: string;
-    isActive: boolean;
-    status: string;
-  }) => void;
-  getUserInput: (value: userInput) => void;
 };
 
-function TabPasswordDone({
-  activeTab,
-  setActiveTabStatus,
-  getUserInput,
-}: TabPasswordDone) {
+function TabPasswordDone({ activeTab }: TabPasswordDone) {
   const navigate = useNavigate();
-
   return (
     <div
       className={`${s.tabPassword}  ${
@@ -28,18 +17,6 @@ function TabPasswordDone({
       <div>Your password has been successfully updated. </div>
       <div>Please log in using the new password.</div>
       <div className={s.buttonContainer}>
-        <button
-          className={s.cancelButton}
-          onClick={() => {
-            getUserInput({ username: "", email: "" });
-            setActiveTabStatus({
-              ...activeTab,
-              ["status"]: "default",
-            });
-          }}
-        >
-          Cancel
-        </button>
         <button
           className={s.searchButton}
           onClick={() => {

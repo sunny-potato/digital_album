@@ -130,11 +130,7 @@ function FindAccount() {
               )}
             {passwordStatus.isActive &&
               passwordStatus.status === "donePassword" && (
-                <TabPasswordDone
-                  activeTab={passwordStatus}
-                  setActiveTabStatus={setPasswordStatus}
-                  getUserInput={getUserInput}
-                />
+                <TabPasswordDone activeTab={passwordStatus} />
               )}
           </div>
         </div>

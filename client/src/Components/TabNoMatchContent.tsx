@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import s from "../Styles/TabDefaultContent.module.css";
+import s from "../Styles/TabCommon.module.css";
 
 type TabNoMatchContent = {
   tabDescription: string;

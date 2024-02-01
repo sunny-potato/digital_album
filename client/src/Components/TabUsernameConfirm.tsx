@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import s from "../Styles/TabDefaultContent.module.css";
+import s from "../Styles/TabCommon.module.css";
 import { getUsernameWithEmail } from "../Services/user";
 import { useNavigate } from "react-router-dom";
 import { userInput } from "../Types/Commonness";

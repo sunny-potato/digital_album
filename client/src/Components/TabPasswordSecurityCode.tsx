@@ -1,6 +1,6 @@
 import { userInput } from "../Types/Commonness";
 import { useNavigate } from "react-router-dom";
-import s from "../Styles/TabDefaultContent.module.css";
+import s from "../Styles/TabCommon.module.css";
 import { useState } from "react";
 import { checkVerificationCode } from "../Services/user";
 
