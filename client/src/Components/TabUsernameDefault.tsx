@@ -2,30 +2,22 @@ import { useNavigate } from "react-router-dom";
 import s from "../Styles/TabCommon.module.css";
 import { useState } from "react";
 import emailValidation from "../Utils/emailValidation";
-import { findUserAccount, getUsernameWithEmail } from "../Services/user";
+import { getUsernameWithEmail } from "../Services/user";
 import { userInput } from "../Types/Commonness";
-
-type TabUsernameDefault = {
-  activeTab: { name: string; isActive: boolean; status: string };
-  setActiveTabStatus: (value: {
-    name: string;
-    isActive: boolean;
-    status: string;
-  }) => void;
-  getUserInput: (value: userInput) => void;
-};
+import { TabUsernameDefault as TabUsernameDefaultProps } from "../Services/tab";
 
 function TabUsernameDefault({
   activeTab,
   setActiveTabStatus,
   getUserInput,
-}: TabUsernameDefault) {
+}: TabUsernameDefaultProps) {
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState<userInput>({
     username: "",
     email: "",
   });
   const [errorMessage, setErrorMessage] = useState<string>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <div
@@ -42,15 +34,21 @@ function TabUsernameDefault({
       ></input>
       {errorMessage && <div className={s.warningMessage}>{errorMessage}</div>}
       <div className={s.buttonContainer}>
-        <button className={s.cancelButton} onClick={() => navigate("/login")}>
+        <button
+          className={s.cancelButton}
+          disabled={isLoading ? true : false}
+          onClick={() => navigate("/login")}
+        >
           Cancel
         </button>
         <button
           className={s.searchButton}
+          disabled={isLoading ? true : false}
           onClick={async () => {
             if (!emailValidation(userInput.email)) {
               setErrorMessage("Please enter en valid email");
             } else {
+              setIsLoading(true);
               setErrorMessage("");
               const isUserAccountFound = await getUsernameWithEmail(
                 userInput.email
@@ -65,6 +63,7 @@ function TabUsernameDefault({
                 getUserInput(userInput);
               }
             }
+            setIsLoading(false);
           }}
         >
           Search

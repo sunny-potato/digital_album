@@ -1,25 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import s from "../Styles/TabCommon.module.css";
-import { useState } from "react";
-import { findUserAccount } from "../Services/user";
 import emailValidation from "../Utils/emailValidation";
-import { userInput } from "../Types/Commonness";
-
-type TabPasswordDefault = {
-  activeTab: { name: string; isActive: boolean; status: string };
-  setActiveTabStatus: (value: {
-    name: string;
-    isActive: boolean;
-    status: string;
-  }) => void;
-  getUserInput: (value: userInput) => void;
-};
+import { findUserAccount } from "../Services/user";
+import { TabPasswordDefault as TabPasswordDefaultProps } from "../Services/tab";
 
 function TabPasswordDefault({
   activeTab,
   setActiveTabStatus,
   getUserInput,
-}: TabPasswordDefault) {
+}: TabPasswordDefaultProps) {
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState<{
     username: string;
@@ -27,6 +17,7 @@ function TabPasswordDefault({
   }>({ username: "", email: "" });
   const [usernameErrorMessage, setUsernameErrorMessage] = useState<string>("");
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isUsernameValid = () => {
     if (userInput.username === "") {
@@ -81,13 +72,19 @@ function TabPasswordDefault({
         <div className={s.warningMessage}>{emailErrorMessage}</div>
       )}
       <div className={s.buttonContainer}>
-        <button className={s.cancelButton} onClick={() => navigate("/login")}>
+        <button
+          className={s.cancelButton}
+          disabled={isLoading ? true : false}
+          onClick={() => navigate("/login")}
+        >
           Cancel
         </button>
         <button
           className={s.searchButton}
+          disabled={isLoading ? true : false}
           onClick={async () => {
             if (isUsernameValid() && isEmailValid()) {
+              setIsLoading(true);
               const isUserAccountFound = await findUserAccount(userInput);
               if (isUserAccountFound) {
                 setActiveTabStatus({
@@ -99,6 +96,7 @@ function TabPasswordDefault({
                 setActiveTabStatus({ ...activeTab, ["status"]: "noMatch" });
               }
             }
+            setIsLoading(false);
           }}
         >
           Search

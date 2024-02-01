@@ -1,40 +1,26 @@
-import { userInput } from "../Types/Commonness";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import s from "../Styles/TabCommon.module.css";
-import { useState } from "react";
 import { checkVerificationCode } from "../Services/user";
-
-type TabPasswordSecurityCode = {
-  activeTab: { name: string; isActive: boolean; status: string };
-  setActiveTabStatus: (value: {
-    name: string;
-    isActive: boolean;
-    status: string;
-  }) => void;
-  userData: userInput;
-  getUserInput: (value: userInput) => void;
-};
+import { TabPasswordSecurityCode as TabPasswordSecurityCodeProps } from "../Services/tab";
 
 function TabPasswordSecurityCode({
   activeTab,
   setActiveTabStatus,
   userData,
-  getUserInput,
-}: TabPasswordSecurityCode) {
+}: TabPasswordSecurityCodeProps) {
   const navigate = useNavigate();
-  // const [userInput, setUserInput] = useState<userInput>({
-  //   username: "",
-  //   email: "",
-  // });
   const [securityCode, setSecurityCode] = useState<number | undefined>();
   const [errorMessage, setErrorMessage] = useState<string>();
-  console.log(securityCode);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   return (
     <div
       className={`${s.tabInner}  ${activeTab.isActive ? "" : s.tabInActive} `}
     >
       <div className={s.pageDescription}>
         Please check your email for the security code that we sent.
+        <div>The code is 6 numbers</div>
       </div>
       <input
         type="number"
@@ -46,12 +32,19 @@ function TabPasswordSecurityCode({
       ></input>
       {errorMessage && <div className={s.warningMessage}>{errorMessage}</div>}
       <div className={s.buttonContainer}>
-        <button className={s.cancelButton} onClick={() => navigate("/login")}>
+        <button
+          className={s.cancelButton}
+          disabled={isLoading ? true : false}
+          onClick={() => navigate("/login")}
+        >
           Cancel
         </button>
         <button
           className={s.searchButton}
+          disabled={isLoading ? true : false}
           onClick={async () => {
+            setErrorMessage("");
+            setIsLoading(true);
             const isCodeVerified = await checkVerificationCode(
               userData,
               securityCode as number
@@ -65,6 +58,7 @@ function TabPasswordSecurityCode({
               setErrorMessage("The verification code is invalid");
               // how to handle when it is not valid????????????
             }
+            setIsLoading(false);
           }}
         >
           Continue

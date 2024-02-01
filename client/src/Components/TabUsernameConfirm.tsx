@@ -3,26 +3,22 @@ import s from "../Styles/TabCommon.module.css";
 import { getUsernameWithEmail } from "../Services/user";
 import { useNavigate } from "react-router-dom";
 import { userInput } from "../Types/Commonness";
+import { TabUsernameConfirm as TabUsernameConfirmProps } from "../Services/tab";
 
-type TabUsernameConfirm = {
-  activeTab: { name: string; isActive: boolean; status: string };
-  userData: userInput;
-};
-
-function TabUsernameConfirm({ activeTab, userData }: TabUsernameConfirm) {
+function TabUsernameConfirm({ activeTab, userData }: TabUsernameConfirmProps) {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
 
   useEffect(() => {
     const getUsername = async () => {
-      console.log(userData);
       if (userData) {
         const result = await getUsernameWithEmail(userData.email);
         setUsername(result);
       }
     };
-    void getUsername();
+    getUsername().catch(console.error);
   }, [userData]);
+
   return (
     <div
       className={`${s.tabPassword}  ${

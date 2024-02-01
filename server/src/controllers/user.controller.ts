@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import {
   getTheSameEmail,
-  getTheSameUsername,
   getUsername,
   getUserInfoWithUsernameAndEmail,
   saveSecurityCode,
@@ -19,10 +18,15 @@ export const getUsernameController: RequestHandler = async (req, res) => {
 };
 
 export const getUsernameWithEmail: RequestHandler = async (req, res) => {
+  let result;
   const email = req.query.email as string;
   const userId = await getTheSameEmail(email);
-  const username = await getUsername(userId[0].id);
-  const result = username[0].user_name;
+  if (userId[0]) {
+    const username = await getUsername(userId[0].id);
+    result = username[0].user_name;
+  } else {
+    result = false;
+  }
   res.status(200).send(result);
 };
 
@@ -46,7 +50,6 @@ export const findUserAccount: RequestHandler = async (req, res) => {
 export const sendEmailVerificationCode: RequestHandler = async (req, res) => {
   const useremail = req.query.useremail as string;
   const username = req.query.username as string;
-  // console.log(username);
 
   const userInfo = await getUserInfoWithUsernameAndEmail({
     username: username,
@@ -54,7 +57,6 @@ export const sendEmailVerificationCode: RequestHandler = async (req, res) => {
   });
   if (userInfo.length === 0) return;
   const userId = userInfo[0].id;
-  // console.log(userId);
   const securityCode = createVerificationCode();
   const resultSendEmail = await sendEmail({
     to: useremail as string,
@@ -88,8 +90,8 @@ export const checkVerificationCode: RequestHandler = async (req, res) => {
   const userId = userInfo[0].id;
   const sendtCode = await matchSecurityCode(userId);
   if (sendtCode[0].code === securityCode) {
-    isCodeMatched = true;
     await deleteSecurityCode({ userId: userId, code: securityCode });
+    isCodeMatched = true;
   } else {
     isCodeMatched = false;
   }

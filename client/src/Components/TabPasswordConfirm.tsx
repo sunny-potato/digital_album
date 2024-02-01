@@ -1,27 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import s from "../Styles/TabCommon.module.css";
-import { userInput } from "../Types/Commonness";
 import { sendEmailVerificationCode } from "../Services/user";
-
-type TabPasswordConfirm = {
-  activeTab: { name: string; isActive: boolean; status: string };
-  setActiveTabStatus: (value: {
-    name: string;
-    isActive: boolean;
-    status: string;
-  }) => void;
-  userData: userInput;
-  getUserInput: (value: userInput) => void;
-};
+import { TabPasswordConfirm as TabPasswordConfirmProps } from "../Services/tab";
 
 function TabPasswordConfirm({
   activeTab,
   setActiveTabStatus,
   userData,
   getUserInput,
-}: TabPasswordConfirm) {
+}: TabPasswordConfirmProps) {
   const [isCodeSendingSuccess, setIsCodeSendingSuccess] =
     useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>();
 
   return (
     <div
@@ -29,7 +19,7 @@ function TabPasswordConfirm({
         activeTab.isActive ? "" : s.tabInActive
       } `}
     >
-      {userData.username && userData.email && (
+      {userData.username && userData.email && isCodeSendingSuccess && (
         <div>
           We will send a security code to :<div>{userData.email}</div>
         </div>
@@ -37,12 +27,13 @@ function TabPasswordConfirm({
       {!isCodeSendingSuccess && (
         <div>
           Sorry, the security code couldn't send due to technical problem.
-          Please try it again.
+          <div>Please try it again.</div>
         </div>
       )}
       <div className={s.buttonContainer}>
         <button
           className={s.cancelButton}
+          disabled={isLoading ? true : false}
           onClick={() => {
             getUserInput({ username: "", email: "" });
             setActiveTabStatus({
@@ -55,7 +46,9 @@ function TabPasswordConfirm({
         </button>
         <button
           className={s.searchButton}
+          disabled={isLoading ? true : false}
           onClick={async () => {
+            setIsLoading(true);
             setIsCodeSendingSuccess(true);
             const isCodeSendt = await sendEmailVerificationCode(userData);
             if (isCodeSendt) {
@@ -66,6 +59,7 @@ function TabPasswordConfirm({
             } else {
               setIsCodeSendingSuccess(false);
             }
+            setIsLoading(false);
           }}
         >
           Continue

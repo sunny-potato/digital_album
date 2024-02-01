@@ -1,22 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import s from "../Styles/TabCommon.module.css";
-
-type TabNoMatchContent = {
-  tabDescription: string;
-  activeTab: { name: string; isActive: boolean; status: string };
-  setActiveTabStatus: (value: {
-    name: string;
-    isActive: boolean;
-    status: string;
-  }) => void;
-};
+import { TabNoMatchContent as TabNoMatchContentProps } from "../Services/tab";
 
 function TabNoMatchContent({
   tabDescription,
   activeTab,
   setActiveTabStatus,
-}: TabNoMatchContent) {
+}: TabNoMatchContentProps) {
   const navigate = useNavigate();
+
   return (
     <div
       className={`${s.tabPassword}  ${

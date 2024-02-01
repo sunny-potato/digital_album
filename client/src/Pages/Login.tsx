@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Login as login } from "../Types/Login";
+import { Login as login, validation } from "../Types/Login";
 import { validateLoginInfo } from "../Services/user";
 import { UserContext } from "../AppContext";
 import s from "../Styles/Login.module.css";
@@ -29,7 +29,7 @@ function Login() {
     if (!isLoading) {
       setIsLoading(true);
       event.preventDefault();
-      void checkValidation(loginInfo);
+      checkValidation(loginInfo).catch(console.error);
     } else {
       setIsLoading(false);
     }
@@ -38,7 +38,7 @@ function Login() {
   async function checkValidation(loginInfo: login) {
     if (loginInfo.username !== "" && loginInfo.password !== "") {
       const isLoginValidated = await validateLoginInfo(loginInfo);
-      displayValidationResult(isLoginValidated.data);
+      displayValidationResult(isLoginValidated.data as validation);
       setIsLoginInfoValid(true);
     } else {
       setIsLoading(false);
@@ -46,11 +46,7 @@ function Login() {
     }
   }
 
-  function displayValidationResult(validation: {
-    result: boolean;
-    username: string;
-    userId: number;
-  }) {
+  function displayValidationResult(validation: validation) {
     if (validation.result) {
       setIsLoginValidated(true);
       setUserId(validation.userId);

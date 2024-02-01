@@ -1,27 +1,18 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import s from "../Styles/TabCommon.module.css";
-import { userInput } from "../Types/Commonness";
-import { useState } from "react";
 import { Input } from "./Input";
 import { PasswordStrength } from "./PasswordStrength";
 import { PasswordMatch } from "./PasswordMatch";
 import { checkPasswordStrength } from "../Utils/checkPasswordStrength";
 import { updatePassword } from "../Services/user";
+import { TabPasswordReset as TabPasswordResetProps } from "../Services/tab";
 
-type TabPasswordReset = {
-  activeTab: { name: string; isActive: boolean; status: string };
-  setActiveTabStatus: (value: {
-    name: string;
-    isActive: boolean;
-    status: string;
-  }) => void;
-  userData: userInput;
-};
 function TabPasswordReset({
   activeTab,
   setActiveTabStatus,
   userData,
-}: TabPasswordReset) {
+}: TabPasswordResetProps) {
   const navigate = useNavigate();
   const [password, setPassword] = useState<{
     newPassword: string;
@@ -31,6 +22,7 @@ function TabPasswordReset({
     confirmedPassword: "",
   });
   const [isPasswordsMatched, setIsPasswordsMatched] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function passwordHandler(currentPassword: string) {
     setPassword({
@@ -111,12 +103,18 @@ function TabPasswordReset({
         }
       />
       <div className={s.buttonContainer}>
-        <button className={s.cancelButton} onClick={() => navigate("/login")}>
+        <button
+          className={s.cancelButton}
+          disabled={isLoading ? true : false}
+          onClick={() => navigate("/login")}
+        >
           Cancel
         </button>
         <button
           className={s.searchButton}
+          disabled={isLoading ? true : false}
           onClick={async () => {
+            setIsLoading(true);
             const isAllRequirementsMet = checkRequirements();
             if (isAllRequirementsMet) {
               const updatedData = {
@@ -131,6 +129,7 @@ function TabPasswordReset({
                 });
               }
             }
+            setIsLoading(false);
           }}
         >
           Continue

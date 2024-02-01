@@ -28,3 +28,9 @@ export type UserContext = {
   userId: number | null;
   setUserId: (value: number | null) => void;
 };
+
+export type validation = {
+  result: boolean;
+  username: string;
+  userId: number;
+};

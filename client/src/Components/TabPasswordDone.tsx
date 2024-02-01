@@ -1,12 +1,8 @@
 import s from "../Styles/TabCommon.module.css";
-import { userInput } from "../Types/Commonness";
 import { useNavigate } from "react-router-dom";
+import { TabPasswordDone as TabPasswordDoneProps } from "../Services/tab";
 
-type TabPasswordDone = {
-  activeTab: { name: string; isActive: boolean; status: string };
-};
-
-function TabPasswordDone({ activeTab }: TabPasswordDone) {
+function TabPasswordDone({ activeTab }: TabPasswordDoneProps) {
   const navigate = useNavigate();
   return (
     <div
@@ -19,6 +15,7 @@ function TabPasswordDone({ activeTab }: TabPasswordDone) {
       <div className={s.buttonContainer}>
         <button
           className={s.searchButton}
+          style={{ padding: "0.5rem 1rem" }}
           onClick={() => {
             navigate("/login");
           }}
