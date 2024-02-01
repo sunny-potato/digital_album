@@ -93,7 +93,7 @@ function FindAccount() {
             {passwordStatus.isActive && passwordStatus.status === "noMatch" && (
               <TabNoMatchContent
                 tabDescription={
-                  "We can't find any account registered with given username or email"
+                  "We can't find any account with given username or email"
                 }
                 activeTab={passwordStatus}
                 setActiveTabStatus={setPasswordStatus}

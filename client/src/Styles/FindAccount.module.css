@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
 }
+
 .pageContainer {
   height: 100vh;
   display: flex;
@@ -9,16 +10,18 @@
   justify-content: center;
   align-items: center;
 }
+
 .contentContainer {
   background-color: #e1eedd;
   border-radius: 0.5rem;
   padding: 0 0 1rem 0;
 }
+
 .tabLinks {
   display: flex;
 }
+
 .tabTitle {
-  width: 100%;
   padding: 1rem;
   color: #183a1d;
   font-size: 1.5rem;
@@ -33,6 +36,7 @@
   background-color: #183a1d;
   color: #ffffff;
 }
+
 .tabContent {
   padding: 1rem;
 }
