@@ -105,7 +105,8 @@ npm run dev
 **1. Main colors :**
 
 ![color pallete](colorPallete.jpg)
-`#F6A453`
+`$\color{#f6a453}{\textsf{#f6a453}}$`
+`#f6a453`
 `#fefbe9`
 `#f0a04b`
 `#183a1d`
