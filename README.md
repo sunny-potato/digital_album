@@ -103,7 +103,7 @@ npm run dev
 ## Design
 
 **1. Main colors :**
-`#f6c453`
+`#F6A453`
 `#fefbe9`
 `#f0a04b`
 `#183a1d`
