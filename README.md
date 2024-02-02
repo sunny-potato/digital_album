@@ -103,6 +103,8 @@ npm run dev
 ## Design
 
 **1. Main colors :**
+
+![color pallete](colorPallete.jpg)
 `#F6A453`
 `#fefbe9`
 `#f0a04b`
