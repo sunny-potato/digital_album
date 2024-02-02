@@ -4,11 +4,11 @@ Digital album is a website where users can upload pictures and organize them int
 
 ## Table of Contents
 
-[Link and Screenshot](#link-and-screenshot)
-[Technologies](#technologies)
-[Getting started](#getting-started)
-[Features](#features)
-[Design](#design)
+- [Link and Screenshot](#link-and-screenshot)
+- [Technologies](#technologies)
+- [Getting started](#getting-started)
+- [Features](#features)
+- [Design](#design)
 
 ## Link and Screenshot
 
@@ -17,20 +17,25 @@ Digital album is a website where users can upload pictures and organize them int
 
 ## Technologies
 
-- Front-end :
-  React
-  Vite
-  Axios
-  [Material-UI](https://mui.com/)
-- Back-end :
-  Node.js
-  Express
-  Multer (for storing images in memory as buffers)
-  UUID (for creating unique IDs for images)
-  Postgres.js
-- Database :
-  Noen.tech (serverless Postgres)
-  Google Cloud Storage (for storing images)
+**1. Front-end :**
+
+- React.js
+- Vite
+- Axios
+- [Material-UI](https://mui.com/)
+
+**2. Back-end :**
+
+- Node.js
+- Express
+- Multer (for storing images in memory as buffers)
+- UUID (for creating unique IDs for images)
+- Postgres.js
+
+**3. Database :**
+
+- Noen.tech (serverless Postgres)
+- Google Cloud Storage (for storing images)
 
 _For improving this project,
 [sharp](https://sharp.pixelplumbing.com/)(for optimizing image)_
@@ -67,33 +72,34 @@ npm run dev
 
 ## Features
 
-1. Login
-   - Users can log in with their username and password.
-   - Option to recover usernames and reset passwords using verification codes sent via email.
-2. Signup
-   - Users can create new accounts.
-3. File management
-   - Users can create, delete, and update files for saving images.
-   - Files can be sorted based on various criteria.
-4. Image management
-   - Users can upload and delete images within files.
-   - Images can be sorted based on various criteria.
-   - Display images with relevant information using an image slider.
-   - Option to download images to the local computer.
-5. Social sharing
-   -Share images from the website on social media platforms using URLs.
-6. Dynamic and responsive design
-   - Responsive SVG animations enhance the user experience.
+**1. Login**
+
+- Users can log in with their username and password.
+- Option to recover usernames and reset passwords using verification codes sent via email.
+  **2. Signup**
+- Users can create new accounts.
+  **3. File management**
+- Users can create, delete, and update files for saving images.
+- Files can be sorted based on various criteria.
+  **4. Image management**
+- Users can upload and delete images within files.
+- Images can be sorted based on various criteria.
+- Display images with relevant information using an image slider.
+- Option to download images to the local computer.
+  **5. Social sharing**
+  -Share images from the website on social media platforms using URLs.
+  **6. Dynamic and responsive design**
+- Responsive SVG animations enhance the user experience.
 
 ## Design
 
-1. Main colors:
-   `#f6c453`
-   `#fefbe9`
-   `#f0a04b`
-   `#183a1d`
-   `#e1eedd`
-2. Fonts :
+**1. Main colors :**
+`#f6c453`
+`#fefbe9`
+`#f0a04b`
+`#183a1d`
+`#e1eedd`
+**2. Fonts :**
 
 #e7e7e7(cancel) rgba(50, 50, 50, 0.4)(popupbackground)
 title : font-size 1.5 rem
