@@ -105,10 +105,10 @@ npm run dev
 **1. Main colors :**
 
 `#f6a453`$\color{#f6a453}{\textsf{⬤}}$,
-`#fefbe9`$\color{#fefbe9}{\textsf{⬤}}$,
 `#f0a04b`$\color{#f0a04b}{\textsf{⬤}}$,
 `#183a1d`$\color{#183a1d}{\textsf{⬤}}$,
-`#e1eedd`$\color{#e1eedd}{\textsf{⬤}}$
+`#e1eedd`$\color{#e1eedd}{\textsf{⬤}}$,
+`#fefbe9`$\color{#fefbe9}{\textsf{⬤}}$
 
 **2. Fonts :**
 
