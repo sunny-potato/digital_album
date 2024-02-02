@@ -91,6 +91,7 @@
   }
   .pageImage {
     background-color: aquamarine;
+    overflow: hidden;
   }
 
   .pageImage > div {
