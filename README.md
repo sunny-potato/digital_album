@@ -76,19 +76,28 @@ npm run dev
 
 - Users can log in with their username and password.
 - Option to recover usernames and reset passwords using verification codes sent via email.
-  **2. Signup**
+
+**2. Signup**
+
 - Users can create new accounts.
-  **3. File management**
+
+**3. File management**
+
 - Users can create, delete, and update files for saving images.
 - Files can be sorted based on various criteria.
-  **4. Image management**
+
+**4. Image management**
+
 - Users can upload and delete images within files.
 - Images can be sorted based on various criteria.
 - Display images with relevant information using an image slider.
 - Option to download images to the local computer.
-  **5. Social sharing**
-  -Share images from the website on social media platforms using URLs.
-  **6. Dynamic and responsive design**
+
+**5. Social sharing**
+-Share images from the website on social media platforms using URLs.
+
+**6. Dynamic and responsive design**
+
 - Responsive SVG animations enhance the user experience.
 
 ## Design
@@ -99,6 +108,7 @@ npm run dev
 `#f0a04b`
 `#183a1d`
 `#e1eedd`
+
 **2. Fonts :**
 
 #e7e7e7(cancel) rgba(50, 50, 50, 0.4)(popupbackground)
