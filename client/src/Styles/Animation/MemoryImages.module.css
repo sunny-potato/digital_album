@@ -43,3 +43,24 @@
     opacity: 0;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .mainWoman {
+    width: 100%;
+    height: 15rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .mainWoman {
+    width: 100%;
+    height: 20rem;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .mainWoman {
+    width: 100%;
+    height: 50rem;
+  }
+}
