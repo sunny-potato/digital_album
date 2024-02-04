@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   text-decoration: none;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 #root {
