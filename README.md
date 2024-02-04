@@ -111,7 +111,7 @@ npm run dev
 `#fefbe9`$\color{#fefbe9}{\textsf{⬤}}$
 
 **2. Fonts :**
-Google Fonts : Space Grotesk Regular 400
+Google Fonts - Space Grotesk Regular 400
 
 #e7e7e7(cancel) rgba(50, 50, 50, 0.4)(popupbackground)
 title : font-size 1.5 rem
