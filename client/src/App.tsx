@@ -13,6 +13,7 @@ import About from "./Pages/About";
 import FindAccount from "./Pages/FindAccount";
 
 // things to do
+// 1) nav - detect click outside of nav
 // 5) move image to another file
 // 7) fetch images from database quickly by using google CDN
 

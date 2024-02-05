@@ -23,7 +23,8 @@ export const convertDropDownDataForm = (dataType: string, dataName: string) => {
 };
 
 export const getDropDownDefaultValue = (dropDownListName: string) => {
-  let sortValue = getLocalStorageData(`${dropDownListName}`);
+  let sortValue: string | Record<string, string>;
+  sortValue = getLocalStorageData(`${dropDownListName}`);
   if (!sortValue) {
     const defaultValue = { sortBy: "date", orderBy: "asc" };
     sortValue = defaultValue;

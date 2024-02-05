@@ -8,8 +8,8 @@ function Home() {
       <div className={s.contentContainer}>
         <div className={s.pageTitle}>
           <div>Keep</div>
-          <div>Your memories</div>
-          <div>Alive</div>
+          <div>your memories</div>
+          <div>alive</div>
         </div>
         <div className={s.pageImage}>
           <MemoryImages />

@@ -39,7 +39,7 @@
 
 @media screen and (max-width: 500px) {
   .contentContainer {
-    min-height: 100%;
+    min-height: 100vh;
     flex-direction: column;
     justify-content: center;
     margin: 0rem;
