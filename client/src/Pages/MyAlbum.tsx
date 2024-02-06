@@ -14,7 +14,6 @@ import { AlbumData, CurrentMyalbumData } from "../Types/MyAlbum";
 import MyAlbumDisplay from "../Components/MyAlbumDisplay";
 import MyAlbumEdit from "../Components/MyAlbumEdit";
 import { getLocalStorageData } from "../Utils/localstorage";
-import { AxiosResponse } from "axios";
 
 function MyAlbum() {
   const userId = Number(useParams().userId);

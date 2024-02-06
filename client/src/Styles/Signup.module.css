@@ -53,6 +53,11 @@
   margin: auto;
   padding-top: 4rem;
 }
+.pageTitle {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
 .signupWrapperContainer {
   display: flex;
 }
@@ -70,9 +75,8 @@
   border-radius: 0.5rem;
 }
 
-.passwordCheckList,
 .passwordCheckList span {
-  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .warningNote {
   color: red;
@@ -91,4 +95,10 @@
   color: #183a1d;
   font-weight: bolder;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .passwordCheckList span {
+    padding-right: 0rem;
+  }
 }

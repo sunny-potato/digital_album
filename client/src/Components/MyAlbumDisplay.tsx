@@ -8,7 +8,6 @@ import DropDown from "./DropDown";
 import { getSortedFoldersInMyAlbum } from "../Services/myAlbum";
 import { setLocalStorageData } from "../Utils/localstorage";
 import { dropDownContent, getDropDownDefaultValue } from "../Utils/dropDown";
-import { Tooltip } from "@mui/material";
 import { formatFileSize, formatDateTime } from "../Utils/formatData";
 
 function MyAlbumDisplay({

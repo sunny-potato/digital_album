@@ -5,7 +5,6 @@
   font-family: "Space Grotesk", sans-serif;
 }
 
-#root {
-  min-height: 100vh;
+body {
   background-color: #fefbe9;
 }

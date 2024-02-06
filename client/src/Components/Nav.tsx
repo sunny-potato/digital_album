@@ -13,9 +13,11 @@ function Nav() {
   const [username, setUsername] = useState<string>("");
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const [screenSize, setScreenSize] = useState<number>();
 
+  console.log("window.innerWidth : ", window.innerWidth);
+  console.log("isMenuClicked : ", isMenuClicked);
   useEffect(() => {
-    console.log("start");
     if (userId) {
       const retrieveUserName = async () => {
         const username = await getUsername(userId);
@@ -44,6 +46,20 @@ function Nav() {
     };
   }, []);
 
+  useEffect(() => {
+    const screenSizeHandler = () => {
+      setScreenSize(window.innerWidth);
+    };
+    window.addEventListener("resize", screenSizeHandler);
+    return () => {
+      window.removeEventListener("resize", screenSizeHandler);
+    };
+    // const screenSize = window.innerWidth;
+    // if (screenSize >= 1000) {
+    //   setIsMenuClicked(true);
+    // }
+  }, []);
+
   return (
     <div className={s.navContainer}>
       <div className={s.navHome}>
@@ -56,6 +72,7 @@ function Nav() {
           to={"/about"}
           className={s.menuTitle}
           style={{ display: isMenuClicked ? "block" : "none" }}
+          onClick={() => setIsMenuClicked(false)}
         >
           About
         </Link>
@@ -64,6 +81,7 @@ function Nav() {
             to={`/myAlbum/${userId}`}
             className={s.menuTitle}
             style={{ display: isMenuClicked ? "block" : "none" }}
+            onClick={() => setIsMenuClicked(false)}
           >
             My album
           </Link>
@@ -76,6 +94,7 @@ function Nav() {
               to={`/myPage/${userId}`}
               className={s.menuTitle}
               style={{ display: isMenuClicked ? "block" : "none" }}
+              onClick={() => setIsMenuClicked(false)}
             >
               <div className={s.username}>
                 <PersonOutlineIcon />
@@ -87,7 +106,9 @@ function Nav() {
               className={s.menuTitle}
               style={{ display: isMenuClicked ? "block" : "none" }}
               onClick={() => (
-                setUserId(null), removeLocalStorageData("myAlbumDropDownList")
+                setUserId(null),
+                removeLocalStorageData("myAlbumDropDownList"),
+                setIsMenuClicked(false)
               )}
             >
               Log out
@@ -99,6 +120,7 @@ function Nav() {
               to={"/signup"}
               className={s.menuTitle}
               style={{ display: isMenuClicked ? "block" : "none" }}
+              onClick={() => setIsMenuClicked(false)}
             >
               Sign up
             </Link>
@@ -106,6 +128,7 @@ function Nav() {
               to={"/login"}
               className={s.menuTitle}
               style={{ display: isMenuClicked ? "block" : "none" }}
+              onClick={() => setIsMenuClicked(false)}
             >
               Log in
             </Link>

@@ -129,7 +129,7 @@ function SignUp() {
         </div>
       </div>
       <form className={s.formContainer} onSubmit={(event) => submitForm(event)}>
-        <div>Sign up</div>
+        <div className={s.pageTitle}>Sign up</div>
         <Input
           label={"Username*"}
           type={"text"}

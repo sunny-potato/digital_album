@@ -9,132 +9,14 @@
   grid-template-columns: repeat(2, 1fr);
   overflow: hidden;
 }
-/* .albumPhotoBox {
-  height: 100%;
-  width: 100%;
-} */
-/* .albumPhoto {
-  margin: 1em;
-  height: 17em;
-}
-.albumPhoto img {
-  width: 100%;
-  height: 100%;
-  object-fit: scale-down;
-} */
-/* .albumTitle {
-  text-align: center;
-} */
 
-/* .albumListBox {
-  width: 100%;
-  height: 100%;
-  padding: 2em 0;
+@media screen and (max-width: 700px) {
+  .editAlbumBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 2rem 0;
+  }
 }
-.albumList li {
-  margin: 0.7rem;
-  list-style: none;
-}
-.albumListTitle {
-  font-size: 1.2em;
-  font-weight: bolder;
-  text-align: center;
-  padding-bottom: 0.5rem;
-}
-.albumList {
-  height: 100%;
-}
-.folderList {
-  position: relative;
-  height: 94%;
-  overflow-y: auto;
-}
-
-.folderListInner {
-  position: absolute;
-  width: 100%;
-}
-
-.folderList::-webkit-scrollbar {
-  width: 0.7rem;
-}
-.folderList::-webkit-scrollbar-thumb {
-  background: #183a1d;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
-}
-.folderList::-webkit-scrollbar-track {
-  background: #e1eedd;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
-} */
-
-/* .imageInput {
-  height: 17em;
-  position: relative;
-}
-.imageInput input {
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  top: 90%;
-  transform: translate(-18%, 0%);
-} */
-/* .noImageDiv {
-  width: 100%;
-  height: 100%;
-  line-height: 17em;
-  border-radius: 1em;
-  border: 0.2em #183a1d dotted;
-  text-align: center;
-} */
-/* 
-.albumTitle > input {
-  border-color: lightgray;
-  height: 2rem;
-  border-width: 0.1em;
-  border-radius: 0.5rem;
-  padding: 0 0.8em;
-  margin-bottom: 0.5em;
-} */
-
-/* .albumList li {
-  margin: 0.7rem;
-  list-style: none;
-}
-.albumListTitle {
-  font-size: 1.2em;
-  font-weight: bolder;
-  text-align: center;
-  padding-bottom: 0.5rem;
-}
-.albumList {
-  height: 100%;
-}
-
-.albumListBox {
-  width: 100%;
-  height: 100%;
-  padding: 2em 0;
-}
-.deleteFolderListButton {
-  background-color: #fefbe9;
-  font-weight: bolder;
-  border-radius: 0.3rem;
-  margin-right: 0.2rem;
-  z-index: 10;
-}
-.folderList > input {
-  width: 100%;
-  padding: 0 0.5rem;
-  border-width: 0.1em;
-  border-radius: 0.3rem;
-  z-index: 10;
-}
-
-.addFolderListButton {
-  background-color: #fefbe9;
-  font-weight: bolder;
-  border-radius: 0.3rem;
-  z-index: 10;
-} */

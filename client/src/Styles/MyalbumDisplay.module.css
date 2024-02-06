@@ -7,6 +7,7 @@
   height: 100%;
   display: flex;
   grid-template-columns: repeat(2, 1fr);
+  /* background-color: red; */
 }
 .albumPhotoBox {
   height: 100%;
@@ -84,6 +85,7 @@
   align-items: center;
 }
 .folderIcon {
+  color: #183a1d;
 }
 .contentInner {
   width: 100%;
@@ -92,8 +94,31 @@
 }
 .folderTitle {
   font-size: 1.1rem;
+  color: #183a1d;
 }
 .folderData {
   font-size: 0.7rem;
   color: gray;
+}
+
+@media screen and (max-width: 700px) {
+  .displayAlbumBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .albumPhotoBox {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 2rem;
+  }
+
+  .albumList {
+    padding: 0 1rem;
+  }
 }

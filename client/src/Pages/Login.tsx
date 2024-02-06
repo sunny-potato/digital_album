@@ -61,9 +61,9 @@ function Login() {
     <div className={s.pageContainer}>
       <div className={s.imageContainer}>
         <ConfettiEffect />
-        <div className={s.imageInner}>
-          <WelcomeMan />
-        </div>
+        {/* <div className={s.imageInner}> */}
+        <WelcomeMan />
+        {/* </div> */}
       </div>
       <div className={s.contentContainer}>
         <div className={s.loginContainer}>

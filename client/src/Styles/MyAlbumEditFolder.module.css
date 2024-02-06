@@ -20,6 +20,11 @@
   position: relative;
   height: 94%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 .folderListInner {
@@ -65,13 +70,15 @@
   border-radius: 0.3rem;
   margin-right: 0.2rem;
   z-index: 10;
+  background-color: red;
 }
-.folderList > input {
-  width: 100%;
+.folderList input {
+  /* width: 100%; */
   padding: 0 0.5rem;
   border-width: 0.1em;
   border-radius: 0.3rem;
   z-index: 10;
+  background-color: yellow;
 }
 
 .addFolderListButton {
@@ -79,4 +86,19 @@
   font-weight: bolder;
   border-radius: 0.3rem;
   z-index: 10;
+}
+
+@media screen and (max-width: 700px) {
+  .folderList {
+    /* background-color: red; */
+  }
+  .folderList > input {
+    height: 100%;
+    /* width: 100%;
+    padding: 0 0.5rem;
+    border-width: 0.1em;
+    border-radius: 0.3rem;
+    z-index: 10;
+    background-color: yellow; */
+  }
 }

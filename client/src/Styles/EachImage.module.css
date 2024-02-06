@@ -30,7 +30,6 @@
   position: absolute;
   bottom: 5%;
   left: 2%;
-  /* background: red; */
 }
 .imageInformation > div {
   line-height: 1.5;
@@ -49,11 +48,9 @@
 }
 
 .popOverButtons {
-  /* background-color: blue; */
   position: absolute;
   bottom: 5%;
   right: 2%;
-  /* padding: 0 0rem; */
 }
 
 .popOverButtons > button,
