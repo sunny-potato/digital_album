@@ -1,0 +1,65 @@
+.pageContainer {
+  height: 100vh;
+  padding: 5rem 10rem;
+  margin-bottom: 5rem;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  padding: 3rem 0 2rem 0;
+  text-align: center;
+}
+
+.pageContents {
+  padding-bottom: 5rem;
+}
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  padding: 2rem 0 0.3rem 0;
+}
+.infoSection {
+  display: flex;
+  align-items: center;
+}
+.infoSectionTitle {
+  font-weight: bolder;
+  padding-right: 0.5rem;
+}
+.infoSectionContent {
+  padding-bottom: 0.3rem;
+}
+.subSectionTitle {
+  font-size: 1rem;
+  font-weight: bolder;
+  padding: 1.5rem 0 0.3rem 1rem;
+}
+.subSectionContent {
+  padding: 0.3rem 0 0.3rem 1rem;
+}
+.githubLink {
+  text-decoration: underline;
+}
+.githubLink:hover {
+  background-color: rgba(50, 50, 50, 0.4);
+}
+@media screen and (max-width: 500px) {
+  .pageContainer {
+    height: 100%;
+    padding: 5rem 1rem 2rem 1rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .pageContainer {
+    height: 100%;
+    padding: 5rem 0.2rem 2rem 0.2rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .pageContainer {
+    padding: 5rem 20rem;
+  }
+}
