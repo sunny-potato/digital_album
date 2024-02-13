@@ -19,7 +19,7 @@
   height: 17em;
   position: relative;
 }
-.imageInput input {
+.imageInput > input {
   width: 100%;
   position: absolute;
   left: 0%;

@@ -11,7 +11,7 @@ function MyAlbumEditFolder({
     <div className={s.albumListBox}>
       <div className={s.albumList}>
         <div className={s.albumListTitle}>Folder List</div>
-        <div className={s.folderList}>
+        <div className={s.folderListBox}>
           <div className={s.folderListInner}>
             {folderList &&
               folderList.map((folder: Folder, index: number) => (

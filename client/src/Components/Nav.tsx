@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import s from "../Styles/Nav.module.css";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../AppContext";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { getUsername } from "../Services/user";
@@ -12,11 +12,8 @@ function Nav() {
   const { userId, setUserId } = useContext(UserContext);
   const [username, setUsername] = useState<string>("");
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [screenSize, setScreenSize] = useState<number>();
-
-  console.log("window.innerWidth : ", window.innerWidth);
   console.log("isMenuClicked : ", isMenuClicked);
+
   useEffect(() => {
     if (userId) {
       const retrieveUserName = async () => {
@@ -46,20 +43,6 @@ function Nav() {
     };
   }, []);
 
-  useEffect(() => {
-    const screenSizeHandler = () => {
-      setScreenSize(window.innerWidth);
-    };
-    window.addEventListener("resize", screenSizeHandler);
-    return () => {
-      window.removeEventListener("resize", screenSizeHandler);
-    };
-    // const screenSize = window.innerWidth;
-    // if (screenSize >= 1000) {
-    //   setIsMenuClicked(true);
-    // }
-  }, []);
-
   return (
     <div className={s.navContainer}>
       <div className={s.navHome}>
@@ -67,11 +50,10 @@ function Nav() {
           Digital Album
         </Link>
       </div>
-      <div className={`${s.navMenu}`} ref={ref}>
+      <div className={`${s.navMenu} ${isMenuClicked ? `${s.active}` : ""}`}>
         <Link
           to={"/about"}
           className={s.menuTitle}
-          style={{ display: isMenuClicked ? "block" : "none" }}
           onClick={() => setIsMenuClicked(false)}
         >
           About
@@ -80,7 +62,6 @@ function Nav() {
           <Link
             to={`/myAlbum/${userId}`}
             className={s.menuTitle}
-            style={{ display: isMenuClicked ? "block" : "none" }}
             onClick={() => setIsMenuClicked(false)}
           >
             My album
@@ -93,7 +74,6 @@ function Nav() {
             <Link
               to={`/myPage/${userId}`}
               className={s.menuTitle}
-              style={{ display: isMenuClicked ? "block" : "none" }}
               onClick={() => setIsMenuClicked(false)}
             >
               <div className={s.username}>
@@ -104,7 +84,6 @@ function Nav() {
             <Link
               to={"/login"}
               className={s.menuTitle}
-              style={{ display: isMenuClicked ? "block" : "none" }}
               onClick={() => (
                 setUserId(null),
                 removeLocalStorageData("myAlbumDropDownList"),
@@ -119,7 +98,6 @@ function Nav() {
             <Link
               to={"/signup"}
               className={s.menuTitle}
-              style={{ display: isMenuClicked ? "block" : "none" }}
               onClick={() => setIsMenuClicked(false)}
             >
               Sign up
@@ -127,7 +105,6 @@ function Nav() {
             <Link
               to={"/login"}
               className={s.menuTitle}
-              style={{ display: isMenuClicked ? "block" : "none" }}
               onClick={() => setIsMenuClicked(false)}
             >
               Log in

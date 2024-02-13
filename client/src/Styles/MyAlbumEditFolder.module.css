@@ -4,7 +4,7 @@
   padding: 2em 0;
 }
 .albumList li {
-  margin: 0.7rem;
+  /* margin: 0.7rem; */
   list-style: none;
 }
 .albumListTitle {
@@ -16,13 +16,13 @@
 .albumList {
   height: 100%;
 }
-.folderList {
+.folderListBox {
   position: relative;
   height: 94%;
   overflow-y: auto;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  background-color: white;
+  background-color: white; */
   /* justify-content: center; */
   /* align-items: center; */
 }
@@ -30,6 +30,14 @@
 .folderListInner {
   position: absolute;
   width: 100%;
+}
+
+.folderList {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  justify-content: start;
+  align-items: start;
 }
 
 .folderList::-webkit-scrollbar {
@@ -45,6 +53,16 @@
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
 }
+
+.folderList input {
+  width: 50%;
+  /* padding: 0 0.5rem; */
+  border-width: 0.1em;
+  border-radius: 0.3rem;
+  z-index: 10;
+  background-color: yellow;
+}
+
 .albumList li {
   margin: 0.7rem;
   list-style: none;
@@ -71,14 +89,6 @@
   margin-right: 0.2rem;
   z-index: 10;
   background-color: red;
-}
-.folderList input {
-  /* width: 100%; */
-  padding: 0 0.5rem;
-  border-width: 0.1em;
-  border-radius: 0.3rem;
-  z-index: 10;
-  background-color: yellow;
 }
 
 .addFolderListButton {
