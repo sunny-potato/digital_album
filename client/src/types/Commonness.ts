@@ -1,3 +1,5 @@
+import { E164Number } from "libphonenumber-js/min";
+
 export type PopupMessage = {
   isRequirementFulfilled: boolean;
   setIsRequirementFulfilled: (value: boolean) => void;
@@ -19,4 +21,15 @@ export type DropDown = {
 export type userInput = {
   username: string;
   email: string;
+};
+
+export type ProfileInfo = {
+  id: number | undefined;
+  username: string;
+  firstname: string;
+  lastname: string;
+  birthdate: string;
+  email: string;
+  telephon: E164Number;
+  address: string;
 };

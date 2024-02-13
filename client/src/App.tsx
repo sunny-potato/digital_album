@@ -8,7 +8,7 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import NotFoundPage from "./Pages/NotFound";
 import EachImage from "./Pages/EachImage";
-import MyPage from "./Pages/MyPage";
+import Profile from "./Pages/Profile";
 import About from "./Pages/About";
 import FindAccount from "./Pages/FindAccount";
 
@@ -26,7 +26,7 @@ function App() {
               <Route path="image/:imageId" element={<EachImage />} />
             </Route>
             <Route path="/login" element={<Login />} />
-            <Route path="/myPage/:userId" element={<MyPage />} />
+            <Route path="/myPage/:userId" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/findAccount" element={<FindAccount />} />
             <Route path="/*" element={<NotFoundPage />} />

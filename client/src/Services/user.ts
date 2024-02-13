@@ -1,7 +1,7 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8000";
 import { Login as login, Signup } from "../Types/Login";
-import { userInput } from "../Types/Commonness";
+import { ProfileInfo, userInput } from "../Types/Commonness";
 
 export async function validateLoginInfo(loginInfo: login) {
   return await axios.get(
@@ -60,5 +60,10 @@ export async function updatePassword(userData: {
     `/user/${userData.username}/updatePassword`,
     userData
   );
-  return response.data;
+  return response.data as string;
+}
+
+export async function getuserAllInformation(userId: number) {
+  const response = await axios.get(`/user/profile?userId=${userId}`);
+  return response.data as ProfileInfo;
 }

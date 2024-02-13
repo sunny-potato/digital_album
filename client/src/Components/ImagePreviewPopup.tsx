@@ -9,7 +9,7 @@ import {
   handleOnDrop,
   handleDragLeave,
 } from "../Utils/dragAndDrop";
-import { ConstructionOutlined } from "@mui/icons-material";
+// import { ConstructionOutlined } from "@mui/icons-material";
 
 function ImagePreviewPopup({
   selectedImageBlob,
@@ -85,7 +85,7 @@ function ImagePreviewPopup({
             ></img>
             <div className={s.addImage}>
               <div className={s.addImageText}> More images?</div>
-              <label className={s.addImageInput}>
+              <div className={s.addImageInput}>
                 <input
                   type="file"
                   accept="image/*"
@@ -99,7 +99,7 @@ function ImagePreviewPopup({
                     });
                   }}
                 />
-              </label>
+              </div>
             </div>
           </div>
         </div>

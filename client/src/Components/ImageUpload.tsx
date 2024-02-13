@@ -40,11 +40,10 @@ function ImageUpload({
         alt="upload icon"
       ></img>
       <div className={s.uploadInput} style={changeBackgroundColor()}>
-        <span className={s.uploadDragDrop} style={changeBackgroundColor()}>
-          Drag and drop,{" "}
-        </span>
-        <label className={s.uploadImages} style={changeBackgroundColor()}>
-          or
+        <div className={s.uploadDragDrop} style={changeBackgroundColor()}>
+          Drag and drop, or
+        </div>
+        <div className={s.uploadImages} style={changeBackgroundColor()}>
           <input
             name="uploadImages"
             type="file"
@@ -60,7 +59,7 @@ function ImageUpload({
             }}
             style={changeBackgroundColor()}
           />
-        </label>
+        </div>
       </div>
     </div>
   );

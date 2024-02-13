@@ -4,9 +4,9 @@ export async function getAllUserAccounts() {
   return await sql`select * from user_account`;
 }
 
-// export async function findPassword(password: string) {
-//   return await sql`select * from user_account where password=${password}`;
-// }
+export async function getUserAllInformation(userId: number) {
+  return await sql`select * from user_account cross join user_info where user_info.id=${userId} and user_info.id=user_account.user_id`;
+}
 
 export async function getTheSameUsername(username: string) {
   return await sql`select * from user_account where user_name=${username}`;

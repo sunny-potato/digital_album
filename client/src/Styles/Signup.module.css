@@ -51,12 +51,14 @@
   width: 80%;
   max-width: 50rem;
   margin: auto;
-  padding-top: 4rem;
+  padding: 4rem 0 2rem 0;
 }
 .pageTitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bolder;
   margin-bottom: 1rem;
+  padding: 1rem 0 2rem 0;
+  text-align: center;
 }
 .signupWrapperContainer {
   display: flex;

@@ -12,7 +12,6 @@ function Nav() {
   const { userId, setUserId } = useContext(UserContext);
   const [username, setUsername] = useState<string>("");
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
-  console.log("isMenuClicked : ", isMenuClicked);
 
   useEffect(() => {
     if (userId) {

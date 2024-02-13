@@ -1,5 +1,3 @@
-/* .forlderListSortBox {
-} */
 .folderListSort {
   width: fit-content;
   display: flex;
@@ -10,8 +8,7 @@
   cursor: pointer;
   position: relative;
 }
-/* .sortIcon {
-} */
+
 .sortText {
   padding: 0 0.1rem;
 }

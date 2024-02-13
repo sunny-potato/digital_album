@@ -8,6 +8,7 @@
 }
 .displayInputPopupBox {
   position: absolute;
+  margin-top: 1rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -17,6 +18,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.2);
 }
 .uploadInputPopupBox {
   width: 100%;
@@ -30,6 +32,7 @@
   border: 0.1em #183a1d dashed;
   border-radius: 0.5em;
   background-color: #e1eedd;
+  position: relative;
 }
 .addImageIcon {
   width: 2rem;
@@ -38,11 +41,10 @@
 }
 .addImage {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin-bottom: 0.5rem;
-}
-.addImageText {
-  line-height: 2rem;
 }
 .displayPopupContent {
   display: grid;

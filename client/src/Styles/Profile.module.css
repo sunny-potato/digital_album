@@ -1,0 +1,49 @@
+* {
+  color: #183a1d;
+}
+.pageContainer {
+  height: 100vh;
+  padding: 5rem;
+}
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  padding: 1rem 0 2rem 0;
+  text-align: center;
+}
+.userImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.username {
+  width: 10rem;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  text-align: center;
+}
+.profileImage {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+}
+.userInformation {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userInformation > div {
+  padding: 0.5rem;
+}
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+.fullName {
+  display: flex;
+  flex-direction: row;
+}
+.fullName > div:nth-child(1) {
+  padding-right: 0.5rem;
+}

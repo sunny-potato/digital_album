@@ -7,32 +7,39 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
+  overflow: hidden;
 }
 
 .uploadIcon {
   width: 3em;
-  background-color: #e1eedd;
 }
+
 .uploadInput {
-  background-color: #e1eedd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
+
 .uploadDragDrop {
-  margin-left: 9em;
-  background-color: #e1eedd;
+  margin: 0.5rem 0;
 }
+
 .uploadImages {
   background-color: #e1eedd;
 }
+
 input[type="file"]::file-selector-button {
-  margin-left: 0.3rem;
+  margin-left: 3rem;
   background-color: white;
   cursor: pointer;
   padding: 0.5rem;
 }
-input[type="file"] {
+/* input[type="file"] {
   color: transparent;
-}
-input[type="file"]:after {
+} */
+/* input[type="file"]:after {
   content: "";
-}
+} */

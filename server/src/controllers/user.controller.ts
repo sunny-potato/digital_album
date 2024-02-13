@@ -7,6 +7,7 @@ import {
   matchSecurityCode,
   deleteSecurityCode,
   updatePassword,
+  getUserAllInformation,
 } from "../services/user.service";
 import sendEmail from "../configs/nodemailer.config";
 import { createVerificationCode } from "../utils/emailOauth";
@@ -102,4 +103,24 @@ export const updateUserPassword: RequestHandler = async (req, res) => {
   const userData = req.body;
   await updatePassword(userData);
   res.status(200).send(true);
+};
+
+export const getuserAllInformation: RequestHandler = async (req, res) => {
+  const userId = Number(req.query.userId);
+  const allInfo = await getUserAllInformation(userId);
+  const infoWithPassword = Object.entries(allInfo[0]).filter(([key, value]) => {
+    return key !== "user_password" && key !== "user_id";
+  });
+  const infoWithObject = Object.fromEntries(infoWithPassword);
+  const profileInfo = {
+    id: infoWithObject.id,
+    username: infoWithObject.user_name,
+    firstname: infoWithObject.first_name,
+    lastname: infoWithObject.last_name,
+    birthdate: infoWithObject.birthdate,
+    email: infoWithObject.email,
+    telephon: infoWithObject.telephon,
+    address: infoWithObject.address,
+  };
+  res.status(200).send(profileInfo);
 };

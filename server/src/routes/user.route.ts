@@ -4,6 +4,7 @@ import {
   findUserAccount,
   getUsernameController,
   getUsernameWithEmail,
+  getuserAllInformation,
   sendEmailVerificationCode,
   updateUserPassword,
 } from "../controllers/user.controller";
@@ -15,5 +16,6 @@ router.get("/findUserAccount", findUserAccount);
 router.get("/getEmailVerificationCode", sendEmailVerificationCode);
 router.get("/checkVerificationCode", checkVerificationCode);
 router.post("/:username/updatePassword", updateUserPassword);
+router.get("/profile", getuserAllInformation);
 
 export default router;
