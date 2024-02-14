@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import s from "../Styles/Home.module.css";
 import MemoryImages from "../Components/Animation/MemoryImages";
 
