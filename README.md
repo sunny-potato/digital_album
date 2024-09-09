@@ -12,14 +12,13 @@ Digital album is a website where users can upload pictures and organize them int
 
 ## Link and Screenshot
 
-- Link to the project :
 - Screenshot :![](digital_album.gif)
 
 ## Technologies
 
 **1. Front-end :**
 
-- React.js
+- React
 - Vite
 - Axios
 - [Material-UI](https://mui.com/)
@@ -29,12 +28,10 @@ Digital album is a website where users can upload pictures and organize them int
 - Node.js
 - Express
 - Multer (for storing images in memory as buffers)
-- UUID (for creating unique IDs for images)
-- Postgres.js
 
 **3. Database :**
 
-- Noen.tech (serverless Postgres)
+- Noen (serverless PostgreSQL)
 - Google Cloud Storage (for storing images)
 
 _For improving this project,
