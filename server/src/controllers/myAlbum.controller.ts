@@ -128,12 +128,11 @@ export const createNewFolder: RequestHandler = async (req, res) => {
         created_at: new Date(),
       });
     }
-    if (folder.id !== undefined && folder.createdAt !== undefined) {
+    if (folder.id) {
       const result = await updateFolder({
         id: folder.id,
         name: folder.name,
         order_value: index + 1,
-        created_at: folder.createdAt,
       });
     }
   }

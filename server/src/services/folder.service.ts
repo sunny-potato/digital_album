@@ -17,13 +17,11 @@ export async function updateFolder(folder: {
   id: number;
   name: string;
   order_value: number;
-  created_at: Date;
 }) {
   return await sql`
       update folder
       set name=${folder.name},
-      order_value=${folder.order_value},
-      created_at=${folder.created_at}
+      order_value=${folder.order_value}
       where id=${folder.id}
       returning *
     `;
